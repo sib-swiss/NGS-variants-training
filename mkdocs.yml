@@ -1,8 +1,16 @@
-site_name: My site
+site_name: NGS - variant analysis
 nav:
     - Home: index.md
     - Precourse preparations: precourse.md
     - Course schedule: course_schedule.md
+    - Day 1:
+        - Introduction: day1/introduction.md
+        - Server login: day1/server_login.md
+        - Read alignment - basics: day1/alignment.md
+        - Read alignment - advanced: day1/alignment_advanced.md
+    - Day 2:
+        - Variant calling: day2/variant_calling.md
+        - Filtering & evaluation: day2/filtering_evaluation.md
 
 theme:
   name: material
@@ -11,8 +19,8 @@ theme:
   favicon: assets/images/dna-svgrepo-com.svg
 
 # Repository
-repo_name: GeertvanGeest/course_website_template
-repo_url: https://github.com/GeertvanGeest/course_website_template
+repo_name: sib-swiss/NGS-variants-training
+repo_url: https://github.com/sib-swiss/NGS-variants-training
 edit_uri: ""
 
 markdown_extensions:

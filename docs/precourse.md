@@ -7,7 +7,7 @@ As is stated in the course prerequisites at the [announcement web page](https://
 
 We will be mainly working on an Amazon Web Services ([AWS](https://aws.amazon.com/]))  Elastic Cloud (EC2) server. Our Ubuntu server behaves like a 'normal' remote server, and can be approached through `ssh` with a username, key and IP address. All participants will be granted access to a personal home directory.
 
-Before the course, make sure you can comfortably work on a remote server. This means that you can approach it through the shell, modify scripts and transfer files. We can recommend `atom` for Linux and Mac, and `Notepad ++` in combination with MobaXterm for Windows. We will be visualising our results with IGV. Therefore, install in your computer:
+Before the course, make sure you can comfortably work on a remote server. This means that you can approach it through the shell, modify scripts and transfer files. We can recommend `atom` for Linux and Mac, and MobaXterm for Windows. We will be visualising our results with IGV. Therefore, install in your computer:
 
 === "mac OS/Linux"
     * SSH and scripting: [Atom](https://atom.io/) with packages like: [`terminus`](https://atom.io/packages/terminus) and [`ftp-remote-edit`](https://atom.io/packages/ftp-remote-edit)
