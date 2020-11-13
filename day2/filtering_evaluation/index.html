@@ -1,0 +1,767 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/dna-svgrepo-com.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>Filtering & evaluation - NGS - variant analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exercises" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="NGS - variant analysis" class="md-header-nav__button md-logo" aria-label="NGS - variant analysis">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            NGS - variant analysis
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Filtering & evaluation
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - variant analysis" class="md-nav__button md-logo" aria-label="NGS - variant analysis">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M.1 494.1c-1.1 9.5 6.3 17.8 15.9 17.8l32.3.1c8.1 0 14.9-5.9 16-13.9.7-4.9 1.8-11.1 3.4-18.1H380c1.6 6.9 2.9 13.2 3.5 18.1 1.1 8 7.9 14 16 13.9l32.3-.1c9.6 0 17.1-8.3 15.9-17.8-4.6-37.9-25.6-129-118.9-207.7-17.6 12.4-37.1 24.2-58.5 35.4 6.2 4.6 11.4 9.4 17 14.2H159.7c21.3-18.1 47-35.6 78.7-51.4C410.5 199.1 442.1 65.8 447.9 17.9 449 8.4 441.6.1 432 .1L399.6 0c-8.1 0-14.9 5.9-16 13.9-.7 4.9-1.8 11.1-3.4 18.1H67.8c-1.6-7-2.7-13.1-3.4-18.1-1.1-8-7.9-14-16-13.9L16.1.1C6.5.1-1 8.4.1 17.9 5.3 60.8 31.4 171.8 160 256 31.5 340.2 5.3 451.2.1 494.1zM224 219.6c-25.1-13.7-46.4-28.4-64.3-43.6h128.5c-17.8 15.2-39.1 30-64.2 43.6zM355.1 96c-5.8 10.4-12.8 21.1-21 32H114c-8.3-10.9-15.3-21.6-21-32h262.1zM92.9 416c5.8-10.4 12.8-21.1 21-32h219.4c8.3 10.9 15.4 21.6 21.2 32H92.9z"/></svg>
+
+    </a>
+    NGS - variant analysis
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../precourse/" class="md-nav__link">
+      Precourse preparations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../course_schedule/" class="md-nav__link">
+      Course schedule
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Day 1
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Day 1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../day1/introduction/" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../day1/server_login/" class="md-nav__link">
+      Server login
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../day1/alignment/" class="md-nav__link">
+      Read alignment - basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../day1/alignment_advanced/" class="md-nav__link">
+      Read alignment - advanced
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Day 2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Day 2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../variant_calling/" class="md-nav__link">
+      Variant calling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Filtering & evaluation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Filtering & evaluation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hard-filtering" class="md-nav__link">
+    1. Hard filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Hard filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#splitting-snps-and-indels" class="md-nav__link">
+    Splitting SNPs and INDELs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-snps" class="md-nav__link">
+    Filtering SNPs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-indels" class="md-nav__link">
+    Filtering INDELs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merging-filtered-snps-and-indels" class="md-nav__link">
+    Merging filtered SNPs and INDELs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-evaluation-by-concordance" class="md-nav__link">
+    2. Evaluation by concordance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hard-filtering" class="md-nav__link">
+    1. Hard filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Hard filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#splitting-snps-and-indels" class="md-nav__link">
+    Splitting SNPs and INDELs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-snps" class="md-nav__link">
+    Filtering SNPs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtering-indels" class="md-nav__link">
+    Filtering INDELs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merging-filtered-snps-and-indels" class="md-nav__link">
+    Merging filtered SNPs and INDELs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-evaluation-by-concordance" class="md-nav__link">
+    2. Evaluation by concordance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Filtering & evaluation</h1>
+                
+                <h2 id="exercises">Exercises</h2>
+<h3 id="1-hard-filtering">1. Hard filtering</h3>
+<p>The developers of <code>gatk</code> strongly advise to do <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-">Variant Quality Score Recalibration (VQSR)</a> for filtering SNPs and INDELs. However, this is not always possible. For example, in the case of limited data availability and/or in the case you are working with non-model organisms and/or in the case you are a bit lazy and okay with a number of false positives.</p>
+<p>Our dataset is too small to apply VQSR. We will therefore do hard filtering instead.</p>
+<h4 id="splitting-snps-and-indels">Splitting SNPs and INDELs</h4>
+<p>First, filtering thresholds are usually different for SNPs and INDELs. You can extract all the SNP records in our trio vcf like this:</p>
+<div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
+--variant variants/trio.vcf <span class="se">\</span>
+--select-type SNP <span class="se">\</span>
+--output variants/trio.SNP.vcf
+</code></pre></div>
+<p><strong>Exercise:</strong> Check out the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037055952-SelectVariants">documentation of <code>gatk SelectVariants</code></a>, and:</p>
+<ul>
+<li>Figure out what you&rsquo;ll need to fill in at <code>--select-type</code> if you want to select only INDELS.</li>
+<li>Generate a vcf with only the SNPs and a second vcf with only the INDELs from <code>trio.vcf</code>.</li>
+</ul>
+<details class="done"><summary>Answer</summary><p>You will need to fill in <code>INDEL</code> at <code>--select-type</code> to filter for INDELs.</p>
+<p>To get the SNPs you can run the command above. To get the INDELs you&rsquo;ll need to change <code>--select-type</code> to <code>INDEL</code>:</p>
+<div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
+--variant variants/trio.vcf <span class="se">\</span>
+--select-type INDEL <span class="se">\</span>
+--output variants/trio.INDEL.vcf
+</code></pre></div>
+</details>
+<h4 id="filtering-snps">Filtering SNPs</h4>
+<p>The command <code>gatk VariantFiltration</code> enables you to filter for both the INFO field (per variant) and FORMAT field (per genotype). For now we&rsquo;re only interested in filtering variants. Below you can find the command to hard-filter the SNP variants on some sensible thresholds (that are explained <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants">here</a>).</p>
+<div class="highlight"><pre><span></span><code>gatk VariantFiltration <span class="se">\</span>
+--variant variants/trio.SNP.vcf <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span> --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span> --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;SOR &gt; 3.0&quot;</span> --filter-name <span class="s2">&quot;SOR3&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;FS &gt; 60.0&quot;</span> --filter-name <span class="s2">&quot;FS60&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;MQ &lt; 40.0&quot;</span> --filter-name <span class="s2">&quot;MQ40&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;MQRankSum &lt; -12.5&quot;</span> --filter-name <span class="s2">&quot;MQRankSum-12.5&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -8.0&quot;</span> --filter-name <span class="s2">&quot;ReadPosRankSum-8&quot;</span> <span class="se">\</span>
+--output variants/trio.SNP.filtered.vcf
+</code></pre></div>
+<p><strong>Exercise:</strong> Run the filtering command above. Did it affect the number of records in the vcf?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can check out the number of records in a vcf with:</p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> &lt;variants.vcf&gt; <span class="p">|</span> wc -l
+</code></pre></div>
+</div>
+<details class="done"><summary>Answer</summary><p>There are no differences in the number of records:</p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> trio.SNP.vcf <span class="p">|</span> wc -l
+</code></pre></div>
+<p>and</p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> trio.SNP.filtered.vcf <span class="p">|</span> wc -l
+</code></pre></div>
+<p>both give 446.</p>
+<p>However, there are SNPs filtered out, by changing the <code>FILTER</code> column. You can check the number of records with PASS by:</p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> trio.SNP.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+</code></pre></div>
+<p>Giving:</p>
+<div class="highlight"><pre><span></span><code>441 PASS
+2 QD2;SOR3
+3 SOR3
+</code></pre></div>
+</details>
+<h4 id="filtering-indels">Filtering INDELs</h4>
+<p>A command with <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering">sensible parameters</a> to do a first iteration of hard filtering the INDELs would be:</p>
+<div class="highlight"><pre><span></span><code>gatk VariantFiltration <span class="se">\</span>
+--variant variants/trio.INDEL.vcf <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span> --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span> --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;FS &gt; 200.0&quot;</span> --filter-name <span class="s2">&quot;FS200&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -20.0&quot;</span> --filter-name <span class="s2">&quot;ReadPosRankSum-20&quot;</span> <span class="se">\</span>
+--output variants/trio.INDEL.filtered.vcf
+</code></pre></div>
+<p><strong>Exercise:</strong> Run the command and figure out how many variants are filtered out.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can use this command from the answer to the previous exercise:</p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> &lt;variants.vcf&gt; <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+</code></pre></div>
+<p>to see how many INDELs were filtered out.</p>
+</div>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.INDEL.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+</code></pre></div>
+<p>gives:</p>
+<div class="highlight"><pre><span></span><code>110 PASS
+</code></pre></div>
+<p>So no variants are filtered out.</p>
+</details>
+<h4 id="merging-filtered-snps-and-indels">Merging filtered SNPs and INDELs</h4>
+<p>Now that we have filtered the INDELs and SNPs separately, we can merge them again with this command:</p>
+<div class="highlight"><pre><span></span><code>gatk MergeVcfs <span class="se">\</span>
+--INPUT variants/trio.SNP.filtered.vcf <span class="se">\</span>
+--INPUT variants/trio.INDEL.filtered.vcf <span class="se">\</span>
+--OUTPUT variants/trio.filtered.vcf
+</code></pre></div>
+<p><strong>Exercise:</strong> Run the command to merge the vcfs.</p>
+<h3 id="2-evaluation-by-concordance">2. Evaluation by concordance</h3>
+<p>For this region we have a highly curated truth set for the mother available. It originates from the <a href="https://www.illumina.com/platinumgenomes.html">Illumina Platinum truth set</a>. You can find it at <code>variants/NA12878.vcf.gz</code></p>
+<p>To check how well we did, we&rsquo;d first need to extract a vcf with only the information of the mother.</p>
+<p><strong>Exercise:</strong> To extract variants that have at least one alternative allele in the mother from <code>variants/trio.filtered.vcf</code>, use <code>gatk SelectVariants</code> with the arguments:</p>
+<ul>
+<li><code>--sample-name mother</code></li>
+<li><code>--exclude-non-variants</code></li>
+<li><code>--remove-unused-alternates</code></li>
+</ul>
+<p>In addition to the required arguments.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
+--variant variants/trio.filtered.vcf <span class="se">\</span>
+--sample-name mother <span class="se">\</span>
+--exclude-non-variants <span class="se">\</span>
+--remove-unused-alternates <span class="se">\</span>
+--output variants/mother.trio.filtered.vcf
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong></p>
+<p>A. How many variants are in <code>mother.trio.filtered.vcf</code>? How many of those are filtered out?</p>
+<p>B. Compare our vcf with the curated truth set with the command below. How many SNPs didn&rsquo;t we detect?</p>
+<div class="highlight"><pre><span></span><code>gatk Concordance <span class="se">\</span>
+--evaluation variants/mother.trio.filtered.vcf <span class="se">\</span>
+--truth variants/NA12878.vcf.gz <span class="se">\</span>
+--intervals chr20:10018000-10220000 <span class="se">\</span>
+--summary variants/concordance.mother.trio.filtered
+</code></pre></div>
+<details class="done"><summary>Answer</summary><p>To get the number of records per FILTER, we run:</p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/mother.trio.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+</code></pre></div>
+<p>gives:</p>
+<div class="highlight"><pre><span></span><code>407 PASS
+2 SOR3
+</code></pre></div>
+<p>So two records were filtered out, based on the Symmetric Odds Ratio (issues with strand bias).</p>
+<p>Check out the output of <code>gatk Concordance</code> with <code>cat</code>:</p>
+<div class="highlight"><pre><span></span><code>cat variants/concordance.mother.trio.filtered
+</code></pre></div>
+<p>gives:</p>
+<div class="highlight"><pre><span></span><code>type    TP      FP      FN      RECALL  PRECISION
+SNP     319     5       9       0.973   0.985
+INDEL   63      20      6       0.913   0.759
+</code></pre></div>
+<p>Showing that there were 9 false negatives, i.e. SNPs we didn&rsquo;t detect.</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">Recall &amp; precision</p>
+<p>More info on the definition of recall and precision on this <a href="https://en.wikipedia.org/wiki/Precision_and_recall">wikipedia page</a></p>
+</div>
+<p><strong>Exercise:</strong> Check out the concordance of the mother with the truth set before filtering. Did filtering improve the recall or precision?</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We did the filtering on <code>trio.vcf</code>, therefore, you first have to extract the records that only apply to the mother by using <code>gatk SelectVariants</code>.</p>
+<p>Also note that <code>trio.vcf</code> contains records other than SNPs and INDELs. Use <code>--select-type</code> to select only SNPs and INDELs.</p>
+</div>
+<details class="done"><summary>Answer</summary><p>First select only SNPs and INDELs from the mother from the unfiltered vcf:</p>
+<div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
+--variant variants/trio.vcf <span class="se">\</span>
+--sample-name mother <span class="se">\</span>
+--exclude-non-variants <span class="se">\</span>
+--remove-unused-alternates <span class="se">\</span>
+--select-type INDEL <span class="se">\</span>
+--select-type SNP <span class="se">\</span>
+--output variants/mother.trio.vcf
+</code></pre></div>
+<p>Get the concordance with the truth set:</p>
+<div class="highlight"><pre><span></span><code>gatk Concordance <span class="se">\</span>
+--evaluation variants/mother.trio.vcf <span class="se">\</span>
+--truth variants/NA12878.vcf.gz <span class="se">\</span>
+--intervals chr20:10018000-10220000 <span class="se">\</span>
+--summary variants/concordance.mother.trio
+</code></pre></div>
+<p>Which gives:</p>
+<div class="highlight"><pre><span></span><code>type    TP      FP      FN      RECALL  PRECISION
+SNP     319     7       9       0.973   0.979
+INDEL   63      20      6       0.913   0.759
+</code></pre></div>
+<p>The precision for SNPs is slightly lower. Due to filtering, we removed two false positives.</p>
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../variant_calling/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Variant calling
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../../assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
