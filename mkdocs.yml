@@ -16,7 +16,7 @@ nav:
 
 theme:
   name: material
-  logo: /assets/images/SIB_logo.svg
+  logo: assets/images/SIB_logo.svg
   favicon: assets/images/SIB_logo.svg
 
 # Repository
