@@ -1,8 +1,10 @@
 
 ## Material
 
-**[GATK best practices germline short variant workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-)**
+**Course introduction:**
 
-<figure>
-  <img src="../../assets/images/gatk_germline.png" width="800"/>
-</figure>
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/introduction.pdf){: .md-button }
+
+**Introduction to variant analysis:**
+
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/introduction_variant_analysis.pdf){: .md-button }

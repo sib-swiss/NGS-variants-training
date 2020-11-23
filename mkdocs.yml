@@ -10,13 +10,14 @@ nav:
         - Read alignment - advanced: day1/alignment_advanced.md
     - Day 2:
         - Variant calling: day2/variant_calling.md
+        - Visualisation: day2/visualisation.md
         - Filtering & evaluation: day2/filtering_evaluation.md
+        - Annotation: day2/annotation.md
 
 theme:
   name: material
-  icon:
-    logo: fontawesome/solid/dna
-  favicon: assets/images/dna-svgrepo-com.svg
+  logo: /assets/images/SIB_logo.svg
+  favicon: assets/images/SIB_logo.svg
 
 # Repository
 repo_name: sib-swiss/NGS-variants-training

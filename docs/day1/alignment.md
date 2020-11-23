@@ -1,13 +1,20 @@
+## Material
+
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/sequencing_alignment.pdf){: .md-button }
 
 ## Exercises
 
 ### 1. Prepare the reference genome
 
-Copy the data files in `/data` to your home directory.
+Download and unpack the data files in your home directory.
 
 ```sh
-cp -r /data/ ~/
+cd
+wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
+tar -xvf ngs-variants-training.tar.gz
 ```
+
+This will create the directory `data`. Check out what's in there. 
 
 We'll use `bwa mem` for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:
 
