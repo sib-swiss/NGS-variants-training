@@ -523,11 +523,11 @@ tar -xvf ngs-variants-training.tar.gz
 <p>We&rsquo;ll use <code>bwa mem</code> for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:</p>
 <div class="highlight"><pre><span></span><code>bwa index &lt;reference.fa&gt;
 </code></pre></div>
-<p>Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in <code>~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>bwa index ~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
+<p>Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in <code>~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>bwa index ~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
 </code></pre></div>
 </details>
-<p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
+<p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/workdir/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
 <details class="done"><summary>Answer</summary><p>The manual says:
 <div class="highlight"><pre><span></span><code>bwa mem [-aCHMpP] [-t nThreads] [-k minSeedLen] ... db.prefix reads.fq [mates.fq]
 </code></pre></div>
@@ -539,19 +539,19 @@ So, we&rsquo;ll need:</p>
 </ul>
 <p>For our reference sequence a command would look like:</p>
 <div class="highlight"><pre><span></span><code>bwa mem <span class="se">\</span>
-~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 &lt;forward_reads.fq&gt; <span class="se">\</span>
 &lt;reverse_reads.fq&gt; <span class="se">\</span>
 &gt; &lt;alignment.sam&gt;
 </code></pre></div>
 </details>
-<p>Perform an alignment with <code>bwa mem</code> of the reads from the mother (<code>mother_R1.fastq</code> and <code>mother_R2.fastq</code>) against chromosome 20. Write the alignment file to a directory in <code>~/data/</code> called <code>alignment</code>.</p>
+<p>Perform an alignment with <code>bwa mem</code> of the reads from the mother (<code>mother_R1.fastq</code> and <code>mother_R2.fastq</code>) against chromosome 20. Write the alignment file to a directory in <code>~/workdir</code> called <code>alignment</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Index prefix is the same a reference filename</p>
 <p>With default values, the index of a reference for <code>bwa mem</code> is the same as the reference itself. In this case, this would be <code>Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
 </div>
 <details class="done"><summary>Answer</summary><p>We&rsquo;ll first make the alignment directory:</p>
-<p><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data/
+<p><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/
 mkdir alignment
 </code></pre></div>
 Then, we run the alignment:</p>
@@ -559,12 +559,12 @@ Then, we run the alignment:</p>
 ~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 ~/data/fastq/mother_R1.fastq <span class="se">\</span>
 ~/data/fastq/mother_R2.fastq <span class="se">\</span>
-&gt; ~/data/alignment/mother.sam
+&gt; ~/workdir/alignment/mother.sam
 </code></pre></div>
 </details>
 <h3 id="2-alignment-statistics">2. Alignment statistics</h3>
 <p><strong>Exercise:</strong> Check out the statistics of the alignment by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Any duplicates in there?</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data/alignment
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment
 samtools flagstat mother.sam
 </code></pre></div>
 <p>Should give:</p>
