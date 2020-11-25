@@ -524,8 +524,8 @@ tar -xvf ngs-variants-training.tar.gz
 <div class="highlight"><pre><span></span><code>bwa index &lt;reference.fa&gt;
 </code></pre></div>
 <p>Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in <code>~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> index ~/workdir/data/reference/
-bwa Homo_sapiens.GRCh38.dna.chromosome.20.fa
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/data/reference/
+bwa index Homo_sapiens.GRCh38.dna.chromosome.20.fa
 </code></pre></div>
 </details>
 <p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/workdir/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
