@@ -22,14 +22,14 @@ We'll use `bwa mem` for the alignment. Like all alignment software, it requires 
 bwa index <reference.fa>
 ```
 
-Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in `~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
+Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in `~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
 
 ??? done "Answer"
     ```sh
-    bwa index ~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
+    bwa index ~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
     ```
 
-Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/bwa.shtml). We'll be using paired-end reads of three samples that can be found at `~/data/fastq`. If we run `bwa mem` with default options, which three arguments do we need?
+Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/bwa.shtml). We'll be using paired-end reads of three samples that can be found at `~/workdir/data/fastq`. If we run `bwa mem` with default options, which three arguments do we need?
 
 ??? done "Answer"
     The manual says:
@@ -46,13 +46,13 @@ Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/
 
     ```sh
     bwa mem \
-    ~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    ~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     <forward_reads.fq> \
     <reverse_reads.fq> \
     > <alignment.sam>
     ```
 
-Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the alignment file to a directory in `~/data/` called `alignment`.
+Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the alignment file to a directory in `~/workdir` called `alignment`.
 
 !!! note "Index prefix is the same a reference filename"
     With default values, the index of a reference for `bwa mem` is the same as the reference itself. In this case, this would be `Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
@@ -61,7 +61,7 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
     We'll first make the alignment directory:
 
     ```sh
-    cd ~/data/
+    cd ~/workdir/
     mkdir alignment
     ```
     Then, we run the alignment:
@@ -71,7 +71,7 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
     ~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     ~/data/fastq/mother_R1.fastq \
     ~/data/fastq/mother_R2.fastq \
-    > ~/data/alignment/mother.sam
+    > ~/workdir/alignment/mother.sam
     ```
 
 ### 2. Alignment statistics
@@ -80,7 +80,7 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
 
 ??? done "Answer"
     ```sh
-    cd ~/data/alignment
+    cd ~/workdir/alignment
     samtools flagstat mother.sam
     ```
 
