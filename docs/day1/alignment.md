@@ -26,7 +26,8 @@ Make an index of the reference sequence of chromosome 20 of the human genome. Yo
 
 ??? done "Answer"
     ```sh
-    bwa index ~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
+    cd index ~/workdir/data/reference/
+    bwa Homo_sapiens.GRCh38.dna.chromosome.20.fa
     ```
 
 Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/bwa.shtml). We'll be using paired-end reads of three samples that can be found at `~/workdir/data/fastq`. If we run `bwa mem` with default options, which three arguments do we need?
@@ -68,10 +69,10 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
 
     ```sh
     bwa mem \
-    ~/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-    ~/data/fastq/mother_R1.fastq \
-    ~/data/fastq/mother_R2.fastq \
-    > ~/workdir/alignment/mother.sam
+    data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    data/fastq/mother_R1.fastq \
+    data/fastq/mother_R2.fastq \
+    > alignment/mother.sam
     ```
 
 ### 2. Alignment statistics
