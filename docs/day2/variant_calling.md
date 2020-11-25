@@ -15,7 +15,7 @@
 Many algorithms work faster, or only work with an index of their (large) input files. In that sense, `gatk` is no different from other tools. The index for a reference needs to be created in two steps:
 
 ```sh
-cd ~/data/reference
+cd ~/workdir/data/reference
 samtools faidx <reference.fa>
 gatk CreateSequenceDictionary --REFERENCE <reference.fa>
 ```
@@ -36,7 +36,7 @@ gatk IndexFeatureFile --input <variants.vcf>
     Creating the index for the reference genome:
 
     ```sh
-    cd ~/data
+    cd ~/workdir/data
     samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
     gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
     ```
@@ -110,15 +110,15 @@ BQSR is done in two steps:
 
 ??? done "Answer"
     ```sh
-    cd ~/data
+    cd ~/workdir
 
     mkdir bqsr
 
     gatk BaseRecalibrator \
-    --reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     --input alignment/mother.bam \
-    --known-sites variants/GCF.38.filtered.renamed.vcf \
-    --known-sites variants/1000g_gold_standard.indels.filtered.vcf \
+    --known-sites data/variants/GCF.38.filtered.renamed.vcf \
+    --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
     --output bqsr/mother.recal.table
 
     gatk ApplyBQSR \
@@ -131,12 +131,12 @@ BQSR is done in two steps:
 
 ??? done "Answer"
     ```sh
-    cd ~/data
+    cd ~/workdir
 
     for sample in mother father son
     do
       gatk BaseRecalibrator \
-      --reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+      --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
       --input alignment/$sample.bam \
       --known-sites variants/GCF.38.filtered.renamed.vcf \
       --known-sites variants/1000g_gold_standard.indels.filtered.vcf \
@@ -162,12 +162,15 @@ The command [`gatk HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/ar
     * `--ouput`
     * `--reference`
 
-**Exercise:** Run `gatk HaplotypeCaller` with required options on the recalibrated alignment file of the mother (`bqsr/mother.recal.bam`). We'll focus on a small region, so add `--intervals chr20:10018000-10220000`.
+**Exercise:** Make a directory `~/workdir/variants` to write the output vcf. After that, run `gatk HaplotypeCaller` with required options on the recalibrated alignment file of the mother (`bqsr/mother.recal.bam`). We'll focus on a small region, so add `--intervals chr20:10018000-10220000`.
 
 ??? done "Answer"
     ```sh
+    cd ~/workdir
+    mkdir /variants
+
     gatk HaplotypeCaller \
-    --reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     --input bqsr/mother.recal.bam \
     --output variants/mother.HC.vcf \
     --intervals chr20:10018000-10220000 \
@@ -179,10 +182,12 @@ We will do the variant calling on all three samples. Later we want to combine th
 
 ??? done "Answer"
     ```sh
+    cd ~/workdir
+
     for sample in mother father son
     do
       gatk HaplotypeCaller \
-      --reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+      --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
       --input bqsr/$sample.recal.bam \
       --output variants/$sample.HC.g.vcf \
       --bam-output variants/$sample.phased.bam \
@@ -214,7 +219,7 @@ You can retrieve the combined vcf from the database with `gatk GenotypeGVCFs`.
 
 ```sh
 gatk GenotypeGVCFs \
---reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+--reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
 --variant gendb://genomicsdb \
 --intervals chr20:10018000-10220000 \
 --output variants/trio.vcf

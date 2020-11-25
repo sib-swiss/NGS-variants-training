@@ -6,15 +6,15 @@
 
 ### 1. Prepare the reference genome
 
-Download and unpack the data files in your home directory.
+Download and unpack the data files in your working directory (`~/workdir`).
 
 ```sh
-cd
+cd ~/workdir
 wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
 tar -xvf ngs-variants-training.tar.gz
 ```
 
-This will create the directory `data`. Check out what's in there. 
+This will create the directory `data`. Check out what's in there.
 
 We'll use `bwa mem` for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:
 

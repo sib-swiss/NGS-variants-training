@@ -12,6 +12,8 @@ Our dataset is too small to apply VQSR. We will therefore do hard filtering inst
 First, filtering thresholds are usually different for SNPs and INDELs. You can extract all the SNP records in our trio vcf like this:
 
 ```sh
+cd ~/workdir
+
 gatk SelectVariants \
 --variant variants/trio.vcf \
 --select-type SNP \
@@ -65,13 +67,13 @@ gatk VariantFiltration \
     There are no differences in the number of records:
 
     ```sh
-    grep -v "^#" trio.SNP.vcf | wc -l
+    grep -v "^#" variants/trio.SNP.vcf | wc -l
     ```
 
     and
 
     ```sh
-    grep -v "^#" trio.SNP.filtered.vcf | wc -l
+    grep -v "^#" variants/trio.SNP.filtered.vcf | wc -l
     ```
 
     both give 446.
@@ -79,7 +81,7 @@ gatk VariantFiltration \
     However, there are SNPs filtered out, by changing the `FILTER` column. You can check the number of records with PASS by:
 
     ```sh
-    grep -v "^#" trio.SNP.filtered.vcf | cut -f 7 | sort | uniq -c
+    grep -v "^#" variants/trio.SNP.filtered.vcf | cut -f 7 | sort | uniq -c
     ```
 
     Giving:
@@ -174,7 +176,7 @@ B. Compare our vcf with the curated truth set with the command below. How many S
 ```sh
 gatk Concordance \
 --evaluation variants/mother.trio.filtered.vcf \
---truth variants/NA12878.vcf.gz \
+--truth data/variants/NA12878.vcf.gz \
 --intervals chr20:10018000-10220000 \
 --summary variants/concordance.mother.trio.filtered
 ```
@@ -242,7 +244,7 @@ gatk Concordance \
     ```sh
     gatk Concordance \
     --evaluation variants/mother.trio.vcf \
-    --truth variants/NA12878.vcf.gz \
+    --truth data/variants/NA12878.vcf.gz \
     --intervals chr20:10018000-10220000 \
     --summary variants/concordance.mother.trio
     ```

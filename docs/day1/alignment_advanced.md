@@ -27,7 +27,7 @@ For variant analysis, it's important to mark reads that possibly originated from
 
 ??? done "Answer"
     ```sh
-    cd ~/data/alignment
+    cd ~/workdir/alignment
 
     samtools fixmate -m mother.bam mother.fixmate.bam
     samtools sort -o mother.positionsort.bam mother.fixmate.bam
@@ -168,13 +168,13 @@ The command below loops over the strings `father`, `mother` and `son`, and:
 ```sh
 #!/usr/bin/env bash
 
-cd ~/data
+cd ~/workdir
 
 for sample in mother father son
 do
-  bwa mem reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-  fastq/"$sample"_R1.fastq.gz \
-  fastq/"$sample"_R2.fastq.gz \
+  bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+  data/fastq/"$sample"_R1.fastq.gz \
+  data/fastq/"$sample"_R2.fastq.gz \
   | samtools fixmate -m - - \
   | samtools sort \
   | samtools markdup -s - - \
