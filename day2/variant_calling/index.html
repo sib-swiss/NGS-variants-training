@@ -534,7 +534,7 @@
 <h2 id="exercises">Exercises</h2>
 <h3 id="1-indexing-indexing-indexing">1. Indexing, indexing, indexing</h3>
 <p>Many algorithms work faster, or only work with an index of their (large) input files. In that sense, <code>gatk</code> is no different from other tools. The index for a reference needs to be created in two steps:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data/reference
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/data/reference
 samtools faidx &lt;reference.fa&gt;
 gatk CreateSequenceDictionary --REFERENCE &lt;reference.fa&gt;
 </code></pre></div>
@@ -548,7 +548,7 @@ gatk CreateSequenceDictionary --REFERENCE &lt;reference.fa&gt;
 <li>A part of the 1000 genomes indel golden standard: <code>variants/1000g_gold_standard.indels.filtered.vcf</code></li>
 </ul>
 <details class="done"><summary>Answer</summary><p>Creating the index for the reference genome:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/data
 samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
 gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
 </code></pre></div>
@@ -607,15 +607,15 @@ gatk IndexFeatureFile --input variants/GCF.38.filtered.renamed.vcf
 --output &lt;output.table&gt;
 </code></pre></div>
 </div>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
 
 mkdir bqsr
 
 gatk BaseRecalibrator <span class="se">\</span>
---reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+--reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 --input alignment/mother.bam <span class="se">\</span>
---known-sites variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
---known-sites variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
+--known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
+--known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
 --output bqsr/mother.recal.table
 
 gatk ApplyBQSR <span class="se">\</span>
@@ -625,12 +625,12 @@ gatk ApplyBQSR <span class="se">\</span>
 </code></pre></div>
 </details>
 <p><strong>Exercise:</strong> Place these commands in a loop, that performs the BQSR for mother, father and son.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
 
 <span class="k">for</span> sample in mother father son
 <span class="k">do</span>
   gatk BaseRecalibrator <span class="se">\</span>
-  --reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+  --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
   --input alignment/<span class="nv">$sample</span>.bam <span class="se">\</span>
   --known-sites variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
   --known-sites variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
@@ -653,9 +653,12 @@ gatk ApplyBQSR <span class="se">\</span>
 <li><code>--reference</code></li>
 </ul>
 </details>
-<p><strong>Exercise:</strong> Run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>gatk HaplotypeCaller <span class="se">\</span>
---reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+<p><strong>Exercise:</strong> Make a directory <code>~/workdir/variants</code> to write the output vcf. After that, run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+mkdir /variants
+
+gatk HaplotypeCaller <span class="se">\</span>
+--reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 --input bqsr/mother.recal.bam <span class="se">\</span>
 --output variants/mother.HC.vcf <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
@@ -663,10 +666,12 @@ gatk ApplyBQSR <span class="se">\</span>
 </details>
 <p>We will do the variant calling on all three samples. Later we want to combine the variant calls. For efficient merging of vcfs, we will need to output the variants as a GVCF. To do that, we will use the option <code>--emit-ref-confidence GVCF</code>. Also, we&rsquo;ll visualise the haplotype phasing with IGV in the next section. For that we&rsquo;ll need a phased bam. You can get this output with the argument <code>--bam-output</code>.</p>
 <p><strong>Exercise:</strong> Run <code>gatk HaplotypeCaller</code> for mother, father and son by using a loop, and by using the arguments in the previous exercise. On top of that add the arguments <code>--emit-ref-confidence GVCF</code> and <code>--bamoutput &lt;phased.bam&gt;</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="k">for</span> sample in mother father son
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+
+<span class="k">for</span> sample in mother father son
 <span class="k">do</span>
   gatk HaplotypeCaller <span class="se">\</span>
-  --reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+  --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
   --input bqsr/<span class="nv">$sample</span>.recal.bam <span class="se">\</span>
   --output variants/<span class="nv">$sample</span>.HC.g.vcf <span class="se">\</span>
   --bam-output variants/<span class="nv">$sample</span>.phased.bam <span class="se">\</span>
@@ -688,7 +693,7 @@ gatk ApplyBQSR <span class="se">\</span>
 <p><strong>Exercise:</strong> Run this command to generate the database.</p>
 <p>You can retrieve the combined vcf from the database with <code>gatk GenotypeGVCFs</code>.</p>
 <div class="highlight"><pre><span></span><code>gatk GenotypeGVCFs <span class="se">\</span>
---reference reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+--reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 --variant gendb://genomicsdb <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
 --output variants/trio.vcf

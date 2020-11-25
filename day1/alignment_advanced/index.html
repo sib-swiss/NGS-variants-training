@@ -545,7 +545,7 @@
 </ul>
 </details>
 <p><strong>Exercise:</strong> Run the three commands that are required to mark duplicates.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/data/alignment
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment
 
 samtools fixmate -m mother.bam mother.fixmate.bam
 samtools sort -o mother.positionsort.bam mother.fixmate.bam
@@ -639,13 +639,13 @@ mother.markdup.bam <span class="se">\</span>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span> ~/data
+<span class="nb">cd</span> ~/workdir
 
 <span class="k">for</span> sample in mother father son
 <span class="k">do</span>
-  bwa mem reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
-  fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
-  fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz <span class="se">\</span>
+  bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+  data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
+  data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz <span class="se">\</span>
   <span class="p">|</span> samtools fixmate -m - - <span class="se">\</span>
   <span class="p">|</span> samtools sort <span class="se">\</span>
   <span class="p">|</span> samtools markdup -s - - <span class="se">\</span>

@@ -556,7 +556,9 @@
 <p>Our dataset is too small to apply VQSR. We will therefore do hard filtering instead.</p>
 <h4 id="splitting-snps-and-indels">Splitting SNPs and INDELs</h4>
 <p>First, filtering thresholds are usually different for SNPs and INDELs. You can extract all the SNP records in our trio vcf like this:</p>
-<div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+
+gatk SelectVariants <span class="se">\</span>
 --variant variants/trio.vcf <span class="se">\</span>
 --select-type SNP <span class="se">\</span>
 --output variants/trio.SNP.vcf
@@ -595,14 +597,14 @@
 </code></pre></div>
 </div>
 <details class="done"><summary>Answer</summary><p>There are no differences in the number of records:</p>
-<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> trio.SNP.vcf <span class="p">|</span> wc -l
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.SNP.vcf <span class="p">|</span> wc -l
 </code></pre></div>
 <p>and</p>
-<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> trio.SNP.filtered.vcf <span class="p">|</span> wc -l
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.SNP.filtered.vcf <span class="p">|</span> wc -l
 </code></pre></div>
 <p>both give 446.</p>
 <p>However, there are SNPs filtered out, by changing the <code>FILTER</code> column. You can check the number of records with PASS by:</p>
-<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> trio.SNP.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.SNP.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
 </code></pre></div>
 <p>Giving:</p>
 <div class="highlight"><pre><span></span><code>441 PASS
@@ -666,7 +668,7 @@
 <p>B. Compare our vcf with the curated truth set with the command below. How many SNPs didn&rsquo;t we detect?</p>
 <div class="highlight"><pre><span></span><code>gatk Concordance <span class="se">\</span>
 --evaluation variants/mother.trio.filtered.vcf <span class="se">\</span>
---truth variants/NA12878.vcf.gz <span class="se">\</span>
+--truth data/variants/NA12878.vcf.gz <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
 --summary variants/concordance.mother.trio.filtered
 </code></pre></div>
@@ -711,7 +713,7 @@ INDEL   63      20      6       0.913   0.759
 <p>Get the concordance with the truth set:</p>
 <div class="highlight"><pre><span></span><code>gatk Concordance <span class="se">\</span>
 --evaluation variants/mother.trio.vcf <span class="se">\</span>
---truth variants/NA12878.vcf.gz <span class="se">\</span>
+--truth data/variants/NA12878.vcf.gz <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
 --summary variants/concordance.mother.trio
 </code></pre></div>
