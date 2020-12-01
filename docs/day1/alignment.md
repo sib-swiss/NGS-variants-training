@@ -46,8 +46,10 @@ Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/
     For our reference sequence a command would look like:
 
     ```sh
+    cd ~/workdir/
+
     bwa mem \
-    ~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     <forward_reads.fq> \
     <reverse_reads.fq> \
     > <alignment.sam>
@@ -56,7 +58,7 @@ Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/
 Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the alignment file to a directory in `~/workdir` called `alignment`.
 
 !!! note "Index prefix is the same a reference filename"
-    With default values, the index of a reference for `bwa mem` is the same as the reference itself. In this case, this would be `Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
+    With default values, the name of the index of a reference for `bwa mem` is the same as the name of the reference itself. In this case, this would be `Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
 
 ??? done "Answer"
     We'll first make the alignment directory:
