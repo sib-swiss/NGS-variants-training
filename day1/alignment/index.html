@@ -539,8 +539,10 @@ So, we&rsquo;ll need:</p>
 <li>reverse reads (<code>mates.fq</code>)</li>
 </ul>
 <p>For our reference sequence a command would look like:</p>
-<div class="highlight"><pre><span></span><code>bwa mem <span class="se">\</span>
-~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/
+
+bwa mem <span class="se">\</span>
+data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 &lt;forward_reads.fq&gt; <span class="se">\</span>
 &lt;reverse_reads.fq&gt; <span class="se">\</span>
 &gt; &lt;alignment.sam&gt;
@@ -549,7 +551,7 @@ So, we&rsquo;ll need:</p>
 <p>Perform an alignment with <code>bwa mem</code> of the reads from the mother (<code>mother_R1.fastq</code> and <code>mother_R2.fastq</code>) against chromosome 20. Write the alignment file to a directory in <code>~/workdir</code> called <code>alignment</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Index prefix is the same a reference filename</p>
-<p>With default values, the index of a reference for <code>bwa mem</code> is the same as the reference itself. In this case, this would be <code>Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
+<p>With default values, the name of the index of a reference for <code>bwa mem</code> is the same as the name of the reference itself. In this case, this would be <code>Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
 </div>
 <details class="done"><summary>Answer</summary><p>We&rsquo;ll first make the alignment directory:</p>
 <p><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/
