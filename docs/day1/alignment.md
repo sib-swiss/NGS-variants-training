@@ -72,8 +72,8 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
     ```sh
     bwa mem \
     data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-    data/fastq/mother_R1.fastq \
-    data/fastq/mother_R2.fastq \
+    data/fastq/mother_R1.fastq.gz \
+    data/fastq/mother_R2.fastq.gz \
     > alignment/mother.sam
     ```
 
