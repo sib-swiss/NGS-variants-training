@@ -32,16 +32,17 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     #### Login to AWS EC2 remote server
 
-    Use the video tutorials and the information below to log in and set up a remote script editor.
+    In this part, we'll use the video tutorials and the information below to log in and set up a remote script editor.
 
     Open a terminal and login like this:
 
     ```sh
-    ssh -i path/to/key/key_[USERNAME].pem [USERNAME]@[AWS_IP]
+    ssh -i path/to/key/key_<username>.pem <username>@<IP>
     ```
 
     !!! warning
-        change `path/to/key` to the actual path where you have put the key file.
+        * change `path/to/key` to the actual path where you have put the key file.
+        * replace <username> and <IP> with your actual username and IP
 
     #### Setup your favourite editor to work remotely
 
@@ -105,7 +106,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     #### Login to AWS EC2 remote server
 
-    Use the video tutorials and the information below to log in and set up a remote script editor.
+    In this part, you will use the video tutorials and the information below to log in and set up a remote script editor.
 
     If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](https://player.vimeo.com/video/473838657) to set up an SSH session.
 
@@ -376,7 +377,7 @@ echo dog
 echo bird
 ```
 
-However, if you want to change the command, you would have to change it for all the three command calls. Amongst others for that reason, you want to write the command only once. You can do this with a for-loop, like this:
+However, if you want to change the command (add an option for example), you would have to change it for all the three command calls. Amongst others for that reason, you want to write the command only once. You can do this with a for-loop, like this:
 
 ```sh
 #!/usr/bin/env bash
