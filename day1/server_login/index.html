@@ -960,13 +960,16 @@ Take therefore into account that great power comes with great responsibility. Ov
 <h2 id="exercises">Exercises</h2>
 <h3 id="1-first-login">1. First login</h3>
 <h4 id="login-to-aws-ec2-remote-server">Login to AWS EC2 remote server</h4>
-<p>Use the video tutorials and the information below to log in and set up a remote script editor.</p>
+<p>In this part, we&rsquo;ll use the video tutorials and the information below to log in and set up a remote script editor.</p>
 <p>Open a terminal and login like this:</p>
-<div class="highlight"><pre><span></span><code>ssh -i path/to/key/key_<span class="o">[</span>USERNAME<span class="o">]</span>.pem <span class="o">[</span>USERNAME<span class="o">]</span>@<span class="o">[</span>AWS_IP<span class="o">]</span>
+<div class="highlight"><pre><span></span><code>ssh -i path/to/key/key_&lt;username&gt;.pem &lt;username&gt;@&lt;IP&gt;
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>change <code>path/to/key</code> to the actual path where you have put the key file.</p>
+<ul>
+<li>change <code>path/to/key</code> to the actual path where you have put the key file.</li>
+<li>replace <username> and <IP> with your actual username and IP</li>
+</ul>
 </div>
 <h4 id="setup-your-favourite-editor-to-work-remotely">Setup your favourite editor to work remotely</h4>
 <p>To directly initiate and modify scripts on the remote server you can use the Atom plugin <code>ftp-remote-edit</code></p>
@@ -1010,7 +1013,7 @@ Take therefore into account that great power comes with great responsibility. Ov
 <h2 id="exercises_1">Exercises</h2>
 <h3 id="1-first-login_1">1. First login</h3>
 <h4 id="login-to-aws-ec2-remote-server_1">Login to AWS EC2 remote server</h4>
-<p>Use the video tutorials and the information below to log in and set up a remote script editor.</p>
+<p>In this part, you will use the video tutorials and the information below to log in and set up a remote script editor.</p>
 <p>If you are using MobaXterm on windows, you will automatically login to the remote server once you&rsquo;ve started the SSH session. Follow the <a href="https://player.vimeo.com/video/473838657">video tutorial on MobaXterm</a> to set up an SSH session.</p>
 <p>These are the general settings you should take into account:</p>
 <ul>
@@ -1186,7 +1189,7 @@ ls <span class="p">|</span> wc -l
 <span class="nb">echo</span> dog
 <span class="nb">echo</span> bird
 </code></pre></div>
-<p>However, if you want to change the command, you would have to change it for all the three command calls. Amongst others for that reason, you want to write the command only once. You can do this with a for-loop, like this:</p>
+<p>However, if you want to change the command (add an option for example), you would have to change it for all the three command calls. Amongst others for that reason, you want to write the command only once. You can do this with a for-loop, like this:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="k">for</span> animal in cat dog bird
