@@ -19,9 +19,13 @@ You can run snpEff like so:
 ```sh
 snpEff -Xmx4g \
 -v \
+-o gatk \
 GRCh38.99 \
 variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
 ```
+
+!!! note "Output `-o gatk` is deprecated for `gatk4`"
+    Here, we use output `-o gatk` for readability reasons (only one effect per variant is reported). With `gatk3` you could use `gatk VariantAnnotator` with input from `snpEff`. In `gatk4` that is not supported anymore.
 
 **Exercise:** Run the command, and check out the html file (`snpEff_summary.html`). Try to answer these questions:
 
@@ -31,7 +35,7 @@ variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
 
 **C.** Why is this different?
 
-**D.** How many effects are there resulting in a missense mutation?
+**D.** How many effects result in a missense mutation?
 
 ??? done "Answer"
     A. There were 10,357 effects calculated.
@@ -50,6 +54,9 @@ You can (quick and dirty) query the annotation vcf (`trio.filtered.snpeff.vcf`) 
     ```sh
     grep MISSENSE annotation/trio.filtered.snpeff.vcf
     ```
+
+!!! note "Only one effect per SNP in the vcf"
+    In the vcf we have created you can only find one effect per SNP. If you would run `snpEff` without `-o gatk`, you would get all effects per variant.
 
 **A.** How are the SNP annotations stored in the vcf?
 
