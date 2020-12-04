@@ -1,10 +1,12 @@
-## Material
+
 
 In this part we will set up your computer to work on the remote AWS server or with Docker (choose **Docker** if you are doing this course independently).
 
 === "mac OS/Linux"
 
-    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Before you do this part, you should have installed FileZilla and Atom.
+    ## Material
+
+    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Below you can find the material that helps you to login, edit scripts and transfer files.
 
     !!! warning "Great power comes with great responsibility"
         The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
@@ -12,25 +14,12 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     ### Video tutorials
 
-    Below you can find video tutorials to set up FileZilla and atom to edit and/or transfer remote files.
-
-    #### Atom
-
-    Atom is a versatile text editor for all major operating systems. For this course, it's the recommended script editor for Linux and Mac OS users. With the third-party package `ftp-remote-edit`, you can remotely edit scripts. The video tutorial explains how to set it up.
-
-    <iframe src="https://player.vimeo.com/video/473838666" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    #### FileZilla
-
-    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). The video tutorial explains how to set it up.
-
-    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    * [Set up `ftp-remote-edit` for Atom](https://player.vimeo.com/video/473838666)
+    * [Set up FileZilla](https://player.vimeo.com/video/473838726)
 
     ## Exercises
 
-    ### 1. First login
-
-    #### Login to AWS EC2 remote server
+    ### Login to AWS EC2 remote server
 
     In this part, we'll use the video tutorials and the information below to log in and set up a remote script editor.
 
@@ -44,9 +33,13 @@ In this part we will set up your computer to work on the remote AWS server or wi
         * change `path/to/key` to the actual path where you have put the key file.
         * replace <username> and <IP> with your actual username and IP
 
-    #### Setup your favourite editor to work remotely
+    ### Setup your Atom and FileZilla
 
-    To directly initiate and modify scripts on the remote server you can use the Atom plugin `ftp-remote-edit`
+    #### Atom
+
+    Atom is a versatile text editor for all major operating systems. For this course, it's the recommended script editor for Linux and Mac OS users. With the third-party package `ftp-remote-edit`, you can remotely edit scripts. Set it up on your own computer using your own credentials and the video below.
+
+    <iframe src="https://player.vimeo.com/video/473838666" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
     In general, setup the connection to the server with the following details:
 
@@ -56,9 +49,13 @@ In this part we will set up your computer to work on the remote AWS server or wi
     * port: 22
     * authentication/logon type: path to private key file
 
-    Tutorials are found above in the [video tutorial to set up Atom](https://player.vimeo.com/video/473838666).
+    #### FileZilla
 
-    #### Initiate conda
+    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). Set it up on your own computer using your own credentials and the video below.
+
+    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+    ### Initiate conda
 
     To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
 
@@ -78,7 +75,9 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
 === "Windows"
 
-    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Before you do this part, you should have installed FileZilla and MobaXterm.
+    ## Material
+
+    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Below you can find the material that helps you to login, edit scripts and transfer files.
 
     !!! warning "Great power comes with great responsibility"
         The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
@@ -86,29 +85,18 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     ### Video tutorials
 
-    Below you can find video tutorials to set up FileZilla, atom and MobaXterm to edit and/or transfer remote files.
-
-    #### MobaXterm
-
-    MobaXterm is an SSH client for Windows. Use this to connect to the remote host and edit remote scripts if you're on Windows. The video tutorial explains how to set it up.
-
-    <iframe src="https://player.vimeo.com/video/473838657" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    #### FileZilla
-
-    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). The video tutorial explains how to set it up.
-
-    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    * [Set up MobaXterm](https://player.vimeo.com/video/473838657)
+    * [Set up FileZilla](https://player.vimeo.com/video/473838726)
 
     ## Exercises
 
-    ### 1. First login
-
-    #### Login to AWS EC2 remote server
+    ### Set up MobaXterm
 
     In this part, you will use the video tutorials and the information below to log in and set up a remote script editor.
 
-    If you are using MobaXterm on windows, you will automatically login to the remote server once you've started the SSH session. Follow the [video tutorial on MobaXterm](https://player.vimeo.com/video/473838657) to set up an SSH session.
+    MobaXterm is an SSH client for Windows. Use this to connect to the remote host and edit remote scripts. With MobaXterm, you will automatically login to the remote server once you've started the SSH session. Set it up on your own computer using your own credentials and the video below.
+
+    <iframe src="https://player.vimeo.com/video/473838657" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
     These are the general settings you should take into account:
 
@@ -118,7 +106,13 @@ In this part we will set up your computer to work on the remote AWS server or wi
     * port: 22
     * authentication/logon type: path to private key file
 
-    #### Initiate conda
+    ### Set up FileZilla
+
+    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). Set it up on your own computer using your own credentials and the video below.
+
+    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+    ### Initiate conda
 
     To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
 
@@ -148,7 +142,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     ## Exercises
 
-    ### 1. First login
+    ### First login
 
     Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.
 
@@ -219,7 +213,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
     !!! note "Activating the environment"
         You will need to activate the ngs environment each time you login.
 
-### 2. A UNIX command line interface (CLI) refresher
+### A UNIX command line interface (CLI) refresher
 
 Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory.
 
@@ -327,7 +321,7 @@ More on `chmod` and file permissions [here](https://www.howtogeek.com/437958/how
 
 #### Redirection: `>` and `|`
 
-In the root directory (go there like this: `cd /`) there are a range of system directories and files. Write the names of all directories and files to a file called `system_dirs.txt` in your home directory.
+In the root directory (go there like this: `cd /`) there are a range of system directories and files. Write the names of all directories and files to a file called `system_dirs.txt` in your home directory (use `ls` and `>`).
 
 ??? done "Answer"
     ```sh
@@ -367,13 +361,13 @@ Make a shell script that automatically counts the number of system directories a
 
 >:fontawesome-regular-clock: 20 minutes
 
-If you want to run the same command on a range of arguments, it's not very convenient to type the command for each individual argument. For example, you could write `cat`, `dog`, `bird` to stdout in a script like this:
+If you want to run the same command on a range of arguments, it's not very convenient to type the command for each individual argument. For example, you could write `dog`, `fox`, `bird` to stdout in a script like this:
 
 ```sh
 #!/usr/bin/env bash
 
-echo cat
 echo dog
+echo fox
 echo bird
 ```
 
@@ -382,7 +376,9 @@ However, if you want to change the command (add an option for example), you woul
 ```sh
 #!/usr/bin/env bash
 
-for animal in cat dog bird
+ANIMALS="dog fox bird"
+
+for animal in $ANIMALS
 do
   echo $animal
 done
@@ -401,7 +397,7 @@ Write a shell script that removes all the letters "e" from a list of words.
 !!! hint
     Removing the letter "e" from a string can be done with `tr` like this:
     ```sh
-    word=test
+    word="test"
     echo $word | tr -d "e"
     ```
 
@@ -412,15 +408,16 @@ Write a shell script that removes all the letters "e" from a list of words.
     ```
 
 ??? done "Answer"
-    Your script should e.g. look like this:
+    Your script should e.g. look like this (I've added some awesome functionality):
 
     ```sh
     #!/usr/bin/env bash
 
-    wordlist="here is a list of words resulting in a sentence"
+    WORDLIST="here is a list of words resulting in a sentence"
 
-    for word in $wordlist
+    for word in $WORDLIST
     do
+      echo "'$word' with e's removed looks like:"
       echo $word | tr -d "e"
     done
     ```
@@ -428,14 +425,24 @@ Write a shell script that removes all the letters "e" from a list of words.
     resulting in:
 
     ```
+    'here' with e's removed looks like:
     hr
+    'is' with e's removed looks like:
     is
+    'a' with e's removed looks like:
     a
+    'list' with e's removed looks like:
     list
+    'of' with e's removed looks like:
     of
+    'words' with e's removed looks like:
     words
+    'resulting' with e's removed looks like:
     rsulting
+    'in' with e's removed looks like:
     in
+    'a' with e's removed looks like:
     a
+    'sentence' with e's removed looks like:
     sntnc
     ```
