@@ -1106,7 +1106,7 @@ docker attach adoring_bell
 <p>Difference between the commands is explainer <a href="https://stackoverflow.com/questions/30960686/difference-between-docker-attach-and-docker-exec">here</a>. Conclusion: do not run <code>docker attach</code> for a second shell in which you usually want to start a new process.</p>
 </div>
 <h4 id="lost-the-container">Lost the container</h4>
-<p>If you lost the container, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the <code>docker run</code> command (with the option <code>-v</code>, <code>-i</code>, <code>-t</code> and the entrypoint). </p>
+<p>If you lost the container for whatever reason, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the <code>docker run</code> command (with the option <code>-v</code>, <code>-i</code>, <code>-t</code> and the entrypoint).</p>
 <h4 id="save-your-own-version">Save your own version</h4>
 <p>If you have additional installations, and you want to keep them, you can save the image with:</p>
 <div class="highlight"><pre><span></span><code>docker commit adoring_bell my-image
