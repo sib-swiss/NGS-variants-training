@@ -223,7 +223,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     #### Lost the container
 
-    If you lost the container, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the `docker run` command (with the option `-v`, `-i`, `-t` and the entrypoint). 
+    If you lost the container for whatever reason, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the `docker run` command (with the option `-v`, `-i`, `-t` and the entrypoint).
 
     #### Save your own version
 
