@@ -64,14 +64,18 @@ In this part we will set up your computer to work on the remote AWS server or wi
     exec bash
     ```
 
-    To load the environment with the required software packages, run:
+    Now, your shell should start with `(base)`, meaning that the conda `base` environment is loaded.
+
+    To load the environment `variants` with the required software packages, run:
 
     ```sh
     conda activate variants
     ```
 
+    Which should change the start of your shell from `(base)` to `(variants)`
+
     !!! note "Activating the environment"
-        You will need to activate the ngs environment each time you login.
+        You will need to activate the `variants` environment each time you login.
 
 === "Windows"
 
@@ -121,24 +125,25 @@ In this part we will set up your computer to work on the remote AWS server or wi
     exec bash
     ```
 
-    To load the environment with the required software packages, run:
+    Now, your shell should start with `(base)`, meaning that the conda `base` environment is loaded.
+
+    To load the environment `variants` with the required software packages, run:
 
     ```sh
     conda activate variants
     ```
 
+    Which should change the start of your shell from `(base)` to `(variants)`
+
     !!! note "Activating the environment"
-        You will need to activate the ngs environment each time you login.
+        You will need to activate the `variants` environment each time you login.
 
 === "Docker"
 
-    Instructions to install docker [here](https://docs.docker.com/get-docker/). Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.
+    ## Material
 
-    #### Set up docker container
-
-    In the video below there's a tutorial on how to set up a docker container for this course.
-
-    <iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    * Instructions to [install docker](https://docs.docker.com/get-docker/)
+    * Instructions to [set up to container](https://player.vimeo.com/video/481620477)
 
     ## Exercises
 
@@ -146,9 +151,14 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.
 
-    Use the [video tutorial](https://player.vimeo.com/video/481620477) in combination with the commands below to set up the Docker container.
+    In the video below there's a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.
 
-    A command to run the environment required for this course looks like this (in a terminal or powershell):
+    <iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+    The command to run the environment required for this course looks like this (in a terminal or powershell):
+
+    !!! warning "Modify the script"
+        Modify the path after `-v` to the working directory on your computer before running it.
 
     === "Mac OS/Linux terminal"
         ```sh
@@ -173,13 +183,17 @@ In this part we will set up your computer to work on the remote AWS server or wi
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
-    The options `-i` and `-t` let's you approach the container interactively. Meaning that you can use the shell.
+    The options `-i` and `-t` let you approach the container interactively. Meaning that you can use the shell.
 
-    The last bit, `geertvangeest/ngs-intro` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-intro` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+
+    The last bit `/bin/bash` tells us which entrypoint we take. Which is the bash command line interpreter.
 
     You can exit the shell with `exit`.
 
-    #### Restarting the container
+    ### Working with a running container
+
+    #### Restarting
 
     After exiting, you can restart the container.
 
@@ -196,13 +210,30 @@ In this part we will set up your computer to work on the remote AWS server or wi
     docker attach adoring_bell
     ```
 
+    #### Second shell
+
+    If you want to have a second shell in your container, e.g. because your current shell is busy, you can use:
+
+    ```sh
+    docker exec -it adoring_bell /bin/bash
+    ```
+
+    !!! note "Difference `docker attach` and `docker exec`"
+        Difference between the commands is explainer [here](https://stackoverflow.com/questions/30960686/difference-between-docker-attach-and-docker-exec). Conclusion: do not run `docker attach` for a second shell in which you usually want to start a new process.
+
+    #### Lost the container
+
+    If you lost the container, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the `docker run` command (with the option `-v`, `-i`, `-t` and the entrypoint). 
+
+    #### Save your own version
+
     If you have additional installations, and you want to keep them, you can save the image with:
 
     ```sh
     docker commit adoring_bell my-image
     ```
 
-    #### Use conda
+    ### Use conda
 
     If you are in the container with shell, you can load the environment with the required software packages:
 
