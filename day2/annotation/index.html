@@ -469,14 +469,19 @@ snpEff download -v GRCh38.99
 <p>You can run snpEff like so:</p>
 <div class="highlight"><pre><span></span><code>snpEff -Xmx4g <span class="se">\</span>
 -v <span class="se">\</span>
+-o gatk <span class="se">\</span>
 GRCh38.99 <span class="se">\</span>
 variants/trio.filtered.vcf &gt; annotation/trio.filtered.snpeff.vcf
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Output <code>-o gatk</code> is deprecated for <code>gatk4</code></p>
+<p>Here, we use output <code>-o gatk</code> for readability reasons (only one effect per variant is reported). With <code>gatk3</code> you could use <code>gatk VariantAnnotator</code> with input from <code>snpEff</code>. In <code>gatk4</code> that is not supported anymore.</p>
+</div>
 <p><strong>Exercise:</strong> Run the command, and check out the html file (<code>snpEff_summary.html</code>). Try to answer these questions:</p>
 <p><strong>A.</strong> How many effects were calculated?</p>
 <p><strong>B.</strong> How many variants are in the vcf?</p>
 <p><strong>C.</strong> Why is this different?</p>
-<p><strong>D.</strong> How many effects are there resulting in a missense mutation?</p>
+<p><strong>D.</strong> How many effects result in a missense mutation?</p>
 <details class="done"><summary>Answer</summary><p>A. There were 10,357 effects calculated.</p>
 <p>B. There are only 556 variants in the vcf.</p>
 <p>C. This means that there are multiple effects per variant. snpEff calculates effects for each splice variant, and therefore the number of effects are a multitude of the number of variants.</p>
@@ -487,6 +492,10 @@ variants/trio.filtered.vcf &gt; annotation/trio.filtered.snpeff.vcf
 <details class="hint"><summary>Hint</summary><div class="highlight"><pre><span></span><code>grep MISSENSE annotation/trio.filtered.snpeff.vcf
 </code></pre></div>
 </details>
+<div class="admonition note">
+<p class="admonition-title">Only one effect per SNP in the vcf</p>
+<p>In the vcf we have created you can only find one effect per SNP. If you would run <code>snpEff</code> without <code>-o gatk</code>, you would get all effects per variant.</p>
+</div>
 <p><strong>A.</strong> How are the SNP annotations stored in the vcf?</p>
 <p><strong>B.</strong> What are the genotypes of the individuals?</p>
 <p><strong>C.</strong> Which amino acid change does it cause?</p>
