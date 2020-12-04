@@ -404,23 +404,17 @@
     Initiate conda
   </a>
   
-    <nav class="md-nav" aria-label="Initiate conda">
-      <ul class="md-nav__list">
+</li>
         
-          <li class="md-nav__item">
-  <a href="#set-up-docker-container" class="md-nav__link">
-    Set up docker container
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material_2" class="md-nav__link">
+    Material
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -437,13 +431,46 @@
     First login
   </a>
   
-    <nav class="md-nav" aria-label="First login">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-with-a-running-container" class="md-nav__link">
+    Working with a running container
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with a running container">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#restarting-the-container" class="md-nav__link">
-    Restarting the container
+  <a href="#restarting" class="md-nav__link">
+    Restarting
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second-shell" class="md-nav__link">
+    Second shell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lost-the-container" class="md-nav__link">
+    Lost the container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-your-own-version" class="md-nav__link">
+    Save your own version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -451,11 +478,6 @@
   <a href="#use-conda" class="md-nav__link">
     Use conda
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -770,23 +792,17 @@
     Initiate conda
   </a>
   
-    <nav class="md-nav" aria-label="Initiate conda">
-      <ul class="md-nav__list">
+</li>
         
-          <li class="md-nav__item">
-  <a href="#set-up-docker-container" class="md-nav__link">
-    Set up docker container
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material_2" class="md-nav__link">
+    Material
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -803,13 +819,46 @@
     First login
   </a>
   
-    <nav class="md-nav" aria-label="First login">
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#working-with-a-running-container" class="md-nav__link">
+    Working with a running container
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with a running container">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#restarting-the-container" class="md-nav__link">
-    Restarting the container
+  <a href="#restarting" class="md-nav__link">
+    Restarting
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#second-shell" class="md-nav__link">
+    Second shell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lost-the-container" class="md-nav__link">
+    Lost the container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save-your-own-version" class="md-nav__link">
+    Save your own version
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -817,11 +866,6 @@
   <a href="#use-conda" class="md-nav__link">
     Use conda
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -947,12 +991,14 @@ Take therefore into account that great power comes with great responsibility. Ov
 <div class="highlight"><pre><span></span><code>/opt/miniconda3/bin/conda init
 <span class="nb">exec</span> bash
 </code></pre></div>
-<p>To load the environment with the required software packages, run:</p>
+<p>Now, your shell should start with <code>(base)</code>, meaning that the conda <code>base</code> environment is loaded.</p>
+<p>To load the environment <code>variants</code> with the required software packages, run:</p>
 <div class="highlight"><pre><span></span><code>conda activate variants
 </code></pre></div>
+<p>Which should change the start of your shell from <code>(base)</code> to <code>(variants)</code></p>
 <div class="admonition note">
 <p class="admonition-title">Activating the environment</p>
-<p>You will need to activate the ngs environment each time you login.</p>
+<p>You will need to activate the <code>variants</code> environment each time you login.</p>
 </div>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Windows</label><div class="tabbed-content">
@@ -989,24 +1035,32 @@ Take therefore into account that great power comes with great responsibility. Ov
 <div class="highlight"><pre><span></span><code>/opt/miniconda3/bin/conda init
 <span class="nb">exec</span> bash
 </code></pre></div>
-<p>To load the environment with the required software packages, run:</p>
+<p>Now, your shell should start with <code>(base)</code>, meaning that the conda <code>base</code> environment is loaded.</p>
+<p>To load the environment <code>variants</code> with the required software packages, run:</p>
 <div class="highlight"><pre><span></span><code>conda activate variants
 </code></pre></div>
+<p>Which should change the start of your shell from <code>(base)</code> to <code>(variants)</code></p>
 <div class="admonition note">
 <p class="admonition-title">Activating the environment</p>
-<p>You will need to activate the ngs environment each time you login.</p>
+<p>You will need to activate the <code>variants</code> environment each time you login.</p>
 </div>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Docker</label><div class="tabbed-content">
-<p>Instructions to install docker <a href="https://docs.docker.com/get-docker/">here</a>. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
-<h4 id="set-up-docker-container">Set up docker container</h4>
-<p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course.</p>
-<p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
+<h2 id="material_2">Material</h2>
+<ul>
+<li>Instructions to <a href="https://docs.docker.com/get-docker/">install docker</a></li>
+<li>Instructions to <a href="https://player.vimeo.com/video/481620477">set up to container</a></li>
+</ul>
 <h2 id="exercises_2">Exercises</h2>
 <h3 id="first-login">First login</h3>
 <p>Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.</p>
-<p>Use the <a href="https://player.vimeo.com/video/481620477">video tutorial</a> in combination with the commands below to set up the Docker container.</p>
-<p>A command to run the environment required for this course looks like this (in a terminal or powershell):</p>
+<p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
+<p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
+<p>The command to run the environment required for this course looks like this (in a terminal or powershell):</p>
+<div class="admonition warning">
+<p class="admonition-title">Modify the script</p>
+<p>Modify the path after <code>-v</code> to the working directory on your computer before running it.</p>
+</div>
 <div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Mac OS/Linux terminal</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
 -v /full/path/to/local/workdir:/root/workdir <span class="se">\</span>
@@ -1029,10 +1083,12 @@ geertvangeest/ngs-variants <span class="se">\</span>
 <p class="admonition-title">Don&rsquo;t mount directly in the home dir</p>
 <p>Don&rsquo;t directly mount your local directory to the home directory (<code>/root</code>). This will lead to unexpected behaviour.</p>
 </div>
-<p>The options <code>-i</code> and <code>-t</code> let&rsquo;s you approach the container interactively. Meaning that you can use the shell.</p>
-<p>The last bit, <code>geertvangeest/ngs-intro</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+<p>The options <code>-i</code> and <code>-t</code> let you approach the container interactively. Meaning that you can use the shell.</p>
+<p>The part <code>geertvangeest/ngs-intro</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+<p>The last bit <code>/bin/bash</code> tells us which entrypoint we take. Which is the bash command line interpreter.</p>
 <p>You can exit the shell with <code>exit</code>.</p>
-<h4 id="restarting-the-container">Restarting the container</h4>
+<h3 id="working-with-a-running-container">Working with a running container</h3>
+<h4 id="restarting">Restarting</h4>
 <p>After exiting, you can restart the container.</p>
 <p>Find the container name:</p>
 <div class="highlight"><pre><span></span><code>docker container ls -a
@@ -1041,10 +1097,21 @@ geertvangeest/ngs-variants <span class="se">\</span>
 <div class="highlight"><pre><span></span><code>docker start adoring_bell
 docker attach adoring_bell
 </code></pre></div>
+<h4 id="second-shell">Second shell</h4>
+<p>If you want to have a second shell in your container, e.g. because your current shell is busy, you can use:</p>
+<div class="highlight"><pre><span></span><code>docker <span class="nb">exec</span> -it adoring_bell /bin/bash
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Difference <code>docker attach</code> and <code>docker exec</code></p>
+<p>Difference between the commands is explainer <a href="https://stackoverflow.com/questions/30960686/difference-between-docker-attach-and-docker-exec">here</a>. Conclusion: do not run <code>docker attach</code> for a second shell in which you usually want to start a new process.</p>
+</div>
+<h4 id="lost-the-container">Lost the container</h4>
+<p>If you lost the container, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the <code>docker run</code> command (with the option <code>-v</code>, <code>-i</code>, <code>-t</code> and the entrypoint). </p>
+<h4 id="save-your-own-version">Save your own version</h4>
 <p>If you have additional installations, and you want to keep them, you can save the image with:</p>
 <div class="highlight"><pre><span></span><code>docker commit adoring_bell my-image
 </code></pre></div>
-<h4 id="use-conda">Use conda</h4>
+<h3 id="use-conda">Use conda</h3>
 <p>If you are in the container with shell, you can load the environment with the required software packages:</p>
 <div class="highlight"><pre><span></span><code>conda activate variants
 </code></pre></div>
