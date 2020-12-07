@@ -9,7 +9,7 @@ Download the following files to your local computer:
 * `variants/mother.phased.bam.bai`
 * `bqsr/mother.recal.bam`
 * `bqsr/mother.recal.bam.bai`
-* `variants/mother.HC.g.vcf`
+* `variants/mother.HC.vcf`
 
 Launch IGV and select the human genome version hg38 as a reference.
 

@@ -17,6 +17,8 @@ snpEff download -v GRCh38.99
 You can run snpEff like so:
 
 ```sh
+mkdir annotation
+
 snpEff -Xmx4g \
 -v \
 -o gatk \
