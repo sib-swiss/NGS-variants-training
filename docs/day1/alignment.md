@@ -42,6 +42,8 @@ Make an index of the reference sequence of chromosome 20 of the human genome. Yo
     bwa index Homo_sapiens.GRCh38.dna.chromosome.20.fa
     ```
 
+### 2. Read alignment
+
 Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/bwa.shtml). We'll be using paired-end reads of three samples that can be found at `~/workdir/data/fastq`. If we run `bwa mem` with default options, which three arguments do we need?
 
 ??? done "Answer"
@@ -89,7 +91,7 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
     > alignment/mother.sam
     ```
 
-### 2. Alignment statistics
+### 3. Alignment statistics
 
 **Exercise:** Check out the statistics of the alignment by using `samtools flagstat`. Find the documentation [here](http://www.htslib.org/doc/samtools-flagstat.html). Any duplicates in there?
 
@@ -123,7 +125,7 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
 
 
 
-### 3. Compression
+### 4. Compression
 
 The command `samtools view` is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let's start with that.
 

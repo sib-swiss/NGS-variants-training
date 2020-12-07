@@ -196,7 +196,7 @@ gatk VariantsToTable \
 --output variants/mother.HC.table
 ```
 
-**Exercise:** Run the command have a look at the first few records. After that, report the number of SNPs and INDELs.
+**Exercise:** Run the command and have a look at the first few records (use e.g. `head` or `less`). After that, report the number of SNPs and INDELs.
 
 ??? done "Answer"
     You can get the number of SNPs with:
