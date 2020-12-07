@@ -580,8 +580,8 @@ Which tells us that 17329 reads were marked as duplicate.</p>
 -r ID:mother <span class="se">\</span>
 -r SM:mother <span class="se">\</span>
 -r PL:ILLUMINA <span class="se">\</span>
-mother.markdup.bam <span class="se">\</span>
-&gt; mother.markdup.rg.bam
+-o mother.markdup.rg.bam <span class="se">\</span>
+mother.markdup.bam
 </code></pre></div>
 <p>This command modifies the sam header and read tags.</p>
 <p><strong>Exercise:</strong> Run the <code>samtools addreplacerg</code> command and compare the header and first alignments of <code>mother.markdup.bam</code> and <code>mother.markdup.rg.bam</code>. Notice any differences?</p>
@@ -594,11 +594,9 @@ mother.markdup.bam <span class="se">\</span>
 <div class="highlight"><pre><span></span><code>samtools view &lt;alignment.bam&gt; | head
 </code></pre></div>
 </div>
-<details class="done"><summary>Answer</summary><p>Compared to the header of <code>mother.markdup.bam</code>, the header of <code>mother.markdup.rg.bam</code> contains two extra lines starting with <code>@PG</code> and <code>@RG</code> respectively:</p>
-<div class="highlight"><pre><span></span><code>@PG     ID:samtools.4   PN:samtools     PP:samtools.3   VN:1.11 CL:samtools addreplacerg -r ID:mother -r SM:mother -r PL:ILLUMINA mother.markdup.bam
-@RG     ID:mother       SM:mother       PL:ILLUMINA
+<details class="done"><summary>Answer</summary><p>Compared to the header of <code>mother.markdup.bam</code>, the header of <code>mother.markdup.rg.bam</code> contains an extra line starting with <code>@RG</code>:</p>
+<div class="highlight"><pre><span></span><code>@RG     ID:mother       SM:mother       PL:ILLUMINA
 </code></pre></div>
-<p>Here, the <code>@PG</code> lines tell you which commands have been run on this alignment file. The <code>@RG</code> line defines the readgroups present in the alignment file.</p>
 <p>In the alignment records, a tag was added at the very end of each line: <code>RG:Z:mother</code>.</p>
 </details>
 <h3 id="3-indexing">3. Indexing</h3>
@@ -629,14 +627,16 @@ mother.markdup.bam <span class="se">\</span>
 </code></pre></div>
 </div>
 <p>Let&rsquo;s put everything we&rsquo;ve done so far in a pipe and loop over our three samples.</p>
-<p>The command below loops over the strings <code>father</code>, <code>mother</code> and <code>son</code>, and:</p>
-<ul>
-<li>performs the alignment</li>
-<li>marks duplicates</li>
-<li>adds readgroups</li>
-<li>compresses the output</li>
-<li>creates an index</li>
-</ul>
+<p>The command below loops over the strings <code>father</code>, <code>mother</code> and <code>son</code>, and performs these tasks:</p>
+<ol>
+<li>Create a variable to work on data of mother, father and son separately</li>
+<li>Perform the alignment</li>
+<li>Fill in the mate coordinates and sort on coordinate</li>
+<li>Mark duplicates</li>
+<li>Add readgroups</li>
+<li>Compress the output</li>
+<li>Create an index</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir
@@ -655,7 +655,35 @@ mother.markdup.bam <span class="se">\</span>
   samtools index alignment/<span class="nv">$sample</span>.bam
 <span class="k">done</span>
 </code></pre></div>
-<p><strong>Exercise:</strong> Try to understand what each line of this script does. After that, run it to get the alignments of all three samples.</p>
+<p><strong>Exercise:</strong> For each task (1-7), figure out which part of the script performs that task. After that, run it to get the alignments of all three samples.</p>
+<details class="done"><summary>Answer</summary><p>Creating variables (1):</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> sample in mother father son
+<span class="k">do</span>
+  ...
+<span class="k">done</span>
+</code></pre></div>
+<p>Perform the alignment (2):</p>
+<div class="highlight"><pre><span></span><code>bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
+data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz
+</code></pre></div>
+<p>Fill in the mate coordinates and sort on coordinate (3):</p>
+<div class="highlight"><pre><span></span><code>samtools fixmate -m &lt;INPUT&gt; &lt;OUTPUT&gt; <span class="se">\</span>
+<span class="p">|</span> samtools sort
+</code></pre></div>
+<p>Mark duplicates (4):</p>
+<div class="highlight"><pre><span></span><code>samtools markdup -s &lt;INPUT&gt; &lt;OUTPUT&gt;
+</code></pre></div>
+<p>Add readgroups (5):</p>
+<div class="highlight"><pre><span></span><code>samtools addreplacerg -r ID:<span class="nv">$sample</span> -r SM:<span class="nv">$sample</span> -r PL:ILLUMINA &lt;INPUT&gt;
+</code></pre></div>
+<p>Compress the output (6):</p>
+<div class="highlight"><pre><span></span><code>samtools view -bh &gt; alignment/<span class="nv">$sample</span>.bam
+</code></pre></div>
+<p>Create an index (7):</p>
+<div class="highlight"><pre><span></span><code>samtools index alignment/<span class="nv">$sample</span>.bam
+</code></pre></div>
+</details>
                 
               
               

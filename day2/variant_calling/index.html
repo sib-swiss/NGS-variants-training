@@ -632,8 +632,8 @@ gatk ApplyBQSR <span class="se">\</span>
   gatk BaseRecalibrator <span class="se">\</span>
   --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
   --input alignment/<span class="nv">$sample</span>.bam <span class="se">\</span>
-  --known-sites variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
-  --known-sites variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
+  --known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
+  --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
   --output bqsr/<span class="nv">$sample</span>.recal.table
 
   gatk ApplyBQSR <span class="se">\</span>
@@ -655,13 +655,43 @@ gatk ApplyBQSR <span class="se">\</span>
 </details>
 <p><strong>Exercise:</strong> Make a directory <code>~/workdir/variants</code> to write the output vcf. After that, run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
-mkdir /variants
+mkdir variants
 
 gatk HaplotypeCaller <span class="se">\</span>
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 --input bqsr/mother.recal.bam <span class="se">\</span>
 --output variants/mother.HC.vcf <span class="se">\</span>
---intervals chr20:10018000-10220000 <span class="se">\</span>
+--intervals chr20:10018000-10220000
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong> You can get the number of records in a vcf with piping the output of <code>grep -v '^#'</code> to <code>wc -l</code>. Get the number of variants in the vcf.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>grep -v <span class="s1">&#39;^#&#39;</span> variants/mother.HC.vcf <span class="p">|</span> wc -l
+</code></pre></div>
+<p>Shows you that there are 411 variants in there.</p>
+</details>
+<p>You can get some more statistics with <code>gatk VariantsToTable</code>. The output can be used to easily query things in <code>R</code> or MS Excel.</p>
+<p>Here&rsquo;s an example:</p>
+<div class="highlight"><pre><span></span><code>gatk VariantsToTable <span class="se">\</span>
+--variant variants/mother.HC.vcf <span class="se">\</span>
+--fields CHROM -F POS -F TYPE -GF GT <span class="se">\</span>
+--output variants/mother.HC.table
+</code></pre></div>
+<p><strong>Exercise:</strong> Run the command have a look at the first few records. After that, report the number of SNPs and INDELs.</p>
+<details class="done"><summary>Answer</summary><p>You can get the number of SNPs with:</p>
+<div class="highlight"><pre><span></span><code>grep -c <span class="s2">&quot;SNP&quot;</span> variants/mother.HC.table
+</code></pre></div>
+<p>which will give 326</p>
+<p>And the number of INDELs with:</p>
+<div class="highlight"><pre><span></span><code>grep -c <span class="s2">&quot;INDEL&quot;</span> variants/mother.HC.table
+</code></pre></div>
+<p>that outputs 84</p>
+<p>A more fancy way to this would be:</p>
+<div class="highlight"><pre><span></span><code>cut -f <span class="m">3</span> variants/mother.HC.table <span class="p">|</span> tail -n +2 <span class="p">|</span> sort <span class="p">|</span> uniq -c
+</code></pre></div>
+<p>Giving:</p>
+<div class="highlight"><pre><span></span><code>84 INDEL
+1 MIXED
+326 SNP
 </code></pre></div>
 </details>
 <p>We will do the variant calling on all three samples. Later we want to combine the variant calls. For efficient merging of vcfs, we will need to output the variants as a GVCF. To do that, we will use the option <code>--emit-ref-confidence GVCF</code>. Also, we&rsquo;ll visualise the haplotype phasing with IGV in the next section. For that we&rsquo;ll need a phased bam. You can get this output with the argument <code>--bam-output</code>.</p>
@@ -683,7 +713,9 @@ gatk HaplotypeCaller <span class="se">\</span>
 <h3 id="4-combining-gvcfs">4. Combining GVCFs</h3>
 <p>Now that we have all three GVCFs of the mother, father and son, we can combine them into a database. We do this because it enables us to later add GVCFs (with the option <code>--genomicsdb-update-workspace-path</code>), and to efficiently combine them into a single vcf.</p>
 <p>You can generate a GenomicsDB on our three samples like this:</p>
-<div class="highlight"><pre><span></span><code>gatk GenomicsDBImport <span class="se">\</span>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+
+gatk GenomicsDBImport <span class="se">\</span>
 --variant variants/mother.HC.g.vcf <span class="se">\</span>
 --variant variants/father.HC.g.vcf <span class="se">\</span>
 --variant variants/son.HC.g.vcf <span class="se">\</span>

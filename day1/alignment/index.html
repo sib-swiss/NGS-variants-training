@@ -518,6 +518,7 @@
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
 wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
 tar -xvf ngs-variants-training.tar.gz
+rm ngs-variants-training.tar.gz
 </code></pre></div>
 <p>This will create the directory <code>data</code>. Check out what&rsquo;s in there.</p>
 <p>We&rsquo;ll use <code>bwa mem</code> for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:</p>
