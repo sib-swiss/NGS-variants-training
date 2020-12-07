@@ -318,15 +318,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-alignment-statistics" class="md-nav__link">
-    2. Alignment statistics
+  <a href="#2-read-alignment" class="md-nav__link">
+    2. Read alignment
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-compression" class="md-nav__link">
-    3. Compression
+  <a href="#3-alignment-statistics" class="md-nav__link">
+    3. Alignment statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-compression" class="md-nav__link">
+    4. Compression
   </a>
   
 </li>
@@ -477,15 +484,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-alignment-statistics" class="md-nav__link">
-    2. Alignment statistics
+  <a href="#2-read-alignment" class="md-nav__link">
+    2. Read alignment
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-compression" class="md-nav__link">
-    3. Compression
+  <a href="#3-alignment-statistics" class="md-nav__link">
+    3. Alignment statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-compression" class="md-nav__link">
+    4. Compression
   </a>
   
 </li>
@@ -536,6 +550,7 @@ rm ngs-variants-training.tar.gz
 bwa index Homo_sapiens.GRCh38.dna.chromosome.20.fa
 </code></pre></div>
 </details>
+<h3 id="2-read-alignment">2. Read alignment</h3>
 <p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/workdir/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
 <details class="done"><summary>Answer</summary><p>The manual says:
 <div class="highlight"><pre><span></span><code>bwa mem [-aCHMpP] [-t nThreads] [-k minSeedLen] ... db.prefix reads.fq [mates.fq]
@@ -573,7 +588,7 @@ data/fastq/mother_R2.fastq.gz <span class="se">\</span>
 &gt; alignment/mother.sam
 </code></pre></div>
 </details>
-<h3 id="2-alignment-statistics">2. Alignment statistics</h3>
+<h3 id="3-alignment-statistics">3. Alignment statistics</h3>
 <p><strong>Exercise:</strong> Check out the statistics of the alignment by using <code>samtools flagstat</code>. Find the documentation <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Any duplicates in there?</p>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment
 samtools flagstat mother.sam
@@ -596,7 +611,7 @@ samtools flagstat mother.sam
 </code></pre></div>
 <p>No duplicates were found (<code>0 + 0 duplicates</code>). The aligner doesn&rsquo;t automatically flag duplicates. This needs to be done after the alignment.</p>
 </details>
-<h3 id="3-compression">3. Compression</h3>
+<h3 id="4-compression">4. Compression</h3>
 <p>The command <code>samtools view</code> is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let&rsquo;s start with that.</p>
 <p><strong>Exercise</strong>: compress our SAM file into a BAM file and include the header in the output. For this, use the <code>-b</code> and <code>-h</code> options. Find the required documentation <a href="http://www.htslib.org/doc/samtools-view.html">here</a>. How much was the disk space reduced by compressing the file?</p>
 <div class="admonition tip">

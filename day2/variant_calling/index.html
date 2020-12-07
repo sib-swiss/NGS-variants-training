@@ -676,7 +676,7 @@ gatk HaplotypeCaller <span class="se">\</span>
 --fields CHROM -F POS -F TYPE -GF GT <span class="se">\</span>
 --output variants/mother.HC.table
 </code></pre></div>
-<p><strong>Exercise:</strong> Run the command have a look at the first few records. After that, report the number of SNPs and INDELs.</p>
+<p><strong>Exercise:</strong> Run the command and have a look at the first few records (use e.g. <code>head</code> or <code>less</code>). After that, report the number of SNPs and INDELs.</p>
 <details class="done"><summary>Answer</summary><p>You can get the number of SNPs with:</p>
 <div class="highlight"><pre><span></span><code>grep -c <span class="s2">&quot;SNP&quot;</span> variants/mother.HC.table
 </code></pre></div>
