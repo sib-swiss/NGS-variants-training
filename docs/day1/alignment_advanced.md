@@ -72,8 +72,8 @@ samtools addreplacerg \
 -r ID:mother \
 -r SM:mother \
 -r PL:ILLUMINA \
-mother.markdup.bam \
-> mother.markdup.rg.bam
+-o mother.markdup.rg.bam \
+mother.markdup.bam
 ```
 
 This command modifies the sam header and read tags.
@@ -94,14 +94,11 @@ This command modifies the sam header and read tags.
     ```
 
 ??? done "Answer"
-    Compared to the header of `mother.markdup.bam`, the header of `mother.markdup.rg.bam` contains two extra lines starting with `@PG` and `@RG` respectively:
+    Compared to the header of `mother.markdup.bam`, the header of `mother.markdup.rg.bam` contains an extra line starting with `@RG`:
 
     ```
-    @PG     ID:samtools.4   PN:samtools     PP:samtools.3   VN:1.11 CL:samtools addreplacerg -r ID:mother -r SM:mother -r PL:ILLUMINA mother.markdup.bam
     @RG     ID:mother       SM:mother       PL:ILLUMINA
     ```
-
-    Here, the `@PG` lines tell you which commands have been run on this alignment file. The `@RG` line defines the readgroups present in the alignment file.
 
     In the alignment records, a tag was added at the very end of each line: `RG:Z:mother`.
 
@@ -157,13 +154,15 @@ Samtools can quite easily be used in a UNIX pipeline. This has the advantage tha
 
 Let's put everything we've done so far in a pipe and loop over our three samples.
 
-The command below loops over the strings `father`, `mother` and `son`, and:
+The command below loops over the strings `father`, `mother` and `son`, and performs these tasks:
 
-* performs the alignment
-* marks duplicates
-* adds readgroups
-* compresses the output
-* creates an index
+1. Create a variable to work on data of mother, father and son separately
+2. Perform the alignment
+3. Fill in the mate coordinates and sort on coordinate
+4. Mark duplicates
+5. Add readgroups
+6. Compress the output
+7. Create an index
 
 ```sh
 #!/usr/bin/env bash
@@ -185,4 +184,53 @@ do
 done
 ```
 
-**Exercise:** Try to understand what each line of this script does. After that, run it to get the alignments of all three samples.
+**Exercise:** For each task (1-7), figure out which part of the script performs that task. After that, run it to get the alignments of all three samples.
+
+??? done "Answer"
+    Creating variables (1):
+
+    ```sh
+    for sample in mother father son
+    do
+      ...
+    done
+    ```
+
+    Perform the alignment (2):
+
+    ```sh
+    bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    data/fastq/"$sample"_R1.fastq.gz \
+    data/fastq/"$sample"_R2.fastq.gz
+    ```
+
+    Fill in the mate coordinates and sort on coordinate (3):
+
+    ```sh
+    samtools fixmate -m <INPUT> <OUTPUT> \
+    | samtools sort
+    ```
+
+    Mark duplicates (4):
+
+    ```sh
+    samtools markdup -s <INPUT> <OUTPUT>
+    ```
+
+    Add readgroups (5):
+
+    ```sh
+    samtools addreplacerg -r ID:$sample -r SM:$sample -r PL:ILLUMINA <INPUT>
+    ```
+
+    Compress the output (6):
+
+    ```sh
+    samtools view -bh > alignment/$sample.bam
+    ```
+
+    Create an index (7):
+
+    ```sh
+    samtools index alignment/$sample.bam
+    ```
