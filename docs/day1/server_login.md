@@ -418,8 +418,8 @@ done
 Which results in:
 
 ```
-cat
 dog
+fox
 bird
 ```
 
