@@ -643,7 +643,7 @@ gatk SelectVariants <span class="se">\</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Run the command to merge the vcfs.</p>
 <h3 id="2-evaluation-by-concordance">2. Evaluation by concordance</h3>
-<p>For this region we have a highly curated truth set for the mother available. It originates from the <a href="https://www.illumina.com/platinumgenomes.html">Illumina Platinum truth set</a>. You can find it at <code>variants/NA12878.vcf.gz</code></p>
+<p>For this region we have a highly curated truth set for the mother available. It originates from the <a href="https://www.illumina.com/platinumgenomes.html">Illumina Platinum truth set</a>. You can find it at <code>data/variants/NA12878.vcf.gz</code></p>
 <p>To check how well we did, we&rsquo;d first need to extract a vcf with only the information of the mother.</p>
 <p><strong>Exercise:</strong> To extract variants that have at least one alternative allele in the mother from <code>variants/trio.filtered.vcf</code>, use <code>gatk SelectVariants</code> with the arguments:</p>
 <ul>
