@@ -145,7 +145,7 @@ gatk MergeVcfs \
 
 ### 2. Evaluation by concordance
 
-For this region we have a highly curated truth set for the mother available. It originates from the [Illumina Platinum truth set](https://www.illumina.com/platinumgenomes.html). You can find it at `variants/NA12878.vcf.gz`
+For this region we have a highly curated truth set for the mother available. It originates from the [Illumina Platinum truth set](https://www.illumina.com/platinumgenomes.html). You can find it at `data/variants/NA12878.vcf.gz`
 
 To check how well we did, we'd first need to extract a vcf with only the information of the mother.
 
