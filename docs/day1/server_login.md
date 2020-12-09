@@ -246,9 +246,9 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
 === "conda"
 
-    If you have a conda running on your local computer, you can also install the required software using conda.
+    If you have a conda installation on your local computer, you can install the required software using conda.
 
-    You can download the conda environment yaml [here](../assets/yaml/variants.yml)
+    You can build the environment from [variants.yml](../assets/yaml/variants.yml)
 
     Generate the conda environment like this:
 
@@ -264,7 +264,7 @@ In this part we will set up your computer to work on the remote AWS server or wi
     conda activate variants
     ```
 
-    After successful installation and activating the environment all the software required to do the exercises should be available. 
+    After successful installation and activating the environment all the software required to do the exercises should be available.
 
 ### A UNIX command line interface (CLI) refresher
 
