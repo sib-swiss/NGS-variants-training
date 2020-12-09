@@ -2,6 +2,8 @@
 
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/variant_calling.pdf){: .md-button }
 
+[VCF format description](https://samtools.github.io/hts-specs/VCFv4.1.pdf)
+
 [GATK best practices germline short variant workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-):
 
 <figure>
