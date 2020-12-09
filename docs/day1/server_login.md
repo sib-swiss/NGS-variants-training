@@ -1,6 +1,6 @@
 
 
-In this part we will set up your computer to work on the remote AWS server or with Docker (choose **Docker** if you are doing this course independently).
+In this part we will set up your computer to work on the remote AWS server or with Docker (choose **Docker** or **conda** if you are doing this course independently).
 
 === "mac OS/Linux"
 
@@ -243,6 +243,28 @@ In this part we will set up your computer to work on the remote AWS server or wi
 
     !!! note "Activating the environment"
         You will need to activate the ngs environment each time you login.
+
+=== "conda"
+
+    If you have a conda running on your local computer, you can also install the required software using conda.
+
+    You can download the conda environment yaml [here](../assets/yaml/variants.yml)
+
+    Generate the conda environment like this:
+
+    ```sh
+    conda env create --name variants -f variants.yml
+    ```
+
+    This will create the conda environment `variants`
+
+    Activate it like so:
+
+    ```sh
+    conda activate variants
+    ```
+
+    After successful installation and activating the environment all the software required to do the exercises should be available. 
 
 ### A UNIX command line interface (CLI) refresher
 
