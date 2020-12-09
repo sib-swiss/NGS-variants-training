@@ -941,8 +941,8 @@
                 
                   <h1>Server login</h1>
                 
-                <p>In this part we will set up your computer to work on the remote AWS server or with Docker (choose <strong>Docker</strong> if you are doing this course independently).</p>
-<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">mac OS/Linux</label><div class="tabbed-content">
+                <p>In this part we will set up your computer to work on the remote AWS server or with Docker (choose <strong>Docker</strong> or <strong>conda</strong> if you are doing this course independently).</p>
+<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">mac OS/Linux</label><div class="tabbed-content">
 <h2 id="material">Material</h2>
 <p>You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Below you can find the material that helps you to login, edit scripts and transfer files.</p>
 <div class="admonition warning">
@@ -1116,6 +1116,18 @@ docker attach adoring_bell
 <p class="admonition-title">Activating the environment</p>
 <p>You will need to activate the ngs environment each time you login.</p>
 </div>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">conda</label><div class="tabbed-content">
+<p>If you have a conda running on your local computer, you can also install the required software using conda.</p>
+<p>You can download the conda environment yaml <a href="../../assets/yaml/variants.yml">here</a></p>
+<p>Generate the conda environment like this:</p>
+<div class="highlight"><pre><span></span><code>conda env create --name variants -f variants.yml
+</code></pre></div>
+<p>This will create the conda environment <code>variants</code></p>
+<p>Activate it like so:</p>
+<div class="highlight"><pre><span></span><code>conda activate variants
+</code></pre></div>
+<p>After successful installation and activating the environment all the software required to do the exercises should be available. </p>
 </div>
 </div>
 <h3 id="a-unix-command-line-interface-cli-refresher">A UNIX command line interface (CLI) refresher</h3>
