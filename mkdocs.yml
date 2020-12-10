@@ -18,6 +18,7 @@ theme:
   name: material
   logo: assets/images/SIB_logo.svg
   favicon: assets/images/SIB_logo.svg
+  custom_dir: overrides
 
 # Repository
 repo_name: sib-swiss/NGS-variants-training
@@ -46,6 +47,6 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
-google_analytics:
-  - G-SK9D4D2P4M
-  - auto
+# google_analytics:
+#   - G-SK9D4D2P4M
+#   - auto
