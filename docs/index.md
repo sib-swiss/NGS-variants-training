@@ -5,7 +5,7 @@
 * This website
 * Zoom meeting (through mail)
 * Google doc (through mail)
-* [Slack channel](https://join.slack.com/t/ngsvariantana-y1r2970/shared_invite/zt-j9qnpkc7-1se2c_l~mU8A1Pa1PKkHTA)
+* [Slack channel](https://slack.com)
 
 ## Learning outcomes
 
@@ -31,7 +31,7 @@ During lectures, you are encouraged to raise your hand if you have questions (if
   <img src="assets/images/zoom_icons.png" width="300"/>
 </figure>
 
-A main source of communication will be our [slack channel](https://join.slack.com/t/ngsvariantana-y1r2970/shared_invite/zt-j9qnpkc7-1se2c_l~mU8A1Pa1PKkHTA). Ask background questions that interest you personally at **#background**. During the exercises, e.g. if you are stuck or don't understand what is going on, use the slack channel **#peer-q-and-a**.  This channel is not only meant for asking questions but also for answering questions of other participants. Answer questions only if you have finished the practical block, and use the "reply in thread" option:
+A main source of communication will be our [slack channel](https://slack.com). Ask background questions that interest you personally at **#background**. During the exercises, e.g. if you are stuck or don't understand what is going on, use the slack channel **#q-and-a**.  This channel is not only meant for asking questions but also for answering questions of other participants. Answer questions only if you have finished the practical block, and use the "reply in thread" option:
 
 <figure>
   <img src="assets/images/reply_in_thread.png" width="200"/>
@@ -45,6 +45,6 @@ The teacher will review the answers, and add/modify if necessary. If you're stuc
 * Personal interest questions: **#background**
 * During exercises:
 
-    * **\#peer_q_and_a** on slack
+    * **\#q-and-a** on slack
     * if really stuck: *no* button in zoom
     * if finished: *yes* button in zoom
