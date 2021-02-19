@@ -1,3 +1,16 @@
+
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Describe how variant information is stored in a variant call format (`.vcf`) file
+- Describe the 'missing genotype problem' when calling variants of multiple samples, and the different methods on how this can be solved
+- Follow `gatk` best practices workflow to perform a variant analysis by:
+    - Applying Base Quality Score Recalibration on an alignment file
+    - Calling variants with `gatk HaplotypeCaller`
+    - Combining multiple `vcf` files into a single `vcf` file
+- Perform basic operations to get statistics of a `vcf` file
+
 ## Material
 
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/variant_calling.pdf){: .md-button }

@@ -4,11 +4,12 @@
 **After having completed this chapter you will be able to:**
 
 - Describe the importance of studying variants
-- Define a mutation
+- Define a DNA mutation
 - Illustrate the difference between a somatic mutation and a germline mutation
-- Describe the two major types of small variants: SNPs and INDELs.
+- Describe the two major types of small variants: SNPs and INDELs
+- Explain why SNPs are the most used type of variant for genetic research 
 - Explain what haplotypes are and how they can capture more genetic information compared to single small variants
-- Define the difference between large and small variants 
+- Define the difference between large and small variants
 
 ## Material
 

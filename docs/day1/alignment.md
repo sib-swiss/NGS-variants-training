@@ -1,3 +1,21 @@
+
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Describe the general workflow of library preparation and sequencing with an Illumina sequencer
+- Explain how the fastq format stores sequence and base quality information
+- Calculate probability from phred quality and the other way around
+- Explain why base quality and mapping quality are important for detecting variants 
+- Illustrate the difference between short-read and long-read sequencing
+- Explain which type of invention led to development of long-read sequencing
+- Explain what impact long read sequencing can have on variant analysis
+- Explain the concept of read alignment
+- Describe how alignment information is stored in a sequence alignment (`.sam`) file
+- Define a duplicate alignment and explain how alignment duplicates can affect variant analysis
+- Perform an alignment of genomic reads with `bwa mem`
+- Generate and interpret the alignment statistics from `samtools flagstat`
+
 ## Material
 
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/sequencing_alignment.pdf){: .md-button }

@@ -1,4 +1,12 @@
 
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Explain why using Variant Quality Score Recalibration (VQSR) for filtering variants can outperform hard filtering 
+- Perform hard filtering on both SNPs and INDELs separately by using `gatk SelectVariants` in combination with `gatk VariantFiltration`
+- Perform concordance between called variants and a truth set and evaluate performance of a variant calling workflow
+
 ## Exercises
 
 ### 1. Hard filtering

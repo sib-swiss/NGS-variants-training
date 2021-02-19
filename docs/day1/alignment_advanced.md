@@ -1,4 +1,13 @@
 
+## Learning outcomes
+
+**After having completed this chapter you will be able to:**
+
+- Use `samtools` to mark duplicates from an alignment file
+- Use `samtools` to add readgroups to an alignment file
+- Use a for loop in bash to perform the same operation on a range of files
+- Use `samtools` in a pipe to efficiently do multiple operations on an alignment file in a single command
+
 ## Material
 
 * `samtools` [documentation](http://www.htslib.org/doc/samtools.html)

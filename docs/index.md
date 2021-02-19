@@ -1,4 +1,5 @@
-# Course website
+
+This course is inspired on the variant analysis course previously given by Walid Gharib
 
 ## Material
 

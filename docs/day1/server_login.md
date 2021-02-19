@@ -1,6 +1,33 @@
 
+## Learning outcomes
 
-In this part we will set up your computer to work on the remote AWS server or with Docker (choose **Docker** or **conda** if you are doing this course independently).
+!!! note
+    You might already be able to do some or all of these learning outcomes. If so, you can go through the corresponding exercises quickly. The general aim of this chapter is to work comfortably on a remote server by using the command line.
+
+**After having completed this chapter you will be able to:**
+
+* Setup a connection between a local computer and remote host with `ssh`
+* Setup and use a script editor to add and modify scripts on a remote computer
+* Setup and use FileZilla to copy files from a remote machine to a local computer
+* Use the command line to:
+    * Make a directory
+    * Change file permissions to 'executable'
+    * Run a `bash` script
+    * Pipe data from and to a file or other executable
+* Program a loop in `bash`
+
+!!! info "Choose your OS or platform"
+    In this part we will set up your computer to work on the remote AWS server, or setup your computer to do the exercises with conda or with Docker.
+
+    If you are doing the course **with a teacher**, you will have to login to the remote server. Therefore choose either:
+
+    * macOS/Linux
+    * Windows
+
+    If you are doing this course **independently** (i.e. without a teacher) choose either:
+
+    * conda
+    * Docker
 
 === "mac OS/Linux"
 
@@ -410,7 +437,7 @@ Make a shell script that automatically counts the number of system directories a
     ls | wc -l
     ```
 
-### 3. Loops
+### Loops
 
 >:fontawesome-regular-clock: 20 minutes
 
