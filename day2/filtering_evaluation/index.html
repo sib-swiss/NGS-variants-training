@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exercises" class="md-skip">
+        <a href="#learning-outcomes" class="md-skip">
           Skip to content
         </a>
       
@@ -375,6 +375,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercises" class="md-nav__link">
     Exercises
   </a>
@@ -481,6 +488,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercises" class="md-nav__link">
     Exercises
   </a>
@@ -556,7 +570,14 @@
                 
                   <h1>Filtering & evaluation</h1>
                 
-                <h2 id="exercises">Exercises</h2>
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Explain why using Variant Quality Score Recalibration (VQSR) for filtering variants can outperform hard filtering </li>
+<li>Perform hard filtering on both SNPs and INDELs separately by using <code>gatk SelectVariants</code> in combination with <code>gatk VariantFiltration</code></li>
+<li>Perform concordance between called variants and a truth set and evaluate performance of a variant calling workflow</li>
+</ul>
+<h2 id="exercises">Exercises</h2>
 <h3 id="1-hard-filtering">1. Hard filtering</h3>
 <p>The developers of <code>gatk</code> strongly advise to do <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-">Variant Quality Score Recalibration (VQSR)</a> for filtering SNPs and INDELs. However, this is not always possible. For example, in the case of limited data availability and/or in the case you are working with non-model organisms and/or in the case you are a bit lazy and okay with a number of false positives.</p>
 <p>Our dataset is too small to apply VQSR. We will therefore do hard filtering instead.</p>
