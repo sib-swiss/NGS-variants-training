@@ -1,4 +1,3 @@
-
 ## Learning outcomes
 
 !!! note
@@ -6,9 +5,6 @@
 
 **After having completed this chapter you will be able to:**
 
-* Setup a connection between a local computer and remote host with `ssh`
-* Setup and use a script editor to add and modify scripts on a remote computer
-* Setup and use FileZilla to copy files from a remote machine to a local computer
 * Use the command line to:
     * Make a directory
     * Change file permissions to 'executable'
@@ -17,153 +13,43 @@
 * Program a loop in `bash`
 
 !!! info "Choose your OS or platform"
-    In this part we will set up your computer to work on the remote AWS server, or setup your computer to do the exercises with conda or with Docker.
+    In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.
 
-    If you are doing the course **with a teacher**, you will have to login to the remote server. Therefore choose either:
+    If you are doing the course **with a teacher**, you will have to login to the remote server. Therefore choose:
 
-    * macOS/Linux
-    * Windows
+    * Cloud notebook
 
     If you are doing this course **independently** (i.e. without a teacher) choose either:
 
     * conda
     * Docker
 
-=== "mac OS/Linux"
+=== "Cloud notebook"
 
-    ## Material
+    If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: `http://18.195.156.25:10002`) in your browser. This should result in the following page:
 
-    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Below you can find the material that helps you to login, edit scripts and transfer files.
+    <figure>
+      <img src="../../assets/images/jupyter_login_page.png" width="300"/>
+    </figure>
 
-    !!! warning "Great power comes with great responsibility"
-        The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
-        Take therefore into account that great power comes with great responsibility. Overloading it can result in a reboot, cancelling all running calculations.
+    Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. We use the terminal for this. Find it at **New > Terminal**:
 
-    ### Video tutorials
+    <figure>
+      <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
+    </figure>
 
-    * [Set up `ftp-remote-edit` for Atom](https://player.vimeo.com/video/473838666)
-    * [Set up FileZilla](https://player.vimeo.com/video/473838726)
+    For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. You can generate and edit scripts with **New > Text File**:
 
-    ## Exercises
+    <figure>
+      <img src="../../assets/images/jupyter_choose_text.png" width="500"/>
+    </figure>
 
-    ### Login to AWS EC2 remote server
+    Once you have opened a script you can change the code highlighting. This is convenient for writing the code. The text editor will automatically change the highlighting based on the file extension (e.g. `.py` extension will result in python syntax highlighting). You can change or set the syntax highlighting by clicking the button on the bottom of the page. We will be using mainly shell scripting in this course, so here's an example for adjusting it to shell syntax highlighting:
 
-    In this part, we'll use the video tutorials and the information below to log in and set up a remote script editor.
+    <figure>
+      <img src="../../assets/images/jupyter_change_highlighting.png" width="300"/>
+    </figure>
 
-    Open a terminal and login like this:
-
-    ```sh
-    ssh -i path/to/key/key_<username>.pem <username>@<IP>
-    ```
-
-    !!! warning
-        * change `path/to/key` to the actual path where you have put the key file.
-        * replace <username> and <IP> with your actual username and IP
-
-    ### Setup your Atom and FileZilla
-
-    #### Atom
-
-    Atom is a versatile text editor for all major operating systems. For this course, it's the recommended script editor for Linux and Mac OS users. With the third-party package `ftp-remote-edit`, you can remotely edit scripts. Set it up on your own computer using your own credentials and the video below.
-
-    <iframe src="https://player.vimeo.com/video/473838666" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    In general, setup the connection to the server with the following details:
-
-    * protocol: sftp
-    * username: your username
-    * hostname: server IP
-    * port: 22
-    * authentication/logon type: path to private key file
-
-    #### FileZilla
-
-    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). Set it up on your own computer using your own credentials and the video below.
-
-    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    ### Initiate conda
-
-    To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
-
-    ```sh
-    /opt/miniconda3/bin/conda init
-    exec bash
-    ```
-
-    Now, your shell should start with `(base)`, meaning that the conda `base` environment is loaded.
-
-    To load the environment `variants` with the required software packages, run:
-
-    ```sh
-    conda activate variants
-    ```
-
-    Which should change the start of your shell from `(base)` to `(variants)`
-
-    !!! note "Activating the environment"
-        You will need to activate the `variants` environment each time you login.
-
-=== "Windows"
-
-    ## Material
-
-    You have received an e-mail shortly before the workshop with a key, username and IP address to login on a cloud server. Below you can find the material that helps you to login, edit scripts and transfer files.
-
-    !!! warning "Great power comes with great responsibility"
-        The cloud server is a temporary instance for this workshop only. Although the computational resources should be more than enough, **it's a basic Ubuntu server, and there are no hard limits on memory or CPU usage.**
-        Take therefore into account that great power comes with great responsibility. Overloading it can result in a reboot, cancelling all running calculations.
-
-    ### Video tutorials
-
-    * [Set up MobaXterm](https://player.vimeo.com/video/473838657)
-    * [Set up FileZilla](https://player.vimeo.com/video/473838726)
-
-    ## Exercises
-
-    ### Set up MobaXterm
-
-    In this part, you will use the video tutorials and the information below to log in and set up a remote script editor.
-
-    MobaXterm is an SSH client for Windows. Use this to connect to the remote host and edit remote scripts. With MobaXterm, you will automatically login to the remote server once you've started the SSH session. Set it up on your own computer using your own credentials and the video below.
-
-    <iframe src="https://player.vimeo.com/video/473838657" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    These are the general settings you should take into account:
-
-    * protocol: sftp
-    * username: your username
-    * hostname: server IP
-    * port: 22
-    * authentication/logon type: path to private key file
-
-    ### Set up FileZilla
-
-    Many results come in an image (e.g. `.png`, `.jpg`) or `html` format. These can not be viewed directly from the server. Also, for this course, files loaded in IGV need to be on your local computer. You can easily transfer files between your local PC and the remote host with [FileZilla](https://filezilla-project.org/). Set it up on your own computer using your own credentials and the video below.
-
-    <iframe src="https://player.vimeo.com/video/473838726" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-    ### Initiate conda
-
-    To make use of the pre-installed software with conda, we need to initiate it first. Login to the server and run:
-
-    ```sh
-    /opt/miniconda3/bin/conda init
-    exec bash
-    ```
-
-    Now, your shell should start with `(base)`, meaning that the conda `base` environment is loaded.
-
-    To load the environment `variants` with the required software packages, run:
-
-    ```sh
-    conda activate variants
-    ```
-
-    Which should change the start of your shell from `(base)` to `(variants)`
-
-    !!! note "Activating the environment"
-        You will need to activate the `variants` environment each time you login.
 
 === "Docker"
 
@@ -190,105 +76,73 @@
     === "Mac OS/Linux terminal"
         ```sh
         docker run \
-        -v /full/path/to/local/workdir:/root/workdir \
-        -i -t \
-        geertvangeest/ngs-variants \
-        /bin/bash
+        --rm \
+        -v /full/path/to/dir:/home/jovyan \
+        -p 8888:8888 \
+        geertvangeest/ngs-variants:v1 \
+        start-notebook.sh
         ```
 
     === "Windows powershell"
         ```powershell
         docker run `
-        -v C:\Users\myusername:/root/workdir `
-        -i -t `
-        geertvangeest/ngs-variants `
-        /bin/bash
+        --rm `
+        -v C:\users\myusername\dir:/home/jovyan `
+        -p 8888:8888 `
+        geertvangeest/ngs-variants:v1 `
+        start-notebook.sh
         ```
+
+    If this command has run successfully, you will find a link and token in the console, e.g.:
+
+    ```sh
+    http://127.0.0.1:8888/?token=4be8d916e89afad166923de5ce5th1s1san3xamp13
+    ```
+
+    Copy this URL into your browser, and you will be able to use the jupyter notebook.
 
     The option `-v` mounts a local directory in your computer to the directory `/root/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. edit scripts and visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
-    The options `-i` and `-t` let you approach the container interactively. Meaning that you can use the shell.
 
-    The part `geertvangeest/ngs-intro` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-variants:v1` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
 
-    The last bit `/bin/bash` tells us which entrypoint we take. Which is the bash command line interpreter.
-
-    You can exit the shell with `exit`.
-
-    ### Working with a running container
-
-    #### Restarting
-
-    After exiting, you can restart the container.
-
-    Find the container name:
-
-    ```sh
-    docker container ls -a
-    ```
-
-    The name is e.g. `adoring_bell`. To restart run:
-
-    ```sh
-    docker start adoring_bell
-    docker attach adoring_bell
-    ```
-
-    #### Second shell
-
-    If you want to have a second shell in your container, e.g. because your current shell is busy, you can use:
-
-    ```sh
-    docker exec -it adoring_bell /bin/bash
-    ```
-
-    !!! note "Difference `docker attach` and `docker exec`"
-        Difference between the commands is explainer [here](https://stackoverflow.com/questions/30960686/difference-between-docker-attach-and-docker-exec). Conclusion: do not run `docker attach` for a second shell in which you usually want to start a new process.
-
-    #### Lost the container
-
-    If you lost the container for whatever reason, no problem. If you did all your work in the mounted workdir, you can just remount it to a new container based on the same image. To do that, just rerun the `docker run` command (with the option `-v`, `-i`, `-t` and the entrypoint).
-
-    #### Save your own version
-
-    If you have additional installations, and you want to keep them, you can save the image with:
-
-    ```sh
-    docker commit adoring_bell my-image
-    ```
-
-    ### Use conda
-
-    If you are in the container with shell, you can load the environment with the required software packages:
-
-    ```sh
-    conda activate variants
-    ```
-
-    !!! note "Activating the environment"
-        You will need to activate the ngs environment each time you login.
 
 === "conda"
 
     If you have a conda installation on your local computer, you can install the required software using conda.
 
-    You can build the environment from [variants.yml](../assets/yaml/variants.yml)
+    You can build the environment from [ngs-variants.yml](../assets/yaml/ngs-variants.yml)
 
     Generate the conda environment like this:
 
     ```sh
-    conda env create --name variants -f variants.yml
+    conda env create --name ngs-variants -f ngs-variants.yml
     ```
 
-    This will create the conda environment `variants`
+    !!! note "The `yaml` file probably only works for Linux systems"
+        If you want to use the conda environment on a different OS, use:
+
+        ```sh
+        conda create -n ngs-variants python=3.8
+
+        conda activate ngs-variants
+
+        conda install -y -c bioconda \
+        samtools \
+        bwa \
+        snpeff \
+        gatk4
+        ```
+
+    This will create the conda environment `ngs-variants`
 
     Activate it like so:
 
     ```sh
-    conda activate variants
+    conda activate ngs-variants
     ```
 
     After successful installation and activating the environment all the software required to do the exercises should be available.
@@ -330,12 +184,6 @@ touch new_script.sh
 Add a command to this script that writes "SIB courses are great!" (or something you can better relate to.. :wink:) to stdout, and try to run it.
 
 ??? done "Answer"
-    You can use your remote script editor to edit your script. Otherwise you can use `nano` to edit it:
-
-    ```sh
-    nano new_script.sh
-    ```
-
     The script should look like this:
 
     ```sh
