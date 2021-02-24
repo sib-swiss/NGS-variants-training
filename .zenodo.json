@@ -1,0 +1,20 @@
+{
+  "title": "Course material NGS: genome variant analysis",
+  "keywords": [
+    "NGS",
+    "variant",
+    "SNP",
+    "course",
+    "training"
+  ],
+  "creators": [
+    {
+      "name": "Patricia Palagi",
+      "affiliation": "SIB Swiss Institute of Bioinformatics"
+    },
+    {
+      "name": "Geert van Geest",
+      "affiliation": "SIB Swiss Institute of Bioinformatics"
+    }   
+  ]
+}
