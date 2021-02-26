@@ -68,30 +68,21 @@
 
     <iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
-    The command to run the environment required for this course looks like this (in a terminal or powershell):
+    The command to run the environment required for this course looks like this (in a terminal):
 
     !!! warning "Modify the script"
         Modify the path after `-v` to the working directory on your computer before running it.
 
-    === "Mac OS/Linux terminal"
-        ```sh
-        docker run \
-        --rm \
-        -v /full/path/to/dir:/home/jovyan \
-        -p 8888:8888 \
-        geertvangeest/ngs-variants:v1 \
-        start-notebook.sh
-        ```
+      ```sh
+      docker run \
+      --rm \
+      -e JUPYTER_ENABLE_LAB=yes \
+      -v /path/to/workingdir/:/home/jovyan \
+      -p 8888:8888 \
+      geertvangeest/ngs-variants-jupyter:latest \
+      start-notebook.sh
+      ```
 
-    === "Windows powershell"
-        ```powershell
-        docker run `
-        --rm `
-        -v C:\users\myusername\dir:/home/jovyan `
-        -p 8888:8888 `
-        geertvangeest/ngs-variants:v1 `
-        start-notebook.sh
-        ```
 
     If this command has run successfully, you will find a link and token in the console, e.g.:
 
@@ -101,13 +92,13 @@
 
     Copy this URL into your browser, and you will be able to use the jupyter notebook.
 
-    The option `-v` mounts a local directory in your computer to the directory `/root/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. edit scripts and visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
+    The option `-v` mounts a local directory in your computer to the directory `/home/jovyan` in the docker container ('jovyan' is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
 
-    The part `geertvangeest/ngs-variants:v1` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-variants-jupyter:latest` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
 
 
 === "conda"
