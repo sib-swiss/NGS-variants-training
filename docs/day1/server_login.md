@@ -12,7 +12,7 @@
     * Pipe data from and to a file or other executable
 * Program a loop in `bash`
 
-!!! info "Choose your OS or platform"
+!!! info "Choose your platform"
     In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.
 
     If you are doing the course **with a teacher**, you will have to login to the remote server. Therefore choose:
