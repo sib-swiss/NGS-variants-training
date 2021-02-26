@@ -661,7 +661,7 @@
 <li>Program a loop in <code>bash</code></li>
 </ul>
 <div class="admonition info">
-<p class="admonition-title">Choose your OS or platform</p>
+<p class="admonition-title">Choose your platform</p>
 <p>In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.</p>
 <p>If you are doing the course <strong>with a teacher</strong>, you will have to login to the remote server. Therefore choose:</p>
 <ul>
@@ -702,43 +702,31 @@
 <p>Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.</p>
 <p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
 <p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
-<p>The command to run the environment required for this course looks like this (in a terminal or powershell):</p>
+<p>The command to run the environment required for this course looks like this (in a terminal):</p>
 <div class="admonition warning">
 <p class="admonition-title">Modify the script</p>
 <p>Modify the path after <code>-v</code> to the working directory on your computer before running it.</p>
 </div>
-<div class="tabbed-set" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">Mac OS/Linux terminal</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
 --rm <span class="se">\</span>
--v /full/path/to/dir:/home/jovyan <span class="se">\</span>
+-e <span class="nv">JUPYTER_ENABLE_LAB</span><span class="o">=</span>yes <span class="se">\</span>
+-v /path/to/workingdir/:/home/jovyan <span class="se">\</span>
 -p <span class="m">8888</span>:8888 <span class="se">\</span>
-geertvangeest/ngs-variants:v1 <span class="se">\</span>
+geertvangeest/ngs-variants-jupyter:latest <span class="se">\</span>
 start-notebook.sh
 </code></pre></div>
 
-</div>
-<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">Windows powershell</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="n">docker</span> <span class="n">run</span> <span class="p">`</span>
-<span class="p">-</span><span class="n">-rm</span> <span class="p">`</span>
-<span class="n">-v</span> <span class="n">C</span><span class="err">:</span><span class="p">\</span><span class="n">users</span><span class="p">\</span><span class="n">myusername</span><span class="p">\</span><span class="n">dir</span><span class="err">:</span><span class="p">/</span><span class="n">home</span><span class="p">/</span><span class="n">jovyan</span> <span class="p">`</span>
-<span class="n">-p</span> <span class="n">8888</span><span class="err">:</span><span class="n">8888</span> <span class="p">`</span>
-<span class="n">geertvangeest</span><span class="p">/</span><span class="n">ngs-variants</span><span class="err">:</span><span class="n">v1</span> <span class="p">`</span>
-<span class="nb">start-notebook</span><span class="p">.</span><span class="n">sh</span>
-</code></pre></div>
-
-</div>
-</div>
 <p>If this command has run successfully, you will find a link and token in the console, e.g.:</p>
 <div class="highlight"><pre><span></span><code>http://127.0.0.1:8888/?token<span class="o">=</span>4be8d916e89afad166923de5ce5th1s1san3xamp13
 </code></pre></div>
 
 <p>Copy this URL into your browser, and you will be able to use the jupyter notebook.</p>
-<p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/root/workdir</code> in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. edit scripts and visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.</p>
+<p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/jovyan</code> in the docker container (&lsquo;jovyan&rsquo; is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.</p>
 <div class="admonition note">
 <p class="admonition-title">Don&rsquo;t mount directly in the home dir</p>
 <p>Don&rsquo;t directly mount your local directory to the home directory (<code>/root</code>). This will lead to unexpected behaviour.</p>
 </div>
-<p>The part <code>geertvangeest/ngs-variants:v1</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+<p>The part <code>geertvangeest/ngs-variants-jupyter:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">conda</label><div class="tabbed-content">
 <p>If you have a conda installation on your local computer, you can install the required software using conda.</p>
