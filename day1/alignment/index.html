@@ -604,14 +604,6 @@ rm ngs-variants-training.tar.gz
 
 <p>This will create the directory <code>data</code>. Check out what&rsquo;s in there.</p>
 <p>We&rsquo;ll use <code>bwa mem</code> for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:</p>
-<div class="admonition tip">
-<p class="admonition-title">Activate the conda environment</p>
-<p>All software below is in the conda environment <code>variants</code>. To activate it:</p>
-<div class="highlight"><pre><span></span><code>conda activate variants
-</code></pre></div>
-
-<p>Before you&rsquo;ve run this your shell starts with <code>(base)</code>, indicating you&rsquo;re in the <code>base</code> environment. After running the <code>conda activate variants</code> command, it should have changed to <code>variants</code>.</p>
-</div>
 <div class="highlight"><pre><span></span><code>bwa index &lt;reference.fa&gt;
 </code></pre></div>
 
