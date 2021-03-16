@@ -36,17 +36,6 @@ This will create the directory `data`. Check out what's in there.
 
 We'll use `bwa mem` for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:
 
-!!! tip "Activate the conda environment"
-    All software below is in the conda environment `variants`. To activate it:
-
-    ```sh
-    conda activate variants
-    ```
-
-    Before you've run this your shell starts with `(base)`, indicating you're in the `base` environment. After running the `conda activate variants` command, it should have changed to `variants`.
-
-
-
 ```sh
 bwa index <reference.fa>
 ```
