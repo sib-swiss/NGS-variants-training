@@ -26,13 +26,17 @@
 
 === "Cloud notebook"
 
-    If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: `http://18.195.156.25:10002`) in your browser. This should result in the following page:
+    If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: `http://12.345.678.91:10002`) in your browser. This should result in the following page:
 
     <figure>
       <img src="../../assets/images/jupyter_login_page.png" width="300"/>
     </figure>
 
-    Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. We use the terminal for this. Find it at **New > Terminal**:
+    Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. Here's a video that explains how to use JupyterLab to use a terminal and work with scripts:
+
+    <iframe src="https://player.vimeo.com/video/524970007" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+    If you rather read, here's written explanation how to work with JupyterLab. Find it at **New > Terminal**:
 
     <figure>
       <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
