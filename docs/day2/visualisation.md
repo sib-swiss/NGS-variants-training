@@ -22,6 +22,13 @@ Download the following files to your local computer:
 * `bqsr/mother.recal.bam.bai`
 * `variants/mother.HC.vcf`
 
+!!! hint "Download files from the notebook"
+    You can download files from the file browser, by right-clicking a file and selecting **Download**:
+
+    <figure>
+      <img src="../../assets/images/jupyter_download_file.png" width="400"/>
+    </figure>
+
 Launch IGV and select the human genome version hg38 as a reference.
 
 <figure>
