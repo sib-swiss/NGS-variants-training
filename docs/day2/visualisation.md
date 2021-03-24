@@ -17,9 +17,9 @@ Use IGV to:
 Download the following files to your local computer:
 
 * `variants/mother.phased.bam`
-* `variants/mother.phased.bam.bai`
+* `variants/mother.phased.bai`
 * `bqsr/mother.recal.bam`
-* `bqsr/mother.recal.bam.bai`
+* `bqsr/mother.recal.bai`
 * `variants/mother.HC.vcf`
 
 !!! hint "Download files from the notebook"
