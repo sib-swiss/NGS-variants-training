@@ -36,7 +36,7 @@
 
     <iframe src="https://player.vimeo.com/video/524970007" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
 
-    If you rather read, here's written explanation how to work with JupyterLab. Find it at **New > Terminal**:
+    If you rather read, here's written explanation how to work with JupyterLab. First, let's open the terminal. Find it at **New > Terminal**:
 
     <figure>
       <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
