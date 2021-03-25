@@ -16,7 +16,7 @@ Presentation will be sent to you by e-mail.
 
 ## Exercises
 
-To use the human genome is a reference, we have downloaded the database with:
+To use the human genome as a reference, we have downloaded the database with:
 
 !!! warning "No need to download, it's already downloaded for you"
 

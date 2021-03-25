@@ -17,6 +17,8 @@
 
 [VCF format description](https://samtools.github.io/hts-specs/VCFv4.1.pdf)
 
+The [paper](https://www.biorxiv.org/content/10.1101/201178v3) on genomic variant call format (gVCF)
+
 [GATK best practices germline short variant workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-):
 
 <figure>

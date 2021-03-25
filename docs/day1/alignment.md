@@ -32,7 +32,38 @@ tar -xvf ngs-variants-training.tar.gz
 rm ngs-variants-training.tar.gz
 ```
 
-This will create the directory `data`. Check out what's in there.
+**Exercise:** This will create the directory `data`. Check out what's in there.
+
+??? done "Answer"
+    The directory data contains the following:
+    ```
+    data
+    ├── fastq
+    │   ├── father_R1.fastq.gz
+    │   ├── father_R2.fastq.gz
+    │   ├── mother_R1.fastq.gz
+    │   ├── mother_R2.fastq.gz
+    │   ├── son_R1.fastq.gz
+    │   └── son_R2.fastq.gz
+    ├── reference
+    │   └── Homo_sapiens.GRCh38.dna.chromosome.20.fa
+    └── variants
+        ├── 1000g_gold_standard.indels.filtered.vcf
+        ├── GCF.38.filtered.renamed.vcf
+        ├── NA12878.vcf.gz
+        └── NA12878.vcf.gz.tbi
+
+    3 directories, 11 files
+    ```
+
+    These are:
+    
+    * input reads (at `fastq`)
+    * a part of the human reference genome (at `reference`)
+    * some vcfs with variants for calibration and evaluation (at `variants`)
+
+!!! note "Use `data` only for input"
+    The directory `data` that you have just downloaded, contains only input files for the exercises. So, don't write output (except for indexes) to this directory.
 
 We'll use `bwa mem` for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:
 
