@@ -602,7 +602,37 @@ tar -xvf ngs-variants-training.tar.gz
 rm ngs-variants-training.tar.gz
 </code></pre></div>
 
-<p>This will create the directory <code>data</code>. Check out what&rsquo;s in there.</p>
+<p><strong>Exercise:</strong> This will create the directory <code>data</code>. Check out what&rsquo;s in there.</p>
+<details class="done"><summary>Answer</summary><p>The directory data contains the following:
+<div class="highlight"><pre><span></span><code>data
+├── fastq
+│   ├── father_R1.fastq.gz
+│   ├── father_R2.fastq.gz
+│   ├── mother_R1.fastq.gz
+│   ├── mother_R2.fastq.gz
+│   ├── son_R1.fastq.gz
+│   └── son_R2.fastq.gz
+├── reference
+│   └── Homo_sapiens.GRCh38.dna.chromosome.20.fa
+└── variants
+    ├── 1000g_gold_standard.indels.filtered.vcf
+    ├── GCF.38.filtered.renamed.vcf
+    ├── NA12878.vcf.gz
+    └── NA12878.vcf.gz.tbi
+
+3 directories, 11 files
+</code></pre></div></p>
+<p>These are:</p>
+<ul>
+<li>input reads (at <code>fastq</code>)</li>
+<li>a part of the human reference genome (at <code>reference</code>)</li>
+<li>some vcfs with variants for calibration and evaluation (at <code>variants</code>)</li>
+</ul>
+</details>
+<div class="admonition note">
+<p class="admonition-title">Use <code>data</code> only for input</p>
+<p>The directory <code>data</code> that you have just downloaded, contains only input files for the exercises. So, don&rsquo;t write output (except for indexes) to this directory.</p>
+</div>
 <p>We&rsquo;ll use <code>bwa mem</code> for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:</p>
 <div class="highlight"><pre><span></span><code>bwa index &lt;reference.fa&gt;
 </code></pre></div>
