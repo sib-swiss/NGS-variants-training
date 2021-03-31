@@ -243,3 +243,50 @@ done
     ```sh
     samtools index alignment/$sample.bam
     ```
+
+### 5. Additional exercise: Add readgroups and mark duplicates with `picard`
+
+Prepare a sorted .bam (without RG and marked duplicates) from mother.sam (the current mother.bam has readgroups and marked dups):
+
+```sh
+samtools sort mother.sam | samtools view -bh > mother.nrg.bam
+```
+
+Then, run `gatk AddOrReplaceReadGroups` on the file mother.nrg.bam . After that run: `gatk MarkDuplicates` on the alignment file with readgroups added.
+
+Find the documentation here:
+
+* [AddOrReplaceReadGroups](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-)
+* [MarkDuplicates](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-)
+
+**Exercise:** do you see any differences with the output we have generated with `samtools`?
+
+??? done "Answer"
+    Your script should look like this:
+
+    ```sh
+    #!/bin/bash
+
+    cd ~/workdir
+
+    samtools sort alignment/mother.sam \
+    | samtools view -bh > alignment/mother.nrg.bam
+
+    gatk AddOrReplaceReadGroups \
+           --INPUT alignment/mother.nrg.bam \
+           --OUTPUT alignment/mother.nrg.rg.bam \
+           --RGID H0164.2 \
+           --RGLB lib1 \
+           --RGPU H0164ALXX140820.2 \
+           --RGPL ILLUMINA \
+           --RGSM mother
+
+    gatk MarkDuplicates \
+          --INPUT alignment/mother.nrg.rg.bam \
+          --OUTPUT alignment/mother.nrg.rg.md.bam \
+          --METRICS_FILE alignment/marked_dup_metrics_mother.txt
+    ```
+
+    More information on read groups [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups). In this documentation it is stated how to specify `RGID` and `RGPU`.
+
+    Both `samtools` and `gatk MarkDuplicates` mark the same number of duplicates. However, `gatk` forces you to add readgroups that are appropriate for further downstream processing with `gatk`.
