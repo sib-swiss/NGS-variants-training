@@ -386,6 +386,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#5-additional-exercise-add-readgroups-and-mark-duplicates-with-picard" class="md-nav__link">
+    5. Additional exercise: Add readgroups and mark duplicates with picard
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -552,6 +559,13 @@
           <li class="md-nav__item">
   <a href="#4-piping-and-looping" class="md-nav__link">
     4. Piping and looping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-additional-exercise-add-readgroups-and-mark-duplicates-with-picard" class="md-nav__link">
+    5. Additional exercise: Add readgroups and mark duplicates with picard
   </a>
   
 </li>
@@ -764,6 +778,44 @@ data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span cl
 <div class="highlight"><pre><span></span><code>samtools index alignment/<span class="nv">$sample</span>.bam
 </code></pre></div>
 
+</details>
+<h3 id="5-additional-exercise-add-readgroups-and-mark-duplicates-with-picard">5. Additional exercise: Add readgroups and mark duplicates with <code>picard</code></h3>
+<p>Prepare a sorted .bam (without RG and marked duplicates) from mother.sam (the current mother.bam has readgroups and marked dups):</p>
+<div class="highlight"><pre><span></span><code>samtools sort mother.sam <span class="p">|</span> samtools view -bh &gt; mother.nrg.bam
+</code></pre></div>
+
+<p>Then, run <code>gatk AddOrReplaceReadGroups</code> on the file mother.nrg.bam . After that run: <code>gatk MarkDuplicates</code> on the alignment file with readgroups added.</p>
+<p>Find the documentation here:</p>
+<ul>
+<li><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">AddOrReplaceReadGroups</a></li>
+<li><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">MarkDuplicates</a></li>
+</ul>
+<p><strong>Exercise:</strong> do you see any differences with the output we have generated with <code>samtools</code>?</p>
+<details class="done"><summary>Answer</summary><p>Your script should look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+samtools sort alignment/mother.sam <span class="se">\</span>
+<span class="p">|</span> samtools view -bh &gt; alignment/mother.nrg.bam
+
+gatk AddOrReplaceReadGroups <span class="se">\</span>
+       --INPUT alignment/mother.nrg.bam <span class="se">\</span>
+       --OUTPUT alignment/mother.nrg.rg.bam <span class="se">\</span>
+       --RGID H0164.2 <span class="se">\</span>
+       --RGLB lib1 <span class="se">\</span>
+       --RGPU H0164ALXX140820.2 <span class="se">\</span>
+       --RGPL ILLUMINA <span class="se">\</span>
+       --RGSM mother
+
+gatk MarkDuplicates <span class="se">\</span>
+      --INPUT alignment/mother.nrg.rg.bam <span class="se">\</span>
+      --OUTPUT alignment/mother.nrg.rg.md.bam <span class="se">\</span>
+      --METRICS_FILE alignment/marked_dup_metrics_mother.txt
+</code></pre></div>
+
+<p>More information on read groups <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups">here</a>. In this documentation it is stated how to specify <code>RGID</code> and <code>RGPU</code>.</p>
+<p>Both <code>samtools</code> and <code>gatk MarkDuplicates</code> mark the same number of duplicates. However, <code>gatk</code> forces you to add readgroups that are appropriate for further downstream processing with <code>gatk</code>.</p>
 </details>
                 
               
