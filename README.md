@@ -1,8 +1,8 @@
-[![DOI](https://zenodo.org/badge/311317402.svg)](https://zenodo.org/badge/latestdoi/311317402)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4668337.svg)](https://doi.org/10.5281/zenodo.4668337)
 
 Hosted at: [https://sib-swiss.github.io/NGS-variants-training/](https://sib-swiss.github.io/NGS-variants-training/)
 
-# Course website 
+# Course website
 
 This website is generated with [MkDocs](https://www.mkdocs.org/), with the theme [Material](https://squidfunk.github.io/mkdocs-material/).
 
