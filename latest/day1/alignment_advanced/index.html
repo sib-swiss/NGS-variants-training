@@ -1,0 +1,897 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>Read alignment - advanced - NGS - variant analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK9D4D2P4M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SK9D4D2P4M');
+</script>
+
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NGS - variant analysis" class="md-header__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGS - variant analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Read alignment - advanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - variant analysis" class="md-nav__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - variant analysis
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server_login/" class="md-nav__link">
+        Server login
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment/" class="md-nav__link">
+        Read alignment - basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Read alignment - advanced
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Read alignment - advanced
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-marking-duplicates" class="md-nav__link">
+    1. Marking duplicates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-adding-read-groups" class="md-nav__link">
+    2. Adding read groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-indexing" class="md-nav__link">
+    3. Indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-piping-and-looping" class="md-nav__link">
+    4. Piping and looping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-additional-exercise-add-readgroups-and-mark-duplicates-with-picard" class="md-nav__link">
+    5. Additional exercise: Add readgroups and mark duplicates with picard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling/" class="md-nav__link">
+        Variant calling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/visualisation/" class="md-nav__link">
+        Visualisation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/filtering_evaluation/" class="md-nav__link">
+        Filtering & evaluation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/annotation/" class="md-nav__link">
+        Annotation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-marking-duplicates" class="md-nav__link">
+    1. Marking duplicates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-adding-read-groups" class="md-nav__link">
+    2. Adding read groups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-indexing" class="md-nav__link">
+    3. Indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-piping-and-looping" class="md-nav__link">
+    4. Piping and looping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-additional-exercise-add-readgroups-and-mark-duplicates-with-picard" class="md-nav__link">
+    5. Additional exercise: Add readgroups and mark duplicates with picard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Read alignment - advanced</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Use <code>samtools</code> to mark duplicates from an alignment file</li>
+<li>Use <code>samtools</code> to add readgroups to an alignment file</li>
+<li>Use a for loop in bash to perform the same operation on a range of files</li>
+<li>Use <code>samtools</code> in a pipe to efficiently do multiple operations on an alignment file in a single command</li>
+</ul>
+<h2 id="material">Material</h2>
+<ul>
+<li><code>samtools</code> <a href="http://www.htslib.org/doc/samtools.html">documentation</a></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<h3 id="1-marking-duplicates">1. Marking duplicates</h3>
+<p>For variant analysis, it&rsquo;s important to mark reads that possibly originated from PCR duplication. We can do that with <code>samtools markdup</code>. However, we can not directly run that on our <code>.sam</code> file nor on our compressed <code>.bam</code> file.</p>
+<p><strong>Exercise:</strong> Which samtools commands would we need to run to mark duplicates?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>More info on this at the <a href="http://www.htslib.org/doc/samtools-markdup.html#EXAMPLES"><code>samtools markdup</code> documentation</a>.</p>
+<p>Also: the reads are already collated (i.e. forward and reverse are grouped) after the alignment, so no need to run <code>samtools collate</code>.</p>
+</div>
+<details class="done"><summary>Answer</summary><p>The commands would be:</p>
+<ul>
+<li><code>samtools fixmate</code> (with the <code>-m</code> option)</li>
+<li><code>samtools sort</code></li>
+<li><code>samtools markdup</code></li>
+</ul>
+</details>
+<p><strong>Exercise:</strong> Run the three commands that are required to mark duplicates.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/alignment
+
+samtools fixmate -m mother.bam mother.fixmate.bam
+samtools sort -o mother.positionsort.bam mother.fixmate.bam
+samtools markdup mother.positionsort.bam mother.markdup.bam
+</code></pre></div>
+
+</details>
+<p><strong> Exercise:</strong> Run <code>samtools flagstat</code> on the alignment file with marked duplicates. How many reads were marked as duplicate?</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>samtools flagstat mother.markdup.bam
+</code></pre></div>
+
+<p>Gives:</p>
+<p><div class="highlight"><pre><span></span><code>133477 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+317 + 0 supplementary
+17329 + 0 duplicates
+132892 + 0 mapped (99.56% : N/A)
+133160 + 0 paired in sequencing
+66580 + 0 read1
+66580 + 0 read2
+131470 + 0 properly paired (98.73% : N/A)
+131990 + 0 with itself and mate mapped
+
+585 + 0 singletons (0.44% : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
+</code></pre></div>
+Which tells us that 17329 reads were marked as duplicate.</p>
+</details>
+<h3 id="2-adding-read-groups">2. Adding read groups</h3>
+<p>For variant analysis, it&rsquo;s important to know which read came from which sample. Right now, that&rsquo;s easy. All reads come from one individual. But this can become less trivial if you are combining samples. Therefore we add a tag to each read specifying its origin.</p>
+<p>You can add a readgroup to your marked alignment file like this:</p>
+<div class="highlight"><pre><span></span><code>samtools addreplacerg <span class="se">\</span>
+-r ID:mother <span class="se">\</span>
+-r SM:mother <span class="se">\</span>
+-r PL:ILLUMINA <span class="se">\</span>
+-o mother.markdup.rg.bam <span class="se">\</span>
+mother.markdup.bam
+</code></pre></div>
+
+<p>This command modifies the sam header and read tags.</p>
+<p><strong>Exercise:</strong> Run the <code>samtools addreplacerg</code> command and compare the header and first alignments of <code>mother.markdup.bam</code> and <code>mother.markdup.rg.bam</code>. Notice any differences?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can view the header with</p>
+<div class="highlight"><pre><span></span><code>samtools view -H &lt;alignment.bam&gt;
+</code></pre></div>
+
+<p>And the first few alignments with</p>
+<div class="highlight"><pre><span></span><code>samtools view &lt;alignment.bam&gt; | head
+</code></pre></div>
+
+</div>
+<details class="done"><summary>Answer</summary><p>Compared to the header of <code>mother.markdup.bam</code>, the header of <code>mother.markdup.rg.bam</code> contains an extra line starting with <code>@RG</code>:</p>
+<div class="highlight"><pre><span></span><code>@RG     ID:mother       SM:mother       PL:ILLUMINA
+</code></pre></div>
+
+<p>In the alignment records, a tag was added at the very end of each line: <code>RG:Z:mother</code>.</p>
+</details>
+<h3 id="3-indexing">3. Indexing</h3>
+<p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
+<div class="highlight"><pre><span></span><code>samtools index mother.markdup.rg.bam
+</code></pre></div>
+
+<h3 id="4-piping-and-looping">4. Piping and looping</h3>
+<p>Samtools can quite easily be used in a UNIX pipeline. This has the advantage that you don&rsquo;t need to write many intermediate files. However, the developers have not been very consistent with managing input and output (I&rsquo;m sure they had their reasons). To use samtools in a pipe, the input argument needs to replaced with a <code>-</code>. Also, some commands do not write by default to stdout, but to a specified file (this is the case for e.g. <code>samtools fixmate</code> and <code>samtools markdup</code>). In that case, also the output argument should be replaced with <code>-</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>For the command <code>samtools addreplacerg</code> the samtools documentation provides the following synopsis:</p>
+<div class="highlight"><pre><span></span><code>samtools addreplacerg [-r rg-line | -R rg-ID] [-m mode] [-l level] [-o out.bam] in.bam
+</code></pre></div>
+
+<p>Meaning that it requires <code>in.bam</code>, and can write to <code>out.bam</code> if option <code>-o</code> is provided. By default, it writes to stdout. So, if you pipe to <code>samtools addreplacerg</code> you would only need to replace the input file with a <code>-</code>:</p>
+<div class="highlight"><pre><span></span><code>some_command <span class="p">|</span> samtools addreplacerg <span class="o">[</span>options<span class="o">]</span> - &gt; output.sam
+</code></pre></div>
+
+<p>For the command <code>samtools fixmate</code>, the samtools documentation provides this synopsis:</p>
+<div class="highlight"><pre><span></span><code>samtools fixmate [-rpcm] [-O format] in.nameSrt.bam out.bam
+</code></pre></div>
+
+<p>Meaning that it requires both the input file <code>in.nameSrt.bam</code> and the output file <code>out.bam</code>. So, if you pipe to <code>samtools fixmate</code> and you want to write to stdout (so piping from), you&rsquo;ll need to replace both the input and output with a <code>-</code>:</p>
+<div class="highlight"><pre><span></span><code>some_command <span class="p">|</span> samtools fixmate <span class="o">[</span>options<span class="o">]</span> - - &gt; output.sam
+</code></pre></div>
+
+<p>The most frequently used samtools commands don&rsquo;t require an input nor an output file, and therefore behave like many UNIX commands. An example of this is <code>samtools sort</code>. The synopsis is:</p>
+<div class="highlight"><pre><span></span><code>samtools sort [-l level] [-m maxMem] [-o out.bam] [-O format] [-n] [-t tag] [-T tmpprefix] [-@ threads] [in.sam|in.bam|in.cram]
+</code></pre></div>
+
+<p>Telling us that both the input file and output (with option <code>-o</code>) file are optional. If the input file is absent, it reads from stdin. So, you could use it without a <code>-</code> replacing input or output files:</p>
+<div class="highlight"><pre><span></span><code>some_command <span class="p">|</span> samtools sort &gt; output.sam
+</code></pre></div>
+
+</div>
+<p>Let&rsquo;s put everything we&rsquo;ve done so far in a pipe and loop over our three samples.</p>
+<p>The command below loops over the strings <code>father</code>, <code>mother</code> and <code>son</code>, and performs these tasks:</p>
+<ol>
+<li>Create a variable to work on data of mother, father and son separately</li>
+<li>Perform the alignment</li>
+<li>Fill in the mate coordinates and sort on coordinate</li>
+<li>Mark duplicates</li>
+<li>Add readgroups</li>
+<li>Compress the output</li>
+<li>Create an index</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+<span class="k">for</span> sample in mother father son
+<span class="k">do</span>
+  bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+  data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
+  data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz <span class="se">\</span>
+  <span class="p">|</span> samtools fixmate -m - - <span class="se">\</span>
+  <span class="p">|</span> samtools sort <span class="se">\</span>
+  <span class="p">|</span> samtools markdup -s - - <span class="se">\</span>
+  <span class="p">|</span> samtools addreplacerg -r ID:<span class="nv">$sample</span> -r SM:<span class="nv">$sample</span> -r PL:ILLUMINA - <span class="se">\</span>
+  <span class="p">|</span> samtools view -bh &gt; alignment/<span class="nv">$sample</span>.bam
+
+  samtools index alignment/<span class="nv">$sample</span>.bam
+<span class="k">done</span>
+</code></pre></div>
+
+<p><strong>Exercise:</strong> For each task (1-7), figure out which part of the script performs that task. After that, run it to get the alignments of all three samples.</p>
+<details class="done"><summary>Answer</summary><p>Creating variables (1):</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> sample in mother father son
+<span class="k">do</span>
+  ...
+<span class="k">done</span>
+</code></pre></div>
+
+<p>Perform the alignment (2):</p>
+<div class="highlight"><pre><span></span><code>bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
+data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz
+</code></pre></div>
+
+<p>Fill in the mate coordinates and sort on coordinate (3):</p>
+<div class="highlight"><pre><span></span><code>samtools fixmate -m &lt;INPUT&gt; &lt;OUTPUT&gt; <span class="se">\</span>
+<span class="p">|</span> samtools sort
+</code></pre></div>
+
+<p>Mark duplicates (4):</p>
+<div class="highlight"><pre><span></span><code>samtools markdup -s &lt;INPUT&gt; &lt;OUTPUT&gt;
+</code></pre></div>
+
+<p>Add readgroups (5):</p>
+<div class="highlight"><pre><span></span><code>samtools addreplacerg -r ID:<span class="nv">$sample</span> -r SM:<span class="nv">$sample</span> -r PL:ILLUMINA &lt;INPUT&gt;
+</code></pre></div>
+
+<p>Compress the output (6):</p>
+<div class="highlight"><pre><span></span><code>samtools view -bh &gt; alignment/<span class="nv">$sample</span>.bam
+</code></pre></div>
+
+<p>Create an index (7):</p>
+<div class="highlight"><pre><span></span><code>samtools index alignment/<span class="nv">$sample</span>.bam
+</code></pre></div>
+
+</details>
+<h3 id="5-additional-exercise-add-readgroups-and-mark-duplicates-with-picard">5. Additional exercise: Add readgroups and mark duplicates with <code>picard</code></h3>
+<p>Prepare a sorted .bam (without RG and marked duplicates) from mother.sam (the current mother.bam has readgroups and marked dups):</p>
+<div class="highlight"><pre><span></span><code>samtools sort mother.sam <span class="p">|</span> samtools view -bh &gt; mother.nrg.bam
+</code></pre></div>
+
+<p>Then, run <code>gatk AddOrReplaceReadGroups</code> on the file mother.nrg.bam . After that run: <code>gatk MarkDuplicates</code> on the alignment file with readgroups added.</p>
+<p>Find the documentation here:</p>
+<ul>
+<li><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">AddOrReplaceReadGroups</a></li>
+<li><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">MarkDuplicates</a></li>
+</ul>
+<p><strong>Exercise:</strong> do you see any differences with the output we have generated with <code>samtools</code>?</p>
+<details class="done"><summary>Answer</summary><p>Your script should look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+samtools sort alignment/mother.sam <span class="se">\</span>
+<span class="p">|</span> samtools view -bh &gt; alignment/mother.nrg.bam
+
+gatk AddOrReplaceReadGroups <span class="se">\</span>
+       --INPUT alignment/mother.nrg.bam <span class="se">\</span>
+       --OUTPUT alignment/mother.nrg.rg.bam <span class="se">\</span>
+       --RGID H0164.2 <span class="se">\</span>
+       --RGLB lib1 <span class="se">\</span>
+       --RGPU H0164ALXX140820.2 <span class="se">\</span>
+       --RGPL ILLUMINA <span class="se">\</span>
+       --RGSM mother
+
+gatk MarkDuplicates <span class="se">\</span>
+      --INPUT alignment/mother.nrg.rg.bam <span class="se">\</span>
+      --OUTPUT alignment/mother.nrg.rg.md.bam <span class="se">\</span>
+      --METRICS_FILE alignment/marked_dup_metrics_mother.txt
+</code></pre></div>
+
+<p>More information on read groups <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups">here</a>. In this documentation it is stated how to specify <code>RGID</code> and <code>RGPU</code>.</p>
+<p>Both <code>samtools</code> and <code>gatk MarkDuplicates</code> mark the same number of duplicates. However, <code>gatk</code> forces you to add readgroups that are appropriate for further downstream processing with <code>gatk</code>.</p>
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../alignment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Read alignment - basics" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Read alignment - basics
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../day2/variant_calling/" class="md-footer__link md-footer__link--next" aria-label="Next: Variant calling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Variant calling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1013 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>Server login - NGS - variant analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK9D4D2P4M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SK9D4D2P4M');
+</script>
+
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NGS - variant analysis" class="md-header__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGS - variant analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Server login
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - variant analysis" class="md-nav__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - variant analysis
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Server login
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Server login
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-login" class="md-nav__link">
+    First login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-unix-command-line-interface-cli-refresher" class="md-nav__link">
+    A UNIX command line interface (CLI) refresher
+  </a>
+  
+    <nav class="md-nav" aria-label="A UNIX command line interface (CLI) refresher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-a-new-directory" class="md-nav__link">
+    Make a new directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-permissions" class="md-nav__link">
+    File permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection-and" class="md-nav__link">
+    Redirection: &gt; and |
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell-scripts" class="md-nav__link">
+    shell scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment/" class="md-nav__link">
+        Read alignment - basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment_advanced/" class="md-nav__link">
+        Read alignment - advanced
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling/" class="md-nav__link">
+        Variant calling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/visualisation/" class="md-nav__link">
+        Visualisation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/filtering_evaluation/" class="md-nav__link">
+        Filtering & evaluation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/annotation/" class="md-nav__link">
+        Annotation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-login" class="md-nav__link">
+    First login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-unix-command-line-interface-cli-refresher" class="md-nav__link">
+    A UNIX command line interface (CLI) refresher
+  </a>
+  
+    <nav class="md-nav" aria-label="A UNIX command line interface (CLI) refresher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-a-new-directory" class="md-nav__link">
+    Make a new directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-permissions" class="md-nav__link">
+    File permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection-and" class="md-nav__link">
+    Redirection: &gt; and |
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell-scripts" class="md-nav__link">
+    shell scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Server login</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might already be able to do some or all of these learning outcomes. If so, you can go through the corresponding exercises quickly. The general aim of this chapter is to work comfortably on a remote server by using the command line.</p>
+</div>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Use the command line to:<ul>
+<li>Make a directory</li>
+<li>Change file permissions to &lsquo;executable&rsquo;</li>
+<li>Run a <code>bash</code> script</li>
+<li>Pipe data from and to a file or other executable</li>
+</ul>
+</li>
+<li>Program a loop in <code>bash</code></li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Choose your platform</p>
+<p>In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.</p>
+<p>If you are doing the course <strong>with a teacher</strong>, you will have to login to the remote server. Therefore choose:</p>
+<ul>
+<li>Cloud notebook</li>
+</ul>
+<p>If you are doing this course <strong>independently</strong> (i.e. without a teacher) choose either:</p>
+<ul>
+<li>conda</li>
+<li>Docker</li>
+</ul>
+</div>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Cloud notebook</label><div class="tabbed-content">
+<p>If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: <code>http://12.345.678.91:10002</code>) in your browser. This should result in the following page:</p>
+<p><figure>
+  <img src="../../assets/images/jupyter_login_page.png" width="300"/>
+</figure></p>
+<p>Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. Here&rsquo;s a video that explains how to use JupyterLab to use a terminal and work with scripts:</p>
+<p><iframe src="https://player.vimeo.com/video/524970007" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></p>
+<p>If you rather read, here&rsquo;s written explanation how to work with JupyterLab. First, let&rsquo;s open the terminal. Find it at <strong>New &gt; Terminal</strong>:</p>
+<p><figure>
+  <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
+</figure></p>
+<p>For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. You can generate and edit scripts with <strong>New &gt; Text File</strong>:</p>
+<p><figure>
+  <img src="../../assets/images/jupyter_choose_text.png" width="500"/>
+</figure></p>
+<p>Once you have opened a script you can change the code highlighting. This is convenient for writing the code. The text editor will automatically change the highlighting based on the file extension (e.g. <code>.py</code> extension will result in python syntax highlighting). You can change or set the syntax highlighting by clicking the button on the bottom of the page. We will be using mainly shell scripting in this course, so here&rsquo;s an example for adjusting it to shell syntax highlighting:</p>
+<p><figure>
+  <img src="../../assets/images/jupyter_change_highlighting.png" width="300"/>
+</figure></p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Docker</label><div class="tabbed-content">
+<h2 id="material">Material</h2>
+<ul>
+<li>Instructions to <a href="https://docs.docker.com/get-docker/">install docker</a></li>
+<li>Instructions to <a href="https://player.vimeo.com/video/481620477">set up to container</a></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<h3 id="first-login">First login</h3>
+<p>Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.</p>
+<p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
+<p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
+<p>The command to run the environment required for this course looks like this (in a terminal):</p>
+<div class="admonition warning">
+<p class="admonition-title">Modify the script</p>
+<p>Modify the path after <code>-v</code> to the working directory on your computer before running it.</p>
+</div>
+<div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
+--rm <span class="se">\</span>
+-e <span class="nv">JUPYTER_ENABLE_LAB</span><span class="o">=</span>yes <span class="se">\</span>
+-v /path/to/workingdir/:/home/jovyan <span class="se">\</span>
+-p <span class="m">8888</span>:8888 <span class="se">\</span>
+geertvangeest/ngs-variants-jupyter:latest <span class="se">\</span>
+start-notebook.sh
+</code></pre></div>
+
+<p>If this command has run successfully, you will find a link and token in the console, e.g.:</p>
+<div class="highlight"><pre><span></span><code>http://127.0.0.1:8888/?token<span class="o">=</span>4be8d916e89afad166923de5ce5th1s1san3xamp13
+</code></pre></div>
+
+<p>Copy this URL into your browser, and you will be able to use the jupyter notebook.</p>
+<p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/jovyan</code> in the docker container (&lsquo;jovyan&rsquo; is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Don&rsquo;t mount directly in the home dir</p>
+<p>Don&rsquo;t directly mount your local directory to the home directory (<code>/root</code>). This will lead to unexpected behaviour.</p>
+</div>
+<p>The part <code>geertvangeest/ngs-variants-jupyter:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">conda</label><div class="tabbed-content">
+<p>If you have a conda installation on your local computer, you can install the required software using conda.</p>
+<p>You can build the environment from <a href="../../assets/yaml/ngs-variants.yml">ngs-variants.yml</a></p>
+<p>Generate the conda environment like this:</p>
+<div class="highlight"><pre><span></span><code>conda env create --name ngs-variants -f ngs-variants.yml
+</code></pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">The <code>yaml</code> file probably only works for Linux systems</p>
+<p>If you want to use the conda environment on a different OS, use:</p>
+<div class="highlight"><pre><span></span><code>conda create -n ngs-variants <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+
+conda activate ngs-variants
+
+conda install -y -c bioconda <span class="se">\</span>
+samtools <span class="se">\</span>
+bwa <span class="se">\</span>
+snpeff <span class="se">\</span>
+gatk4
+</code></pre></div>
+
+</div>
+<p>This will create the conda environment <code>ngs-variants</code></p>
+<p>Activate it like so:</p>
+<div class="highlight"><pre><span></span><code>conda activate ngs-variants
+</code></pre></div>
+
+<p>After successful installation and activating the environment all the software required to do the exercises should be available.</p>
+</div>
+</div>
+<h3 id="a-unix-command-line-interface-cli-refresher">A UNIX command line interface (CLI) refresher</h3>
+<p>Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory.</p>
+<h4 id="make-a-new-directory">Make a new directory</h4>
+<p>Login to the server and use the command line to make a directory called <code>workdir</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">If working with Docker</p>
+<p>If your are working with docker you are a root user. This means that your &ldquo;home&rdquo; directory is the root directory, i.e. <code>/root</code>, and not <code>/home/username</code>. If you have mounted your local directory to <code>/root/workdir</code>, this directory should already exist.</p>
+</div>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span>
+mkdir workdir
+</code></pre></div>
+
+</details>
+<p>Make a directory <code>scripts</code> within <code>~/workdir</code> and make it your current directory.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> workdir
+mkdir scripts
+<span class="nb">cd</span> scripts
+</code></pre></div>
+
+</details>
+<h4 id="file-permissions">File permissions</h4>
+<p>Generate an empty script in your newly made directory <code>~/workdir/scripts</code> like this:</p>
+<div class="highlight"><pre><span></span><code>touch new_script.sh
+</code></pre></div>
+
+<p>Add a command to this script that writes &ldquo;SIB courses are great!&rdquo; (or something you can better relate to.. <img alt="😉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f609.svg" title=":wink:" />) to stdout, and try to run it.</p>
+<details class="done"><summary>Answer</summary><p>The script should look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;SIB courses are great!&quot;</span>
+</code></pre></div>
+
+</details>
+<p>Usually, you can run it like this:</p>
+<div class="highlight"><pre><span></span><code>./new_script.sh
+</code></pre></div>
+
+<p>But there&rsquo;s an error:</p>
+<div class="highlight"><pre><span></span><code>bash: ./new_script.sh: Permission denied
+</code></pre></div>
+
+<p>Why is there an error?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Use <code>ls -lh new_script.sh</code> to check the permissions.</p>
+</div>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>ls -lh new_script.sh
+</code></pre></div>
+
+<p>gives:</p>
+<div class="highlight"><pre><span></span><code>-rw-r--r--  <span class="m">1</span> user  group    51B Nov <span class="m">11</span> <span class="m">16</span>:21 new_script.sh
+</code></pre></div>
+
+<p>There&rsquo;s no <code>x</code> in the permissions string. You should change at least the permissions of the user.</p>
+</details>
+<p>Make the script executable for yourself, and run it.</p>
+<details class="done"><summary>Answer</summary><p>Change permissions:</p>
+<div class="highlight"><pre><span></span><code>chmod u+x new_script.sh
+</code></pre></div>
+
+<p><code>ls -lh new_script.sh</code> now gives:</p>
+<div class="highlight"><pre><span></span><code>-rwxr--r--  1 user  group    51B Nov 11 16:21 new_script.sh
+</code></pre></div>
+
+<p>So it should be executable:</p>
+<div class="highlight"><pre><span></span><code>./new_script.sh
+</code></pre></div>
+
+</details>
+<p>More on <code>chmod</code> and file permissions <a href="https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/">here</a>.</p>
+<h4 id="redirection-and">Redirection: <code>&gt;</code> and <code>|</code></h4>
+<p>In the root directory (go there like this: <code>cd /</code>) there are a range of system directories and files. Write the names of all directories and files to a file called <code>system_dirs.txt</code> in your home directory (use <code>ls</code> and <code>&gt;</code>).</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>ls / &gt; ~/system_dirs.txt
+</code></pre></div>
+
+</details>
+<p>The command <code>wc -l</code> counts the number of lines, and can read from stdin. Make a one-liner with a pipe <code>|</code> symbol to find out how many system directories and files there are.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>ls / <span class="p">|</span> wc -l
+</code></pre></div>
+
+</details>
+<h4 id="variables">Variables</h4>
+<p>Store <code>system_dirs.txt</code> as variable (like this: <code>VAR=variable</code>), and use <code>wc -l</code> on that variable to count the number of lines in the file.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nv">FILE</span><span class="o">=</span>system_dirs.txt
+wc -l <span class="nv">$FILE</span>
+</code></pre></div>
+
+</details>
+<h4 id="shell-scripts">shell scripts</h4>
+<p>Make a shell script that automatically counts the number of system directories and files.</p>
+<details class="done"><summary>Answer</summary><p>Make a script called e.g. <code>current_system_dirs.sh</code>:
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">cd</span> /
+ls <span class="p">|</span> wc -l
+</code></pre></div></p>
+</details>
+<h3 id="loops">Loops</h3>
+<blockquote>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 20 minutes</p>
+</blockquote>
+<p>If you want to run the same command on a range of arguments, it&rsquo;s not very convenient to type the command for each individual argument. For example, you could write <code>dog</code>, <code>fox</code>, <code>bird</code> to stdout in a script like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">echo</span> dog
+<span class="nb">echo</span> fox
+<span class="nb">echo</span> bird
+</code></pre></div>
+
+<p>However, if you want to change the command (add an option for example), you would have to change it for all the three command calls. Amongst others for that reason, you want to write the command only once. You can do this with a for-loop, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">ANIMALS</span><span class="o">=</span><span class="s2">&quot;dog fox bird&quot;</span>
+
+<span class="k">for</span> animal in <span class="nv">$ANIMALS</span>
+<span class="k">do</span>
+  <span class="nb">echo</span> <span class="nv">$animal</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>Which results in:</p>
+<div class="highlight"><pre><span></span><code>dog
+fox
+bird
+</code></pre></div>
+
+<p>Write a shell script that removes all the letters &ldquo;e&rdquo; from a list of words.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Removing the letter &ldquo;e&rdquo; from a string can be done with <code>tr</code> like this:
+<div class="highlight"><pre><span></span><code><span class="nv">word</span><span class="o">=</span><span class="s2">&quot;test&quot;</span>
+<span class="nb">echo</span> <span class="nv">$word</span> <span class="p">|</span> tr -d <span class="s2">&quot;e&quot;</span>
+</code></pre></div></p>
+<p>Which would result in:</p>
+<div class="highlight"><pre><span></span><code>tst
+</code></pre></div>
+
+</div>
+<details class="done"><summary>Answer</summary><p>Your script should e.g. look like this (I&rsquo;ve added some awesome functionality):</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">WORDLIST</span><span class="o">=</span><span class="s2">&quot;here is a list of words resulting in a sentence&quot;</span>
+
+<span class="k">for</span> word in <span class="nv">$WORDLIST</span>
+<span class="k">do</span>
+  <span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$word</span><span class="s2">&#39; with e&#39;s removed looks like:&quot;</span>
+  <span class="nb">echo</span> <span class="nv">$word</span> <span class="p">|</span> tr -d <span class="s2">&quot;e&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>resulting in:</p>
+<div class="highlight"><pre><span></span><code>&#39;here&#39; with e&#39;s removed looks like:
+hr
+&#39;is&#39; with e&#39;s removed looks like:
+is
+&#39;a&#39; with e&#39;s removed looks like:
+a
+&#39;list&#39; with e&#39;s removed looks like:
+list
+&#39;of&#39; with e&#39;s removed looks like:
+of
+&#39;words&#39; with e&#39;s removed looks like:
+words
+&#39;resulting&#39; with e&#39;s removed looks like:
+rsulting
+&#39;in&#39; with e&#39;s removed looks like:
+in
+&#39;a&#39; with e&#39;s removed looks like:
+a
+&#39;sentence&#39; with e&#39;s removed looks like:
+sntnc
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../introduction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../alignment/" class="md-footer__link md-footer__link--next" aria-label="Next: Read alignment - basics" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Read alignment - basics
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+    
+  </body>
+</html>
