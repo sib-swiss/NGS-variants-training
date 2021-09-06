@@ -1,5 +1,15 @@
+## Authors
 
-This course is inspired on the variant analysis course previously given by Walid Gharib
+- Walid Gharib
+- Irene Keller
+- Geert van Geest
+
+## License & copyright
+
+**License:** [CC BY-SA 4.0](https://raw.githubusercontent.com/sib-swiss/single-cell-training/master/LICENCE)
+
+**Copyright:** [SIB Swiss Institute of Bioinformatics](https://www.sib.swiss/)
+
 
 ## Material
 

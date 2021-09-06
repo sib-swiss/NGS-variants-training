@@ -47,6 +47,10 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
+extra:
+  version:
+    provider: mike
+
 # google_analytics:
 #   - G-SK9D4D2P4M
 #   - auto
