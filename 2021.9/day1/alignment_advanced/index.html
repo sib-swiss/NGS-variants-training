@@ -1,0 +1,832 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/SIB_logo.svg">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
+    
+    
+      
+        <title>Read alignment - advanced - NGS - variant analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.be71726b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SK9D4D2P4M"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SK9D4D2P4M');
+</script>
+
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NGS - variant analysis" class="md-header__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGS - variant analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Read alignment - advanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - variant analysis" class="md-nav__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - variant analysis
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        Day 1
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server_login/" class="md-nav__link">
+        Server login
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment/" class="md-nav__link">
+        Read alignment - basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Read alignment - advanced
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Read alignment - advanced
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-adding-readgroups" class="md-nav__link">
+    1. Adding readgroups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mark-duplicates" class="md-nav__link">
+    2. Mark duplicates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-indexing" class="md-nav__link">
+    3. Indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-piping-and-looping" class="md-nav__link">
+    4. Piping and looping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Day 2
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling/" class="md-nav__link">
+        Variant calling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/visualisation/" class="md-nav__link">
+        Visualisation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/filtering_evaluation/" class="md-nav__link">
+        Filtering & evaluation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/annotation/" class="md-nav__link">
+        Annotation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-adding-readgroups" class="md-nav__link">
+    1. Adding readgroups
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-mark-duplicates" class="md-nav__link">
+    2. Mark duplicates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-indexing" class="md-nav__link">
+    3. Indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-piping-and-looping" class="md-nav__link">
+    4. Piping and looping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Read alignment - advanced</h1>
+                
+                <h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Use <code>samtools</code> to mark duplicates from an alignment file</li>
+<li>Use <code>samtools</code> to add readgroups to an alignment file</li>
+<li>Use a for loop in bash to perform the same operation on a range of files</li>
+<li>Use <code>samtools</code> in a pipe to efficiently do multiple operations on an alignment file in a single command</li>
+</ul>
+<h2 id="material">Material</h2>
+<ul>
+<li><code>samtools</code> <a href="http://www.htslib.org/doc/samtools.html">documentation</a></li>
+</ul>
+<h2 id="exercises">Exercises</h2>
+<h3 id="1-adding-readgroups">1. Adding readgroups</h3>
+<p>During several steps of variant calling <code>gatk</code> uses read group information. For each read, this gives information on the sequencing platform, the library, the lane and of course the sample. Have a look at the description of the different levels of read group information <code>gatk</code> uses <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups">here</a>. </p>
+<p><strong>Exercise:</strong> The documentation mentions several level of read group fields that are used by <code>gatk</code>. Have a look at the <code>fastq</code> header. Does that give you the information that is required? Do we have that information for our sample? Can you specify it for our sample?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can have a look at the first few entries in the <code>fastq</code> file with:</p>
+<div class="highlight"><pre><span></span><code>zcat mother_R1.fastq.gz <span class="p">|</span> head
+</code></pre></div>
+</div>
+<details class="done"><summary>Answer</summary><p>Most of the information you should now based on the experimental design, the rest you can find in the <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq header</a>:</p>
+<ul>
+<li><code>PL</code>: the platform. Should be quite obvious; you usually you have this information. For us, this would be <code>ILLUMINA</code></li>
+<li><code>SM</code>: the sample. All alignments that have reads coming from the same individual should have the same identifier in this field. For us, this would be <code>mother</code>. </li>
+<li><code>LB</code>: library identifier. Molecular duplicates only exist within a library. If a single library was sequenced on multiple lanes, it is important to track this information. In our case, we have sequenced only one library, so you can specify it with e.g. <code>lib1</code>. </li>
+<li><code>PU</code>: platform unit. This field is used to identify the sequencing lane. The documentation tells us we should specify it as <code>[FLOWCELL].[LANE].[SAMPLE BARCODE]</code>. The header of the first entry in our fastq file looks like this: <code>@H0164ALXX140820:2:1101:2136:40460/1</code>. Where the flowcell ID is <code>H0164</code> and the lane <code>2</code>. This formatting is specific to Broad Genomic Services pipelines, and not very common nowadays. Here the sample barcode is added to the flowcell ID, and is therefore specified as ALXX140820. We can therefore specify it with <code>H0164.2.ALXX140820</code>. </li>
+<li><code>ID</code>: read group id. If you don&rsquo;t have specific information on the flowcell and lane (specified with <code>PU</code>), you can use this field to specify a unique unit that is used for e.g. base quality score recalibration. This often a combination of a flow cell identifier and a lane. In our case this could be <code>H0164.2</code></li>
+</ul>
+</details>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>More modern output of an Illumina sequencer looks e.g. like this (example on <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a>):</p>
+<div class="highlight"><pre><span></span><code>@EAS139:136:FC706VJ:2:2104:15343:197393 1:Y:18:ATCACG
+</code></pre></div>
+<p>Here, e.g. the <code>PU</code> field would be <code>FC706VJ.2.ATCACG</code></p>
+</div>
+<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">documentation</a> of <code>AddOrReplaceReadGroups</code>. Specify the required arguments, and run the command. </p>
+<details class="done"><summary>Answer</summary><p>We can use the answers of the previous exercise, and use them in the command:</p>
+<div class="highlight"><pre><span></span><code>gatk AddOrReplaceReadGroups <span class="se">\</span>
+--INPUT alignment/mother.bam <span class="se">\</span>
+--OUTPUT alignment/mother.rg.bam <span class="se">\</span>
+--RGLB lib1 <span class="se">\</span>
+--RGPU H0164.2.ALXX140820 <span class="se">\</span>
+--RGPL ILLUMINA <span class="se">\</span>
+--RGSM mother <span class="se">\</span>
+--RGID H0164.2
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong> Compare the header and first alignments of <code>mother.bam</code> and <code>mother.rg.bam</code>. Notice any differences?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can view the header with</p>
+<div class="highlight"><pre><span></span><code>samtools view -H &lt;alignment.bam&gt;
+</code></pre></div>
+<p>And the first few alignments with</p>
+<div class="highlight"><pre><span></span><code>samtools view &lt;alignment.bam&gt; | head
+</code></pre></div>
+</div>
+<details class="done"><summary>Answer</summary><p>Compared to the header of <code>mother.markdup.bam</code>, the header of <code>mother.markdup.rg.bam</code> contains an extra line starting with <code>@RG</code>:</p>
+<div class="highlight"><pre><span></span><code>@RG     ID:H0164.2      LB:lib1 PL:ILLUMINA     SM:mother       PU:H0164.2.ALXX140820
+</code></pre></div>
+<p>In the alignment records, a tag was added at the very end of each line: <code>RG:Z:H0164.2</code>. Note that all fields (<code>LB</code>, <code>PU</code>, etc.) are related to <code>ID</code>. So for each read only <code>ID</code> is specified and all other fields can be deducted from that. </p>
+</details>
+<h3 id="2-mark-duplicates">2. Mark duplicates</h3>
+<p>Now that we have specified read groups, we can mark the duplicates with <code>gatk MarkDuplicates</code>. </p>
+<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">documentation</a>, and run <code>gatk MarkDuplicates</code> with the three required arguments. </p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>gatk MarkDuplicates <span class="se">\</span>
+--INPUT alignment/mother.rg.bam <span class="se">\</span>
+--OUTPUT alignment/mother.rg.md.bam <span class="se">\</span>
+--METRICS_FILE alignment/marked_dup_metrics_mother.txt 
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong> Run <code>samtools flagstat</code> on the alignment file with marked duplicates. How many reads were marked as duplicate?</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>samtools flagstat mother.rg.md.bam
+</code></pre></div>
+<p>Gives:</p>
+<p><div class="highlight"><pre><span></span><code>133477 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+317 + 0 supplementary
+17329 + 0 duplicates
+132892 + 0 mapped (99.56% : N/A)
+133160 + 0 paired in sequencing
+66580 + 0 read1
+66580 + 0 read2
+131470 + 0 properly paired (98.73% : N/A)
+131990 + 0 with itself and mate mapped
+
+585 + 0 singletons (0.44% : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
+</code></pre></div>
+Which tells us that 17329 reads were marked as duplicate.</p>
+</details>
+<h3 id="3-indexing">3. Indexing</h3>
+<p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
+<div class="highlight"><pre><span></span><code>samtools index mother.rg.md.bam
+</code></pre></div>
+<h3 id="4-piping-and-looping">4. Piping and looping</h3>
+<p><strong>Exercise</strong> Generate a tab-delimited file in which each line represents a sample (mother, father and son), and where you specify the <code>SM</code>, <code>LB</code>, <code>PU</code> and <code>ID</code> fields. E.g., the first line (for &lsquo;mother&rsquo;) would look like:</p>
+<div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2
+</code></pre></div>
+<details class="done"><summary>Answer</summary><p>Your file should look like this:</p>
+<div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2
+father  lib2    H0164.3.ALXX140820  H0164.3
+son lib3    H0164.6.ALXX140820  H0164.6
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong> Below you can find a script that loops over each line in a file and creates a shell variable for each column in that line. Figure out where in the script each of the following tasks is performed:</p>
+<ul>
+<li>adding read groups</li>
+<li>alignment</li>
+<li>indexing</li>
+<li>compression</li>
+<li>marking duplicates</li>
+<li>sorting by coordiante</li>
+</ul>
+<p><strong>Exercise:</strong> Use the tab-delimited file you created as input for the &lsquo;while loop&rsquo; to generate bam files for each sample that are sorted, compressed, have read groups added, duplicates marked and indexed. In the example the tab-delimited file is called <code>sample_rg_fields.txt</code>. In addition, add a command in which you generate the alignments statistics with <code>samtools flagstat</code> of the bam file with marked duplicates. </p>
+<div class="highlight"><pre><span></span><code>cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> sample lb pu id
+<span class="k">do</span>
+    bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+    data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
+    data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz <span class="se">\</span>
+    <span class="p">|</span> samtools sort <span class="se">\</span>
+    <span class="p">|</span> samtools view -bh &gt; alignment/<span class="nv">$sample</span>.bam
+
+    gatk AddOrReplaceReadGroups <span class="se">\</span>
+    --INPUT alignment/<span class="nv">$sample</span>.bam <span class="se">\</span>
+    --OUTPUT alignment/<span class="nv">$sample</span>.rg.bam <span class="se">\</span>
+    --RGLB <span class="nv">$lb</span> <span class="se">\</span>
+    --RGPU <span class="nv">$pu</span> <span class="se">\</span>
+    --RGPL ILLUMINA <span class="se">\</span>
+    --RGSM <span class="nv">$sample</span> <span class="se">\</span>
+    --RGID <span class="nv">$id</span>
+
+    gatk MarkDuplicates <span class="se">\</span>
+    --INPUT alignment/<span class="nv">$sample</span>.rg.bam <span class="se">\</span>
+    --OUTPUT alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
+    --METRICS_FILE alignment/marked_dup_metrics_<span class="nv">$sample</span>.txt 
+
+    samtools index alignment/<span class="nv">$sample</span>.bam
+<span class="k">done</span> &lt; sample_rg_fields.txt
+</code></pre></div>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> sample lb pu id
+<span class="k">do</span>
+    bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+    data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R1.fastq.gz <span class="se">\</span>
+    data/fastq/<span class="s2">&quot;</span><span class="nv">$sample</span><span class="s2">&quot;</span>_R2.fastq.gz <span class="se">\</span>
+    <span class="p">|</span> samtools sort <span class="se">\</span>
+    <span class="p">|</span> samtools view -bh &gt; alignment/<span class="nv">$sample</span>.bam
+
+    gatk AddOrReplaceReadGroups <span class="se">\</span>
+    --INPUT alignment/<span class="nv">$sample</span>.bam <span class="se">\</span>
+    --OUTPUT alignment/<span class="nv">$sample</span>.rg.bam <span class="se">\</span>
+    --RGLB <span class="nv">$lb</span> <span class="se">\</span>
+    --RGPU <span class="nv">$pu</span> <span class="se">\</span>
+    --RGPL ILLUMINA <span class="se">\</span>
+    --RGSM <span class="nv">$sample</span> <span class="se">\</span>
+    --RGID <span class="nv">$id</span>
+
+    gatk MarkDuplicates <span class="se">\</span>
+    --INPUT alignment/<span class="nv">$sample</span>.rg.bam <span class="se">\</span>
+    --OUTPUT alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
+    --METRICS_FILE alignment/marked_dup_metrics_<span class="nv">$sample</span>.txt 
+
+    samtools index alignment/<span class="nv">$sample</span>.bam
+
+    samtools flagstat alignment/<span class="nv">$sample</span>.rg.md.bam &gt; <span class="nv">$sample</span>.rg.md.stats
+<span class="k">done</span> 
+</code></pre></div>
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../alignment/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Read alignment - basics" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Read alignment - basics
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../day2/variant_calling/" class="md-footer__link md-footer__link--next" aria-label="Next: Variant calling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Variant calling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56a63758.min.js"></script>
+      
+    
+  </body>
+</html>
