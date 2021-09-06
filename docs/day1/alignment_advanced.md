@@ -14,40 +14,98 @@
 
 ## Exercises
 
-### 1. Marking duplicates
 
-For variant analysis, it's important to mark reads that possibly originated from PCR duplication. We can do that with `samtools markdup`. However, we can not directly run that on our `.sam` file nor on our compressed `.bam` file.
+### 1. Adding readgroups
 
-**Exercise:** Which samtools commands would we need to run to mark duplicates?
+During several steps of variant calling `gatk` uses read group information. For each read, this gives information on the sequencing platform, the library, the lane and of course the sample. Have a look at the description of the different levels of read group information `gatk` uses [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups). 
 
-!!! hint
-    More info on this at the [`samtools markdup` documentation](http://www.htslib.org/doc/samtools-markdup.html#EXAMPLES).
+**Exercise:** The documentation mentions several level of read group fields that are used by `gatk`. Have a look at the `fastq` header. Does that give you the information that is required? Do we have that information for our sample? Can you specify it for our sample?
 
-    Also: the reads are already collated (i.e. forward and reverse are grouped) after the alignment, so no need to run `samtools collate`.
+!!! Hint
+    You can have a look at the first few entries in the `fastq` file with:
 
-??? done "Answer"
-    The commands would be:
-
-    * `samtools fixmate` (with the `-m` option)
-    * `samtools sort`
-    * `samtools markdup`
-
-**Exercise:** Run the three commands that are required to mark duplicates.
-
-??? done "Answer"
     ```sh
-    cd ~/workdir/alignment
-
-    samtools fixmate -m mother.bam mother.fixmate.bam
-    samtools sort -o mother.positionsort.bam mother.fixmate.bam
-    samtools markdup mother.positionsort.bam mother.markdup.bam
+    zcat mother_R1.fastq.gz | head
     ```
 
-** Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates. How many reads were marked as duplicate?
+??? done "Answer"
+    Most of the information you should now based on the experimental design, the rest you can find in the [fastq header](https://en.wikipedia.org/wiki/FASTQ_format):
+
+    - `PL`: the platform. Should be quite obvious; you usually you have this information. For us, this would be `ILLUMINA`
+    - `SM`: the sample. All alignments that have reads coming from the same individual should have the same identifier in this field. For us, this would be `mother`. 
+    - `LB`: library identifier. Molecular duplicates only exist within a library. If a single library was sequenced on multiple lanes, it is important to track this information. In our case, we have sequenced only one library, so you can specify it with e.g. `lib1`. 
+    - `PU`: platform unit. This field is used to identify the sequencing lane. The documentation tells us we should specify it as `[FLOWCELL].[LANE].[SAMPLE BARCODE]`. The header of the first entry in our fastq file looks like this: `@H0164ALXX140820:2:1101:2136:40460/1`. Where the flowcell ID is `H0164` and the lane `2`. This formatting is specific to Broad Genomic Services pipelines, and not very common nowadays. Here the sample barcode is added to the flowcell ID, and is therefore specified as ALXX140820. We can therefore specify it with `H0164.2.ALXX140820`. 
+    - `ID`: read group id. If you don't have specific information on the flowcell and lane (specified with `PU`), you can use this field to specify a unique unit that is used for e.g. base quality score recalibration. This often a combination of a flow cell identifier and a lane. In our case this could be `H0164.2`
+
+!!! Note
+    More modern output of an Illumina sequencer looks e.g. like this (example on [Wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)):
+
+    ```
+    @EAS139:136:FC706VJ:2:2104:15343:197393 1:Y:18:ATCACG
+    ```
+
+    Here, e.g. the `PU` field would be `FC706VJ.2.ATCACG`
+
+
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. 
+
+??? done "Answer"
+    We can use the answers of the previous exercise, and use them in the command:
+
+    ```sh 
+    gatk AddOrReplaceReadGroups \
+    --INPUT alignment/mother.bam \
+    --OUTPUT alignment/mother.rg.bam \
+    --RGLB lib1 \
+    --RGPU H0164.2.ALXX140820 \
+    --RGPL ILLUMINA \
+    --RGSM mother \
+    --RGID H0164.2
+    ```
+
+**Exercise:** Compare the header and first alignments of `mother.bam` and `mother.rg.bam`. Notice any differences?
+
+!!! hint
+    You can view the header with
+
+    ```
+    samtools view -H <alignment.bam>
+    ```
+
+    And the first few alignments with
+
+    ```
+    samtools view <alignment.bam> | head
+    ```
+
+??? done "Answer"
+    Compared to the header of `mother.markdup.bam`, the header of `mother.markdup.rg.bam` contains an extra line starting with `@RG`:
+
+    ```
+    @RG     ID:H0164.2      LB:lib1 PL:ILLUMINA     SM:mother       PU:H0164.2.ALXX140820
+    ```
+
+    In the alignment records, a tag was added at the very end of each line: `RG:Z:H0164.2`. Note that all fields (`LB`, `PU`, etc.) are related to `ID`. So for each read only `ID` is specified and all other fields can be deducted from that. 
+
+### 2. Mark duplicates
+
+Now that we have specified read groups, we can mark the duplicates with `gatk MarkDuplicates`. 
+
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. 
 
 ??? done "Answer"
     ```sh
-    samtools flagstat mother.markdup.bam
+    gatk MarkDuplicates \
+    --INPUT alignment/mother.rg.bam \
+    --OUTPUT alignment/mother.rg.md.bam \
+    --METRICS_FILE alignment/marked_dup_metrics_mother.txt 
+    ```
+
+**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates. How many reads were marked as duplicate?
+
+??? done "Answer"
+    ```sh
+    samtools flagstat mother.rg.md.bam
     ```
 
     Gives:
@@ -70,223 +128,95 @@ For variant analysis, it's important to mark reads that possibly originated from
     ```
     Which tells us that 17329 reads were marked as duplicate.
 
-### 2. Adding read groups
-
-For variant analysis, it's important to know which read came from which sample. Right now, that's easy. All reads come from one individual. But this can become less trivial if you are combining samples. Therefore we add a tag to each read specifying its origin.
-
-You can add a readgroup to your marked alignment file like this:
-
-```sh
-samtools addreplacerg \
--r ID:mother \
--r SM:mother \
--r PL:ILLUMINA \
--o mother.markdup.rg.bam \
-mother.markdup.bam
-```
-
-This command modifies the sam header and read tags.
-
-**Exercise:** Run the `samtools addreplacerg` command and compare the header and first alignments of `mother.markdup.bam` and `mother.markdup.rg.bam`. Notice any differences?
-
-!!! hint
-    You can view the header with
-
-    ```
-    samtools view -H <alignment.bam>
-    ```
-
-    And the first few alignments with
-
-    ```
-    samtools view <alignment.bam> | head
-    ```
-
-??? done "Answer"
-    Compared to the header of `mother.markdup.bam`, the header of `mother.markdup.rg.bam` contains an extra line starting with `@RG`:
-
-    ```
-    @RG     ID:mother       SM:mother       PL:ILLUMINA
-    ```
-
-    In the alignment records, a tag was added at the very end of each line: `RG:Z:mother`.
-
-
 ### 3. Indexing
 
 To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of 'phonebook' of your sequence alignment file. Indexing can be done with `samtools` as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:
 
 ```sh
-samtools index mother.markdup.rg.bam
+samtools index mother.rg.md.bam
 ```
 
 ### 4. Piping and looping
 
-Samtools can quite easily be used in a UNIX pipeline. This has the advantage that you don't need to write many intermediate files. However, the developers have not been very consistent with managing input and output (I'm sure they had their reasons). To use samtools in a pipe, the input argument needs to replaced with a `-`. Also, some commands do not write by default to stdout, but to a specified file (this is the case for e.g. `samtools fixmate` and `samtools markdup`). In that case, also the output argument should be replaced with `-`.
+**Exercise** Generate a tab-delimited file in which each line represents a sample (mother, father and son), and where you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
 
-!!! example
-    For the command `samtools addreplacerg` the samtools documentation provides the following synopsis:
-
-    ```
-    samtools addreplacerg [-r rg-line | -R rg-ID] [-m mode] [-l level] [-o out.bam] in.bam
-    ```
-
-    Meaning that it requires `in.bam`, and can write to `out.bam` if option `-o` is provided. By default, it writes to stdout. So, if you pipe to `samtools addreplacerg` you would only need to replace the input file with a `-`:
-
-    ```sh
-    some_command | samtools addreplacerg [options] - > output.sam
-    ```
-
-    For the command `samtools fixmate`, the samtools documentation provides this synopsis:
-
-    ```
-    samtools fixmate [-rpcm] [-O format] in.nameSrt.bam out.bam
-    ```
-
-    Meaning that it requires both the input file `in.nameSrt.bam` and the output file `out.bam`. So, if you pipe to `samtools fixmate` and you want to write to stdout (so piping from), you'll need to replace both the input and output with a `-`:
-
-    ```sh
-    some_command | samtools fixmate [options] - - > output.sam
-    ```
-
-    The most frequently used samtools commands don't require an input nor an output file, and therefore behave like many UNIX commands. An example of this is `samtools sort`. The synopsis is:
-
-    ```
-    samtools sort [-l level] [-m maxMem] [-o out.bam] [-O format] [-n] [-t tag] [-T tmpprefix] [-@ threads] [in.sam|in.bam|in.cram]
-    ```
-
-    Telling us that both the input file and output (with option `-o`) file are optional. If the input file is absent, it reads from stdin. So, you could use it without a `-` replacing input or output files:
-
-    ```sh
-    some_command | samtools sort > output.sam
-    ```
-
-Let's put everything we've done so far in a pipe and loop over our three samples.
-
-The command below loops over the strings `father`, `mother` and `son`, and performs these tasks:
-
-1. Create a variable to work on data of mother, father and son separately
-2. Perform the alignment
-3. Fill in the mate coordinates and sort on coordinate
-4. Mark duplicates
-5. Add readgroups
-6. Compress the output
-7. Create an index
-
-```sh
-#!/usr/bin/env bash
-
-cd ~/workdir
-
-for sample in mother father son
-do
-  bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-  data/fastq/"$sample"_R1.fastq.gz \
-  data/fastq/"$sample"_R2.fastq.gz \
-  | samtools fixmate -m - - \
-  | samtools sort \
-  | samtools markdup -s - - \
-  | samtools addreplacerg -r ID:$sample -r SM:$sample -r PL:ILLUMINA - \
-  | samtools view -bh > alignment/$sample.bam
-
-  samtools index alignment/$sample.bam
-done
+```
+mother	lib1	H0164.2.ALXX140820	H0164.2
 ```
 
-**Exercise:** For each task (1-7), figure out which part of the script performs that task. After that, run it to get the alignments of all three samples.
-
 ??? done "Answer"
-    Creating variables (1):
+    Your file should look like this:
 
-    ```sh
-    for sample in mother father son
-    do
-      ...
-    done
+    ```
+    mother	lib1	H0164.2.ALXX140820	H0164.2
+    father	lib2	H0164.3.ALXX140820	H0164.3
+    son	lib3	H0164.6.ALXX140820	H0164.6
     ```
 
-    Perform the alignment (2):
+**Exercise:** Below you can find a script that loops over each line in a file and creates a shell variable for each column in that line. Figure out where in the script each of the following tasks is performed:
 
-    ```sh
+- adding read groups
+- alignment
+- indexing
+- compression
+- marking duplicates
+- sorting by coordiante
+
+**Exercise:** Use the tab-delimited file you created as input for the 'while loop' to generate bam files for each sample that are sorted, compressed, have read groups added, duplicates marked and indexed. In the example the tab-delimited file is called `sample_rg_fields.txt`. In addition, add a command in which you generate the alignments statistics with `samtools flagstat` of the bam file with marked duplicates. 
+
+```sh
+cat sample_rg_fields.txt | while read sample lb pu id
+do
     bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     data/fastq/"$sample"_R1.fastq.gz \
-    data/fastq/"$sample"_R2.fastq.gz
-    ```
-
-    Fill in the mate coordinates and sort on coordinate (3):
-
-    ```sh
-    samtools fixmate -m <INPUT> <OUTPUT> \
-    | samtools sort
-    ```
-
-    Mark duplicates (4):
-
-    ```sh
-    samtools markdup -s <INPUT> <OUTPUT>
-    ```
-
-    Add readgroups (5):
-
-    ```sh
-    samtools addreplacerg -r ID:$sample -r SM:$sample -r PL:ILLUMINA <INPUT>
-    ```
-
-    Compress the output (6):
-
-    ```sh
-    samtools view -bh > alignment/$sample.bam
-    ```
-
-    Create an index (7):
-
-    ```sh
-    samtools index alignment/$sample.bam
-    ```
-
-### 5. Additional exercise: Add readgroups and mark duplicates with `picard`
-
-Prepare a sorted .bam (without RG and marked duplicates) from mother.sam (the current mother.bam has readgroups and marked dups):
-
-```sh
-samtools sort mother.sam | samtools view -bh > mother.nrg.bam
-```
-
-Then, run `gatk AddOrReplaceReadGroups` on the file mother.nrg.bam . After that run: `gatk MarkDuplicates` on the alignment file with readgroups added.
-
-Find the documentation here:
-
-* [AddOrReplaceReadGroups](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-)
-* [MarkDuplicates](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-)
-
-**Exercise:** do you see any differences with the output we have generated with `samtools`?
-
-??? done "Answer"
-    Your script should look like this:
-
-    ```sh
-    #!/bin/bash
-
-    cd ~/workdir
-
-    samtools sort alignment/mother.sam \
-    | samtools view -bh > alignment/mother.nrg.bam
-
+    data/fastq/"$sample"_R2.fastq.gz \
+    | samtools sort \
+    | samtools view -bh > alignment/$sample.bam
+    
     gatk AddOrReplaceReadGroups \
-           --INPUT alignment/mother.nrg.bam \
-           --OUTPUT alignment/mother.nrg.rg.bam \
-           --RGID H0164.2 \
-           --RGLB lib1 \
-           --RGPU H0164ALXX140820.2 \
-           --RGPL ILLUMINA \
-           --RGSM mother
+    --INPUT alignment/$sample.bam \
+    --OUTPUT alignment/$sample.rg.bam \
+    --RGLB $lb \
+    --RGPU $pu \
+    --RGPL ILLUMINA \
+    --RGSM $sample \
+    --RGID $id
 
     gatk MarkDuplicates \
-          --INPUT alignment/mother.nrg.rg.bam \
-          --OUTPUT alignment/mother.nrg.rg.md.bam \
-          --METRICS_FILE alignment/marked_dup_metrics_mother.txt
+    --INPUT alignment/$sample.rg.bam \
+    --OUTPUT alignment/$sample.rg.md.bam \
+    --METRICS_FILE alignment/marked_dup_metrics_$sample.txt 
+
+    samtools index alignment/$sample.bam
+done < sample_rg_fields.txt
+```
+
+??? done "Answer"
+    ```sh
+    cat sample_rg_fields.txt | while read sample lb pu id
+    do
+        bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+        data/fastq/"$sample"_R1.fastq.gz \
+        data/fastq/"$sample"_R2.fastq.gz \
+        | samtools sort \
+        | samtools view -bh > alignment/$sample.bam
+        
+        gatk AddOrReplaceReadGroups \
+        --INPUT alignment/$sample.bam \
+        --OUTPUT alignment/$sample.rg.bam \
+        --RGLB $lb \
+        --RGPU $pu \
+        --RGPL ILLUMINA \
+        --RGSM $sample \
+        --RGID $id
+
+        gatk MarkDuplicates \
+        --INPUT alignment/$sample.rg.bam \
+        --OUTPUT alignment/$sample.rg.md.bam \
+        --METRICS_FILE alignment/marked_dup_metrics_$sample.txt 
+
+        samtools index alignment/$sample.bam
+
+        samtools flagstat alignment/$sample.rg.md.bam > $sample.rg.md.stats
+    done 
     ```
-
-    More information on read groups [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups). In this documentation it is stated how to specify `RGID` and `RGPU`.
-
-    Both `samtools` and `gatk MarkDuplicates` mark the same number of duplicates. However, `gatk` forces you to add readgroups that are appropriate for further downstream processing with `gatk`.

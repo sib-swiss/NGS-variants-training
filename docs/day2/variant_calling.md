@@ -111,7 +111,7 @@ BQSR is done in two steps:
     * `--input`
     * `--output`
 
-**Exercise:** Run the two commands with the required options on `mother.bam`, with `--known-sites` `variants/1000g_gold_standard.indels.filtered.vcf` and `variants/GCF.38.filtered.renamed.vcf`.
+**Exercise:** Run the two commands with the required options on `mother.rg.md.bam`, with `--known-sites` `variants/1000g_gold_standard.indels.filtered.vcf` and `variants/GCF.38.filtered.renamed.vcf`.
 
 !!! hint "Multiple inputs for same argument"
     In some cases you need to add multiple inputs (e.g. multiple `vcf` files) into the same argument (e.g. `--known-sites`). To provide multiple inputs for the same argument in `gatk`, you can use the same argument multiple times, e.g.:
@@ -133,7 +133,7 @@ BQSR is done in two steps:
 
     gatk BaseRecalibrator \
     --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-    --input alignment/mother.bam \
+    --input alignment/mother.rg.md.bam \
     --known-sites data/variants/GCF.38.filtered.renamed.vcf \
     --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
     --output bqsr/mother.recal.table
@@ -144,7 +144,7 @@ BQSR is done in two steps:
     --output bqsr/mother.recal.bam
     ```
 
-**Exercise:** Place these commands in a loop, that performs the BQSR for mother, father and son.
+**Exercise:** Place these commands in a 'for loop', that performs the BQSR for mother, father and son.
 
 ??? done "Answer"
     ```sh

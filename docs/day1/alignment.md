@@ -159,20 +159,26 @@ Perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fas
 
     No duplicates were found (`0 + 0 duplicates`). The aligner doesn't automatically flag duplicates. This needs to be done after the alignment.
 
+### 4. Sorting and compression
 
+Many downstream analyses require a coordinate sorted alignment file. Now, your alignment file is in the same order as the fastq file. You can coordinate sort an alignment file with `samtools sort`. You can find the documentation [here](http://www.htslib.org/doc/samtools-sort.html). 
 
+**Exercise**: Sort the alignment file according to coordinate. 
 
-### 4. Compression
+??? done "Answer"
+    ```sh
+    samtools sort -o alignment/mother.sorted.sam alignment/mother.sam 
+    ```
+
+!!! tip "Tip: `samtools sort` and `samtools view` can write to stdout"
+    Like `bwa mem`, `samtools sort` and `samtools view` can write its output to stdout. This means that you need to redirect your output to a file with `>` or use the the output option `-o`.
 
 The command `samtools view` is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let's start with that.
 
 **Exercise**: compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
 
-!!! tip "Tip: `samtools view` writes to stdout"
-    Like `bwa mem`, `samtools view` writes its output to stdout. This means that you need to redirect your output to a file with `>` or use the the output option `-o`.
-
 ??? done "Answer"
     ```sh
-    samtools view -bh mother.sam > mother.bam
+    samtools view -bh mother.sorted.sam > mother.bam
     ```
-    By using `ls -lh`, you can find out that `mother.sam` has a size of 54 Mb, while `mother.bam` is only 20 Mb.  
+    By using `ls -lh`, you can find out that `mother.sorted.sam` has a size of 55 Mb, while `mother.bam` is only 16 Mb.  
