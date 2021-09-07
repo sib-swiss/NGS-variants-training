@@ -690,7 +690,7 @@ gatk BaseRecalibrator <span class="se">\</span>
 --output bqsr/mother.recal.table
 
 gatk ApplyBQSR <span class="se">\</span>
---input alignment/mother.bam <span class="se">\</span>
+--input alignment/mother.rg.md.bam <span class="se">\</span>
 --bqsr-recal-file bqsr/mother.recal.table <span class="se">\</span>
 --output bqsr/mother.recal.bam
 </code></pre></div>
@@ -702,13 +702,13 @@ gatk ApplyBQSR <span class="se">\</span>
 <span class="k">do</span>
   gatk BaseRecalibrator <span class="se">\</span>
   --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
-  --input alignment/<span class="nv">$sample</span>.bam <span class="se">\</span>
+  --input alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
   --known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
   --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
   --output bqsr/<span class="nv">$sample</span>.recal.table
 
   gatk ApplyBQSR <span class="se">\</span>
-  --input alignment/<span class="nv">$sample</span>.bam <span class="se">\</span>
+  --input alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
   --bqsr-recal-file bqsr/<span class="nv">$sample</span>.recal.table <span class="se">\</span>
   --output bqsr/<span class="nv">$sample</span>.recal.bam
 <span class="k">done</span>
