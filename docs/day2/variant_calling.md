@@ -139,7 +139,7 @@ BQSR is done in two steps:
     --output bqsr/mother.recal.table
 
     gatk ApplyBQSR \
-    --input alignment/mother.bam \
+    --input alignment/mother.rg.md.bam \
     --bqsr-recal-file bqsr/mother.recal.table \
     --output bqsr/mother.recal.bam
     ```
@@ -154,13 +154,13 @@ BQSR is done in two steps:
     do
       gatk BaseRecalibrator \
       --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-      --input alignment/$sample.bam \
+      --input alignment/$sample.rg.md.bam \
       --known-sites data/variants/GCF.38.filtered.renamed.vcf \
       --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
       --output bqsr/$sample.recal.table
 
       gatk ApplyBQSR \
-      --input alignment/$sample.bam \
+      --input alignment/$sample.rg.md.bam \
       --bqsr-recal-file bqsr/$sample.recal.table \
       --output bqsr/$sample.recal.bam
     done

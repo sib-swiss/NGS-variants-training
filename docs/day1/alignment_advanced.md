@@ -19,7 +19,7 @@
 
 During several steps of variant calling `gatk` uses read group information. For each read, this gives information on the sequencing platform, the library, the lane and of course the sample. Have a look at the description of the different levels of read group information `gatk` uses [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups). 
 
-**Exercise:** The documentation mentions several level of read group fields that are used by `gatk`. Have a look at the `fastq` header. Does that give you the information that is required? Do we have that information for our sample? Can you specify it for our sample?
+**Exercise:** The documentation mentions several read group fields that are used by `gatk`. Have a look at the `fastq` header. Does that give you the information that is required? Do we have that information for our sample? Can you specify it for our sample?
 
 !!! Hint
     You can have a look at the first few entries in the `fastq` file with:
