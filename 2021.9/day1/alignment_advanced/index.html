@@ -702,7 +702,7 @@ son lib3    H0164.6.ALXX140820  H0164.6
 <li>indexing</li>
 <li>compression</li>
 <li>marking duplicates</li>
-<li>sorting by coordiante</li>
+<li>sorting by coordinate</li>
 </ul>
 <p><strong>Exercise:</strong> Use the tab-delimited file you created as input for the &lsquo;while loop&rsquo; to generate bam files for each sample that are sorted, compressed, have read groups added, duplicates marked and indexed. In the example the tab-delimited file is called <code>sample_rg_fields.txt</code>. In addition, add a command in which you generate the alignments statistics with <code>samtools flagstat</code> of the bam file with marked duplicates. </p>
 <div class="highlight"><pre><span></span><code>cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> sample lb pu id
