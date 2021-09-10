@@ -23,7 +23,9 @@ theme:
 # Repository
 repo_name: sib-swiss/NGS-variants-training
 repo_url: https://github.com/sib-swiss/NGS-variants-training
-edit_uri: ""
+edit_uri: edit/main/docs/
+
+site_url: https://sib-swiss.github.io/NGS-variants-training/
 
 markdown_extensions:
   - abbr
@@ -50,6 +52,8 @@ extra_css:
 extra:
   version:
     provider: mike
+
+copyright: Copyright &copy; 2021 SIB Swiss institute of Bioinformatics
 
 # google_analytics:
 #   - G-SK9D4D2P4M
