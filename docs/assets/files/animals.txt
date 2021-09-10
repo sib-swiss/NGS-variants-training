@@ -1,0 +1,3 @@
+dog	retrieves	4
+fox	jumps	4
+bird	flies	2

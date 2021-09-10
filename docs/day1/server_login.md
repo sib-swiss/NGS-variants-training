@@ -282,8 +282,6 @@ Make a shell script that automatically counts the number of system directories a
 
 ### Loops
 
->:fontawesome-regular-clock: 20 minutes
-
 If you want to run the same command on a range of arguments, it's not very convenient to type the command for each individual argument. For example, you could write `dog`, `fox`, `bird` to stdout in a script like this:
 
 ```sh
@@ -369,3 +367,35 @@ Write a shell script that removes all the letters "e" from a list of words.
     'sentence' with e's removed looks like:
     sntnc
     ```
+
+Look you might be used to in `R` or `python` you can also loop over lines in files. This can be convenient if you have for example a set of parameters in each line of a file. 
+
+Create a tab-delimited file `animals.txt` with the following contents:
+
+```
+dog retrieves   4
+fox jumps   4
+bird    flies   2
+```
+
+!!! hint
+    If you're having trouble typing the actual 'tabs' you can also download the file [here](../assets/files/animals.txt)
+
+With unix shell you can loop over the lines of that file and store each column as a variable. Below, the three columns in the tab delimited file are stored in the variables `$animal`, `$behaviour` and `$leg_number`:
+
+```sh
+cat animals.txt | while read animal behaviour leg_number
+do
+    #something here
+done
+``` 
+
+**Exercise:** Modify the script in such a way that it writes the strings that are stored in the variables at each line to stdout. 
+
+??? done 
+    ```sh
+    cat animals.txt | while read animal behaviour leg_number
+    do
+        echo "The $animal $behaviour, and has $leg_number legs" 
+    done
+    ``` 

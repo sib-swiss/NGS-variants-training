@@ -168,6 +168,46 @@ BQSR is done in two steps:
 
 ### 3. Variant calling
 
+#### Calculating PL and GQ by hand 
+
+Here's a function in R to calculate genotype likelihoods as described in Li H.  Bioinformatics. 2011;27:2987–93 (assuming equal base error probabilities for all reads):
+
+```R
+glik <- function(m,g,e,ref,alt){
+  (((m-g)*e+g*(1-e))^alt * ((m-g)*(1-e)+g*e)^ref)/(m^(ref+alt))
+}
+```
+
+Where:
+
+- `m` : ploidy
+- `g` : number of alternative alleles
+- `e` : base error probability
+- `ref` : number of reference alleles counted
+- `alt` : number of alternative alleles counted
+
+**Exercise:** In a local R session, calculate the genotype likelihoods for a case where we count 22 reference alleles and 4 alternative alleles (so a coverage of 26), and base error probability of 0.01. Calculate the PL values (`-10*log10(likelihood)`) for each genotype. 
+
+??? done "Answer"
+    ```R
+    # For g = 0 (i.e. 0 reference alleles)
+    -10*log10(glik(m = 2, g= 0, e = 0.01, ref = 22, alt = 4))
+    # [1] 80.96026 
+    -10*log10(glik(m = 2, g= 1, e = 0.01, ref = 22, alt = 4))
+    # [1] 78.2678
+    -10*log10(glik(m = 2, g= 2, e = 0.01, ref = 22, alt = 4))
+    # [1] 440.1746
+    ``` 
+
+**Exercise:** What is the most likely genotype? What is the genotype quality (GQ)? Do you think we should be confident about this genotype call?
+
+??? done "Answer" 
+    The most likely genotype has the lowest PL, so where g=1 (heterozygous). GL is calculated by subtracting the lowest PL from the second lowest PL, so 80.96 - 78.27 = 2.69. 
+    
+    This is a low genotype quality (note that we're in the phred scale), i.e. an error probability of 0.54. This makes sense, if the genotype is heterozygous we would roughly expect to count as many reference as alternative alleles, and our example quite strongly deviates from this expectation. 
+
+#### Calling variants with GATK
+
 The command [`gatk HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller) is the core command of `gatk`. It performs the actual variant calling.
 
 **Exercise:** Check out the [`gatk HaplotypeCaller` documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller), and find out which arguments are required.
