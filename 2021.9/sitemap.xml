@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/course_schedule/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/precourse/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day1/alignment/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day1/alignment_advanced/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day1/introduction/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day1/server_login/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day2/annotation/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day2/filtering_evaluation/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day2/variant_calling/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://sib-swiss.github.io/NGS-variants-training/2021.9/day2/visualisation/</loc>
          <lastmod>2021-09-10</lastmod>
          <changefreq>daily</changefreq>
     </url>
