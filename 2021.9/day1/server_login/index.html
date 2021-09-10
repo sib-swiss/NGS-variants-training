@@ -848,9 +848,6 @@ ls <span class="p">|</span> wc -l
 </code></pre></div></p>
 </details>
 <h3 id="loops">Loops</h3>
-<blockquote>
-<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg></span> 20 minutes</p>
-</blockquote>
 <p>If you want to run the same command on a range of arguments, it&rsquo;s not very convenient to type the command for each individual argument. For example, you could write <code>dog</code>, <code>fox</code>, <code>bird</code> to stdout in a script like this:</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
@@ -916,6 +913,29 @@ in
 a
 &#39;sentence&#39; with e&#39;s removed looks like:
 sntnc
+</code></pre></div>
+</details>
+<p>Look you might be used to in <code>R</code> or <code>python</code> you can also loop over lines in files. This can be convenient if you have for example a set of parameters in each line of a file. </p>
+<p>Create a tab-delimited file <code>animals.txt</code> with the following contents:</p>
+<div class="highlight"><pre><span></span><code>dog retrieves   4
+fox jumps   4
+bird    flies   2
+</code></pre></div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you&rsquo;re having trouble typing the actual &lsquo;tabs&rsquo; you can also download the file <a href="../../assets/files/animals.txt">here</a></p>
+</div>
+<p>With unix shell you can loop over the lines of that file and store each column as a variable. Below, the three columns in the tab delimited file are stored in the variables <code>$animal</code>, <code>$behaviour</code> and <code>$leg_number</code>:</p>
+<div class="highlight"><pre><span></span><code>cat animals.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> animal behaviour leg_number
+<span class="k">do</span>
+    <span class="c1">#something here</span>
+<span class="k">done</span>
+</code></pre></div>
+<p><strong>Exercise:</strong> Modify the script in such a way that it writes the strings that are stored in the variables at each line to stdout. </p>
+<details class="done"><summary>Done</summary><div class="highlight"><pre><span></span><code>cat animals.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> animal behaviour leg_number
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;The </span><span class="nv">$animal</span><span class="s2"> </span><span class="nv">$behaviour</span><span class="s2">, and has </span><span class="nv">$leg_number</span><span class="s2"> legs&quot;</span> 
+<span class="k">done</span>
 </code></pre></div>
 </details>
                 

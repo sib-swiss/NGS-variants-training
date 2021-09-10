@@ -425,6 +425,26 @@
     3. Variant calling
   </a>
   
+    <nav class="md-nav" aria-label="3. Variant calling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculating-pl-and-gq-by-hand" class="md-nav__link">
+    Calculating PL and GQ by hand
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calling-variants-with-gatk" class="md-nav__link">
+    Calling variants with GATK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -552,6 +572,26 @@
   <a href="#3-variant-calling" class="md-nav__link">
     3. Variant calling
   </a>
+  
+    <nav class="md-nav" aria-label="3. Variant calling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculating-pl-and-gq-by-hand" class="md-nav__link">
+    Calculating PL and GQ by hand
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calling-variants-with-gatk" class="md-nav__link">
+    Calling variants with GATK
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -721,6 +761,35 @@ gatk ApplyBQSR <span class="se">\</span>
 </code></pre></div>
 </details>
 <h3 id="3-variant-calling">3. Variant calling</h3>
+<h4 id="calculating-pl-and-gq-by-hand">Calculating PL and GQ by hand</h4>
+<p>Here&rsquo;s a function in R to calculate genotype likelihoods as described in Li H.  Bioinformatics. 2011;27:2987–93 (assuming equal base error probabilities for all reads):</p>
+<div class="highlight"><pre><span></span><code><span class="n">glik</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">ref</span><span class="p">,</span><span class="n">alt</span><span class="p">){</span>
+  <span class="p">(((</span><span class="n">m</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="n">e</span><span class="o">+</span><span class="n">g</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">e</span><span class="p">))</span><span class="o">^</span><span class="n">alt</span> <span class="o">*</span> <span class="p">((</span><span class="n">m</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">e</span><span class="p">)</span><span class="o">+</span><span class="n">g</span><span class="o">*</span><span class="n">e</span><span class="p">)</span><span class="o">^</span><span class="n">ref</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">m</span><span class="o">^</span><span class="p">(</span><span class="n">ref</span><span class="o">+</span><span class="n">alt</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Where:</p>
+<ul>
+<li><code>m</code> : ploidy</li>
+<li><code>g</code> : number of alternative alleles</li>
+<li><code>e</code> : base error probability</li>
+<li><code>ref</code> : number of reference alleles counted</li>
+<li><code>alt</code> : number of alternative alleles counted</li>
+</ul>
+<p><strong>Exercise:</strong> In a local R session, calculate the genotype likelihoods for a case where we count 22 reference alleles and 4 alternative alleles (so a coverage of 26), and base error probability of 0.01. Calculate the PL values (<code>-10*log10(likelihood)</code>) for each genotype. </p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="c1"># For g = 0 (i.e. 0 reference alleles)</span>
+<span class="m">-10</span><span class="o">*</span><span class="nf">log10</span><span class="p">(</span><span class="nf">glik</span><span class="p">(</span><span class="n">m</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="m">22</span><span class="p">,</span> <span class="n">alt</span> <span class="o">=</span> <span class="m">4</span><span class="p">))</span>
+<span class="c1"># [1] 80.96026 </span>
+<span class="m">-10</span><span class="o">*</span><span class="nf">log10</span><span class="p">(</span><span class="nf">glik</span><span class="p">(</span><span class="n">m</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="m">22</span><span class="p">,</span> <span class="n">alt</span> <span class="o">=</span> <span class="m">4</span><span class="p">))</span>
+<span class="c1"># [1] 78.2678</span>
+<span class="m">-10</span><span class="o">*</span><span class="nf">log10</span><span class="p">(</span><span class="nf">glik</span><span class="p">(</span><span class="n">m</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">g</span><span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">,</span> <span class="n">ref</span> <span class="o">=</span> <span class="m">22</span><span class="p">,</span> <span class="n">alt</span> <span class="o">=</span> <span class="m">4</span><span class="p">))</span>
+<span class="c1"># [1] 440.1746</span>
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong> What is the most likely genotype? What is the genotype quality (GQ)? Do you think we should be confident about this genotype call?</p>
+<details class="done"><summary>Answer</summary><p>The most likely genotype has the lowest PL, so where g=1 (heterozygous). GL is calculated by subtracting the lowest PL from the second lowest PL, so 80.96 - 78.27 = 2.69. </p>
+<p>This is a low genotype quality (note that we&rsquo;re in the phred scale), i.e. an error probability of 0.54. This makes sense, if the genotype is heterozygous we would roughly expect to count as many reference as alternative alleles, and our example quite strongly deviates from this expectation. </p>
+</details>
+<h4 id="calling-variants-with-gatk">Calling variants with GATK</h4>
 <p>The command <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller"><code>gatk HaplotypeCaller</code></a> is the core command of <code>gatk</code>. It performs the actual variant calling.</p>
 <p><strong>Exercise:</strong> Check out the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037225632-HaplotypeCaller"><code>gatk HaplotypeCaller</code> documentation</a>, and find out which arguments are required.</p>
 <details class="done"><summary>Answer</summary><p>Required arguments are:</p>
