@@ -160,7 +160,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
 - indexing
 - compression
 - marking duplicates
-- sorting by coordiante
+- sorting by coordinate
 
 **Exercise:** Use the tab-delimited file you created as input for the 'while loop' to generate bam files for each sample that are sorted, compressed, have read groups added, duplicates marked and indexed. In the example the tab-delimited file is called `sample_rg_fields.txt`. In addition, add a command in which you generate the alignments statistics with `samtools flagstat` of the bam file with marked duplicates. 
 
