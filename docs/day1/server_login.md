@@ -368,7 +368,7 @@ Write a shell script that removes all the letters "e" from a list of words.
     sntnc
     ```
 
-Look you might be used to in `R` or `python` you can also loop over lines in files. This can be convenient if you have for example a set of parameters in each line of a file. 
+Like you might be used to in `R` or `python` you can also loop over lines in files. This can be convenient if you have for example a set of parameters in each line of a file. 
 
 Create a tab-delimited file `animals.txt` with the following contents:
 
