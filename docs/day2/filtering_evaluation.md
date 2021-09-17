@@ -7,6 +7,10 @@
 - Perform hard filtering on both SNPs and INDELs separately by using `gatk SelectVariants` in combination with `gatk VariantFiltration`
 - Perform concordance between called variants and a truth set and evaluate performance of a variant calling workflow
 
+## Material
+
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/filtering_evaluation.pdf){: .md-button }
+
 ## Exercises
 
 ### 1. Hard filtering

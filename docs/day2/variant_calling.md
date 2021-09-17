@@ -178,6 +178,16 @@ genotype_likelihood <- function(m,g,e,ref,alt){
 }
 ```
 
+!!! note "No local R installation?"
+    If you don't have access to an R installation, you can also install it in the jupyter environment by running inside the terminal:
+
+    ```sh
+    conda install r-base 
+    ```
+
+    After installation, start an interactive R session by typing `R`. 
+
+
 Where:
 
 - `m` : ploidy
