@@ -767,6 +767,13 @@ gatk ApplyBQSR <span class="se">\</span>
   <span class="p">(((</span><span class="n">m</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="n">e</span><span class="o">+</span><span class="n">g</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">e</span><span class="p">))</span><span class="o">^</span><span class="n">alt</span> <span class="o">*</span> <span class="p">((</span><span class="n">m</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">e</span><span class="p">)</span><span class="o">+</span><span class="n">g</span><span class="o">*</span><span class="n">e</span><span class="p">)</span><span class="o">^</span><span class="n">ref</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">m</span><span class="o">^</span><span class="p">(</span><span class="n">ref</span><span class="o">+</span><span class="n">alt</span><span class="p">))</span>
 <span class="p">}</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">No local R installation?</p>
+<p>If you don&rsquo;t have access to an R installation, you can also install it in the jupyter environment by running inside the terminal:</p>
+<div class="highlight"><pre><span></span><code>conda install r-base 
+</code></pre></div>
+<p>After installation, start an interactive R session by typing <code>R</code>. </p>
+</div>
 <p>Where:</p>
 <ul>
 <li><code>m</code> : ploidy</li>
