@@ -178,16 +178,6 @@ genotype_likelihood <- function(m,g,e,ref,alt){
 }
 ```
 
-!!! note "No local R installation?"
-    If you don't have access to an R installation, you can also install it in the jupyter environment by running inside the terminal:
-
-    ```sh
-    conda install r-base 
-    ```
-
-    After installation, start an interactive R session by typing `R`. 
-
-
 Where:
 
 - `m` : ploidy
@@ -196,7 +186,16 @@ Where:
 - `ref` : number of reference alleles counted
 - `alt` : number of alternative alleles counted
 
-**Exercise:** In a local R session, calculate the genotype likelihoods for a case where we count 22 reference alleles and 4 alternative alleles (so a coverage of 26), and base error probability of 0.01. Calculate the PL values (`-10*log10(likelihood)`) for each genotype. 
+**Exercise:** In a local R session, calculate the three genotype likelihoods (for g = 0, g = 1 and g = 2) for a case where we count 22 reference alleles and 4 alternative alleles (so a coverage of 26), and base error probability of 0.01. Calculate the PL values (`-10*log10(likelihood)`) for each genotype. 
+
+!!! note "No local R installation?"
+    If you don't have access to an R installation, you can also install it in the jupyter environment by running inside the terminal:
+
+    ```sh
+    conda install r-base 
+    ```
+
+    After installation, start an interactive R session by typing `R`. 
 
 ??? done "Answer"
     ```R
