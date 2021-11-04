@@ -2,7 +2,7 @@
 
 - Walid Gharib
 - Irene Keller
-- Geert van Geest
+- Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
 
 ## License & copyright
 
