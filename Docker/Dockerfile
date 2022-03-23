@@ -1,4 +1,4 @@
-FROM jupyter/minimal-notebook:9fe5186aba96
+FROM jupyter/minimal-notebook:latest
 
 # change user to root to modify .bashrc for e.g. highlighting in the console
 USER root
