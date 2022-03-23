@@ -12,7 +12,7 @@
 
 ## Material
 
-Presentation will be sent to you by e-mail.
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/variant_annotation.pdf){: .md-button }
 
 ## Exercises
 
