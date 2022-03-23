@@ -32,13 +32,9 @@ mkdir annotation
 
 snpEff -Xmx4g \
 -v \
--o gatk \
 GRCh38.99 \
 variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
 ```
-
-!!! note "Output `-o gatk` is deprecated for `gatk4`"
-    Here, we use output `-o gatk` for readability reasons (only one effect per variant is reported). With `gatk3` you could use `gatk VariantAnnotator` with input from `snpEff`. In `gatk4` that is not supported anymore.
 
 **Exercise:** Run the command, and check out the html file (`snpEff_summary.html`). Try to answer these questions:
 
@@ -61,15 +57,14 @@ variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
 
 You can (quick and dirty) query the annotation vcf (`trio.filtered.snpeff.vcf`) for the missense mutation with `grep`.
 
-**Exercise:** Find the variant causing the missense mutation (the line contains the string `MISSENSE`). And answer the following questions:
+**Exercise:** Find the variant causing the missense mutation (the line contains the string `missense`). And answer the following questions:
 
 ??? hint "Hint"
     ```sh
-    grep MISSENSE annotation/trio.filtered.snpeff.vcf
+    grep missense trio.filtered.snpeff.vcf 
     ```
 
-!!! note "Only one effect per SNP in the vcf"
-    In the vcf we have created you can only find one effect per SNP. If you would run `snpEff` without `-o gatk`, you would get all effects per variant.
+Run the command and have a look at the SnpEff [ANN field documentation](http://pcingola.github.io/SnpEff/se_inputoutput/#ann-field-vcf-output-files). Answer the following questions:
 
 **A.** How are the SNP annotations stored in the vcf?
 
@@ -82,17 +77,17 @@ You can (quick and dirty) query the annotation vcf (`trio.filtered.snpeff.vcf`) 
     Find the line with the missense mutation like this:
 
     ```sh
-    grep MISSENSE annotation/trio.filtered.snpeff.vcf
+    grep missense annotation/trio.filtered.snpeff.vcf
     ```
 
-    This results in (long line, scroll to the right to see more):
+    This results in (truncated long line, scroll to the right to see more):
 
     ```
-    chr20   10049540        .       T       A       220.29  PASS    AC=1;AF=0.167;AN=6;BaseQRankSum=-6.040e-01;DP=85;ExcessHet=3.0103;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=8.16;ReadPosRankSum=0.226;SOR=0.951;EFF=NON_SYNONYMOUS_CODING(MODERATE|MISSENSE|cTg/cAg|L324Q|ANKEF1|protein_coding|CODING|ENST00000378392|7)      GT:AD:DP:GQ:PL   0/0:34,0:34:99:0,102,1163  0/1:17,10:27:99:229,0,492       0/0:24,0:24:72:0,72,811
+    chr20   10049540        .       T       A       220.29  PASS    AC=1;AF=0.167;AN=6;BaseQRankSum=-6.040e-01;DP=85;ExcessHet=3.0103;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=8.16;ReadPosRankSum=0.226;SOR=0.951;ANN=A|missense_variant|MODERATE|ANKEF1|ENSG00000132623|transcript|ENST00000378392.6|protein_coding|7/11|c.971T>A|p.Leu324Gln|1426/5429|971/2331|324/776||,A|missense_variant|MODERATE|ANKEF1|ENSG00000132623|transcript|ENST00000378380.4|protein_coding|6/10|c.971T>A|p.Leu324Gln|1300/5303|971/2331|324/776||       GT:AD:DP:GQ:PL  0/0:34,0:34:99:0,102,1163       0/1:17,10:27:99:229,0,492       0/0:24,0:24:72:0,72,811
     ```
 
-    A. SNP annotations are stored in the INFO field, starting with `EFF=`
+    A. SNP annotations are stored in the INFO field, starting with `ANN=`
 
     B. The genotypes are homozygous reference for the father and son, and heterozygous for the mother. (find the order of the samples with `grep ^#CHROM`)
 
-    C. The triplet changes from cTg to cAg, resulting in a change from L (Leucine) to Q (Glutamine).
+    C. The triplet changes from cTg to cAg, resulting in a change from Leu (Leucine) to Gln (Glutamine).
