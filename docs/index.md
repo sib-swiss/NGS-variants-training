@@ -1,7 +1,10 @@
+## Teachers
+
+- Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+- Lea Pohlmeier [:custom-orcid:](https://orcid.org/0000-0001-5066-6941 )
+
 ## Authors
 
-- Walid Gharib
-- Irene Keller
 - Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
 
 ## License & copyright
