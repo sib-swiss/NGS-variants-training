@@ -138,6 +138,15 @@ samtools index mother.rg.md.bam
 
 ### 4. Piping and looping
 
+Now we have performed now the following steps on one sample:
+
+- Read alignment
+- Adding readgroups
+- Marking of duplicates
+- Indexing
+
+We now apply these steps to all three samples.
+
 **Exercise** Generate a tab-delimited file in which each line represents a sample (mother, father and son), and where you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
 
 ```
