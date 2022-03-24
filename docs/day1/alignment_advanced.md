@@ -196,8 +196,8 @@ do
     --OUTPUT alignment/$sample.rg.md.bam \
     --METRICS_FILE alignment/marked_dup_metrics_$sample.txt 
 
-    samtools index alignment/$sample.bam
-done < sample_rg_fields.txt
+    samtools index alignment/$sample.rg.md.bam
+done
 ```
 
 ??? done "Answer"
@@ -224,7 +224,7 @@ done < sample_rg_fields.txt
         --OUTPUT alignment/$sample.rg.md.bam \
         --METRICS_FILE alignment/marked_dup_metrics_$sample.txt 
 
-        samtools index alignment/$sample.bam
+        samtools index alignment/$sample.rg.md.bam
 
         samtools flagstat alignment/$sample.rg.md.bam > $sample.rg.md.stats
     done 
