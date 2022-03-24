@@ -718,7 +718,9 @@
 <li>Docker</li>
 </ul>
 </div>
-<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Cloud notebook</label><div class="tabbed-content">
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cloud notebook</label><label for="__tabbed_1_2">Docker</label><label for="__tabbed_1_3">conda</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <p>If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: <code>http://12.345.678.91:10002</code>) in your browser. This should result in the following page:</p>
 <p><figure>
   <img src="../../assets/images/jupyter_login_page.png" width="300"/>
@@ -738,7 +740,7 @@
   <img src="../../assets/images/jupyter_change_highlighting.png" width="300"/>
 </figure></p>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Docker</label><div class="tabbed-content">
+<div class="tabbed-block">
 <h2 id="material">Material</h2>
 <ul>
 <li>Instructions to <a href="https://docs.docker.com/get-docker/">install docker</a></li>
@@ -773,7 +775,7 @@ start-notebook.sh
 </div>
 <p>The part <code>geertvangeest/ngs-variants-jupyter:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
 </div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">conda</label><div class="tabbed-content">
+<div class="tabbed-block">
 <p>If you have a conda installation on your local computer, you can install the required software using conda.</p>
 <p>You can build the environment from <a href="../../assets/yaml/ngs-variants.yml">ngs-variants.yml</a></p>
 <p>Generate the conda environment like this:</p>
@@ -798,6 +800,7 @@ gatk4
 <div class="highlight"><pre><span></span><code>conda activate ngs-variants
 </code></pre></div>
 <p>After successful installation and activating the environment all the software required to do the exercises should be available.</p>
+</div>
 </div>
 </div>
 <h3 id="a-unix-command-line-interface-cli-refresher">A UNIX command line interface (CLI) refresher</h3>
