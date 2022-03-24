@@ -770,8 +770,8 @@ son lib3    H0164.6.ALXX140820  H0164.6
     --OUTPUT alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
     --METRICS_FILE alignment/marked_dup_metrics_<span class="nv">$sample</span>.txt 
 
-    samtools index alignment/<span class="nv">$sample</span>.bam
-<span class="k">done</span> &lt; sample_rg_fields.txt
+    samtools index alignment/<span class="nv">$sample</span>.rg.md.bam
+<span class="k">done</span>
 </code></pre></div>
 <details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> sample lb pu id
 <span class="k">do</span>
@@ -795,7 +795,7 @@ son lib3    H0164.6.ALXX140820  H0164.6
     --OUTPUT alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
     --METRICS_FILE alignment/marked_dup_metrics_<span class="nv">$sample</span>.txt 
 
-    samtools index alignment/<span class="nv">$sample</span>.bam
+    samtools index alignment/<span class="nv">$sample</span>.rg.md.bam
 
     samtools flagstat alignment/<span class="nv">$sample</span>.rg.md.bam &gt; <span class="nv">$sample</span>.rg.md.stats
 <span class="k">done</span> 
