@@ -721,6 +721,14 @@ Which tells us that 17329 reads were marked as duplicate.</p>
 <div class="highlight"><pre><span></span><code>samtools index mother.rg.md.bam
 </code></pre></div>
 <h3 id="4-piping-and-looping">4. Piping and looping</h3>
+<p>Now we have performed now the following steps on one sample:</p>
+<ul>
+<li>Read alignment</li>
+<li>Adding readgroups</li>
+<li>Marking of duplicates</li>
+<li>Indexing</li>
+</ul>
+<p>We now apply these steps to all three samples.</p>
 <p><strong>Exercise</strong> Generate a tab-delimited file in which each line represents a sample (mother, father and son), and where you specify the <code>SM</code>, <code>LB</code>, <code>PU</code> and <code>ID</code> fields. E.g., the first line (for &lsquo;mother&rsquo;) would look like:</p>
 <div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2
 </code></pre></div>
