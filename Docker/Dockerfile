@@ -20,4 +20,4 @@ gatk4=4.2.0.0
 
 # copy a different snpeff config file in order to download to /data (in stead of conda directory)
 # comment the line below if running this container locally.
-COPY snpEff.config /opt/conda/share/snpeff-5.0-0
+COPY snpEff.config /opt/conda/share/snpeff-5.0-1
