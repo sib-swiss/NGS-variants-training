@@ -28,24 +28,24 @@ cd ~/workdir
 
 gatk SelectVariants \
 --variant variants/trio.vcf \
---select-type SNP \
+--select-type-to-include SNP \
 --output variants/trio.SNP.vcf
 ```
 
 **Exercise:** Check out the [documentation of `gatk SelectVariants`](https://gatk.broadinstitute.org/hc/en-us/articles/360037055952-SelectVariants), and:
 
-* Figure out what you'll need to fill in at `--select-type` if you want to select only INDELS.
+* Figure out what you'll need to fill in at `--select-type-to-include` if you want to select only INDELS.
 * Generate a vcf with only the SNPs and a second vcf with only the INDELs from `trio.vcf`.
 
 ??? done "Answer"
-    You will need to fill in `INDEL` at `--select-type` to filter for INDELs.
+    You will need to fill in `INDEL` at `--select-type-to-include` to filter for INDELs.
 
-    To get the SNPs you can run the command above. To get the INDELs you'll need to change `--select-type` to `INDEL`:
+    To get the SNPs you can run the command above. To get the INDELs you'll need to change `--select-type-to-include` to `INDEL`:
 
     ```sh
     gatk SelectVariants \
     --variant variants/trio.vcf \
-    --select-type INDEL \
+    --select-type-to-include INDEL \
     --output variants/trio.INDEL.vcf
     ```
 
@@ -234,7 +234,7 @@ gatk Concordance \
 !!! note
     We did the filtering on `trio.vcf`, therefore, you first have to extract the records that only apply to the mother by using `gatk SelectVariants`.
 
-    Also note that `trio.vcf` contains records other than SNPs and INDELs. Use `--select-type` to select only SNPs and INDELs.
+    Also note that `trio.vcf` contains records other than SNPs and INDELs. Use `--select-type-to-include` to select only SNPs and INDELs.
 
 ??? done "Answer"
 
@@ -246,8 +246,8 @@ gatk Concordance \
     --sample-name mother \
     --exclude-non-variants \
     --remove-unused-alternates \
-    --select-type INDEL \
-    --select-type SNP \
+    --select-type-to-include INDEL \
+    --select-type-to-include SNP \
     --output variants/mother.trio.vcf
     ```
 
