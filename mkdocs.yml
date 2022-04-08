@@ -28,6 +28,7 @@ edit_uri: edit/main/docs/
 site_url: https://sib-swiss.github.io/NGS-variants-training/
 
 markdown_extensions:
+  - meta
   - abbr
   - def_list
   - footnotes

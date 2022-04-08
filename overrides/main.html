@@ -12,3 +12,13 @@
   gtag('config', 'G-SK9D4D2P4M');
 </script>
 {% endblock %}
+
+{% block extrahead %}
+  {% if page and page.meta and page.meta.bioschemas %}
+    <script type="application/ld+json">
+      {{ page.meta.bioschemas }})
+    </script>
+  {% else %}
+    <meta property="robots" content="index, follow" />
+  {% endif %}
+{% endblock %}
