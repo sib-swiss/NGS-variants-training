@@ -5,7 +5,7 @@ nav:
     - Course schedule: course_schedule.md
     - Day 1:
         - Introduction: day1/introduction.md
-        - Server login: day1/server_login.md
+        - Setup: day1/server_login.md
         - Read alignment - basics: day1/alignment.md
         - Read alignment - advanced: day1/alignment_advanced.md
     - Day 2:
