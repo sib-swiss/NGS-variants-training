@@ -1,0 +1,13 @@
+name: variants
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - bwa=0.7.17
+  - bzip2=1.0.8
+  - gatk4=4.1.9.0
+  - htslib=1.9
+  - pip=20.3
+  - python=3.8.1
+  - samtools=1.9
+  - snpeff=5.0
