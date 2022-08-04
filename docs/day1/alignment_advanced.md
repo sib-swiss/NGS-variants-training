@@ -47,15 +47,19 @@ During several steps of variant calling `gatk` uses read group information. For 
     Here, e.g. the `PU` field would be `FC706VJ.2.ATCACG`
 
 
-**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. 
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. Do this from a script called `07_add_readgroups.sh` (in `~/workdir/scripts/mother_only`).
 
 ??? done "Answer"
     We can use the answers of the previous exercise, and use them in the command:
 
-    ```sh 
+    ```sh title="07_add_readgroups.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+
     gatk AddOrReplaceReadGroups \
-    --INPUT alignment/mother.bam \
-    --OUTPUT alignment/mother.rg.bam \
+    --INPUT alignments/mother.bam \
+    --OUTPUT alignments/mother.rg.bam \
     --RGLB lib1 \
     --RGPU H0164.2.ALXX140820 \
     --RGPL ILLUMINA \
@@ -91,21 +95,29 @@ During several steps of variant calling `gatk` uses read group information. For 
 
 Now that we have specified read groups, we can mark the duplicates with `gatk MarkDuplicates`. 
 
-**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. 
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. Do this from a script called `08_mark_duplicates.sh` (in `~/workdir/scripts/mother_only`). 
 
 ??? done "Answer"
-    ```sh
+    ```sh title="08_mark_duplicates.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+
     gatk MarkDuplicates \
-    --INPUT alignment/mother.rg.bam \
-    --OUTPUT alignment/mother.rg.md.bam \
-    --METRICS_FILE alignment/marked_dup_metrics_mother.txt 
+    --INPUT alignments/mother.rg.bam \
+    --OUTPUT alignments/mother.rg.md.bam \
+    --METRICS_FILE alignments/marked_dup_metrics_mother.txt 
     ```
 
-**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates. How many reads were marked as duplicate?
+**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates, and write the output to a file called `mother.rg.md.bam.flagstat`. Create a script called `09_get_alignment_stats_after_md.sh` (in `~/workdir/scripts/mother_only`). How many reads were marked as duplicate?
 
 ??? done "Answer"
-    ```sh
-    samtools flagstat mother.rg.md.bam
+    ```sh title="09_get_alignment_stats_after_md.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/alignments
+
+    samtools flagstat mother.rg.md.bam > mother.rg.md.bam.flagstat
     ```
 
     Gives:
@@ -133,25 +145,108 @@ Now that we have specified read groups, we can mark the duplicates with `gatk Ma
 To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of 'phonebook' of your sequence alignment file. Indexing can be done with `samtools` as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:
 
 ```sh
-samtools index mother.rg.md.bam
+samtools index <bam file>
 ```
 
-### 4. Piping and looping
+**Exercise**: Create a script called `10_index_alignment.sh` (in `~/workdir/scripts/mother_only`) to perform the alignment.
 
-Now we have performed now the following steps on one sample:
+??? done "Answer"
+    ```sh title="10_index_alignment.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/alignments/
+
+    samtools index mother.rg.md.bam
+    ```
+
+
+### 4. Recap - mother only
+
+Now we have performed now the following steps on the sample `mother`:
 
 - Read alignment
 - Adding readgroups
 - Marking of duplicates
 - Indexing
 
-We now apply these steps to all three samples.
+Your `scripts` directory should look like this:
 
-**Exercise** Generate a tab-delimited file in which each line represents a sample (mother, father and son), and where you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
+```
+scripts
+├── 01_download_course_data.sh
+├── 02_create_bwa_index.sh
+└── mother_only
+    ├── 03_alignment.sh
+    ├── 04_get_alignment_statistics.sh
+    ├── 05_sort_alignment.sh
+    ├── 06_compress_alignment.sh
+    ├── 07_add_readgroups.sh
+    ├── 08_mark_duplicates.sh
+    ├── 09_get_alignment_stats_after_md.sh
+    └── 10_index_alignment.sh
+
+1 directory, 10 files
+```
+
+### 5. Apply it on all three samples with pipes and loops
+
+We now apply these steps to all three samples. In order to do that, we combine the alignment with the sorting and compression in one command. We can do that with piping the output of `bwa` to `samtools sort` and `samtools view`, like this:
+
+```sh
+SAMPLE="mother"
+
+bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+data/fastq/"$SAMPLE"_R1.fastq.gz \
+data/fastq/"$SAMPLE"_R2.fastq.gz \
+| samtools sort \
+| samtools view -bh > results/alignments/"$SAMPLE".bam
+```
+
+**Exercise**: Make a directory in the scripts directory called `all_samples` (so `~/workdir/scripts/all_samples`). In here, create a script called `03_alignment_sorting_compression.sh`. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. `mother`, `father` and `son`).
+
+??? done "Answer"
+
+    Your `scripts` folder should look like:
+
+    ```
+    scripts
+    ├── 01_download_course_data.sh
+    ├── 02_create_bwa_index.sh
+    ├── all_samples
+    │   └── 03_alignment_sorting_compression.sh
+    └── mother_only
+        ├── 03_alignment.sh
+        ├── 04_get_alignment_statistics.sh
+        └── ...
+    ```
+
+    And the script: 
+
+    ```sh title="03_alignment_sorting_compression.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir
+
+    for SAMPLE in mother father son
+    do
+        bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+        data/fastq/"$SAMPLE"_R1.fastq.gz \
+        data/fastq/"$SAMPLE"_R2.fastq.gz \
+        | samtools sort \
+        | samtools view -bh > results/alignments/"$SAMPLE".bam
+    done
+    ```
+
+Now we continue with adding the readgroups. For each sample, we have to add specific information to the different readgroup fields. We can do that by looping over a tab delimited file with sample-specific information in each row. Let's create that tab-delimited file. 
+
+**Exercise** Generate a tab-delimited file called `sample_rg_fields.txt` and store it in `~/workdir/results/`. In this file, each line should represent a sample (mother, father and son), and you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
 
 ```
 mother	lib1	H0164.2.ALXX140820	H0164.2
 ```
+
+!!! warning
+    Make sure to add a newline (++enter++) at the end of the file. Otherwise a loop will stop at the second-last line.
 
 ??? done "Answer"
     Your file should look like this:
@@ -162,70 +257,103 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     son	lib3	H0164.6.ALXX140820	H0164.6
     ```
 
-**Exercise:** Below you can find a script that loops over each line in a file and creates a shell variable for each column in that line. Figure out where in the script each of the following tasks is performed:
+**Exercise** Generate a script called `04_add_readgroups.sh` (in `~/workdir/scripts/all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](../server_login#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
 
-- adding read groups
-- alignment
-- indexing
-- compression
-- marking duplicates
-- sorting by coordinate
-
-**Exercise:** Use the tab-delimited file you created as input for the 'while loop' to generate bam files for each sample that are sorted, compressed, have read groups added, duplicates marked and indexed. In the example the tab-delimited file is called `sample_rg_fields.txt`. In addition, add a command in which you generate the alignments statistics with `samtools flagstat` of the bam file with marked duplicates. 
-
-```sh
-cat sample_rg_fields.txt | while read sample lb pu id
-do
-    bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-    data/fastq/"$sample"_R1.fastq.gz \
-    data/fastq/"$sample"_R2.fastq.gz \
-    | samtools sort \
-    | samtools view -bh > alignment/$sample.bam
+??? hint
     
-    gatk AddOrReplaceReadGroups \
-    --INPUT alignment/$sample.bam \
-    --OUTPUT alignment/$sample.rg.bam \
-    --RGLB $lb \
-    --RGPU $pu \
-    --RGPL ILLUMINA \
-    --RGSM $sample \
-    --RGID $id
+    Try to just print the variables from a loop in order to check to see whether the loop performs according to your expectation. E.g.:
 
-    gatk MarkDuplicates \
-    --INPUT alignment/$sample.rg.bam \
-    --OUTPUT alignment/$sample.rg.md.bam \
-    --METRICS_FILE alignment/marked_dup_metrics_$sample.txt 
+    ```sh
+    cd ~/workdir/results
 
-    samtools index alignment/$sample.rg.md.bam
-done
-```
+    cat sample_rg_fields.txt | while read SAMPLE LB PU ID
+    do
+        echo $SAMPLE $LB $PU $ID
+    done
+    ```
 
 ??? done "Answer"
-    ```sh
-    cat sample_rg_fields.txt | while read sample lb pu id
+    
+    ```sh title="04_add_readgroups.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+
+    cat sample_rg_fields.txt | while read SAMPLE LB PU ID
     do
-        bwa mem data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-        data/fastq/"$sample"_R1.fastq.gz \
-        data/fastq/"$sample"_R2.fastq.gz \
-        | samtools sort \
-        | samtools view -bh > alignment/$sample.bam
-        
         gatk AddOrReplaceReadGroups \
-        --INPUT alignment/$sample.bam \
-        --OUTPUT alignment/$sample.rg.bam \
-        --RGLB $lb \
-        --RGPU $pu \
+        --INPUT alignments/"$SAMPLE".bam \
+        --OUTPUT alignments/"$SAMPLE".rg.bam \
+        --RGLB "$LB" \
+        --RGPU "$PU" \
         --RGPL ILLUMINA \
-        --RGSM $sample \
-        --RGID $id
-
-        gatk MarkDuplicates \
-        --INPUT alignment/$sample.rg.bam \
-        --OUTPUT alignment/$sample.rg.md.bam \
-        --METRICS_FILE alignment/marked_dup_metrics_$sample.txt 
-
-        samtools index alignment/$sample.rg.md.bam
-
-        samtools flagstat alignment/$sample.rg.md.bam > $sample.rg.md.stats
+        --RGSM "$SAMPLE" \
+        --RGID "$ID"
     done 
     ```
+
+As the final steps, we will mark the duplicates and perform the indexing for the three samples. 
+
+**Exercise:** Generate two scripts called `05_mark_duplicates.sh` and `06_index_alignments.sh`, in which you loop over the sample names and  perform the respective calculations. You can use `08_mark_duplicates.sh` and `10_index_alignment.sh` in `~/workdir/scripts/mother_only` as a template. 
+
+??? done "Answer"
+    ```sh title="05_mark_duplicates.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+    
+    for SAMPLE in mother father son
+    do
+        gatk MarkDuplicates \
+        --INPUT alignments/"$SAMPLE".rg.bam \
+        --OUTPUT alignments/"$SAMPLE".rg.md.bam \
+        --METRICS_FILE alignments/marked_dup_metrics_"$SAMPLE".txt 
+    done
+
+    ```
+
+    ```sh title="06_index_alignment.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+
+    for SAMPLE in mother father son
+    do
+        samtools index alignments/"$SAMPLE".rg.md.bam
+    done  
+    ```
+
+### 6. Recap - all samples
+
+Now, we have performed on all three samples:
+
+- Alignment
+- Sorting
+- Compression
+- Adding readgroups
+- Marking of duplicates
+- Indexing
+
+Your scripts directory should look like this:
+
+```
+scripts
+├── 01_download_course_data.sh
+├── 02_create_bwa_index.sh
+├── all_samples
+│   ├── 03_alignment_sorting_compression.sh
+│   ├── 04_add_readgroups.sh
+│   ├── 05_mark_duplicates.sh
+│   └── 06_index_alignment.sh
+└── mother_only
+    ├── 03_alignment.sh
+    ├── 04_get_alignment_statistics.sh
+    ├── 05_sort_alignment.sh
+    ├── 06_compress_alignment.sh
+    ├── 07_add_readgroups.sh
+    ├── 08_mark_duplicates.sh
+    ├── 09_get_alignment_stats_after_md.sh
+    └── 10_index_alignment.sh
+
+2 directories, 14 files
+```
