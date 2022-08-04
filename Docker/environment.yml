@@ -6,4 +6,4 @@ dependencies:
   - samtools=1.12
   - bwa=0.7.17
   - snpeff=5.0
-  - gatk4=4.2.0.0
+  - gatk4=4.2.6
