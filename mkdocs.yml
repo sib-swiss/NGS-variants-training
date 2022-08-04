@@ -6,6 +6,7 @@ nav:
     - Day 1:
         - Introduction: day1/introduction.md
         - Setup: day1/server_login.md
+        - Reproducibility: day1/reproducibility.md
         - Read alignment - basics: day1/alignment.md
         - Read alignment - advanced: day1/alignment_advanced.md
     - Day 2:
@@ -42,8 +43,8 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true 
   - attr_list
-  - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.keys
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg

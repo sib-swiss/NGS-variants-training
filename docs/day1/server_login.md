@@ -26,34 +26,30 @@
 
 === "Cloud notebook"
 
+    ## Exercises 
+
+    ### First login
+
     If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: `http://12.345.678.91:10002`) in your browser. This should result in the following page:
 
     <figure>
-      <img src="../../assets/images/jupyter_login_page.png" width="300"/>
+      <img src="../../assets/images/vscode_login_page.png" width="300"/>
     </figure>
 
-    Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. Here's a video that explains how to use JupyterLab to use a terminal and work with scripts:
+    !!! info
+        The link gives you access to a web version of [Visual Studio Code](https://code.visualstudio.com). This is a powerful code editor that you can also use a local application on your computer. 
 
-    <iframe src="https://player.vimeo.com/video/524970007" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-
-    If you rather read, here's written explanation how to work with JupyterLab. First, let's open the terminal. Find it at **New > Terminal**:
+    Type in the password that was provided to you by the teacher. Now let's open the terminal. You can do that with ++ctrl+grave++. Or by clicking **Application menu** > **Terminal** > **New Terminal**:
 
     <figure>
-      <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
+      <img src="../../assets/images/open_terminal.gif" width="500"/>
     </figure>
 
-    For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. You can generate and edit scripts with **New > Text File**:
+    For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. With use of the 'new file' button:
 
     <figure>
-      <img src="../../assets/images/jupyter_choose_text.png" width="500"/>
+      <img src="../../assets/images/new_file.gif" width="500"/>
     </figure>
-
-    Once you have opened a script you can change the code highlighting. This is convenient for writing the code. The text editor will automatically change the highlighting based on the file extension (e.g. `.py` extension will result in python syntax highlighting). You can change or set the syntax highlighting by clicking the button on the bottom of the page. We will be using mainly shell scripting in this course, so here's an example for adjusting it to shell syntax highlighting:
-
-    <figure>
-      <img src="../../assets/images/jupyter_change_highlighting.png" width="300"/>
-    </figure>
-
 
 === "Docker"
 
@@ -144,26 +140,20 @@
 
 ### A UNIX command line interface (CLI) refresher
 
-Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory.
+Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory. 
+
+If you need some reminders of the commands, here's a link to a UNIX command line cheat sheet:
+
+[:fontawesome-solid-file-pdf: UNIX cheat sheet](https://www.alexji.com/UNIXCheatSheet.pdf){: .md-button }
+
 
 #### Make a new directory
-
-Login to the server and use the command line to make a directory called `workdir`.
-
-!!! note "If working with Docker"
-    If your are working with docker you are a root user. This means that your "home" directory is the root directory, i.e. `/root`, and not `/home/username`. If you have mounted your local directory to `/root/workdir`, this directory should already exist.
-
-??? done "Answer"
-    ```sh
-    cd
-    mkdir workdir
-    ```
 
 Make a directory `scripts` within `~/workdir` and make it your current directory.
 
 ??? done "Answer"
     ```sh
-    cd workdir
+    cd ~/workdir
     mkdir scripts
     cd scripts
     ```
@@ -179,7 +169,7 @@ touch new_script.sh
 Add a command to this script that writes "SIB courses are great!" (or something you can better relate to.. :wink:) to stdout, and try to run it.
 
 ??? done "Answer"
-    The script should look like this:
+    Generate a script as described above. The script should look like this:
 
     ```sh
     #!/usr/bin/env bash
@@ -244,11 +234,11 @@ More on `chmod` and file permissions [here](https://www.howtogeek.com/437958/how
 
 #### Redirection: `>` and `|`
 
-In the root directory (go there like this: `cd /`) there are a range of system directories and files. Write the names of all directories and files to a file called `system_dirs.txt` in your home directory (use `ls` and `>`).
+In the root directory (go there like this: `cd /`) there are a range of system directories and files. Write the names of all directories and files to a file called `system_dirs.txt` in your working directory.
 
 ??? done "Answer"
     ```sh
-    ls / > ~/system_dirs.txt
+    ls / > ~/workdir/system_dirs.txt
     ```
 
 The command `wc -l` counts the number of lines, and can read from stdin. Make a one-liner with a pipe `|` symbol to find out how many system directories and files there are.
@@ -264,7 +254,7 @@ Store `system_dirs.txt` as variable (like this: `VAR=variable`), and use `wc -l`
 
 ??? done "Answer"
     ```sh
-    FILE=system_dirs.txt
+    FILE=~/workdir/system_dirs.txt
     wc -l $FILE
     ```
 
@@ -279,6 +269,7 @@ Make a shell script that automatically counts the number of system directories a
     cd /
     ls | wc -l
     ```
+
 
 ### Loops
 
