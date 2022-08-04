@@ -1,0 +1,7 @@
+{
+    "workbench.startupEditor": "none",
+    "extensions.ignoreRecommendations": true,
+    "extensions.showRecommendationsOnlyOnDemand": true,
+    "terminal.integrated.fontSize": 14,
+    "editor.fontSize": 13
+}

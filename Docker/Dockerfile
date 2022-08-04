@@ -1,22 +1,35 @@
-FROM jupyter/minimal-notebook:latest
+FROM linuxserver/code-server:4.5.1
 
-# change user to root to modify .bashrc for e.g. highlighting in the console
-USER root
-RUN cat /etc/skel/.bashrc >> /etc/bash.bashrc
+# Install base utilities
+RUN apt-get update && \
+    apt-get install -y wget bc tree && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# change back to notebook user
-USER $NB_UID
+# Install miniconda
+ENV CONDA_DIR /opt/conda
+RUN wget -O ~/miniconda.sh --quiet \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    /bin/bash ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh
 
-# remove auto-generated work directory
-RUN rm -r /home/jovyan/work
+# Put conda in path so we can use conda activate
+ENV PATH=$CONDA_DIR/bin:$PATH
+
+# RUN cat /etc/skel/.bashrc >> /etc/bash.bashrc
 
 # intall required software with conda
-RUN /opt/conda/bin/conda install -y --quiet -c bioconda \
-python=3.8 \
-samtools=1.12 \
-bwa=0.7.17 \
-snpeff=5.0 \
-gatk4=4.2.0.0
+COPY environment.yml ./
+
+RUN conda env create \
+    -n ngs-tools \
+    -f environment.yml
+
+RUN conda init 
+
+COPY settings.json /config/data/User/
+COPY keybindings.json /config/data/User/
+RUN mkdir -p /config/workdir
 
 # copy a different snpeff config file in order to download to /data (in stead of conda directory)
 # comment the line below if running this container locally.
