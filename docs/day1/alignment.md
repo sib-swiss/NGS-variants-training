@@ -21,11 +21,34 @@
 
 ## Exercises
 
+Throughout the exercises today and tomorrow we will work on three different 'subprojects':
+
+- Preparing references by indexing
+- Alignment and variant calling on one sample ('mother')
+- Alignment, variant calling and filtering on all samples
+
+We store the scripts required for these subprojects in different subdirectories of `~/workdir/scripts` named:
+
+- `A-prepare_references`
+- `B-mother_only`
+- `C-all_samples`
+
+You can already create these directories now with:
+
+```sh
+cd ~/workdir/scripts/
+
+mkdir -p \
+A-prepare_references \
+B-mother_only \
+C-all_samples
+```
+
 ### 1. Download data and prepare the reference genome
 
-Let's start with the first script of our 'pipeline'. We will use it to download and unpack the course data. Use the code snippet below to create a script called `01_download_course_data.sh`. Store it in `~/workdir/scripts/`, and run it.
+Let's start with the first script of our 'pipeline'. We will use it to download and unpack the course data. Use the code snippet below to create a script called `A01_download_course_data.sh`. Store it in `~/workdir/scripts/A-prepare_references/`, and run it.
 
-```sh title="01_download_course_data.sh"
+```sh title="A01_download_course_data.sh"
 #!/usr/bin/env bash
 cd ~/workdir
 
@@ -82,10 +105,10 @@ The software `bwa` is in this environment. We will use it for the alignment. Lik
 bwa index <reference.fa>
 ```
 
-Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in `~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`. Do it with a script called `02_create_bwa_index.sh`. 
+Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in `~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`. Do it with a script called `A02_create_bwa_index.sh`. Also store this in the directory `A-prepare_references`.
 
 ??? done "Answer"
-    ```sh title="02_create_bwa_index.sh"
+    ```sh title="A02_create_bwa_index.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/data/reference/
@@ -119,29 +142,28 @@ Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/
     > <alignment.sam>
     ```
 
-We will now go through all the steps concerning alignment for the sample `mother`. To store the results of these steps, we will create a directory within `~/workdir` called `results`. For the alignment, make a script called `03_alignment.sh`. Since we will perform a similar analysis later on for all samples, we store this script in a subdirectory of `~/workdir/scripts` called `mother_only`. 
+We will now go through all the steps concerning alignment for the sample `mother`. To store the results of these steps, we will create a directory within `~/workdir` called `results`. For the alignment, make a script called `B01_alignment.sh`. Since we will perform a similar analysis later on for all samples, we store this script in`~/workdir/scripts/B-mother_only`. 
 
-Long story short, organize your directory `~/workdir/scripts` like this:
+Your directory `~/workdir/scripts` should now like this:
 
 ```
 scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-└── mother_only
-    └── 03_alignment.sh
-
-1 directory, 3 files
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   ├── A02_create_bwa_index.sh
+├── B-mother_only
+│   └── B01_alignment.sh
+└── C-all_samples
 ```
 
-In `03_alignment.sh` write the commands to perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the resulting `.sam` file to a directory in `~/workdir/results` called `alignments`.
+In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the resulting `.sam` file to a directory in `~/workdir/results` called `alignments`.
 
 !!! note "Index prefix is the same a reference filename"
     With default values, the name of the index of a reference for `bwa mem` is the same as the name of the reference itself. In this case, this would be `Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
 
 ??? done "Answer"
-    Put the script in `~/workdir/scripts/mother_only/`. 
 
-    ```sh title="03_read_alignment.sh"
+    ```sh title="B01_read_alignment.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/
@@ -156,11 +178,11 @@ In `03_alignment.sh` write the commands to perform an alignment with `bwa mem` o
 
 ### 3. Alignment statistics
 
-**Exercise:** Check out the statistics of the alignment by using `samtools flagstat`. Write the output of samtools flagstat to a file called `mother.sam.flagstat`. Do this by creating a script called `04_get_alignment_statistics.sh`, and add this script to `~/workdir/scripts/mother_only`. Find the documentation of `samtools flagstat` [here](http://www.htslib.org/doc/samtools-flagstat.html). Any duplicates in there?
+**Exercise:** Check out the statistics of the alignment by using `samtools flagstat`. Write the output of samtools flagstat to a file called `mother.sam.flagstat`. Do this by creating a script called `B02_get_alignment_statistics.sh`, and add this script to `~/workdir/scripts/B-mother_only`. Find the documentation of `samtools flagstat` [here](http://www.htslib.org/doc/samtools-flagstat.html). Any duplicates in there?
 
 ??? done "Answer"
 
-    ```sh title="04_get_alignment_statistics.sh"
+    ```sh title="B02_get_alignment_statistics.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results/alignments
@@ -192,10 +214,10 @@ In `03_alignment.sh` write the commands to perform an alignment with `bwa mem` o
 
 Many downstream analyses require a coordinate sorted alignment file. Now, your alignment file is in the same order as the fastq file. You can coordinate sort an alignment file with `samtools sort`. You can find the documentation [here](http://www.htslib.org/doc/samtools-sort.html). 
 
-**Exercise**: Sort the alignment file according to coordinate. In order to do this, create a script called `05_sort_alignment.sh` (in `~/workdir/scripts/mother_only`). 
+**Exercise**: Sort the alignment file according to coordinate. In order to do this, create a script called `B03_sort_alignment.sh` (in `~/workdir/scripts/B-mother_only`). 
 
 ??? done "Answer"
-    ```sh title="05_sort_alignment.sh"
+    ```sh title="B03_sort_alignment.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results
@@ -208,10 +230,10 @@ Many downstream analyses require a coordinate sorted alignment file. Now, your a
 
 The command `samtools view` is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let's start with that.
 
-**Exercise**: compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Perform the calculation from a script called `06_compress_alignment.sh` (in `~/workdir/scripts/mother_only`).  Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
+**Exercise**: compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Perform the calculation from a script called `B04_compress_alignment.sh` (in `~/workdir/scripts/B-mother_only`).  Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
 
 ??? done "Answer"
-    ```sh title="06_compress_alignment.sh"
+    ```sh title="B04_compress_alignment.sh"
     #!/usr/bin/env bash
     
     cd ~/workdir/results
@@ -233,13 +255,13 @@ On the sample `mother`. Your scripts directory should look like this:
 
 ```
 scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-└── mother_only
-    ├── 03_alignment.sh
-    ├── 04_get_alignment_statistics.sh
-    ├── 05_sort_alignment.sh
-    └── 06_compress_alignment.sh
-
-1 directory, 6 files
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   └── B04_compress_alignment.sh
+└── C-all_samples
 ```
