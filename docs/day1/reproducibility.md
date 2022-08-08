@@ -19,26 +19,48 @@ During today and tomorrow we will work with a small *E. coli* dataset to practic
 4. Make your scripts **specific**, i.e. do not combine many different commands in the same script
 5. Refer to **directories and variables** at the beginning of the script
 
+!!! tip "Keep re-evaluating your code structure"
+    If you start a project it can be difficult to know what kind of analyses you are going to run, and how they interrelate. While working on a project, therefore re-evaluate readability of your project structure, and do not hesitate to change script numbering, names or contents. 
+
 By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285). 
 
-By the end of day 2 `~/workdir` should look (something) like this:
+By the end of day 2 `~/workdir/scripts` should look (something) like this:
 
 ```
-.
-├── alignment_output
-├── reads
-├── ref_genome
-├── scripts
-│   ├── 01_download_reads.sh
-│   ├── 02_run_fastqc.sh
-│   ├── 03_trim_reads.sh
-│   ├── 04_run_fastqc_trimmed.sh
-│   ├── 05_download_ecoli_reference.sh
-│   ├── 06_build_bowtie_index.sh
-│   ├── 07_align_reads.sh
-│   ├── 08_compress_sort.sh
-│   ├── 09_extract_unmapped.sh
-│   ├── 10_extract_region.sh
-│   └── 11_align_sort_filter.sh
-└── trimmed_data
+scripts
+├── A_prepare_references
+│   ├── A01_download_course_data.sh
+│   ├── A02_create_bwa_index.sh
+│   ├── A03_create_vcf_indices.sh
+│   └── A04_create_fasta_index.sh
+├── B_mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   ├── B08_index_alignment.sh
+│   ├── B09_perform_bqsr.sh
+│   ├── B10_run_haplotypecaller.sh
+│   └── B11_variants_to_table.sh
+└── C_all_samples
+    ├── C01_alignment_sorting_compression.sh
+    ├── C02_add_readgroups.sh
+    ├── C03_mark_duplicates.sh
+    ├── C04_index_alignment.sh
+    ├── C05_perform_bqsr.sh
+    ├── C06_run_haplotypecaller.sh
+    ├── C07_create_genomicsdb.sh
+    ├── C08_genotype_gvcfs.sh
+    ├── C09_select_SNPs.sh
+    ├── C10_select_INDELs.sh
+    ├── C11_filter_SNPs.sh
+    ├── C12_filter_INDELs.sh
+    ├── C13_merge_filtered.sh
+    ├── C14_extract_mother_only.sh
+    ├── C15_evaluate_concordance.sh
+    ├── C16_extract_mother_before_filtering.sh
+    └── C17_evaluate_concordance_before_filtering.sh
 ```
