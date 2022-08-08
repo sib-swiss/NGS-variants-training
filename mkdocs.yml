@@ -10,6 +10,7 @@ nav:
         - Read alignment - basics: day1/alignment.md
         - Read alignment - advanced: day1/alignment_advanced.md
     - Day 2:
+        - Variant calling - preparation: day2/variant_calling_preparation.md
         - Variant calling: day2/variant_calling.md
         - Visualisation: day2/visualisation.md
         - Filtering & evaluation: day2/filtering_evaluation.md
