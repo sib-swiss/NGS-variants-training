@@ -105,12 +105,12 @@
 
     If you have a conda installation on your local computer, you can install the required software using conda.
 
-    You can build the environment from [ngs-variants.yml](../assets/yaml/ngs-variants.yml)
+    You can build the environment from [environment.yml](../assets/yaml/environment.yml)
 
     Generate the conda environment like this:
 
     ```sh
-    conda env create --name ngs-variants -f ngs-variants.yml
+    conda env create --name ngs-variants -f environment.yml
     ```
 
     !!! note "The `yaml` file probably only works for Linux systems"
@@ -125,7 +125,8 @@
         samtools \
         bwa \
         snpeff \
-        gatk4
+        gatk4 \
+        r-base
         ```
 
     This will create the conda environment `ngs-variants`
