@@ -751,6 +751,7 @@
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
+  
                 
   <a href="https://github.com/sib-swiss/NGS-variants-training/edit/main/docs/day1/server_login.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
@@ -829,46 +830,47 @@
 </div>
 <div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
 --rm <span class="se">\</span>
--e <span class="nv">JUPYTER_ENABLE_LAB</span><span class="o">=</span>yes <span class="se">\</span>
--v /path/to/workingdir/:/home/jovyan <span class="se">\</span>
--p <span class="m">8888</span>:8888 <span class="se">\</span>
-geertvangeest/ngs-variants-jupyter:latest <span class="se">\</span>
-start-notebook.sh
+-p <span class="m">8443</span>:8443 <span class="se">\</span>
+-e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\</span>
+-e <span class="nv">PGID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\</span>
+-e <span class="nv">DEFAULT_WORKSPACE</span><span class="o">=</span>/config/workdir <span class="se">\</span>
+-v <span class="nv">$PWD</span>:/config/workdir <span class="se">\</span>
+geertvangeest/ngs-variants-vscode
 </code></pre></div>
-<p>If this command has run successfully, you will find a link and token in the console, e.g.:</p>
-<div class="highlight"><pre><span></span><code>http://127.0.0.1:8888/?token<span class="o">=</span>4be8d916e89afad166923de5ce5th1s1san3xamp13
+<p>If this command has run successfully, use your browser to navigate to port 8443 on your local machine:</p>
+<div class="highlight"><pre><span></span><code>http://127.0.0.1:8443
 </code></pre></div>
-<p>Copy this URL into your browser, and you will be able to use the jupyter notebook.</p>
-<p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/home/jovyan</code> in the docker container (&lsquo;jovyan&rsquo; is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.</p>
+<p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/config/workdir</code> in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.</p>
 <div class="admonition note">
 <p class="admonition-title">Don&rsquo;t mount directly in the home dir</p>
 <p>Don&rsquo;t directly mount your local directory to the home directory (<code>/root</code>). This will lead to unexpected behaviour.</p>
 </div>
-<p>The part <code>geertvangeest/ngs-variants-jupyter:latest</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+<p>The part <code>geertvangeest/ngs-variants-vscode</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
 </div>
 <div class="tabbed-block">
 <p>If you have a conda installation on your local computer, you can install the required software using conda.</p>
-<p>You can build the environment from <a href="../../assets/yaml/ngs-variants.yml">ngs-variants.yml</a></p>
+<p>You can build the environment from <a href="../../assets/yaml/environment.yml">environment.yml</a></p>
 <p>Generate the conda environment like this:</p>
-<div class="highlight"><pre><span></span><code>conda env create --name ngs-variants -f ngs-variants.yml
+<div class="highlight"><pre><span></span><code>conda env create --name ngs-tools -f environment.yml
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">The <code>yaml</code> file probably only works for Linux systems</p>
 <p>If you want to use the conda environment on a different OS, use:</p>
-<div class="highlight"><pre><span></span><code>conda create -n ngs-variants <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+<div class="highlight"><pre><span></span><code>conda create -n ngs-tools <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
 
-conda activate ngs-variants
+conda activate ngs-tools
 
 conda install -y -c bioconda <span class="se">\</span>
 samtools <span class="se">\</span>
 bwa <span class="se">\</span>
 snpeff <span class="se">\</span>
-gatk4
+gatk4 <span class="se">\</span>
+r-base
 </code></pre></div>
 </div>
-<p>This will create the conda environment <code>ngs-variants</code></p>
+<p>This will create the conda environment <code>ngs-tools</code></p>
 <p>Activate it like so:</p>
-<div class="highlight"><pre><span></span><code>conda activate ngs-variants
+<div class="highlight"><pre><span></span><code>conda activate ngs-tools
 </code></pre></div>
 <p>After successful installation and activating the environment all the software required to do the exercises should be available.</p>
 </div>
@@ -1047,6 +1049,57 @@ bird    flies   2
 
 
               
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="sib-swiss/NGS-variants-training"
+            data-repo-id="MDEwOlJlcG9zaXRvcnkzMTEzMTc0MDI="
+            data-category="Q&A"
+            data-category-id="DIC_kwDOEo5Tms4CQ1hn"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+
+
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
             </article>
             
           </div>

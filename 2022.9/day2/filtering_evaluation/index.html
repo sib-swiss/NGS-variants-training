@@ -683,6 +683,7 @@
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
+  
                 
   <a href="https://github.com/sib-swiss/NGS-variants-training/edit/main/docs/day2/filtering_evaluation.md" title="Edit this page" class="md-content__button md-icon">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
@@ -891,15 +892,15 @@ gatk SelectVariants <span class="se">\</span>
 </code></pre></div>
 <p>So two records were filtered out, based on the Symmetric Odds Ratio (issues with strand bias).</p>
 <p>Your script to evaluate the concordance:</p>
-<div class="highlight"><span class="filename">evaluate_concordance.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">C15_evaluate_concordance.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span> ~/workdir/results
+<span class="nb">cd</span> ~/workdir
 
 gatk Concordance <span class="se">\</span>
---evaluation variants/mother.trio.filtered.vcf <span class="se">\</span>
+--evaluation results/variants/mother.trio.filtered.vcf <span class="se">\</span>
 --truth data/variants/NA12878.vcf.gz <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
---summary variants/concordance.mother.trio.filtered
+--summary results/variants/concordance.mother.trio.filtered
 </code></pre></div>
 <p>Check out the output with <code>cat</code>:</p>
 <div class="highlight"><pre><span></span><code>cat variants/concordance.mother.trio.filtered
@@ -943,13 +944,13 @@ gatk SelectVariants <span class="se">\</span>
 <p>Get the concordance with the truth set:</p>
 <div class="highlight"><span class="filename">C17_evaluate_concordance_before_filtering.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="nb">cd</span> ~/workdir/results
+<span class="nb">cd</span> ~/workdir
 
 gatk Concordance <span class="se">\</span>
---evaluation variants/mother.trio.vcf <span class="se">\</span>
+--evaluation results/variants/mother.trio.vcf <span class="se">\</span>
 --truth data/variants/NA12878.vcf.gz <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
---summary variants/concordance.mother.trio
+--summary results/variants/concordance.mother.trio
 </code></pre></div>
 <p>Which gives:</p>
 <div class="highlight"><pre><span></span><code>type    TP      FP      FN      RECALL  PRECISION
@@ -965,6 +966,57 @@ INDEL   63      20      6       0.913   0.759
 
 
               
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="sib-swiss/NGS-variants-training"
+            data-repo-id="MDEwOlJlcG9zaXRvcnkzMTEzMTc0MDI="
+            data-category="Q&A"
+            data-category-id="DIC_kwDOEo5Tms4CQ1hn"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+
+
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
             </article>
             
           </div>
