@@ -73,6 +73,6 @@ copyright: >
   Copyright &copy; 2021-2022 SIB Swiss institute of Bioinformatics –
   <a href="#__consent">Change cookie settings</a>
 
-# google_analytics:
-#   - G-SK9D4D2P4M
-#   - auto
+google_analytics:
+  - G-SK9D4D2P4M
+  - auto
