@@ -1,11 +1,11 @@
 ## Teachers
 
 - Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
-- Lea Pohlmeier [:custom-orcid:](https://orcid.org/0000-0001-5066-6941 )
 
 ## Authors
 
 - Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+- Patricia Palagi [:custom-orcid:](https://orcid.org/0000-0001-9062-6303)
 
 ## License & copyright
 
