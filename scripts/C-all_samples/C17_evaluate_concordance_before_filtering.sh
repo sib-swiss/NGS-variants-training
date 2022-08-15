@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/workdir
 
 gatk Concordance \
---evaluation variants/mother.trio.vcf \
+--evaluation results/variants/mother.trio.vcf \
 --truth data/variants/NA12878.vcf.gz \
 --intervals chr20:10018000-10220000 \
---summary variants/concordance.mother.trio
+--summary results/variants/concordance.mother.trio
