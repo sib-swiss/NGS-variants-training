@@ -1,0 +1,47 @@
+{
+    "@context": "https://schema.org/",
+    "@type": "LearningResource",
+    "@id" : "https://sib-swiss.github.io/NGS-variants-training",
+    "http://purl.org/dc/terms/conformsTo": {
+        "@type": "CreativeWork",
+        "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE"
+    },
+    "description": "Course on detecting variants from next generation sequencing data",
+    "keywords": "NGS, variant, SNP, INDEL, sequencing, SNV, gatk",
+    "name": "NGS - variant analysis",
+
+    "about": [
+      {
+        "@type": "DefinedTerm",
+        "@id": "http://edamontology.org/topic_3168",
+        "inDefinedTermSet": "http://edamontology.org",
+        "termCode": "topic_3168",
+        "name": "Sequencing"
+      },
+      {
+        "@type": "DefinedTerm",
+        "@id": "http://edamontology.org/topic_3227",
+        "inDefinedTermSet": "http://edamontology.org",
+        "termCode": "topic_3227",
+        "name": "Variant calling"
+      }
+    ],
+    "audience": "Biologists working with NGS data",
+    "author": [
+        { 
+          "@type": "Person",
+          "name":"Geert van Geest", 
+          "email": "geert.vangeest@sib.swiss"
+        },
+        {
+          "@type": "Person",
+          "name": "Patricia Palagi"
+        },
+        {
+          "@type": "Organization",
+          "name": "SIB Swiss Institute of Bioinformatics"
+        }
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.6457818",
+    "license": "CC-BY 4.0"
+  }
