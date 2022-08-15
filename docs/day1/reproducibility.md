@@ -24,6 +24,31 @@ During today and tomorrow we will work with a small *E. coli* dataset to practic
 
 By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285). 
 
+## Exercises
+
+Throughout the exercises today and tomorrow we will work on three different 'subprojects':
+
+- Preparing references by indexing
+- Alignment and variant calling on one sample ('mother')
+- Alignment, variant calling and filtering on all samples
+
+We store the scripts required for these subprojects in different subdirectories of `~/workdir/scripts` named:
+
+- `A-prepare_references`
+- `B-mother_only`
+- `C-all_samples`
+
+You can already create these directories now with:
+
+```sh
+cd ~/workdir/scripts/
+
+mkdir -p \
+A-prepare_references \
+B-mother_only \
+C-all_samples
+```
+
 By the end of day 2 `~/workdir/scripts` should look (something) like this:
 
 ```
