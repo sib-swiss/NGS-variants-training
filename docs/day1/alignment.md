@@ -150,7 +150,7 @@ In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` 
     data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
     data/fastq/mother_R1.fastq.gz \
     data/fastq/mother_R2.fastq.gz \
-    > alignments/mother.sam
+    > results/alignments/mother.sam
     ```
 
 ### 3. Alignment statistics
