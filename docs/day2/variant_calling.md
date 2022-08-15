@@ -41,16 +41,16 @@ Where:
 - `ref` : number of reference alleles counted
 - `alt` : number of alternative alleles counted
 
-**Exercise:** In a local R session, calculate the three genotype likelihoods (for g = 0, g = 1 and g = 2) for a case where we count 22 reference alleles and 4 alternative alleles (so a coverage of 26), and base error probability of 0.01. Calculate the PL values (`-10*log10(likelihood)`) for each genotype. 
+**Exercise:** In the `scripts` directory, create a script called `calculate_genotype_likelihoods.R`. Copy-paste the above function to the script, and use it to calculate the three genotype likelihoods (for g = 0, g = 1 and g = 2) for a case where we count 22 reference alleles and 4 alternative alleles (so a coverage of 26), and base error probability of 0.01. Calculate the PL values (`-10*log10(likelihood)`) for each genotype. 
 
-!!! note "No local R installation?"
-    If you don't have access to an R installation, you can also install it in the jupyter environment by running inside the terminal:
+!!! tip "Using VScode with R"
+    In order to easily interact with your R script, you can do the following:
 
-    ```sh
-    conda install r-base 
-    ```
-
-    After installation, start an interactive R session by typing `R`. 
+    - Open the R script in VS code
+    - In the terminal, type `R` to start the R console
+    - Select the code you'd like to run in the R script
+    - Type ++ctrl+enter++ to send it to the console
+    - After you have finished, type `quit()` in the R console. 
 
 ??? done "Answer"
     ```R
