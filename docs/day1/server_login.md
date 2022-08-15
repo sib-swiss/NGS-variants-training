@@ -73,32 +73,31 @@
     !!! warning "Modify the script"
         Modify the path after `-v` to the working directory on your computer before running it.
 
-      ```sh
-      docker run \
-      --rm \
-      -e JUPYTER_ENABLE_LAB=yes \
-      -v /path/to/workingdir/:/home/jovyan \
-      -p 8888:8888 \
-      geertvangeest/ngs-variants-jupyter:latest \
-      start-notebook.sh
-      ```
-
-
-    If this command has run successfully, you will find a link and token in the console, e.g.:
-
     ```sh
-    http://127.0.0.1:8888/?token=4be8d916e89afad166923de5ce5th1s1san3xamp13
+    docker run \
+    --rm \
+    -p 8443:8443 \
+    -e PUID=1000 \
+    -e PGID=1000 \
+    -e DEFAULT_WORKSPACE=/config/workdir \
+    -v $PWD:/config/workdir \
+    geertvangeest/ngs-variants-vscode
     ```
 
-    Copy this URL into your browser, and you will be able to use the jupyter notebook.
 
-    The option `-v` mounts a local directory in your computer to the directory `/home/jovyan` in the docker container ('jovyan' is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
+    If this command has run successfully, use your browser to navigate to port 8443 on your local machine:
+
+    ```sh
+    http://127.0.0.1:8443
+    ```
+
+    The option `-v` mounts a local directory in your computer to the directory `/config/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
 
-    The part `geertvangeest/ngs-variants-jupyter:latest` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-variants-vscode` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
 
 
 === "conda"
@@ -110,16 +109,16 @@
     Generate the conda environment like this:
 
     ```sh
-    conda env create --name ngs-variants -f environment.yml
+    conda env create --name ngs-tools -f environment.yml
     ```
 
     !!! note "The `yaml` file probably only works for Linux systems"
         If you want to use the conda environment on a different OS, use:
 
         ```sh
-        conda create -n ngs-variants python=3.8
+        conda create -n ngs-tools python=3.8
 
-        conda activate ngs-variants
+        conda activate ngs-tools
 
         conda install -y -c bioconda \
         samtools \
@@ -129,12 +128,12 @@
         r-base
         ```
 
-    This will create the conda environment `ngs-variants`
+    This will create the conda environment `ngs-tools`
 
     Activate it like so:
 
     ```sh
-    conda activate ngs-variants
+    conda activate ngs-tools
     ```
 
     After successful installation and activating the environment all the software required to do the exercises should be available.
