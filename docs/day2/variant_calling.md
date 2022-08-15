@@ -83,17 +83,19 @@ The command [`gatk HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/ar
     * `--ouput`
     * `--reference`
 
-**Exercise:** Make a directory `~/workdir/variants` to write the output vcf. After that, run `gatk HaplotypeCaller` with required options on the recalibrated alignment file of the mother (`bqsr/mother.recal.bam`). We'll focus on a small region, so add `--intervals chr20:10018000-10220000`.
+**Exercise:** Generate a script called `B10_run_haplotype_caller.sh` in `B-mother_only`. Use it to make a directory called `~/workdir/results/variants` to write the output vcf. In the same script, run `gatk HaplotypeCaller` with required options on the recalibrated alignment file of the mother (`results/bqsr/mother.recal.bam`). We'll focus on a small region, so add `--intervals chr20:10018000-10220000`.
 
 ??? done "Answer"
-    ```sh
+    ```sh title="B10_run_haplotype_caller.sh"
+    #!/usr/bin/env bash
+
     cd ~/workdir
-    mkdir variants
+    mkdir -p results/variants
 
     gatk HaplotypeCaller \
     --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-    --input bqsr/mother.recal.bam \
-    --output variants/mother.HC.vcf \
+    --input results/bqsr/mother.recal.bam \
+    --output results/variants/mother.HC.vcf \
     --intervals chr20:10018000-10220000
     ```
 
@@ -117,9 +119,21 @@ gatk VariantsToTable \
 --output variants/mother.HC.table
 ```
 
-**Exercise:** Run the command and have a look at the first few records (use e.g. `head` or `less`). After that, report the number of SNPs and INDELs.
+**Exercise:** Run the command from within a script called `B11_variants_to_table.sh`, and have a look at the first few records (use e.g. `head` or `less`). After that, report the number of SNPs and INDELs.
 
 ??? done "Answer"
+    Your script should look like:
+
+    ```sh title="B11_variants_to_table.sh"
+    cd ~/workdir
+
+    gatk VariantsToTable \
+    --variant results/variants/mother.HC.vcf \
+    --fields CHROM -F POS -F TYPE -GF GT \
+    --output results/variants/mother.HC.table
+
+    ```
+
     You can get the number of SNPs with:
 
     ```sh
@@ -150,24 +164,27 @@ gatk VariantsToTable \
     326 SNP
     ```
 
-We will do the variant calling on all three samples. Later we want to combine the variant calls. For efficient merging of vcfs, we will need to output the variants as a GVCF. To do that, we will use the option `--emit-ref-confidence GVCF`. Also, we'll visualise the haplotype phasing with IGV in the next section. For that we'll need a phased bam. You can get this output with the argument `--bam-output`.
+Now, we will perform the variant calling on all three samples. Later we want to combine the variant calls. For efficient merging of vcfs, we will need to output the variants as a GVCF. To do that, we will use the option `--emit-ref-confidence GVCF`. Also, we'll visualise the haplotype phasing with IGV in the next section. For that we'll need a phased bam. You can get this output with the argument `--bam-output`.
 
-**Exercise:** Run `gatk HaplotypeCaller` for mother, father and son by using a loop, and by using the arguments in the previous exercise. On top of that add the arguments `--emit-ref-confidence GVCF` and `--bamoutput <phased.bam>`.
+**Exercise:** Create a script in `C-all_samples` called `C06_run_haplotypecaller.sh`. Use it to run `gatk HaplotypeCaller` for mother, father and son in a loop. Use the same arguments as in the previous exercise. On top of that, add the arguments `--emit-ref-confidence GVCF` and `--bamoutput <phased.bam>`.
 
 ??? done "Answer"
-    ```sh
+    ```sh title="C06_run_haplotypecaller.sh"
+    #!/usr/bin/env bash
+
     cd ~/workdir
 
-    for sample in mother father son
+    for SAMPLE in mother father son
     do
-      gatk HaplotypeCaller \
-      --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-      --input bqsr/$sample.recal.bam \
-      --output variants/$sample.HC.g.vcf \
-      --bam-output variants/$sample.phased.bam \
-      --intervals chr20:10018000-10220000 \
-      --emit-ref-confidence GVCF
+        gatk HaplotypeCaller \
+        --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+        --input results/bqsr/"$SAMPLE".recal.bam \
+        --output results/variants/"$SAMPLE".HC.g.vcf \
+        --bam-output results/variants/"$SAMPLE".phased.bam \
+        --intervals chr20:10018000-10220000 \
+        --emit-ref-confidence GVCF
     done
+
 
     ```
 
@@ -177,23 +194,25 @@ Now that we have all three GVCFs of the mother, father and son, we can combine t
 
 You can generate a GenomicsDB on our three samples like this:
 
-```sh
+```sh title="C07_create_genomicsdb.sh"
+#!/usr/bin/env bash
+
 cd ~/workdir
 
 gatk GenomicsDBImport \
---variant variants/mother.HC.g.vcf \
---variant variants/father.HC.g.vcf \
---variant variants/son.HC.g.vcf \
+--variant results/variants/mother.HC.g.vcf \
+--variant results/variants/father.HC.g.vcf \
+--variant results/variants/son.HC.g.vcf \
 --intervals chr20:10018000-10220000 \
---genomicsdb-workspace-path genomicsdb
+--genomicsdb-workspace-path results/genomicsdb
 
 ```
 
-**Exercise:** Run this command to generate the database.
+**Exercise:** Create a script called `C07_create_genomicsdb.sh` to run this command to generate the database.
 
 You can retrieve the combined vcf from the database with `gatk GenotypeGVCFs`.
 
-```sh
+```sh title="C08_genotype_gvcfs.sh"
 gatk GenotypeGVCFs \
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
 --variant gendb://genomicsdb \
@@ -201,4 +220,4 @@ gatk GenotypeGVCFs \
 --output variants/trio.vcf
 ```
 
-**Exercise:** Run this command to generate the combined vcf.
+**Exercise:** Create a script called `C08_genotype_gvcfs.sh` to run this command to generate the combined vcf.

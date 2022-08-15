@@ -37,26 +37,39 @@ Also input vcf files need to be indexed. This will create a `.idx` file associat
 gatk IndexFeatureFile --input <variants.vcf>
 ```
 
-**Exercise:** Create the required `gatk` indexes for:
+**Exercise:** Create two scripts in `A-prepare_references` to generate the required indexes:
 
-* The reference genome `reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`
-* A part of the dbsnp database: `variants/GCF.38.filtered.renamed.vcf`
-* A part of the 1000 genomes indel golden standard: `variants/1000g_gold_standard.indels.filtered.vcf`
+* **`A03_create_vcf_indices.sh`**, in which you create indices for:
+    * A part of the dbsnp database: `variants/GCF.38.filtered.renamed.vcf`
+    * A part of the 1000 genomes indel golden standard: `variants/1000g_gold_standard.indels.filtered.vcf`
+* **`A04_create_fasta_index.sh`**, in which you create an index for:
+    * The reference genome `reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`
+
+!!! note
+    Indexes are often stored in the same directory as the indexed file. For the vcf and fasta indexes this is also the case. 
 
 ??? done "Answer"
-    Creating the index for the reference genome:
-
-    ```sh
-    cd ~/workdir/data
-    samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
-    gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
-    ```
 
     Creating the indices for the vcfs:
 
-    ```sh
+    ```sh title="A03_create_vcf_indices.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/data 
+
     gatk IndexFeatureFile --input variants/1000g_gold_standard.indels.filtered.vcf
     gatk IndexFeatureFile --input variants/GCF.38.filtered.renamed.vcf
+    ```
+
+    Creating the index for the reference genome:
+
+    ```sh title="A04_create_fasta_index.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/data 
+
+    samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
+    gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
     ```
 
 !!! note "Chromosome names"
@@ -105,7 +118,7 @@ BQSR is done in two steps:
     * `--input`
     * `--output`
 
-**Exercise:** Run the two commands with the required options on `mother.rg.md.bam`, with `--known-sites` `variants/1000g_gold_standard.indels.filtered.vcf` and `variants/GCF.38.filtered.renamed.vcf`.
+**Exercise:** Create a script in `B-mother_only` called `B09_perform_bqsr.sh` to execute the two bqsr commands. Do this with the required options on `mother.rg.md.bam`. At `--known-sites` specify `variants/1000g_gold_standard.indels.filtered.vcf` and `variants/GCF.38.filtered.renamed.vcf`.
 
 !!! hint "Multiple inputs for same argument"
     In some cases you need to add multiple inputs (e.g. multiple `vcf` files) into the same argument (e.g. `--known-sites`). To provide multiple inputs for the same argument in `gatk`, you can use the same argument multiple times, e.g.:
@@ -120,42 +133,46 @@ BQSR is done in two steps:
     ```
 
 ??? done "Answer"
-    ```sh
+    ```sh title="B09_perform_bqsr.sh"
+    #!/usr/bin/env bash
+
     cd ~/workdir
 
-    mkdir bqsr
+    mkdir -p results/bqsr
 
     gatk BaseRecalibrator \
     --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-    --input alignment/mother.rg.md.bam \
+    --input results/alignments/mother.rg.md.bam \
     --known-sites data/variants/GCF.38.filtered.renamed.vcf \
     --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
-    --output bqsr/mother.recal.table
+    --output results/bqsr/mother.recal.table
 
     gatk ApplyBQSR \
-    --input alignment/mother.rg.md.bam \
-    --bqsr-recal-file bqsr/mother.recal.table \
-    --output bqsr/mother.recal.bam
+    --input results/alignments/mother.rg.md.bam \
+    --bqsr-recal-file results/bqsr/mother.recal.table \
+    --output results/bqsr/mother.recal.bam
     ```
 
-**Exercise:** Place these commands in a 'for loop', that performs the BQSR for mother, father and son.
+**Exercise:** Place these commands in a 'for loop', that performs the BQSR for mother, father and son. Do this with a script called `C05_perform_bqsr.sh` in `C-all_samples`.
 
 ??? done "Answer"
-    ```sh
+    ```sh title="C05_perform_bqsr.sh"
+    #!/usr/bin/env bash
+
     cd ~/workdir
 
-    for sample in mother father son
+    for SAMPLE in mother father son
     do
-      gatk BaseRecalibrator \
-      --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
-      --input alignment/$sample.rg.md.bam \
-      --known-sites data/variants/GCF.38.filtered.renamed.vcf \
-      --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
-      --output bqsr/$sample.recal.table
+    gatk BaseRecalibrator \
+    --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
+    --input results/alignments/"$SAMPLE".rg.md.bam \
+    --known-sites data/variants/GCF.38.filtered.renamed.vcf \
+    --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
+    --output bqsr/"$SAMPLE".recal.table
 
-      gatk ApplyBQSR \
-      --input alignment/$sample.rg.md.bam \
-      --bqsr-recal-file bqsr/$sample.recal.table \
-      --output bqsr/$sample.recal.bam
+    gatk ApplyBQSR \
+    --input results/alignments/"$SAMPLE".rg.md.bam \
+    --bqsr-recal-file bqsr/"$SAMPLE".recal.table \
+    --output bqsr/"$SAMPLE".recal.bam
     done
     ```
