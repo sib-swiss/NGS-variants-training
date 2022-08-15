@@ -21,7 +21,7 @@ Our dataset is too small to apply VQSR. We will therefore do hard filtering inst
 
 #### Splitting SNPs and INDELs
 
-First, filtering thresholds are usually different for SNPs and INDELs. You can extract all the SNP records in our trio vcf like this:
+First, filtering thresholds are usually different for SNPs and INDELs. Therefore, we will split `trio.vcf` into two vcfs, one containg only SNPs, and one containing only INDELs. You can extract all the SNP records in our trio vcf like this:
 
 ```sh
 cd ~/workdir
@@ -34,19 +34,38 @@ gatk SelectVariants \
 
 **Exercise:** Check out the [documentation of `gatk SelectVariants`](https://gatk.broadinstitute.org/hc/en-us/articles/360037055952-SelectVariants), and:
 
-* Figure out what you'll need to fill in at `--select-type-to-include` if you want to select only INDELS.
-* Generate a vcf with only the SNPs and a second vcf with only the INDELs from `trio.vcf`.
+* Figure out what you'll need to write at `--select-type-to-include` if you want to select only INDELS.
+* Make a script (named `C09_select_SNPs.sh`) to generate a vcf with only the SNPs
+* Make a script (named `C10_select_INDELs.sh`) to generate a second vcf with only the INDELs from `trio.vcf`.
 
 ??? done "Answer"
     You will need to fill in `INDEL` at `--select-type-to-include` to filter for INDELs.
 
-    To get the SNPs you can run the command above. To get the INDELs you'll need to change `--select-type-to-include` to `INDEL`:
+    To get the SNPs you can run the command above:
 
-    ```sh
+    ```sh title="C09_select_SNPs.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir
+
     gatk SelectVariants \
-    --variant variants/trio.vcf \
+    --variant results/variants/trio.vcf \
+    --select-type-to-include SNP \
+    --output results/variants/trio.SNP.vcf
+    ```
+    
+    To get the INDELs you'll need to change `--select-type-to-include` to `INDEL`:
+
+    ```sh title="C10_select_INDELs.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir
+
+    gatk SelectVariants \
+    --variant results/variants/trio.vcf \
     --select-type-to-include INDEL \
-    --output variants/trio.INDEL.vcf
+    --output results/variants/trio.INDEL.vcf
+
     ```
 
 #### Filtering SNPs
@@ -56,17 +75,17 @@ The command `gatk VariantFiltration` enables you to filter for both the INFO fie
 ```sh
 gatk VariantFiltration \
 --variant variants/trio.SNP.vcf \
---filter-expression "QD < 2.0" --filter-name "QD2" \
---filter-expression "QUAL < 30.0" --filter-name "QUAL30" \
---filter-expression "SOR > 3.0" --filter-name "SOR3" \
---filter-expression "FS > 60.0" --filter-name "FS60" \
---filter-expression "MQ < 40.0" --filter-name "MQ40" \
---filter-expression "MQRankSum < -12.5" --filter-name "MQRankSum-12.5" \
+--filter-expression "QD < 2.0"              --filter-name "QD2" \
+--filter-expression "QUAL < 30.0"           --filter-name "QUAL30" \
+--filter-expression "SOR > 3.0"             --filter-name "SOR3" \
+--filter-expression "FS > 60.0"             --filter-name "FS60" \
+--filter-expression "MQ < 40.0"             --filter-name "MQ40" \
+--filter-expression "MQRankSum < -12.5"     --filter-name "MQRankSum-12.5" \
 --filter-expression "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" \
 --output variants/trio.SNP.filtered.vcf
 ```
 
-**Exercise:** Run the filtering command above. Did it affect the number of records in the vcf?
+**Exercise:** Run the filtering command above in a script called `C11_filter_SNPs.sh`. Did it affect the number of records in the vcf?
 
 !!! hint
     You can check out the number of records in a vcf with:
@@ -76,6 +95,25 @@ gatk VariantFiltration \
     ```
 
 ??? done "Answer"
+    Your script:
+
+    ```sh title="C11_filter_SNPs.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/variants
+
+    gatk VariantFiltration \
+    --variant trio.SNP.vcf \
+    --filter-expression "QD < 2.0"              --filter-name "QD2" \
+    --filter-expression "QUAL < 30.0"           --filter-name "QUAL30" \
+    --filter-expression "SOR > 3.0"             --filter-name "SOR3" \
+    --filter-expression "FS > 60.0"             --filter-name "FS60" \
+    --filter-expression "MQ < 40.0"             --filter-name "MQ40" \
+    --filter-expression "MQRankSum < -12.5"     --filter-name "MQRankSum-12.5" \
+    --filter-expression "ReadPosRankSum < -8.0" --filter-name "ReadPosRankSum-8" \
+    --output trio.SNP.filtered.vcf
+    ```
+
     There are no differences in the number of records:
 
     ```sh
@@ -111,14 +149,14 @@ A command with [sensible parameters](https://gatk.broadinstitute.org/hc/en-us/ar
 ```sh
 gatk VariantFiltration \
 --variant variants/trio.INDEL.vcf \
---filter-expression "QD < 2.0" --filter-name "QD2" \
---filter-expression "QUAL < 30.0" --filter-name "QUAL30" \
---filter-expression "FS > 200.0" --filter-name "FS200" \
---filter-expression "ReadPosRankSum < -20.0" --filter-name "ReadPosRankSum-20" \
+--filter-expression "QD < 2.0"                  --filter-name "QD2" \
+--filter-expression "QUAL < 30.0"               --filter-name "QUAL30" \
+--filter-expression "FS > 200.0"                --filter-name "FS200" \
+--filter-expression "ReadPosRankSum < -20.0"    --filter-name "ReadPosRankSum-20" \
 --output variants/trio.INDEL.filtered.vcf
 ```
 
-**Exercise:** Run the command and figure out how many variants are filtered out.
+**Exercise:** Run the command from a script called `C12_filter_INDELs.sh` and figure out how many variants are filtered out.
 
 !!! hint
     You can use this command from the answer to the previous exercise:
@@ -130,6 +168,25 @@ gatk VariantFiltration \
     to see how many INDELs were filtered out.
 
 ??? done "Answer"
+
+    Your script:
+
+    ```sh title="C12_filter_INDELs.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/variants
+
+    gatk VariantFiltration \
+    --variant trio.INDEL.vcf \
+    --filter-expression "QD < 2.0"                  --filter-name "QD2" \
+    --filter-expression "QUAL < 30.0"               --filter-name "QUAL30" \
+    --filter-expression "FS > 200.0"                --filter-name "FS200" \
+    --filter-expression "ReadPosRankSum < -20.0"    --filter-name "ReadPosRankSum-20" \
+    --output trio.INDEL.filtered.vcf
+    ```
+
+    And check out the contents of the `FILTER` column: 
+
     ```sh
     grep -v "^#" variants/trio.INDEL.filtered.vcf | cut -f 7 | sort | uniq -c
     ```
@@ -148,12 +205,27 @@ Now that we have filtered the INDELs and SNPs separately, we can merge them agai
 
 ```sh
 gatk MergeVcfs \
---INPUT variants/trio.SNP.filtered.vcf \
---INPUT variants/trio.INDEL.filtered.vcf \
---OUTPUT variants/trio.filtered.vcf
+--INPUT <input1.vcf> \
+--INPUT <input2.vcf> \
+--OUTPUT <merged.vcf>
 ```
 
-**Exercise:** Run the command to merge the vcfs.
+**Exercise:** Run this command from a script called `C13_merge_filtered.sh` to merge the vcfs (`trio.SNP.filtered.vcf` and `trio.INDEL.filtered.vcf`).
+
+??? done "Answer"
+
+    ```sh title="C13_merged_filtered.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/variants
+
+    gatk MergeVcfs \
+    --INPUT trio.SNP.filtered.vcf \
+    --INPUT trio.INDEL.filtered.vcf \
+    --OUTPUT trio.filtered.vcf
+
+    ```
+
 
 ### 2. Evaluation by concordance
 
@@ -161,7 +233,7 @@ For this region we have a highly curated truth set for the mother available. It 
 
 To check how well we did, we'd first need to extract a vcf with only the information of the mother.
 
-**Exercise:** To extract variants that have at least one alternative allele in the mother from `variants/trio.filtered.vcf`, use `gatk SelectVariants` with the arguments:
+**Exercise:** Generate a script called `C14_extract_mother_only.sh` to extract variants that have at least one alternative allele in the mother from `variants/trio.filtered.vcf`. Use `gatk SelectVariants` with the arguments:
 
 * `--sample-name mother`
 * `--exclude-non-variants`
@@ -170,20 +242,24 @@ To check how well we did, we'd first need to extract a vcf with only the informa
 In addition to the required arguments.
 
 ??? done "Answer"
-    ```sh
+    ```sh title="C14_extract_mother_only.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/variants
+
     gatk SelectVariants \
-    --variant variants/trio.filtered.vcf \
+    --variant trio.filtered.vcf \
     --sample-name mother \
     --exclude-non-variants \
     --remove-unused-alternates \
-    --output variants/mother.trio.filtered.vcf
+    --output mother.trio.filtered.vcf
     ```
 
 **Exercise:**
 
-A. How many variants are in `mother.trio.filtered.vcf`? How many of those are filtered out?
+A. How many variants are in the extracted vcf? How many of those are filtered out?
 
-B. Compare our vcf with the curated truth set with the command below. How many SNPs didn't we detect?
+B. Compare our vcf with the curated truth set with the command below from a script called `C15_evaluate_concordance.sh`. How many SNPs didn't we detect?
 
 ```sh
 gatk Concordance \
@@ -210,7 +286,21 @@ gatk Concordance \
 
     So two records were filtered out, based on the Symmetric Odds Ratio (issues with strand bias).
 
-    Check out the output of `gatk Concordance` with `cat`:
+    Your script to evaluate the concordance:
+
+    ```sh title="evaluate_concordance.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+
+    gatk Concordance \
+    --evaluation variants/mother.trio.filtered.vcf \
+    --truth data/variants/NA12878.vcf.gz \
+    --intervals chr20:10018000-10220000 \
+    --summary variants/concordance.mother.trio.filtered
+    ```
+
+    Check out the output with `cat`:
 
     ```sh
     cat variants/concordance.mother.trio.filtered
@@ -229,7 +319,12 @@ gatk Concordance \
 !!! tip "Recall & precision"
     More info on the definition of recall and precision on this [wikipedia page](https://en.wikipedia.org/wiki/Precision_and_recall)
 
-**Exercise:** Check out the concordance of the mother with the truth set before filtering. Did filtering improve the recall or precision?
+**Exercise:** Check out the concordance of the mother with the truth set before filtering. Do this by generating two scripts:
+
+- `C16_extract_mother_before_filtering.sh`: to run `gatk SelectVariants` in order to get only variants from the mother from the unfiltered `trio.vcf`. 
+- `C17_evaluate_concordance_before_filtering.sh`: to run `gatk Concordance` on the selected variants. 
+
+ Did filtering improve the recall or precision?
 
 !!! note
     We did the filtering on `trio.vcf`, therefore, you first have to extract the records that only apply to the mother by using `gatk SelectVariants`.
@@ -240,25 +335,35 @@ gatk Concordance \
 
     First select only SNPs and INDELs from the mother from the unfiltered vcf:
 
-    ```sh
+    ```sh title="C16_extract_mother_before_filtering.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/variants
+
     gatk SelectVariants \
-    --variant variants/trio.vcf \
+    --variant trio.vcf \
     --sample-name mother \
     --exclude-non-variants \
     --remove-unused-alternates \
     --select-type-to-include INDEL \
     --select-type-to-include SNP \
-    --output variants/mother.trio.vcf
+    --output mother.trio.vcf
+
     ```
 
     Get the concordance with the truth set:
 
-    ```sh
+    ```sh title="C17_evaluate_concordance_before_filtering.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results
+
     gatk Concordance \
     --evaluation variants/mother.trio.vcf \
     --truth data/variants/NA12878.vcf.gz \
     --intervals chr20:10018000-10220000 \
     --summary variants/concordance.mother.trio
+
     ```
 
     Which gives:

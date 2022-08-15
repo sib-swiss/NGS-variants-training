@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/workdir/results/variants
 
 gatk SelectVariants \
---variant variants/trio.filtered.vcf \
+--variant trio.filtered.vcf \
 --sample-name mother \
 --exclude-non-variants \
 --remove-unused-alternates \
---output variants/mother.trio.filtered.vcf
+--output mother.trio.filtered.vcf

@@ -33,10 +33,11 @@ mkdir annotation
 snpEff -Xmx4g \
 -v \
 GRCh38.99 \
-variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
+<filtered_variants.vcf> \
+> <annotated_variants.vcf>
 ```
 
-**Exercise:** Run the command, and check out the html file (`snpEff_summary.html`). Try to answer these questions:
+**Exercise:** Run the command on the filtered vcf (`trio.filtered.vcf`) using a script called `C18_annotate_snpEff.sh`. Check out the html file (`snpEff_summary.html`). Try to answer these questions:
 
 **A.** How many effects were calculated?
 
@@ -47,6 +48,21 @@ variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
 **D.** How many effects result in a missense mutation?
 
 ??? done "Answer"
+
+    Your script:
+
+    ```sh title="C18_annotate_snpEff.sh"
+    #!/usr/bin/env bash
+
+    cd ~/workdir/results/variants
+
+    snpEff -Xmx4g \
+    -v \
+    GRCh38.99 \
+    trio.filtered.vcf \
+    > trio.filtered.snpeff.vcf
+    ```
+
     A. There were 10,357 effects calculated.
 
     B. There are only 556 variants in the vcf.
@@ -55,7 +71,7 @@ variants/trio.filtered.vcf > annotation/trio.filtered.snpeff.vcf
 
     D. Two effects result in a missense mutation.
 
-You can (quick and dirty) query the annotation vcf (`trio.filtered.snpeff.vcf`) for the missense mutation with `grep`.
+You can (quick and dirty) query the annotated vcf for the missense mutation with `grep`.
 
 **Exercise:** Find the variant causing the missense mutation (the line contains the string `missense`). And answer the following questions:
 

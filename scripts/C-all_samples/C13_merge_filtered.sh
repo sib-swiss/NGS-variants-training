@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/workdir/results/variants
 
 gatk MergeVcfs \
---INPUT variants/trio.SNP.filtered.vcf \
---INPUT variants/trio.INDEL.filtered.vcf \
---OUTPUT variants/trio.filtered.vcf
+--INPUT trio.SNP.filtered.vcf \
+--INPUT trio.INDEL.filtered.vcf \
+--OUTPUT trio.filtered.vcf

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/workdir/results/variants
 
 gatk SelectVariants \
---variant variants/trio.vcf \
+--variant trio.vcf \
 --sample-name mother \
 --exclude-non-variants \
 --remove-unused-alternates \
 --select-type-to-include INDEL \
 --select-type-to-include SNP \
---output variants/mother.trio.vcf
+--output mother.trio.vcf
