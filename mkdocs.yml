@@ -70,7 +70,7 @@ extra:
       make our documentation better.
   analytics:
     provider: google
-    property: G-SK9D4D2P4M
+    property: G-9DHDFTPFZD
 
 copyright: >
   Copyright &copy; 2021-2022 SIB Swiss institute of Bioinformatics –
