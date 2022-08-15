@@ -21,29 +21,6 @@
 
 ## Exercises
 
-Throughout the exercises today and tomorrow we will work on three different 'subprojects':
-
-- Preparing references by indexing
-- Alignment and variant calling on one sample ('mother')
-- Alignment, variant calling and filtering on all samples
-
-We store the scripts required for these subprojects in different subdirectories of `~/workdir/scripts` named:
-
-- `A-prepare_references`
-- `B-mother_only`
-- `C-all_samples`
-
-You can already create these directories now with:
-
-```sh
-cd ~/workdir/scripts/
-
-mkdir -p \
-A-prepare_references \
-B-mother_only \
-C-all_samples
-```
-
 ### 1. Download data and prepare the reference genome
 
 Let's start with the first script of our 'pipeline'. We will use it to download and unpack the course data. Use the code snippet below to create a script called `A01_download_course_data.sh`. Store it in `~/workdir/scripts/A-prepare_references/`, and run it.

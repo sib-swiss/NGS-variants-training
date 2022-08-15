@@ -47,12 +47,12 @@ During several steps of variant calling `gatk` uses read group information. For 
     Here, e.g. the `PU` field would be `FC706VJ.2.ATCACG`
 
 
-**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. Do this from a script called `07_add_readgroups.sh` (in `~/workdir/scripts/mother_only`).
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. Do this from a script called `B05_add_readgroups.sh` (in `~/workdir/scripts/B-mother_only`).
 
 ??? done "Answer"
     We can use the answers of the previous exercise, and use them in the command:
 
-    ```sh title="07_add_readgroups.sh"
+    ```sh title="B05_add_readgroups.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results
@@ -95,10 +95,10 @@ During several steps of variant calling `gatk` uses read group information. For 
 
 Now that we have specified read groups, we can mark the duplicates with `gatk MarkDuplicates`. 
 
-**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. Do this from a script called `08_mark_duplicates.sh` (in `~/workdir/scripts/mother_only`). 
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. Do this from a script called `B06_mark_duplicates.sh` (in `~/workdir/scripts/B-mother_only`). 
 
 ??? done "Answer"
-    ```sh title="08_mark_duplicates.sh"
+    ```sh title="B06_mark_duplicates.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results
@@ -109,10 +109,10 @@ Now that we have specified read groups, we can mark the duplicates with `gatk Ma
     --METRICS_FILE alignments/marked_dup_metrics_mother.txt 
     ```
 
-**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates, and write the output to a file called `mother.rg.md.bam.flagstat`. Create a script called `09_get_alignment_stats_after_md.sh` (in `~/workdir/scripts/mother_only`). How many reads were marked as duplicate?
+**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates, and write the output to a file called `mother.rg.md.bam.flagstat`. Create a script called `B07_get_alignment_stats_after_md.sh` (in `~/workdir/scripts/B-mother_only`). How many reads were marked as duplicate?
 
 ??? done "Answer"
-    ```sh title="09_get_alignment_stats_after_md.sh"
+    ```sh title="B07_get_alignment_stats_after_md.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results/alignments
@@ -148,10 +148,10 @@ To look up specific alignments, it is convenient to have your alignment file ind
 samtools index <bam file>
 ```
 
-**Exercise**: Create a script called `10_index_alignment.sh` (in `~/workdir/scripts/mother_only`) to perform the alignment.
+**Exercise**: Create a script called `B08_index_alignment.sh` (in `~/workdir/scripts/B-mother_only`) to perform the alignment.
 
 ??? done "Answer"
-    ```sh title="10_index_alignment.sh"
+    ```sh title="B08_index_alignment.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results/alignments/
@@ -172,20 +172,20 @@ Now we have performed now the following steps on the sample `mother`:
 Your `scripts` directory should look like this:
 
 ```
-scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-└── mother_only
-    ├── 03_alignment.sh
-    ├── 04_get_alignment_statistics.sh
-    ├── 05_sort_alignment.sh
-    ├── 06_compress_alignment.sh
-    ├── 07_add_readgroups.sh
-    ├── 08_mark_duplicates.sh
-    ├── 09_get_alignment_stats_after_md.sh
-    └── 10_index_alignment.sh
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   └── B08_index_alignment.sh
+└── C-all_samples
 
-1 directory, 10 files
 ```
 
 ### 5. Apply it on all three samples with pipes and loops
@@ -202,27 +202,34 @@ data/fastq/"$SAMPLE"_R2.fastq.gz \
 | samtools view -bh > results/alignments/"$SAMPLE".bam
 ```
 
-**Exercise**: Make a directory in the scripts directory called `all_samples` (so `~/workdir/scripts/all_samples`). In here, create a script called `03_alignment_sorting_compression.sh`. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. `mother`, `father` and `son`).
+**Exercise**: Make a directory in the scripts directory `C-all_samples` (so `~/workdir/scripts/C-all_samples`). In here, create a script called `C01_alignment_sorting_compression.sh`. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. `mother`, `father` and `son`).
 
 ??? done "Answer"
 
-    Your `scripts` folder should look like:
+    Your `scripts` directory should look like:
 
     ```
     scripts
-    ├── 01_download_course_data.sh
-    ├── 02_create_bwa_index.sh
-    ├── all_samples
-    │   └── 03_alignment_sorting_compression.sh
-    └── mother_only
-        ├── 03_alignment.sh
-        ├── 04_get_alignment_statistics.sh
-        └── ...
+    ├── A-prepare_references
+    │   ├── A01_download_course_data.sh
+    │   └── A02_create_bwa_index.sh
+    ├── B-mother_only
+    │   ├── B01_alignment.sh
+    │   ├── B02_get_alignment_statistics.sh
+    │   ├── B03_sort_alignment.sh
+    │   ├── B04_compress_alignment.sh
+    │   ├── B05_add_readgroups.sh
+    │   ├── B06_mark_duplicates.sh
+    │   ├── B07_get_alignment_stats_after_md.sh
+    │   └── B08_index_alignment.sh
+    └── C-all_samples
+        └── C01_alignment_sorting_compression.sh
+
     ```
 
     And the script: 
 
-    ```sh title="03_alignment_sorting_compression.sh"
+    ```sh title="C01_alignment_sorting_compression.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir
@@ -257,7 +264,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     son	lib3	H0164.6.ALXX140820	H0164.6
     ```
 
-**Exercise** Generate a script called `04_add_readgroups.sh` (in `~/workdir/scripts/all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](../server_login#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
+**Exercise** Generate a script called `C02_add_readgroups.sh` (in `~/workdir/scripts/C-all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](../server_login#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
 
 ??? hint
     
@@ -274,7 +281,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
 
 ??? done "Answer"
     
-    ```sh title="04_add_readgroups.sh"
+    ```sh title="C02_add_readgroups.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results
@@ -292,12 +299,12 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     done 
     ```
 
-As the final steps, we will mark the duplicates and perform the indexing for the three samples. 
+As final step, we will mark the duplicates and perform the indexing for the three samples. 
 
-**Exercise:** Generate two scripts called `05_mark_duplicates.sh` and `06_index_alignments.sh`, in which you loop over the sample names and  perform the respective calculations. You can use `08_mark_duplicates.sh` and `10_index_alignment.sh` in `~/workdir/scripts/mother_only` as a template. 
+**Exercise:** Generate two scripts called `C03_mark_duplicates.sh` and `C04_index_alignments.sh`, in which you loop over the sample names and  perform the respective calculations. You can use `B06_mark_duplicates.sh` and `B08_index_alignment.sh` as a template. 
 
 ??? done "Answer"
-    ```sh title="05_mark_duplicates.sh"
+    ```sh title="C03_mark_duplicates.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results
@@ -312,7 +319,7 @@ As the final steps, we will mark the duplicates and perform the indexing for the
 
     ```
 
-    ```sh title="06_index_alignment.sh"
+    ```sh title="C04_index_alignment.sh"
     #!/usr/bin/env bash
 
     cd ~/workdir/results
@@ -338,22 +345,21 @@ Your scripts directory should look like this:
 
 ```
 scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-├── all_samples
-│   ├── 03_alignment_sorting_compression.sh
-│   ├── 04_add_readgroups.sh
-│   ├── 05_mark_duplicates.sh
-│   └── 06_index_alignment.sh
-└── mother_only
-    ├── 03_alignment.sh
-    ├── 04_get_alignment_statistics.sh
-    ├── 05_sort_alignment.sh
-    ├── 06_compress_alignment.sh
-    ├── 07_add_readgroups.sh
-    ├── 08_mark_duplicates.sh
-    ├── 09_get_alignment_stats_after_md.sh
-    └── 10_index_alignment.sh
-
-2 directories, 14 files
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   └── B08_index_alignment.sh
+└── C-all_samples
+    ├── C01_alignment_sorting_compression.sh
+    ├── C02_add_readgroups.sh
+    ├── C03_mark_duplicates.sh
+    └── C04_index_alignment.sh
 ```
