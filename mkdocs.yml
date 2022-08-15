@@ -21,6 +21,8 @@ theme:
   logo: assets/images/SIB_logo.svg
   favicon: assets/images/SIB_logo.svg
   custom_dir: overrides
+  icon:
+    repo: fontawesome/brands/github
 
 # Repository
 repo_name: sib-swiss/NGS-variants-training
