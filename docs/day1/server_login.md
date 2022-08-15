@@ -12,6 +12,9 @@
     * Pipe data from and to a file or other executable
 * Program a loop in `bash`
 
+!!! tip "Running into problems during exercises?"
+    Use the "Comments" box at the bottom of each page 👇 for asking questions or giving feedback. It requires a [github account](https://github.com/).
+
 !!! info "Choose your platform"
     In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.
 
@@ -24,7 +27,7 @@
     * conda
     * Docker
 
-=== "Cloud notebook"
+=== "Cloud server"
 
     ## Exercises 
 

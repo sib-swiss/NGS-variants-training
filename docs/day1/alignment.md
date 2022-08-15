@@ -21,6 +21,9 @@
 
 ## Exercises
 
+!!! tip "Running into problems during the exercises?"
+    Use the "Comments" box at the bottom of each page 👇 for asking questions or giving feedback. It requires a [github account](https://github.com/).
+
 ### 1. Download data and prepare the reference genome
 
 Let's start with the first script of our 'pipeline'. We will use it to download and unpack the course data. Use the code snippet below to create a script called `A01_download_course_data.sh`. Store it in `~/workdir/scripts/A-prepare_references/`, and run it.
