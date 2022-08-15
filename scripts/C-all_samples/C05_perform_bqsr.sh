@@ -9,10 +9,10 @@ do
   --input results/alignments/"$SAMPLE".rg.md.bam \
   --known-sites data/variants/GCF.38.filtered.renamed.vcf \
   --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf \
-  --output bqsr/"$SAMPLE".recal.table
+  --output results/bqsr/"$SAMPLE".recal.table
 
   gatk ApplyBQSR \
   --input results/alignments/"$SAMPLE".rg.md.bam \
-  --bqsr-recal-file bqsr/"$SAMPLE".recal.table \
-  --output bqsr/"$SAMPLE".recal.bam
+  --bqsr-recal-file results/bqsr/"$SAMPLE".recal.table \
+  --output results/bqsr/"$SAMPLE".recal.bam
 done
