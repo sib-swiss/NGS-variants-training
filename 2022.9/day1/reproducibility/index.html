@@ -375,6 +375,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -445,6 +452,20 @@
           Day 2
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling_preparation/" class="md-nav__link">
+        Variant calling - preparation
+      </a>
+    </li>
+  
+
+            
           
             
               
@@ -559,6 +580,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -596,25 +624,69 @@
 <li>Make your scripts <strong>specific</strong>, i.e. do not combine many different commands in the same script</li>
 <li>Refer to <strong>directories and variables</strong> at the beginning of the script</li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Keep re-evaluating your code structure</p>
+<p>If you start a project it can be difficult to know what kind of analyses you are going to run, and how they interrelate. While working on a project, therefore re-evaluate readability of your project structure, and do not hesitate to change script numbering, names or contents. </p>
+</div>
 <p>By adhering to these simple principles it will be relatively straightforward to re-do your analysis steps only based on the scripts, and will get you started to adhere to the <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285">Ten Simple Rules for Reproducible Computational Research</a>. </p>
-<p>By the end of day 2 <code>~/workdir</code> should look (something) like this:</p>
-<div class="highlight"><pre><span></span><code>.
-├── alignment_output
-├── reads
-├── ref_genome
-├── scripts
-│   ├── 01_download_reads.sh
-│   ├── 02_run_fastqc.sh
-│   ├── 03_trim_reads.sh
-│   ├── 04_run_fastqc_trimmed.sh
-│   ├── 05_download_ecoli_reference.sh
-│   ├── 06_build_bowtie_index.sh
-│   ├── 07_align_reads.sh
-│   ├── 08_compress_sort.sh
-│   ├── 09_extract_unmapped.sh
-│   ├── 10_extract_region.sh
-│   └── 11_align_sort_filter.sh
-└── trimmed_data
+<h2 id="exercises">Exercises</h2>
+<p>Throughout the exercises today and tomorrow we will work on three different &lsquo;subprojects&rsquo;:</p>
+<ul>
+<li>Preparing references by indexing</li>
+<li>Alignment and variant calling on one sample (&lsquo;mother&rsquo;)</li>
+<li>Alignment, variant calling and filtering on all samples</li>
+</ul>
+<p>We store the scripts required for these subprojects in different subdirectories of <code>~/workdir/scripts</code> named:</p>
+<ul>
+<li><code>A-prepare_references</code></li>
+<li><code>B-mother_only</code></li>
+<li><code>C-all_samples</code></li>
+</ul>
+<p>You can already create these directories now with:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/scripts/
+
+mkdir -p <span class="se">\</span>
+A-prepare_references <span class="se">\</span>
+B-mother_only <span class="se">\</span>
+C-all_samples
+</code></pre></div>
+<p>By the end of day 2 <code>~/workdir/scripts</code> should look (something) like this:</p>
+<div class="highlight"><pre><span></span><code>scripts
+├── A_prepare_references
+│   ├── A01_download_course_data.sh
+│   ├── A02_create_bwa_index.sh
+│   ├── A03_create_vcf_indices.sh
+│   └── A04_create_fasta_index.sh
+├── B_mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   ├── B08_index_alignment.sh
+│   ├── B09_perform_bqsr.sh
+│   ├── B10_run_haplotypecaller.sh
+│   └── B11_variants_to_table.sh
+└── C_all_samples
+    ├── C01_alignment_sorting_compression.sh
+    ├── C02_add_readgroups.sh
+    ├── C03_mark_duplicates.sh
+    ├── C04_index_alignment.sh
+    ├── C05_perform_bqsr.sh
+    ├── C06_run_haplotypecaller.sh
+    ├── C07_create_genomicsdb.sh
+    ├── C08_genotype_gvcfs.sh
+    ├── C09_select_SNPs.sh
+    ├── C10_select_INDELs.sh
+    ├── C11_filter_SNPs.sh
+    ├── C12_filter_INDELs.sh
+    ├── C13_merge_filtered.sh
+    ├── C14_extract_mother_only.sh
+    ├── C15_evaluate_concordance.sh
+    ├── C16_extract_mother_before_filtering.sh
+    └── C17_evaluate_concordance_before_filtering.sh
 </code></pre></div>
 
               

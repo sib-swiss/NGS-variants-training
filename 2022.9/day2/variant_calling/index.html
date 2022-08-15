@@ -393,6 +393,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../variant_calling_preparation/" class="md-nav__link">
+        Variant calling - preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -447,25 +461,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-indexing-indexing-indexing" class="md-nav__link">
-    1. Indexing, indexing, indexing
+  <a href="#1-variant-calling" class="md-nav__link">
+    1. Variant calling
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-base-quality-score-recalibration-bqsr" class="md-nav__link">
-    2. Base Quality Score Recalibration (BQSR)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-variant-calling" class="md-nav__link">
-    3. Variant calling
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Variant calling">
+    <nav class="md-nav" aria-label="1. Variant calling">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -488,8 +488,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-combining-gvcfs" class="md-nav__link">
-    4. Combining GVCFs
+  <a href="#2-combining-gvcfs" class="md-nav__link">
+    2. Combining GVCFs
   </a>
   
 </li>
@@ -603,25 +603,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-indexing-indexing-indexing" class="md-nav__link">
-    1. Indexing, indexing, indexing
+  <a href="#1-variant-calling" class="md-nav__link">
+    1. Variant calling
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-base-quality-score-recalibration-bqsr" class="md-nav__link">
-    2. Base Quality Score Recalibration (BQSR)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-variant-calling" class="md-nav__link">
-    3. Variant calling
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Variant calling">
+    <nav class="md-nav" aria-label="1. Variant calling">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -644,8 +630,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-combining-gvcfs" class="md-nav__link">
-    4. Combining GVCFs
+  <a href="#2-combining-gvcfs" class="md-nav__link">
+    2. Combining GVCFs
   </a>
   
 </li>
@@ -678,10 +664,8 @@
 <h2 id="learning-outcomes">Learning outcomes</h2>
 <p><strong>After having completed this chapter you will be able to:</strong></p>
 <ul>
-<li>Describe how variant information is stored in a variant call format (<code>.vcf</code>) file</li>
-<li>Describe the &lsquo;missing genotype problem&rsquo; when calling variants of multiple samples, and the different methods on how this can be solved</li>
+<li>Perform basic calculations regarding the genotype likelihood of individual variants</li>
 <li>Follow <code>gatk</code> best practices workflow to perform a variant analysis by:<ul>
-<li>Applying Base Quality Score Recalibration on an alignment file</li>
 <li>Calling variants with <code>gatk HaplotypeCaller</code></li>
 <li>Combining multiple <code>vcf</code> files into a single <code>vcf</code> file</li>
 </ul>
@@ -689,8 +673,6 @@
 <li>Perform basic operations to get statistics of a <code>vcf</code> file</li>
 </ul>
 <h2 id="material">Material</h2>
-<p><a class="md-button" href="../../assets/pdf/variant_calling.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M88 304h-8v-48h8c13.3 0 24 10.7 24 24s-10.7 24-24 24zm104-48h8c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-8v-96zM224 0v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V64C0 28.65 28.65 0 64 0h160zM64 224c-8.84 0-16 7.2-16 16v128c0 8.8 7.16 16 16 16s16-7.2 16-16v-32h8c30.9 0 56-25.1 56-56s-25.1-56-56-56H64zm96 144c0 8.8 7.2 16 16 16h24c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-24c-8.8 0-16 7.2-16 16v128zm128-144c-8.8 0-16 7.2-16 16v128c0 8.8 7.2 16 16 16s16-7.2 16-16v-48h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32v-32h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-48zM256 0l128 128H256V0z"/></svg></span> Download the presentation</a></p>
-<p><a href="https://samtools.github.io/hts-specs/VCFv4.1.pdf">VCF format description</a></p>
 <p>The <a href="https://www.biorxiv.org/content/10.1101/201178v3">paper</a> on genomic variant call format (gVCF)</p>
 <p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-">GATK best practices germline short variant workflow</a>:</p>
 <figure>
@@ -698,118 +680,7 @@
 </figure>
 
 <h2 id="exercises">Exercises</h2>
-<h3 id="1-indexing-indexing-indexing">1. Indexing, indexing, indexing</h3>
-<p>Many algorithms work faster, or only work with an index of their (large) input files. In that sense, <code>gatk</code> is no different from other tools. The index for a reference needs to be created in two steps:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/data/reference
-samtools faidx &lt;reference.fa&gt;
-gatk CreateSequenceDictionary --REFERENCE &lt;reference.fa&gt;
-</code></pre></div>
-<p>Also input vcf files need to be indexed. This will create a <code>.idx</code> file associated with the <code>.vcf</code>. You can do this like this:</p>
-<div class="highlight"><pre><span></span><code>gatk IndexFeatureFile --input &lt;variants.vcf&gt;
-</code></pre></div>
-<p><strong>Exercise:</strong> Create the required <code>gatk</code> indexes for:</p>
-<ul>
-<li>The reference genome <code>reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code></li>
-<li>A part of the dbsnp database: <code>variants/GCF.38.filtered.renamed.vcf</code></li>
-<li>A part of the 1000 genomes indel golden standard: <code>variants/1000g_gold_standard.indels.filtered.vcf</code></li>
-</ul>
-<details class="done"><summary>Answer</summary><p>Creating the index for the reference genome:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/data
-samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
-gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
-</code></pre></div>
-<p>Creating the indices for the vcfs:</p>
-<div class="highlight"><pre><span></span><code>gatk IndexFeatureFile --input variants/1000g_gold_standard.indels.filtered.vcf
-gatk IndexFeatureFile --input variants/GCF.38.filtered.renamed.vcf
-</code></pre></div>
-</details>
-<div class="admonition note">
-<p class="admonition-title">Chromosome names</p>
-<p>Unlike IGV, <code>gatk</code> requires equal chromosome names for all its input files and indexes, e.g. in <code>.fasta</code>, <code>.bam</code> and <code>.vcf</code> files. In general, for the human genome there are three types of chromosome names:</p>
-<ul>
-<li>Just a number, e.g. <code>20</code></li>
-<li>Prefixed by <code>chr</code>. e.g. <code>chr20</code></li>
-<li>Refseq name, e.g. <code>NC_000020.11</code></li>
-</ul>
-<p>Before you start the alignment, it&rsquo;s wise to check out what chromosome naming your input files are using, because changing chromosome names in a <code>.fasta</code> file is easier than in a <code>.bam</code> file.</p>
-<p>If your fasta titles are e.g. starting with a number you can add <code>chr</code> to it with <code>sed</code>:</p>
-<div class="highlight"><pre><span></span><code>sed s/^&gt;/&gt;chr/g &lt;reference.fasta&gt;
-</code></pre></div>
-<p>You can change chromsome names in a vcf with <a href="http://samtools.github.io/bcftools/bcftools.html#annotate"><code>bcftools annotate</code></a>:</p>
-<div class="highlight"><pre><span></span><code>bcftools annotate --rename-chrs &lt;tab-delimited-renaming&gt; &lt;input.vcf&gt;
-</code></pre></div>
-</div>
-<h3 id="2-base-quality-score-recalibration-bqsr">2. Base Quality Score Recalibration (BQSR)</h3>
-<p>BQSR evaluates the base qualities on systematic error. It can ignore sites with known variants. BQSR helps to identify faulty base calls, and therefore reduces the chance on discovering false positive variant positions.</p>
-<p>BQSR is done in two steps:</p>
-<ol>
-<li>Recalibration with <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037593511-BaseRecalibrator"><code>gatk BaseRecalibrator</code></a></li>
-<li>By using the output of <code>gatk BaseRecalibrator</code>, the application to the bam file with <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037055712-ApplyBQSR"><code>gatk ApplyBQSR</code></a></li>
-</ol>
-<p><strong>Exercise:</strong> Check out the documentation of the tools. Which options are required?</p>
-<details class="done"><summary>Answer</summary><p>For <code>gatk BaseRecalibrator</code>:</p>
-<ul>
-<li><code>--reference</code></li>
-<li><code>--input</code></li>
-<li><code>--known-sites</code></li>
-<li><code>--output</code></li>
-</ul>
-<p>For <code>gatk ApplyBQSR</code>:</p>
-<ul>
-<li><code>--bqsr-recal-file</code></li>
-<li><code>--input</code></li>
-<li><code>--output</code></li>
-</ul>
-</details>
-<p><strong>Exercise:</strong> Run the two commands with the required options on <code>mother.rg.md.bam</code>, with <code>--known-sites</code> <code>variants/1000g_gold_standard.indels.filtered.vcf</code> and <code>variants/GCF.38.filtered.renamed.vcf</code>.</p>
-<div class="admonition hint">
-<p class="admonition-title">Multiple inputs for same argument</p>
-<p>In some cases you need to add multiple inputs (e.g. multiple <code>vcf</code> files) into the same argument (e.g. <code>--known-sites</code>). To provide multiple inputs for the same argument in <code>gatk</code>, you can use the same argument multiple times, e.g.:</p>
-<div class="highlight"><pre><span></span><code>gatk BaseRecalibrator <span class="se">\</span>
---reference &lt;reference.fa&gt; <span class="se">\</span>
---input &lt;alignment.bam&gt; <span class="se">\</span>
---known-sites &lt;variants1.vcf&gt; <span class="se">\</span>
---known-sites &lt;variants2.vcf&gt; <span class="se">\</span>
---output &lt;output.table&gt;
-</code></pre></div>
-</div>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
-
-mkdir bqsr
-
-gatk BaseRecalibrator <span class="se">\</span>
---reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
---input alignment/mother.rg.md.bam <span class="se">\</span>
---known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
---known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
---output bqsr/mother.recal.table
-
-gatk ApplyBQSR <span class="se">\</span>
---input alignment/mother.rg.md.bam <span class="se">\</span>
---bqsr-recal-file bqsr/mother.recal.table <span class="se">\</span>
---output bqsr/mother.recal.bam
-</code></pre></div>
-</details>
-<p><strong>Exercise:</strong> Place these commands in a &lsquo;for loop&rsquo;, that performs the BQSR for mother, father and son.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
-
-<span class="k">for</span> sample <span class="k">in</span> mother father son
-<span class="k">do</span>
-  gatk BaseRecalibrator <span class="se">\</span>
-  --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
-  --input alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
-  --known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
-  --known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
-  --output bqsr/<span class="nv">$sample</span>.recal.table
-
-  gatk ApplyBQSR <span class="se">\</span>
-  --input alignment/<span class="nv">$sample</span>.rg.md.bam <span class="se">\</span>
-  --bqsr-recal-file bqsr/<span class="nv">$sample</span>.recal.table <span class="se">\</span>
-  --output bqsr/<span class="nv">$sample</span>.recal.bam
-<span class="k">done</span>
-</code></pre></div>
-</details>
-<h3 id="3-variant-calling">3. Variant calling</h3>
+<h3 id="1-variant-calling">1. Variant calling</h3>
 <h4 id="calculating-pl-and-gq-by-hand">Calculating PL and GQ by hand</h4>
 <p>Here&rsquo;s a function in R to calculate genotype likelihoods as described in Li H.  Bioinformatics. 2011;27:2987–93 (assuming equal base error probabilities for all reads):</p>
 <div class="highlight"><pre><span></span><code><span class="n">genotype_likelihood</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">ref</span><span class="p">,</span><span class="n">alt</span><span class="p">){</span>
@@ -855,14 +726,16 @@ gatk ApplyBQSR <span class="se">\</span>
 <li><code>--reference</code></li>
 </ul>
 </details>
-<p><strong>Exercise:</strong> Make a directory <code>~/workdir/variants</code> to write the output vcf. After that, run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
-mkdir variants
+<p><strong>Exercise:</strong> Generate a script called <code>B10_run_haplotype_caller.sh</code> in <code>B-mother_only</code>. Use it to make a directory called <code>~/workdir/results/variants</code> to write the output vcf. In the same script, run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>results/bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">B10_run_haplotype_caller.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+mkdir -p results/variants
 
 gatk HaplotypeCaller <span class="se">\</span>
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
---input bqsr/mother.recal.bam <span class="se">\</span>
---output variants/mother.HC.vcf <span class="se">\</span>
+--input results/bqsr/mother.recal.bam <span class="se">\</span>
+--output results/variants/mother.HC.vcf <span class="se">\</span>
 --intervals chr20:10018000-10220000
 </code></pre></div>
 </details>
@@ -878,8 +751,16 @@ gatk HaplotypeCaller <span class="se">\</span>
 --fields CHROM -F POS -F TYPE -GF GT <span class="se">\</span>
 --output variants/mother.HC.table
 </code></pre></div>
-<p><strong>Exercise:</strong> Run the command and have a look at the first few records (use e.g. <code>head</code> or <code>less</code>). After that, report the number of SNPs and INDELs.</p>
-<details class="done"><summary>Answer</summary><p>You can get the number of SNPs with:</p>
+<p><strong>Exercise:</strong> Run the command from within a script called <code>B11_variants_to_table.sh</code>, and have a look at the first few records (use e.g. <code>head</code> or <code>less</code>). After that, report the number of SNPs and INDELs.</p>
+<details class="done"><summary>Answer</summary><p>Your script should look like:</p>
+<div class="highlight"><span class="filename">B11_variants_to_table.sh</span><pre><span></span><code><span class="nb">cd</span> ~/workdir
+
+gatk VariantsToTable <span class="se">\</span>
+--variant results/variants/mother.HC.vcf <span class="se">\</span>
+--fields CHROM -F POS -F TYPE -GF GT <span class="se">\</span>
+--output results/variants/mother.HC.table
+</code></pre></div>
+<p>You can get the number of SNPs with:</p>
 <div class="highlight"><pre><span></span><code>grep -c <span class="s2">&quot;SNP&quot;</span> variants/mother.HC.table
 </code></pre></div>
 <p>which will give 326</p>
@@ -896,43 +777,47 @@ gatk HaplotypeCaller <span class="se">\</span>
 326 SNP
 </code></pre></div>
 </details>
-<p>We will do the variant calling on all three samples. Later we want to combine the variant calls. For efficient merging of vcfs, we will need to output the variants as a GVCF. To do that, we will use the option <code>--emit-ref-confidence GVCF</code>. Also, we&rsquo;ll visualise the haplotype phasing with IGV in the next section. For that we&rsquo;ll need a phased bam. You can get this output with the argument <code>--bam-output</code>.</p>
-<p><strong>Exercise:</strong> Run <code>gatk HaplotypeCaller</code> for mother, father and son by using a loop, and by using the arguments in the previous exercise. On top of that add the arguments <code>--emit-ref-confidence GVCF</code> and <code>--bamoutput &lt;phased.bam&gt;</code>.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+<p>Now, we will perform the variant calling on all three samples. Later we want to combine the variant calls. For efficient merging of vcfs, we will need to output the variants as a GVCF. To do that, we will use the option <code>--emit-ref-confidence GVCF</code>. Also, we&rsquo;ll visualise the haplotype phasing with IGV in the next section. For that we&rsquo;ll need a phased bam. You can get this output with the argument <code>--bam-output</code>.</p>
+<p><strong>Exercise:</strong> Create a script in <code>C-all_samples</code> called <code>C06_run_haplotypecaller.sh</code>. Use it to run <code>gatk HaplotypeCaller</code> for mother, father and son in a loop. Use the same arguments as in the previous exercise. On top of that, add the arguments <code>--emit-ref-confidence GVCF</code> and <code>--bamoutput &lt;phased.bam&gt;</code>.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">C06_run_haplotypecaller.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-<span class="k">for</span> sample <span class="k">in</span> mother father son
+<span class="nb">cd</span> ~/workdir
+
+<span class="k">for</span> SAMPLE <span class="k">in</span> mother father son
 <span class="k">do</span>
-  gatk HaplotypeCaller <span class="se">\</span>
-  --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
-  --input bqsr/<span class="nv">$sample</span>.recal.bam <span class="se">\</span>
-  --output variants/<span class="nv">$sample</span>.HC.g.vcf <span class="se">\</span>
-  --bam-output variants/<span class="nv">$sample</span>.phased.bam <span class="se">\</span>
-  --intervals chr20:10018000-10220000 <span class="se">\</span>
-  --emit-ref-confidence GVCF
+    gatk HaplotypeCaller <span class="se">\</span>
+    --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+    --input results/bqsr/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.recal.bam <span class="se">\</span>
+    --output results/variants/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.HC.g.vcf <span class="se">\</span>
+    --bam-output results/variants/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.phased.bam <span class="se">\</span>
+    --intervals chr20:10018000-10220000 <span class="se">\</span>
+    --emit-ref-confidence GVCF
 <span class="k">done</span>
 </code></pre></div>
 </details>
-<h3 id="4-combining-gvcfs">4. Combining GVCFs</h3>
+<h3 id="2-combining-gvcfs">2. Combining GVCFs</h3>
 <p>Now that we have all three GVCFs of the mother, father and son, we can combine them into a database. We do this because it enables us to later add GVCFs (with the option <code>--genomicsdb-update-workspace-path</code>), and to efficiently combine them into a single vcf.</p>
 <p>You can generate a GenomicsDB on our three samples like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+<div class="highlight"><span class="filename">C07_create_genomicsdb.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
 
 gatk GenomicsDBImport <span class="se">\</span>
---variant variants/mother.HC.g.vcf <span class="se">\</span>
---variant variants/father.HC.g.vcf <span class="se">\</span>
---variant variants/son.HC.g.vcf <span class="se">\</span>
+--variant results/variants/mother.HC.g.vcf <span class="se">\</span>
+--variant results/variants/father.HC.g.vcf <span class="se">\</span>
+--variant results/variants/son.HC.g.vcf <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
---genomicsdb-workspace-path genomicsdb
+--genomicsdb-workspace-path results/genomicsdb
 </code></pre></div>
-<p><strong>Exercise:</strong> Run this command to generate the database.</p>
+<p><strong>Exercise:</strong> Create a script called <code>C07_create_genomicsdb.sh</code> to run this command to generate the database.</p>
 <p>You can retrieve the combined vcf from the database with <code>gatk GenotypeGVCFs</code>.</p>
-<div class="highlight"><pre><span></span><code>gatk GenotypeGVCFs <span class="se">\</span>
+<div class="highlight"><span class="filename">C08_genotype_gvcfs.sh</span><pre><span></span><code>gatk GenotypeGVCFs <span class="se">\</span>
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
 --variant gendb://genomicsdb <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
 --output variants/trio.vcf
 </code></pre></div>
-<p><strong>Exercise:</strong> Run this command to generate the combined vcf.</p>
+<p><strong>Exercise:</strong> Create a script called <code>C08_genotype_gvcfs.sh</code> to run this command to generate the combined vcf.</p>
 
               
             </article>
@@ -946,7 +831,7 @@ gatk GenomicsDBImport <span class="se">\</span>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../day1/alignment_advanced/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Read alignment - advanced" rel="prev">
+        <a href="../variant_calling_preparation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Variant calling - preparation" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -955,7 +840,7 @@ gatk GenomicsDBImport <span class="se">\</span>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Read alignment - advanced
+              Variant calling - preparation
             </div>
           </div>
         </a>

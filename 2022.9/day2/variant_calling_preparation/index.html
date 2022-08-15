@@ -9,14 +9,14 @@
       
       
       
-        <link rel="canonical" href="https://sib-swiss.github.io/NGS-variants-training/2022.9/day2/annotation/">
+        <link rel="canonical" href="https://sib-swiss.github.io/NGS-variants-training/2022.9/day2/variant_calling_preparation/">
       
       <link rel="icon" href="../../assets/images/SIB_logo.svg">
       <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
-        <title>Annotation - NGS - variant analysis</title>
+        <title>Variant calling - preparation - NGS - variant analysis</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Annotation
+              Variant calling - preparation
             
           </span>
         </div>
@@ -393,11 +393,82 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../variant_calling_preparation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Variant calling - preparation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Variant calling - preparation
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-indexing-indexing-indexing" class="md-nav__link">
+    1. Indexing, indexing, indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-base-quality-score-recalibration-bqsr" class="md-nav__link">
+    2. Base Quality Score Recalibration (BQSR)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -449,62 +520,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Annotation
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../annotation/" class="md-nav__link">
         Annotation
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#learning-outcomes" class="md-nav__link">
-    Learning outcomes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#material" class="md-nav__link">
-    Material
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#exercises" class="md-nav__link">
-    Exercises
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -559,6 +579,26 @@
     Exercises
   </a>
   
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-indexing-indexing-indexing" class="md-nav__link">
+    1. Indexing, indexing, indexing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-base-quality-score-recalibration-bqsr" class="md-nav__link">
+    2. Base Quality Score Recalibration (BQSR)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -573,82 +613,161 @@
             <article class="md-content__inner md-typeset">
               
                 
-<a href="https://github.com/sib-swiss/NGS-variants-training/edit/main/docs/day2/annotation.md" title="Edit this page" class="md-content__button md-icon">
+<a href="https://github.com/sib-swiss/NGS-variants-training/edit/main/docs/day2/variant_calling_preparation.md" title="Edit this page" class="md-content__button md-icon">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
 </a>
 
 
 
-  <h1>Annotation</h1>
+  <h1>Variant calling - preparation</h1>
 
 <h2 id="learning-outcomes">Learning outcomes</h2>
 <p><strong>After having completed this chapter you will be able to:</strong></p>
 <ul>
-<li>Describe the aims of variant annotation</li>
-<li>Explain how variants are ranked in order of importance</li>
-<li>Explain how splice variation affects variant annotation</li>
-<li>Perform a variant annotation with <code>snpEff</code></li>
-<li>Interpret the report generated by <code>snpEff</code></li>
-<li>Explain how variant annotation can be added to a <code>vcf</code> file</li>
+<li>Describe how variant information is stored in a variant call format (<code>.vcf</code>) file</li>
+<li>Describe the &lsquo;missing genotype problem&rsquo; when calling variants of multiple samples, and the different methods on how this can be solved</li>
+<li>Applying Base Quality Score Recalibration on an alignment file</li>
 </ul>
 <h2 id="material">Material</h2>
-<p><a class="md-button" href="../../assets/pdf/variant_annotation.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M88 304h-8v-48h8c13.3 0 24 10.7 24 24s-10.7 24-24 24zm104-48h8c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-8v-96zM224 0v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V64C0 28.65 28.65 0 64 0h160zM64 224c-8.84 0-16 7.2-16 16v128c0 8.8 7.16 16 16 16s16-7.2 16-16v-32h8c30.9 0 56-25.1 56-56s-25.1-56-56-56H64zm96 144c0 8.8 7.2 16 16 16h24c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-24c-8.8 0-16 7.2-16 16v128zm128-144c-8.8 0-16 7.2-16 16v128c0 8.8 7.2 16 16 16s16-7.2 16-16v-48h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32v-32h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-48zM256 0l128 128H256V0z"/></svg></span> Download the presentation</a></p>
+<p><a class="md-button" href="../../assets/pdf/variant_calling.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M88 304h-8v-48h8c13.3 0 24 10.7 24 24s-10.7 24-24 24zm104-48h8c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-8v-96zM224 0v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V64C0 28.65 28.65 0 64 0h160zM64 224c-8.84 0-16 7.2-16 16v128c0 8.8 7.16 16 16 16s16-7.2 16-16v-32h8c30.9 0 56-25.1 56-56s-25.1-56-56-56H64zm96 144c0 8.8 7.2 16 16 16h24c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-24c-8.8 0-16 7.2-16 16v128zm128-144c-8.8 0-16 7.2-16 16v128c0 8.8 7.2 16 16 16s16-7.2 16-16v-48h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32v-32h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-48zM256 0l128 128H256V0z"/></svg></span> Download the presentation</a></p>
+<p><a href="https://samtools.github.io/hts-specs/VCFv4.1.pdf">VCF format description</a></p>
+<p><a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-">GATK best practices germline short variant workflow</a>:</p>
+<figure>
+  <img src="../../assets/images/gatk_germline.png" width="800"/>
+</figure>
+
 <h2 id="exercises">Exercises</h2>
-<p>To use the human genome as a reference, we have downloaded the database with:</p>
-<div class="admonition warning">
-<p class="admonition-title">No need to download, it&rsquo;s already downloaded for you</p>
+<h3 id="1-indexing-indexing-indexing">1. Indexing, indexing, indexing</h3>
+<p>Many algorithms work faster, or only work with an index of their (large) input files. In that sense, <code>gatk</code> is no different from other tools. The index for a reference needs to be created in two steps:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/data/reference
+samtools faidx &lt;reference.fa&gt;
+gatk CreateSequenceDictionary --REFERENCE &lt;reference.fa&gt;
+</code></pre></div>
+<p>Also input vcf files need to be indexed. This will create a <code>.idx</code> file associated with the <code>.vcf</code>. You can do this like this:</p>
+<div class="highlight"><pre><span></span><code>gatk IndexFeatureFile --input &lt;variants.vcf&gt;
+</code></pre></div>
+<p><strong>Exercise:</strong> Create two scripts in <code>A-prepare_references</code> to generate the required indexes:</p>
+<ul>
+<li><strong><code>A03_create_vcf_indices.sh</code></strong>, in which you create indices for:<ul>
+<li>A part of the dbsnp database: <code>variants/GCF.38.filtered.renamed.vcf</code></li>
+<li>A part of the 1000 genomes indel golden standard: <code>variants/1000g_gold_standard.indels.filtered.vcf</code></li>
+</ul>
+</li>
+<li><strong><code>A04_create_fasta_index.sh</code></strong>, in which you create an index for:<ul>
+<li>The reference genome <code>reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Indexes are often stored in the same directory as the indexed file. For the vcf and fasta indexes this is also the case. </p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="c1"># don&#39;t run this. It&#39;s already downloaded for you</span>
-snpEff download -v GRCh38.99
-</code></pre></div>
-<p>You can run snpEff like so:</p>
-<div class="highlight"><pre><span></span><code>mkdir annotation
+<details class="done"><summary>Answer</summary><p>Creating the indices for the vcfs:</p>
+<div class="highlight"><span class="filename">A03_create_vcf_indices.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
-snpEff -Xmx4g <span class="se">\</span>
--v <span class="se">\</span>
-GRCh38.99 <span class="se">\</span>
-&lt;filtered_variants.vcf&gt; <span class="se">\</span>
-&gt; &lt;annotated_variants.vcf&gt;
-</code></pre></div>
-<p><strong>Exercise:</strong> Run the command on the filtered vcf (<code>trio.filtered.vcf</code>) using a script called <code>C18_annotate_snpEff.sh</code>. Check out the html file (<code>snpEff_summary.html</code>). Try to answer these questions:</p>
-<p><strong>A.</strong> How many effects were calculated?</p>
-<p><strong>B.</strong> How many variants are in the vcf?</p>
-<p><strong>C.</strong> Why is this different?</p>
-<p><strong>D.</strong> How many effects result in a missense mutation?</p>
-<details class="done"><summary>Answer</summary><p>Your script:</p>
-<div class="highlight"><span class="filename">C18_annotate_snpEff.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">cd</span> ~/workdir/data 
 
-<span class="nb">cd</span> ~/workdir/results/variants
-
-snpEff -Xmx4g <span class="se">\</span>
--v <span class="se">\</span>
-GRCh38.99 <span class="se">\</span>
-trio.filtered.vcf <span class="se">\</span>
-&gt; trio.filtered.snpeff.vcf
+gatk IndexFeatureFile --input variants/1000g_gold_standard.indels.filtered.vcf
+gatk IndexFeatureFile --input variants/GCF.38.filtered.renamed.vcf
 </code></pre></div>
-<p>A. There were 10,357 effects calculated.</p>
-<p>B. There are only 556 variants in the vcf.</p>
-<p>C. This means that there are multiple effects per variant. snpEff calculates effects for each splice variant, and therefore the number of effects are a multitude of the number of variants.</p>
-<p>D. Two effects result in a missense mutation.</p>
-</details>
-<p>You can (quick and dirty) query the annotated vcf for the missense mutation with <code>grep</code>.</p>
-<p><strong>Exercise:</strong> Find the variant causing the missense mutation (the line contains the string <code>missense</code>). And answer the following questions:</p>
-<details class="hint"><summary>Hint</summary><div class="highlight"><pre><span></span><code>grep missense trio.filtered.snpeff.vcf 
+<p>Creating the index for the reference genome:</p>
+<div class="highlight"><span class="filename">A04_create_fasta_index.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/data 
+
+samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
+gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
 </code></pre></div>
 </details>
-<p>Run the command and have a look at the SnpEff <a href="http://pcingola.github.io/SnpEff/se_inputoutput/#ann-field-vcf-output-files">ANN field documentation</a>. Answer the following questions:</p>
-<p><strong>A.</strong> How are the SNP annotations stored in the vcf?</p>
-<p><strong>B.</strong> What are the genotypes of the individuals?</p>
-<p><strong>C.</strong> Which amino acid change does it cause?</p>
-<details class="done"><summary>Answer</summary><p>Find the line with the missense mutation like this:</p>
-<div class="highlight"><pre><span></span><code>grep missense annotation/trio.filtered.snpeff.vcf
+<div class="admonition note">
+<p class="admonition-title">Chromosome names</p>
+<p>Unlike IGV, <code>gatk</code> requires equal chromosome names for all its input files and indexes, e.g. in <code>.fasta</code>, <code>.bam</code> and <code>.vcf</code> files. In general, for the human genome there are three types of chromosome names:</p>
+<ul>
+<li>Just a number, e.g. <code>20</code></li>
+<li>Prefixed by <code>chr</code>. e.g. <code>chr20</code></li>
+<li>Refseq name, e.g. <code>NC_000020.11</code></li>
+</ul>
+<p>Before you start the alignment, it&rsquo;s wise to check out what chromosome naming your input files are using, because changing chromosome names in a <code>.fasta</code> file is easier than in a <code>.bam</code> file.</p>
+<p>If your fasta titles are e.g. starting with a number you can add <code>chr</code> to it with <code>sed</code>:</p>
+<div class="highlight"><pre><span></span><code>sed s/^&gt;/&gt;chr/g &lt;reference.fasta&gt;
 </code></pre></div>
-<p>This results in (truncated long line, scroll to the right to see more):</p>
-<div class="highlight"><pre><span></span><code>chr20   10049540        .       T       A       220.29  PASS    AC=1;AF=0.167;AN=6;BaseQRankSum=-6.040e-01;DP=85;ExcessHet=3.0103;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=8.16;ReadPosRankSum=0.226;SOR=0.951;ANN=A|missense_variant|MODERATE|ANKEF1|ENSG00000132623|transcript|ENST00000378392.6|protein_coding|7/11|c.971T&gt;A|p.Leu324Gln|1426/5429|971/2331|324/776||,A|missense_variant|MODERATE|ANKEF1|ENSG00000132623|transcript|ENST00000378380.4|protein_coding|6/10|c.971T&gt;A|p.Leu324Gln|1300/5303|971/2331|324/776||       GT:AD:DP:GQ:PL  0/0:34,0:34:99:0,102,1163       0/1:17,10:27:99:229,0,492       0/0:24,0:24:72:0,72,811
+<p>You can change chromsome names in a vcf with <a href="http://samtools.github.io/bcftools/bcftools.html#annotate"><code>bcftools annotate</code></a>:</p>
+<div class="highlight"><pre><span></span><code>bcftools annotate --rename-chrs &lt;tab-delimited-renaming&gt; &lt;input.vcf&gt;
 </code></pre></div>
-<p>A. SNP annotations are stored in the INFO field, starting with <code>ANN=</code></p>
-<p>B. The genotypes are homozygous reference for the father and son, and heterozygous for the mother. (find the order of the samples with <code>grep ^#CHROM</code>)</p>
-<p>C. The triplet changes from cTg to cAg, resulting in a change from Leu (Leucine) to Gln (Glutamine).</p>
+</div>
+<h3 id="2-base-quality-score-recalibration-bqsr">2. Base Quality Score Recalibration (BQSR)</h3>
+<p>BQSR evaluates the base qualities on systematic error. It can ignore sites with known variants. BQSR helps to identify faulty base calls, and therefore reduces the chance on discovering false positive variant positions.</p>
+<p>BQSR is done in two steps:</p>
+<ol>
+<li>Recalibration with <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037593511-BaseRecalibrator"><code>gatk BaseRecalibrator</code></a></li>
+<li>By using the output of <code>gatk BaseRecalibrator</code>, the application to the bam file with <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037055712-ApplyBQSR"><code>gatk ApplyBQSR</code></a></li>
+</ol>
+<p><strong>Exercise:</strong> Check out the documentation of the tools. Which options are required?</p>
+<details class="done"><summary>Answer</summary><p>For <code>gatk BaseRecalibrator</code>:</p>
+<ul>
+<li><code>--reference</code></li>
+<li><code>--input</code></li>
+<li><code>--known-sites</code></li>
+<li><code>--output</code></li>
+</ul>
+<p>For <code>gatk ApplyBQSR</code>:</p>
+<ul>
+<li><code>--bqsr-recal-file</code></li>
+<li><code>--input</code></li>
+<li><code>--output</code></li>
+</ul>
+</details>
+<p><strong>Exercise:</strong> Create a script in <code>B-mother_only</code> called <code>B09_perform_bqsr.sh</code> to execute the two bqsr commands. Do this with the required options on <code>mother.rg.md.bam</code>. At <code>--known-sites</code> specify <code>variants/1000g_gold_standard.indels.filtered.vcf</code> and <code>variants/GCF.38.filtered.renamed.vcf</code>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Multiple inputs for same argument</p>
+<p>In some cases you need to add multiple inputs (e.g. multiple <code>vcf</code> files) into the same argument (e.g. <code>--known-sites</code>). To provide multiple inputs for the same argument in <code>gatk</code>, you can use the same argument multiple times, e.g.:</p>
+<div class="highlight"><pre><span></span><code>gatk BaseRecalibrator <span class="se">\</span>
+--reference &lt;reference.fa&gt; <span class="se">\</span>
+--input &lt;alignment.bam&gt; <span class="se">\</span>
+--known-sites &lt;variants1.vcf&gt; <span class="se">\</span>
+--known-sites &lt;variants2.vcf&gt; <span class="se">\</span>
+--output &lt;output.table&gt;
+</code></pre></div>
+</div>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">B09_perform_bqsr.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+mkdir -p results/bqsr
+
+gatk BaseRecalibrator <span class="se">\</span>
+--reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+--input results/alignments/mother.rg.md.bam <span class="se">\</span>
+--known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
+--known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
+--output results/bqsr/mother.recal.table
+
+gatk ApplyBQSR <span class="se">\</span>
+--input results/alignments/mother.rg.md.bam <span class="se">\</span>
+--bqsr-recal-file results/bqsr/mother.recal.table <span class="se">\</span>
+--output results/bqsr/mother.recal.bam
+</code></pre></div>
+</details>
+<p><strong>Exercise:</strong> Place these commands in a &lsquo;for loop&rsquo;, that performs the BQSR for mother, father and son. Do this with a script called <code>C05_perform_bqsr.sh</code> in <code>C-all_samples</code>.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">C05_perform_bqsr.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+<span class="k">for</span> SAMPLE <span class="k">in</span> mother father son
+<span class="k">do</span>
+gatk BaseRecalibrator <span class="se">\</span>
+--reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+--input results/alignments/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.rg.md.bam <span class="se">\</span>
+--known-sites data/variants/GCF.38.filtered.renamed.vcf <span class="se">\</span>
+--known-sites data/variants/1000g_gold_standard.indels.filtered.vcf <span class="se">\</span>
+--output bqsr/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.recal.table
+
+gatk ApplyBQSR <span class="se">\</span>
+--input results/alignments/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.rg.md.bam <span class="se">\</span>
+--bqsr-recal-file bqsr/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.recal.table <span class="se">\</span>
+--output bqsr/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.recal.bam
+<span class="k">done</span>
+</code></pre></div>
 </details>
 
               
@@ -663,7 +782,7 @@ trio.filtered.vcf <span class="se">\</span>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../filtering_evaluation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Filtering &amp; evaluation" rel="prev">
+        <a href="../../day1/alignment_advanced/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Read alignment - advanced" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -672,11 +791,26 @@ trio.filtered.vcf <span class="se">\</span>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Filtering & evaluation
+              Read alignment - advanced
             </div>
           </div>
         </a>
       
+      
+        
+        <a href="../variant_calling/" class="md-footer__link md-footer__link--next" aria-label="Next: Variant calling" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Variant calling
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
       
     </nav>
   

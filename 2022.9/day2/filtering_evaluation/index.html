@@ -395,6 +395,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../variant_calling_preparation/" class="md-nav__link">
+        Variant calling - preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../variant_calling/" class="md-nav__link">
         Variant calling
       </a>
@@ -689,7 +703,7 @@
 <p>The developers of <code>gatk</code> strongly advise to do <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-">Variant Quality Score Recalibration (VQSR)</a> for filtering SNPs and INDELs. However, this is not always possible. For example, in the case of limited data availability and/or in the case you are working with non-model organisms and/or in the case you are a bit lazy and okay with a number of false positives.</p>
 <p>Our dataset is too small to apply VQSR. We will therefore do hard filtering instead.</p>
 <h4 id="splitting-snps-and-indels">Splitting SNPs and INDELs</h4>
-<p>First, filtering thresholds are usually different for SNPs and INDELs. You can extract all the SNP records in our trio vcf like this:</p>
+<p>First, filtering thresholds are usually different for SNPs and INDELs. Therefore, we will split <code>trio.vcf</code> into two vcfs, one containg only SNPs, and one containing only INDELs. You can extract all the SNP records in our trio vcf like this:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
 
 gatk SelectVariants <span class="se">\</span>
@@ -699,38 +713,69 @@ gatk SelectVariants <span class="se">\</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Check out the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037055952-SelectVariants">documentation of <code>gatk SelectVariants</code></a>, and:</p>
 <ul>
-<li>Figure out what you&rsquo;ll need to fill in at <code>--select-type-to-include</code> if you want to select only INDELS.</li>
-<li>Generate a vcf with only the SNPs and a second vcf with only the INDELs from <code>trio.vcf</code>.</li>
+<li>Figure out what you&rsquo;ll need to write at <code>--select-type-to-include</code> if you want to select only INDELS.</li>
+<li>Make a script (named <code>C09_select_SNPs.sh</code>) to generate a vcf with only the SNPs</li>
+<li>Make a script (named <code>C10_select_INDELs.sh</code>) to generate a second vcf with only the INDELs from <code>trio.vcf</code>.</li>
 </ul>
 <details class="done"><summary>Answer</summary><p>You will need to fill in <code>INDEL</code> at <code>--select-type-to-include</code> to filter for INDELs.</p>
-<p>To get the SNPs you can run the command above. To get the INDELs you&rsquo;ll need to change <code>--select-type-to-include</code> to <code>INDEL</code>:</p>
-<div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
---variant variants/trio.vcf <span class="se">\</span>
+<p>To get the SNPs you can run the command above:</p>
+<div class="highlight"><span class="filename">C09_select_SNPs.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+gatk SelectVariants <span class="se">\</span>
+--variant results/variants/trio.vcf <span class="se">\</span>
+--select-type-to-include SNP <span class="se">\</span>
+--output results/variants/trio.SNP.vcf
+</code></pre></div>
+<p>To get the INDELs you&rsquo;ll need to change <code>--select-type-to-include</code> to <code>INDEL</code>:</p>
+<div class="highlight"><span class="filename">C10_select_INDELs.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+gatk SelectVariants <span class="se">\</span>
+--variant results/variants/trio.vcf <span class="se">\</span>
 --select-type-to-include INDEL <span class="se">\</span>
---output variants/trio.INDEL.vcf
+--output results/variants/trio.INDEL.vcf
 </code></pre></div>
 </details>
 <h4 id="filtering-snps">Filtering SNPs</h4>
 <p>The command <code>gatk VariantFiltration</code> enables you to filter for both the INFO field (per variant) and FORMAT field (per genotype). For now we&rsquo;re only interested in filtering variants. Below you can find the command to hard-filter the SNP variants on some sensible thresholds (that are explained <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants">here</a>).</p>
 <div class="highlight"><pre><span></span><code>gatk VariantFiltration <span class="se">\</span>
 --variant variants/trio.SNP.vcf <span class="se">\</span>
---filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span> --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span> --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;SOR &gt; 3.0&quot;</span> --filter-name <span class="s2">&quot;SOR3&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;FS &gt; 60.0&quot;</span> --filter-name <span class="s2">&quot;FS60&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;MQ &lt; 40.0&quot;</span> --filter-name <span class="s2">&quot;MQ40&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;MQRankSum &lt; -12.5&quot;</span> --filter-name <span class="s2">&quot;MQRankSum-12.5&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span>              --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span>           --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;SOR &gt; 3.0&quot;</span>             --filter-name <span class="s2">&quot;SOR3&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;FS &gt; 60.0&quot;</span>             --filter-name <span class="s2">&quot;FS60&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;MQ &lt; 40.0&quot;</span>             --filter-name <span class="s2">&quot;MQ40&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;MQRankSum &lt; -12.5&quot;</span>     --filter-name <span class="s2">&quot;MQRankSum-12.5&quot;</span> <span class="se">\</span>
 --filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -8.0&quot;</span> --filter-name <span class="s2">&quot;ReadPosRankSum-8&quot;</span> <span class="se">\</span>
 --output variants/trio.SNP.filtered.vcf
 </code></pre></div>
-<p><strong>Exercise:</strong> Run the filtering command above. Did it affect the number of records in the vcf?</p>
+<p><strong>Exercise:</strong> Run the filtering command above in a script called <code>C11_filter_SNPs.sh</code>. Did it affect the number of records in the vcf?</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can check out the number of records in a vcf with:</p>
 <div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> &lt;variants.vcf&gt; <span class="p">|</span> wc -l
 </code></pre></div>
 </div>
-<details class="done"><summary>Answer</summary><p>There are no differences in the number of records:</p>
+<details class="done"><summary>Answer</summary><p>Your script:</p>
+<div class="highlight"><span class="filename">C11_filter_SNPs.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results/variants
+
+gatk VariantFiltration <span class="se">\</span>
+--variant trio.SNP.vcf <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span>              --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span>           --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;SOR &gt; 3.0&quot;</span>             --filter-name <span class="s2">&quot;SOR3&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;FS &gt; 60.0&quot;</span>             --filter-name <span class="s2">&quot;FS60&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;MQ &lt; 40.0&quot;</span>             --filter-name <span class="s2">&quot;MQ40&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;MQRankSum &lt; -12.5&quot;</span>     --filter-name <span class="s2">&quot;MQRankSum-12.5&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -8.0&quot;</span> --filter-name <span class="s2">&quot;ReadPosRankSum-8&quot;</span> <span class="se">\</span>
+--output trio.SNP.filtered.vcf
+</code></pre></div>
+<p>There are no differences in the number of records:</p>
 <div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.SNP.vcf <span class="p">|</span> wc -l
 </code></pre></div>
 <p>and</p>
@@ -750,13 +795,13 @@ gatk SelectVariants <span class="se">\</span>
 <p>A command with <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering">sensible parameters</a> to do a first iteration of hard filtering the INDELs would be:</p>
 <div class="highlight"><pre><span></span><code>gatk VariantFiltration <span class="se">\</span>
 --variant variants/trio.INDEL.vcf <span class="se">\</span>
---filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span> --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span> --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;FS &gt; 200.0&quot;</span> --filter-name <span class="s2">&quot;FS200&quot;</span> <span class="se">\</span>
---filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -20.0&quot;</span> --filter-name <span class="s2">&quot;ReadPosRankSum-20&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span>                  --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span>               --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;FS &gt; 200.0&quot;</span>                --filter-name <span class="s2">&quot;FS200&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -20.0&quot;</span>    --filter-name <span class="s2">&quot;ReadPosRankSum-20&quot;</span> <span class="se">\</span>
 --output variants/trio.INDEL.filtered.vcf
 </code></pre></div>
-<p><strong>Exercise:</strong> Run the command and figure out how many variants are filtered out.</p>
+<p><strong>Exercise:</strong> Run the command from a script called <code>C12_filter_INDELs.sh</code> and figure out how many variants are filtered out.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can use this command from the answer to the previous exercise:</p>
@@ -764,7 +809,21 @@ gatk SelectVariants <span class="se">\</span>
 </code></pre></div>
 <p>to see how many INDELs were filtered out.</p>
 </div>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.INDEL.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
+<details class="done"><summary>Answer</summary><p>Your script:</p>
+<div class="highlight"><span class="filename">C12_filter_INDELs.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results/variants
+
+gatk VariantFiltration <span class="se">\</span>
+--variant trio.INDEL.vcf <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QD &lt; 2.0&quot;</span>                  --filter-name <span class="s2">&quot;QD2&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;QUAL &lt; 30.0&quot;</span>               --filter-name <span class="s2">&quot;QUAL30&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;FS &gt; 200.0&quot;</span>                --filter-name <span class="s2">&quot;FS200&quot;</span> <span class="se">\</span>
+--filter-expression <span class="s2">&quot;ReadPosRankSum &lt; -20.0&quot;</span>    --filter-name <span class="s2">&quot;ReadPosRankSum-20&quot;</span> <span class="se">\</span>
+--output trio.INDEL.filtered.vcf
+</code></pre></div>
+<p>And check out the contents of the <code>FILTER</code> column: </p>
+<div class="highlight"><pre><span></span><code>grep -v <span class="s2">&quot;^#&quot;</span> variants/trio.INDEL.filtered.vcf <span class="p">|</span> cut -f <span class="m">7</span> <span class="p">|</span> sort <span class="p">|</span> uniq -c
 </code></pre></div>
 <p>gives:</p>
 <div class="highlight"><pre><span></span><code>110 PASS
@@ -774,32 +833,46 @@ gatk SelectVariants <span class="se">\</span>
 <h4 id="merging-filtered-snps-and-indels">Merging filtered SNPs and INDELs</h4>
 <p>Now that we have filtered the INDELs and SNPs separately, we can merge them again with this command:</p>
 <div class="highlight"><pre><span></span><code>gatk MergeVcfs <span class="se">\</span>
---INPUT variants/trio.SNP.filtered.vcf <span class="se">\</span>
---INPUT variants/trio.INDEL.filtered.vcf <span class="se">\</span>
---OUTPUT variants/trio.filtered.vcf
+--INPUT &lt;input1.vcf&gt; <span class="se">\</span>
+--INPUT &lt;input2.vcf&gt; <span class="se">\</span>
+--OUTPUT &lt;merged.vcf&gt;
 </code></pre></div>
-<p><strong>Exercise:</strong> Run the command to merge the vcfs.</p>
+<p><strong>Exercise:</strong> Run this command from a script called <code>C13_merge_filtered.sh</code> to merge the vcfs (<code>trio.SNP.filtered.vcf</code> and <code>trio.INDEL.filtered.vcf</code>).</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">C13_merged_filtered.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results/variants
+
+gatk MergeVcfs <span class="se">\</span>
+--INPUT trio.SNP.filtered.vcf <span class="se">\</span>
+--INPUT trio.INDEL.filtered.vcf <span class="se">\</span>
+--OUTPUT trio.filtered.vcf
+</code></pre></div>
+</details>
 <h3 id="2-evaluation-by-concordance">2. Evaluation by concordance</h3>
 <p>For this region we have a highly curated truth set for the mother available. It originates from the <a href="https://www.illumina.com/platinumgenomes.html">Illumina Platinum truth set</a>. You can find it at <code>data/variants/NA12878.vcf.gz</code></p>
 <p>To check how well we did, we&rsquo;d first need to extract a vcf with only the information of the mother.</p>
-<p><strong>Exercise:</strong> To extract variants that have at least one alternative allele in the mother from <code>variants/trio.filtered.vcf</code>, use <code>gatk SelectVariants</code> with the arguments:</p>
+<p><strong>Exercise:</strong> Generate a script called <code>C14_extract_mother_only.sh</code> to extract variants that have at least one alternative allele in the mother from <code>variants/trio.filtered.vcf</code>. Use <code>gatk SelectVariants</code> with the arguments:</p>
 <ul>
 <li><code>--sample-name mother</code></li>
 <li><code>--exclude-non-variants</code></li>
 <li><code>--remove-unused-alternates</code></li>
 </ul>
 <p>In addition to the required arguments.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
---variant variants/trio.filtered.vcf <span class="se">\</span>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">C14_extract_mother_only.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results/variants
+
+gatk SelectVariants <span class="se">\</span>
+--variant trio.filtered.vcf <span class="se">\</span>
 --sample-name mother <span class="se">\</span>
 --exclude-non-variants <span class="se">\</span>
 --remove-unused-alternates <span class="se">\</span>
---output variants/mother.trio.filtered.vcf
+--output mother.trio.filtered.vcf
 </code></pre></div>
 </details>
 <p><strong>Exercise:</strong></p>
-<p>A. How many variants are in <code>mother.trio.filtered.vcf</code>? How many of those are filtered out?</p>
-<p>B. Compare our vcf with the curated truth set with the command below. How many SNPs didn&rsquo;t we detect?</p>
+<p>A. How many variants are in the extracted vcf? How many of those are filtered out?</p>
+<p>B. Compare our vcf with the curated truth set with the command below from a script called <code>C15_evaluate_concordance.sh</code>. How many SNPs didn&rsquo;t we detect?</p>
 <div class="highlight"><pre><span></span><code>gatk Concordance <span class="se">\</span>
 --evaluation variants/mother.trio.filtered.vcf <span class="se">\</span>
 --truth data/variants/NA12878.vcf.gz <span class="se">\</span>
@@ -814,7 +887,18 @@ gatk SelectVariants <span class="se">\</span>
 2 SOR3
 </code></pre></div>
 <p>So two records were filtered out, based on the Symmetric Odds Ratio (issues with strand bias).</p>
-<p>Check out the output of <code>gatk Concordance</code> with <code>cat</code>:</p>
+<p>Your script to evaluate the concordance:</p>
+<div class="highlight"><span class="filename">evaluate_concordance.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results
+
+gatk Concordance <span class="se">\</span>
+--evaluation variants/mother.trio.filtered.vcf <span class="se">\</span>
+--truth data/variants/NA12878.vcf.gz <span class="se">\</span>
+--intervals chr20:10018000-10220000 <span class="se">\</span>
+--summary variants/concordance.mother.trio.filtered
+</code></pre></div>
+<p>Check out the output with <code>cat</code>:</p>
 <div class="highlight"><pre><span></span><code>cat variants/concordance.mother.trio.filtered
 </code></pre></div>
 <p>gives:</p>
@@ -828,24 +912,37 @@ INDEL   63      20      6       0.913   0.759
 <p class="admonition-title">Recall &amp; precision</p>
 <p>More info on the definition of recall and precision on this <a href="https://en.wikipedia.org/wiki/Precision_and_recall">wikipedia page</a></p>
 </div>
-<p><strong>Exercise:</strong> Check out the concordance of the mother with the truth set before filtering. Did filtering improve the recall or precision?</p>
+<p><strong>Exercise:</strong> Check out the concordance of the mother with the truth set before filtering. Do this by generating two scripts:</p>
+<ul>
+<li><code>C16_extract_mother_before_filtering.sh</code>: to run <code>gatk SelectVariants</code> in order to get only variants from the mother from the unfiltered <code>trio.vcf</code>. </li>
+<li><code>C17_evaluate_concordance_before_filtering.sh</code>: to run <code>gatk Concordance</code> on the selected variants. </li>
+</ul>
+<p>Did filtering improve the recall or precision?</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>We did the filtering on <code>trio.vcf</code>, therefore, you first have to extract the records that only apply to the mother by using <code>gatk SelectVariants</code>.</p>
 <p>Also note that <code>trio.vcf</code> contains records other than SNPs and INDELs. Use <code>--select-type-to-include</code> to select only SNPs and INDELs.</p>
 </div>
 <details class="done"><summary>Answer</summary><p>First select only SNPs and INDELs from the mother from the unfiltered vcf:</p>
-<div class="highlight"><pre><span></span><code>gatk SelectVariants <span class="se">\</span>
---variant variants/trio.vcf <span class="se">\</span>
+<div class="highlight"><span class="filename">C16_extract_mother_before_filtering.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results/variants
+
+gatk SelectVariants <span class="se">\</span>
+--variant trio.vcf <span class="se">\</span>
 --sample-name mother <span class="se">\</span>
 --exclude-non-variants <span class="se">\</span>
 --remove-unused-alternates <span class="se">\</span>
 --select-type-to-include INDEL <span class="se">\</span>
 --select-type-to-include SNP <span class="se">\</span>
---output variants/mother.trio.vcf
+--output mother.trio.vcf
 </code></pre></div>
 <p>Get the concordance with the truth set:</p>
-<div class="highlight"><pre><span></span><code>gatk Concordance <span class="se">\</span>
+<div class="highlight"><span class="filename">C17_evaluate_concordance_before_filtering.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results
+
+gatk Concordance <span class="se">\</span>
 --evaluation variants/mother.trio.vcf <span class="se">\</span>
 --truth data/variants/NA12878.vcf.gz <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>

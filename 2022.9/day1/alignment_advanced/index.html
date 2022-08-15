@@ -494,6 +494,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../day2/variant_calling_preparation/" class="md-nav__link">
+        Variant calling - preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../day2/variant_calling/" class="md-nav__link">
         Variant calling
       </a>
@@ -701,9 +715,9 @@
 </code></pre></div>
 <p>Here, e.g. the <code>PU</code> field would be <code>FC706VJ.2.ATCACG</code></p>
 </div>
-<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">documentation</a> of <code>AddOrReplaceReadGroups</code>. Specify the required arguments, and run the command. Do this from a script called <code>07_add_readgroups.sh</code> (in <code>~/workdir/scripts/mother_only</code>).</p>
+<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">documentation</a> of <code>AddOrReplaceReadGroups</code>. Specify the required arguments, and run the command. Do this from a script called <code>B05_add_readgroups.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>).</p>
 <details class="done"><summary>Answer</summary><p>We can use the answers of the previous exercise, and use them in the command:</p>
-<div class="highlight"><span class="filename">07_add_readgroups.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">B05_add_readgroups.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results
 
@@ -734,8 +748,8 @@ gatk AddOrReplaceReadGroups <span class="se">\</span>
 </details>
 <h3 id="2-mark-duplicates">2. Mark duplicates</h3>
 <p>Now that we have specified read groups, we can mark the duplicates with <code>gatk MarkDuplicates</code>. </p>
-<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">documentation</a>, and run <code>gatk MarkDuplicates</code> with the three required arguments. Do this from a script called <code>08_mark_duplicates.sh</code> (in <code>~/workdir/scripts/mother_only</code>). </p>
-<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">08_mark_duplicates.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">documentation</a>, and run <code>gatk MarkDuplicates</code> with the three required arguments. Do this from a script called <code>B06_mark_duplicates.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>). </p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">B06_mark_duplicates.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results
 
@@ -745,8 +759,8 @@ gatk MarkDuplicates <span class="se">\</span>
 --METRICS_FILE alignments/marked_dup_metrics_mother.txt 
 </code></pre></div>
 </details>
-<p><strong>Exercise:</strong> Run <code>samtools flagstat</code> on the alignment file with marked duplicates, and write the output to a file called <code>mother.rg.md.bam.flagstat</code>. Create a script called <code>09_get_alignment_stats_after_md.sh</code> (in <code>~/workdir/scripts/mother_only</code>). How many reads were marked as duplicate?</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">09_get_alignment_stats_after_md.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<p><strong>Exercise:</strong> Run <code>samtools flagstat</code> on the alignment file with marked duplicates, and write the output to a file called <code>mother.rg.md.bam.flagstat</code>. Create a script called <code>B07_get_alignment_stats_after_md.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>). How many reads were marked as duplicate?</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">B07_get_alignment_stats_after_md.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results/alignments
 
@@ -774,8 +788,8 @@ Which tells us that 17329 reads were marked as duplicate.</p>
 <p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
 <div class="highlight"><pre><span></span><code>samtools index &lt;bam file&gt;
 </code></pre></div>
-<p><strong>Exercise</strong>: Create a script called <code>10_index_alignment.sh</code> (in <code>~/workdir/scripts/mother_only</code>) to perform the alignment.</p>
-<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">10_index_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<p><strong>Exercise</strong>: Create a script called <code>B08_index_alignment.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>) to perform the alignment.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">B08_index_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results/alignments/
 
@@ -791,20 +805,19 @@ samtools index mother.rg.md.bam
 <li>Indexing</li>
 </ul>
 <p>Your <code>scripts</code> directory should look like this:</p>
-<div class="highlight"><pre><span></span><code>scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-└── mother_only
-    ├── 03_alignment.sh
-    ├── 04_get_alignment_statistics.sh
-    ├── 05_sort_alignment.sh
-    ├── 06_compress_alignment.sh
-    ├── 07_add_readgroups.sh
-    ├── 08_mark_duplicates.sh
-    ├── 09_get_alignment_stats_after_md.sh
-    └── 10_index_alignment.sh
-
-1 directory, 10 files
+<div class="highlight"><pre><span></span><code>├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   └── B08_index_alignment.sh
+└── C-all_samples
 </code></pre></div>
 <h3 id="5-apply-it-on-all-three-samples-with-pipes-and-loops">5. Apply it on all three samples with pipes and loops</h3>
 <p>We now apply these steps to all three samples. In order to do that, we combine the alignment with the sorting and compression in one command. We can do that with piping the output of <code>bwa</code> to <code>samtools sort</code> and <code>samtools view</code>, like this:</p>
@@ -816,20 +829,26 @@ data/fastq/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span cl
 <span class="p">|</span> samtools sort <span class="se">\</span>
 <span class="p">|</span> samtools view -bh &gt; results/alignments/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.bam
 </code></pre></div>
-<p><strong>Exercise</strong>: Make a directory in the scripts directory called <code>all_samples</code> (so <code>~/workdir/scripts/all_samples</code>). In here, create a script called <code>03_alignment_sorting_compression.sh</code>. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. <code>mother</code>, <code>father</code> and <code>son</code>).</p>
-<details class="done"><summary>Answer</summary><p>Your <code>scripts</code> folder should look like:</p>
+<p><strong>Exercise</strong>: Make a directory in the scripts directory <code>C-all_samples</code> (so <code>~/workdir/scripts/C-all_samples</code>). In here, create a script called <code>C01_alignment_sorting_compression.sh</code>. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. <code>mother</code>, <code>father</code> and <code>son</code>).</p>
+<details class="done"><summary>Answer</summary><p>Your <code>scripts</code> directory should look like:</p>
 <div class="highlight"><pre><span></span><code>scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-├── all_samples
-│   └── 03_alignment_sorting_compression.sh
-└── mother_only
-    ├── 03_alignment.sh
-    ├── 04_get_alignment_statistics.sh
-    └── ...
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   └── B08_index_alignment.sh
+└── C-all_samples
+    └── C01_alignment_sorting_compression.sh
 </code></pre></div>
 <p>And the script: </p>
-<div class="highlight"><span class="filename">03_alignment_sorting_compression.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">C01_alignment_sorting_compression.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir
 
@@ -857,7 +876,7 @@ father  lib2    H0164.3.ALXX140820  H0164.3
 son lib3    H0164.6.ALXX140820  H0164.6
 </code></pre></div>
 </details>
-<p><strong>Exercise</strong> Generate a script called <code>04_add_readgroups.sh</code> (in <code>~/workdir/scripts/all_samples</code>) to loop over the tab-delimited file (have a look at the last exercise in <a href="../server_login#loops">Setup</a>), and add the correct readgroups to the bam file of each sample with <code>gatk AddOrReplaceReadGroups</code>. </p>
+<p><strong>Exercise</strong> Generate a script called <code>C02_add_readgroups.sh</code> (in <code>~/workdir/scripts/C-all_samples</code>) to loop over the tab-delimited file (have a look at the last exercise in <a href="../server_login#loops">Setup</a>), and add the correct readgroups to the bam file of each sample with <code>gatk AddOrReplaceReadGroups</code>. </p>
 <details class="hint"><summary>Hint</summary><p>Try to just print the variables from a loop in order to check to see whether the loop performs according to your expectation. E.g.:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/results
 
@@ -867,7 +886,7 @@ cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <
 <span class="k">done</span>
 </code></pre></div>
 </details>
-<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">04_add_readgroups.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">C02_add_readgroups.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results
 
@@ -884,9 +903,9 @@ cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <
 <span class="k">done</span> 
 </code></pre></div>
 </details>
-<p>As the final steps, we will mark the duplicates and perform the indexing for the three samples. </p>
-<p><strong>Exercise:</strong> Generate two scripts called <code>05_mark_duplicates.sh</code> and <code>06_index_alignments.sh</code>, in which you loop over the sample names and  perform the respective calculations. You can use <code>08_mark_duplicates.sh</code> and <code>10_index_alignment.sh</code> in <code>~/workdir/scripts/mother_only</code> as a template. </p>
-<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">05_mark_duplicates.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<p>As final step, we will mark the duplicates and perform the indexing for the three samples. </p>
+<p><strong>Exercise:</strong> Generate two scripts called <code>C03_mark_duplicates.sh</code> and <code>C04_index_alignments.sh</code>, in which you loop over the sample names and  perform the respective calculations. You can use <code>B06_mark_duplicates.sh</code> and <code>B08_index_alignment.sh</code> as a template. </p>
+<details class="done"><summary>Answer</summary><div class="highlight"><span class="filename">C03_mark_duplicates.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results
 
@@ -898,7 +917,7 @@ cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <
     --METRICS_FILE alignments/marked_dup_metrics_<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.txt 
 <span class="k">done</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">06_index_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<div class="highlight"><span class="filename">C04_index_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 
 <span class="nb">cd</span> ~/workdir/results
 
@@ -920,24 +939,23 @@ cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <
 </ul>
 <p>Your scripts directory should look like this:</p>
 <div class="highlight"><pre><span></span><code>scripts
-├── 01_download_course_data.sh
-├── 02_create_bwa_index.sh
-├── all_samples
-│   ├── 03_alignment_sorting_compression.sh
-│   ├── 04_add_readgroups.sh
-│   ├── 05_mark_duplicates.sh
-│   └── 06_index_alignment.sh
-└── mother_only
-    ├── 03_alignment.sh
-    ├── 04_get_alignment_statistics.sh
-    ├── 05_sort_alignment.sh
-    ├── 06_compress_alignment.sh
-    ├── 07_add_readgroups.sh
-    ├── 08_mark_duplicates.sh
-    ├── 09_get_alignment_stats_after_md.sh
-    └── 10_index_alignment.sh
-
-2 directories, 14 files
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   ├── B04_compress_alignment.sh
+│   ├── B05_add_readgroups.sh
+│   ├── B06_mark_duplicates.sh
+│   ├── B07_get_alignment_stats_after_md.sh
+│   └── B08_index_alignment.sh
+└── C-all_samples
+    ├── C01_alignment_sorting_compression.sh
+    ├── C02_add_readgroups.sh
+    ├── C03_mark_duplicates.sh
+    └── C04_index_alignment.sh
 </code></pre></div>
 
               
@@ -968,13 +986,13 @@ cat sample_rg_fields.txt <span class="p">|</span> <span class="k">while</span> <
       
       
         
-        <a href="../../day2/variant_calling/" class="md-footer__link md-footer__link--next" aria-label="Next: Variant calling" rel="next">
+        <a href="../../day2/variant_calling_preparation/" class="md-footer__link md-footer__link--next" aria-label="Next: Variant calling - preparation" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Variant calling
+              Variant calling - preparation
             </div>
           </div>
           <div class="md-footer__button md-icon">
