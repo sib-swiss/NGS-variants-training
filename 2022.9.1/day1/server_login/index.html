@@ -1,0 +1,1296 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "LearningResource",
+    "@id": "https://sib-swiss.github.io/NGS-variants-training",
+    "http://purl.org/dc/terms/conformsTo": {
+        "@type": "CreativeWork",
+        "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE"
+    },
+    "description": "Course on detecting variants from next generation sequencing data",
+    "keywords": "NGS, variant, SNP, INDEL, sequencing, SNV, gatk",
+    "name": "NGS - variant analysis",
+    "about": [
+        {
+            "@type": "DefinedTerm",
+            "@id": "http://edamontology.org/topic_3168",
+            "inDefinedTermSet": "http://edamontology.org",
+            "termCode": "topic_3168",
+            "name": "Sequencing"
+        },
+        {
+            "@type": "DefinedTerm",
+            "@id": "http://edamontology.org/topic_3227",
+            "inDefinedTermSet": "http://edamontology.org",
+            "termCode": "topic_3227",
+            "name": "Variant calling"
+        }
+    ],
+    "abstract": "The detection of genetic variation is of major interest in various disciplines spanning from ecology and evolution research to inherited disease discovery and precision oncology. Next generation sequencing (NGS) methods are very powerful for the detection of genomic variants. Thanks to its throughput and cost-efficiency it enables the detection of a large number of variants in a large number of samples. In this two-day course we will cover the steps from read alignment to variant calling and annotation. We will mainly focus on the detection of germline mutations by following the GATK best practices. ",
+    "audience": "Biologists working with NGS data",
+    "author": [
+        {
+            "@type": "Person",
+            "name": "Geert van Geest",
+            "email": "geert.vangeest@sib.swiss"
+        },
+        {
+            "@type": "Person",
+            "name": "Patricia Palagi"
+        },
+        {
+            "@type": "Organization",
+            "name": "SIB Swiss Institute of Bioinformatics"
+        }
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.6457818",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "teaches": [
+        "Understand important aspects of NGS and read alignment for variant analysis",
+        "Perform a read alignment ready for variant analysis",
+        "Perform variant calling according to GATK best practices",
+        "Perform a variant annotation"
+    ]
+}
+</script>
+
+    
+      
+        <title>Setup - NGS - variant analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.69437709.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-9DHDFTPFZD"),document.addEventListener("DOMContentLoaded",function(){if(document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document.forms.feedback){var e,a=document.forms.feedback;for(e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}"undefined"!=typeof location$&&location$.subscribe(function(e){n("config","G-9DHDFTPFZD",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-9DHDFTPFZD",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
+  
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest version.
+  <a href="../../.."> 
+    <strong>Click here to go to latest.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NGS - variant analysis" class="md-header__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGS - variant analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Setup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - variant analysis" class="md-nav__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - variant analysis
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Day 1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Setup
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Setup
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-login" class="md-nav__link">
+    First login
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises_1" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-login_1" class="md-nav__link">
+    First login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-unix-command-line-interface-cli-refresher" class="md-nav__link">
+    A UNIX command line interface (CLI) refresher
+  </a>
+  
+    <nav class="md-nav" aria-label="A UNIX command line interface (CLI) refresher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-a-new-directory" class="md-nav__link">
+    Make a new directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-permissions" class="md-nav__link">
+    File permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection-and" class="md-nav__link">
+    Redirection: &gt; and |
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell-scripts" class="md-nav__link">
+    shell scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reproducibility/" class="md-nav__link">
+        Reproducibility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment/" class="md-nav__link">
+        Read alignment - basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment_advanced/" class="md-nav__link">
+        Read alignment - advanced
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Day 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling_preparation/" class="md-nav__link">
+        Variant calling - preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling/" class="md-nav__link">
+        Variant calling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/visualisation/" class="md-nav__link">
+        Visualisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/filtering_evaluation/" class="md-nav__link">
+        Filtering & evaluation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/annotation/" class="md-nav__link">
+        Annotation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-login" class="md-nav__link">
+    First login
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises_1" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-login_1" class="md-nav__link">
+    First login
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-unix-command-line-interface-cli-refresher" class="md-nav__link">
+    A UNIX command line interface (CLI) refresher
+  </a>
+  
+    <nav class="md-nav" aria-label="A UNIX command line interface (CLI) refresher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#make-a-new-directory" class="md-nav__link">
+    Make a new directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-permissions" class="md-nav__link">
+    File permissions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection-and" class="md-nav__link">
+    Redirection: &gt; and |
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shell-scripts" class="md-nav__link">
+    shell scripts
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops" class="md-nav__link">
+    Loops
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+  
+                
+  <a href="https://github.com/sib-swiss/NGS-variants-training/edit/main/docs/day1/server_login.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Setup</h1>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You might already be able to do some or all of these learning outcomes. If so, you can go through the corresponding exercises quickly. The general aim of this chapter is to work comfortably on a remote server by using the command line.</p>
+</div>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Use the command line to:<ul>
+<li>Make a directory</li>
+<li>Change file permissions to &lsquo;executable&rsquo;</li>
+<li>Run a <code>bash</code> script</li>
+<li>Pipe data from and to a file or other executable</li>
+</ul>
+</li>
+<li>Program a loop in <code>bash</code></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Running into problems during exercises?</p>
+<p>Use the &ldquo;Comments&rdquo; box at the bottom of each page 👇 for asking questions or giving feedback. It requires a <a href="https://github.com/">github account</a>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Choose your platform</p>
+<p>In this part we will show you how to access the cloud server, or setup your computer to do the exercises with conda or with Docker.</p>
+<p>If you are doing the course <strong>with a teacher</strong>, you will have to login to the remote server. Therefore choose:</p>
+<ul>
+<li>Cloud notebook</li>
+</ul>
+<p>If you are doing this course <strong>independently</strong> (i.e. without a teacher) choose either:</p>
+<ul>
+<li>conda</li>
+<li>Docker</li>
+</ul>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Cloud server</label><label for="__tabbed_1_2">Docker</label><label for="__tabbed_1_3">conda</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<h2 id="exercises">Exercises</h2>
+<h3 id="first-login">First login</h3>
+<p>If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: <code>http://12.345.678.91:10002</code>) in your browser. This should result in the following page:</p>
+<p><figure>
+  <img src="../../assets/images/vscode_login_page.png" width="300"/>
+</figure></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The link gives you access to a web version of <a href="https://code.visualstudio.com">Visual Studio Code</a>. This is a powerful code editor that you can also use a local application on your computer. </p>
+</div>
+<p>Type in the password that was provided to you by the teacher. Now let&rsquo;s open the terminal. You can do that with <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-grave">`</kbd></span>. Or by clicking <strong>Application menu</strong> &gt; <strong>Terminal</strong> &gt; <strong>New Terminal</strong>:</p>
+<p><figure>
+  <img src="../../assets/images/open_terminal.gif" width="500"/>
+</figure></p>
+<p>For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. With use of the &lsquo;new file&rsquo; button:</p>
+<p><figure>
+  <img src="../../assets/images/new_file.gif" width="500"/>
+</figure></p>
+</div>
+<div class="tabbed-block">
+<h2 id="material">Material</h2>
+<ul>
+<li>Instructions to <a href="https://docs.docker.com/get-docker/">install docker</a></li>
+<li>Instructions to <a href="https://player.vimeo.com/video/481620477">set up to container</a></li>
+</ul>
+<h2 id="exercises_1">Exercises</h2>
+<h3 id="first-login_1">First login</h3>
+<p>Docker can be used to run an entire isolated environment in a container. This means that we can run the software with all its dependencies required for this course locally in your computer. Independent of your operating system.</p>
+<p>In the video below there&rsquo;s a tutorial on how to set up a docker container for this course. Note that you will need administrator rights, and that if you are using Windows, you need the latest version of Windows 10.</p>
+<p><iframe src="https://player.vimeo.com/video/481620477" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></p>
+<p>The command to run the environment required for this course looks like this (in a terminal):</p>
+<div class="admonition warning">
+<p class="admonition-title">Modify the script</p>
+<p>Modify the path after <code>-v</code> to the working directory on your computer before running it.</p>
+</div>
+<div class="highlight"><pre><span></span><code>docker run <span class="se">\</span>
+--rm <span class="se">\</span>
+-p <span class="m">8443</span>:8443 <span class="se">\</span>
+-e <span class="nv">PUID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\</span>
+-e <span class="nv">PGID</span><span class="o">=</span><span class="m">1000</span> <span class="se">\</span>
+-e <span class="nv">DEFAULT_WORKSPACE</span><span class="o">=</span>/config/workdir <span class="se">\</span>
+-v <span class="nv">$PWD</span>:/config/workdir <span class="se">\</span>
+geertvangeest/ngs-variants-vscode
+</code></pre></div>
+<p>If this command has run successfully, use your browser to navigate to port 8443 on your local machine:</p>
+<div class="highlight"><pre><span></span><code>http://127.0.0.1:8443
+</code></pre></div>
+<p>The option <code>-v</code> mounts a local directory in your computer to the directory <code>/config/workdir</code> in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Don&rsquo;t mount directly in the home dir</p>
+<p>Don&rsquo;t directly mount your local directory to the home directory (<code>/root</code>). This will lead to unexpected behaviour.</p>
+</div>
+<p>The part <code>geertvangeest/ngs-variants-vscode</code> is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it&rsquo;s on your computer, it will start immediately.</p>
+</div>
+<div class="tabbed-block">
+<p>If you have a conda installation on your local computer, you can install the required software using conda.</p>
+<p>You can build the environment from <a href="../../assets/yaml/environment.yml">environment.yml</a></p>
+<p>Generate the conda environment like this:</p>
+<div class="highlight"><pre><span></span><code>conda env create --name ngs-tools -f environment.yml
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">The <code>yaml</code> file probably only works for Linux systems</p>
+<p>If you want to use the conda environment on a different OS, use:</p>
+<div class="highlight"><pre><span></span><code>conda create -n ngs-tools <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+
+conda activate ngs-tools
+
+conda install -y -c bioconda <span class="se">\</span>
+samtools <span class="se">\</span>
+bwa <span class="se">\</span>
+snpeff <span class="se">\</span>
+gatk4 <span class="se">\</span>
+r-base
+</code></pre></div>
+</div>
+<p>This will create the conda environment <code>ngs-tools</code></p>
+<p>Activate it like so:</p>
+<div class="highlight"><pre><span></span><code>conda activate ngs-tools
+</code></pre></div>
+<p>After successful installation and activating the environment all the software required to do the exercises should be available.</p>
+</div>
+</div>
+</div>
+<h3 id="a-unix-command-line-interface-cli-refresher">A UNIX command line interface (CLI) refresher</h3>
+<p>Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory. </p>
+<p>If you need some reminders of the commands, here&rsquo;s a link to a UNIX command line cheat sheet:</p>
+<p><a class="md-button" href="https://www.alexji.com/UNIXCheatSheet.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.1.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M88 304h-8v-48h8c13.3 0 24 10.7 24 24s-10.7 24-24 24zm104-48h8c8.8 0 16 7.2 16 16v64c0 8.8-7.2 16-16 16h-8v-96zM224 0v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V64C0 28.65 28.65 0 64 0h160zM64 224c-8.84 0-16 7.2-16 16v128c0 8.8 7.16 16 16 16s16-7.2 16-16v-32h8c30.9 0 56-25.1 56-56s-25.1-56-56-56H64zm96 144c0 8.8 7.2 16 16 16h24c26.5 0 48-21.5 48-48v-64c0-26.5-21.5-48-48-48h-24c-8.8 0-16 7.2-16 16v128zm128-144c-8.8 0-16 7.2-16 16v128c0 8.8 7.2 16 16 16s16-7.2 16-16v-48h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-32v-32h32c8.8 0 16-7.2 16-16s-7.2-16-16-16h-48zM256 0l128 128H256V0z"/></svg></span> UNIX cheat sheet</a></p>
+<h4 id="make-a-new-directory">Make a new directory</h4>
+<p>Make a directory <code>scripts</code> within <code>~/workdir</code> and make it your current directory.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+mkdir scripts
+<span class="nb">cd</span> scripts
+</code></pre></div>
+</details>
+<h4 id="file-permissions">File permissions</h4>
+<p>Generate an empty script in your newly made directory <code>~/workdir/scripts</code> like this:</p>
+<div class="highlight"><pre><span></span><code>touch new_script.sh
+</code></pre></div>
+<p>Add a command to this script that writes &ldquo;SIB courses are great!&rdquo; (or something you can better relate to.. <img alt="😉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f609.svg" title=":wink:" />) to stdout, and try to run it.</p>
+<details class="done"><summary>Answer</summary><p>Generate a script as described above. The script should look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;SIB courses are great!&quot;</span>
+</code></pre></div>
+</details>
+<p>Usually, you can run it like this:</p>
+<div class="highlight"><pre><span></span><code>./new_script.sh
+</code></pre></div>
+<p>But there&rsquo;s an error:</p>
+<div class="highlight"><pre><span></span><code>bash: ./new_script.sh: Permission denied
+</code></pre></div>
+<p>Why is there an error?</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Use <code>ls -lh new_script.sh</code> to check the permissions.</p>
+</div>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>ls -lh new_script.sh
+</code></pre></div>
+<p>gives:</p>
+<div class="highlight"><pre><span></span><code>-rw-r--r--  <span class="m">1</span> user  group    51B Nov <span class="m">11</span> <span class="m">16</span>:21 new_script.sh
+</code></pre></div>
+<p>There&rsquo;s no <code>x</code> in the permissions string. You should change at least the permissions of the user.</p>
+</details>
+<p>Make the script executable for yourself, and run it.</p>
+<details class="done"><summary>Answer</summary><p>Change permissions:</p>
+<div class="highlight"><pre><span></span><code>chmod u+x new_script.sh
+</code></pre></div>
+<p><code>ls -lh new_script.sh</code> now gives:</p>
+<div class="highlight"><pre><span></span><code>-rwxr--r--  1 user  group    51B Nov 11 16:21 new_script.sh
+</code></pre></div>
+<p>So it should be executable:</p>
+<div class="highlight"><pre><span></span><code>./new_script.sh
+</code></pre></div>
+</details>
+<p>More on <code>chmod</code> and file permissions <a href="https://www.howtogeek.com/437958/how-to-use-the-chmod-command-on-linux/">here</a>.</p>
+<h4 id="redirection-and">Redirection: <code>&gt;</code> and <code>|</code></h4>
+<p>In the root directory (go there like this: <code>cd /</code>) there are a range of system directories and files. Write the names of all directories and files to a file called <code>system_dirs.txt</code> in your working directory.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>ls / &gt; ~/workdir/system_dirs.txt
+</code></pre></div>
+</details>
+<p>The command <code>wc -l</code> counts the number of lines, and can read from stdin. Make a one-liner with a pipe <code>|</code> symbol to find out how many system directories and files there are.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code>ls / <span class="p">|</span> wc -l
+</code></pre></div>
+</details>
+<h4 id="variables">Variables</h4>
+<p>Store <code>system_dirs.txt</code> as variable (like this: <code>VAR=variable</code>), and use <code>wc -l</code> on that variable to count the number of lines in the file.</p>
+<details class="done"><summary>Answer</summary><div class="highlight"><pre><span></span><code><span class="nv">FILE</span><span class="o">=</span>~/workdir/system_dirs.txt
+wc -l <span class="nv">$FILE</span>
+</code></pre></div>
+</details>
+<h4 id="shell-scripts">shell scripts</h4>
+<p>Make a shell script that automatically counts the number of system directories and files.</p>
+<details class="done"><summary>Answer</summary><p>Make a script called e.g. <code>current_system_dirs.sh</code>:
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">cd</span> /
+ls <span class="p">|</span> wc -l
+</code></pre></div></p>
+</details>
+<h3 id="loops">Loops</h3>
+<p>If you want to run the same command on a range of arguments, it&rsquo;s not very convenient to type the command for each individual argument. For example, you could write <code>dog</code>, <code>fox</code>, <code>bird</code> to stdout in a script like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">echo</span> dog
+<span class="nb">echo</span> fox
+<span class="nb">echo</span> bird
+</code></pre></div>
+<p>However, if you want to change the command (add an option for example), you would have to change it for all the three command calls. Amongst others for that reason, you want to write the command only once. You can do this with a for-loop, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">ANIMALS</span><span class="o">=</span><span class="s2">&quot;dog fox bird&quot;</span>
+
+<span class="k">for</span> animal <span class="k">in</span> <span class="nv">$ANIMALS</span>
+<span class="k">do</span>
+  <span class="nb">echo</span> <span class="nv">$animal</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>Which results in:</p>
+<div class="highlight"><pre><span></span><code>dog
+fox
+bird
+</code></pre></div>
+<p>Write a shell script that removes all the letters &ldquo;e&rdquo; from a list of words.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Removing the letter &ldquo;e&rdquo; from a string can be done with <code>tr</code> like this:
+<div class="highlight"><pre><span></span><code><span class="nv">word</span><span class="o">=</span><span class="s2">&quot;test&quot;</span>
+<span class="nb">echo</span> <span class="nv">$word</span> <span class="p">|</span> tr -d <span class="s2">&quot;e&quot;</span>
+</code></pre></div></p>
+<p>Which would result in:</p>
+<div class="highlight"><pre><span></span><code>tst
+</code></pre></div>
+</div>
+<details class="done"><summary>Answer</summary><p>Your script should e.g. look like this (I&rsquo;ve added some awesome functionality):</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nv">WORDLIST</span><span class="o">=</span><span class="s2">&quot;here is a list of words resulting in a sentence&quot;</span>
+
+<span class="k">for</span> word <span class="k">in</span> <span class="nv">$WORDLIST</span>
+<span class="k">do</span>
+  <span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$word</span><span class="s2">&#39; with e&#39;s removed looks like:&quot;</span>
+  <span class="nb">echo</span> <span class="nv">$word</span> <span class="p">|</span> tr -d <span class="s2">&quot;e&quot;</span>
+<span class="k">done</span>
+</code></pre></div>
+<p>resulting in:</p>
+<div class="highlight"><pre><span></span><code>&#39;here&#39; with e&#39;s removed looks like:
+hr
+&#39;is&#39; with e&#39;s removed looks like:
+is
+&#39;a&#39; with e&#39;s removed looks like:
+a
+&#39;list&#39; with e&#39;s removed looks like:
+list
+&#39;of&#39; with e&#39;s removed looks like:
+of
+&#39;words&#39; with e&#39;s removed looks like:
+words
+&#39;resulting&#39; with e&#39;s removed looks like:
+rsulting
+&#39;in&#39; with e&#39;s removed looks like:
+in
+&#39;a&#39; with e&#39;s removed looks like:
+a
+&#39;sentence&#39; with e&#39;s removed looks like:
+sntnc
+</code></pre></div>
+</details>
+<p>Like you might be used to in <code>R</code> or <code>python</code> you can also loop over lines in files. This can be convenient if you have for example a set of parameters in each line of a file. </p>
+<p>Create a tab-delimited file <code>animals.txt</code> with the following contents:</p>
+<div class="highlight"><pre><span></span><code>dog retrieves   4
+fox jumps   4
+bird    flies   2
+</code></pre></div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you&rsquo;re having trouble typing the actual &lsquo;tabs&rsquo; you can also download the file <a href="../../assets/files/animals.txt">here</a></p>
+</div>
+<p>With unix shell you can loop over the lines of that file and store each column as a variable. Below, the three columns in the tab delimited file are stored in the variables <code>$animal</code>, <code>$behaviour</code> and <code>$leg_number</code>:</p>
+<div class="highlight"><pre><span></span><code>cat animals.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> animal behaviour leg_number
+<span class="k">do</span>
+    <span class="c1">#something here</span>
+<span class="k">done</span>
+</code></pre></div>
+<p><strong>Exercise:</strong> Modify the script in such a way that it writes the strings that are stored in the variables at each line to stdout. </p>
+<details class="done"><summary>Done</summary><div class="highlight"><pre><span></span><code>cat animals.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> animal behaviour leg_number
+<span class="k">do</span>
+    <span class="nb">echo</span> <span class="s2">&quot;The </span><span class="nv">$animal</span><span class="s2"> </span><span class="nv">$behaviour</span><span class="s2">, and has </span><span class="nv">$leg_number</span><span class="s2"> legs&quot;</span> 
+<span class="k">done</span>
+</code></pre></div>
+</details>
+
+
+  
+
+
+
+              
+
+  <!-- Giscus -->
+  <h2 id="__comments">Comments</h2>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="sib-swiss/NGS-variants-training"
+            data-repo-id="MDEwOlJlcG9zaXRvcnkzMTEzMTc0MDI="
+            data-category="Q&A"
+            data-category-id="DIC_kwDOEo5Tms4CQ1hn"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+
+
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../introduction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../reproducibility/" class="md-footer__link md-footer__link--next" aria-label="Next: Reproducibility" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Reproducibility
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021-2022 SIB Swiss institute of Bioinformatics – <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+
+  
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input type="checkbox" class="md-toggle" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        <label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);console.log(new FormData(form)),__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.9c69f0bc.min.js"></script>
+      
+    
+  </body>
+</html>
