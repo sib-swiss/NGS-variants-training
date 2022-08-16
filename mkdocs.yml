@@ -1,28 +1,31 @@
 site_name: NGS - variant analysis
+
 nav:
-    - Home: index.md
-    - Precourse preparations: precourse.md
-    - Course schedule: course_schedule.md
-    - Day 1:
-        - Introduction: day1/introduction.md
-        - Setup: day1/server_login.md
-        - Reproducibility: day1/reproducibility.md
-        - Read alignment - basics: day1/alignment.md
-        - Read alignment - advanced: day1/alignment_advanced.md
-    - Day 2:
-        - Variant calling - preparation: day2/variant_calling_preparation.md
-        - Variant calling: day2/variant_calling.md
-        - Visualisation: day2/visualisation.md
-        - Filtering & evaluation: day2/filtering_evaluation.md
-        - Annotation: day2/annotation.md
+  - Home: index.md
+  - Precourse preparations: precourse.md
+  - Course schedule: course_schedule.md
+  - Day 1:
+    - Introduction: day1/introduction.md
+    - Setup: day1/server_login.md
+    - Reproducibility: day1/reproducibility.md
+    - Read alignment - basics: day1/alignment.md
+    - Read alignment - advanced: day1/alignment_advanced.md
+  - Day 2:
+    - Variant calling - preparation: day2/variant_calling_preparation.md
+    - Variant calling: day2/variant_calling.md
+    - Visualisation: day2/visualisation.md
+    - Filtering & evaluation: day2/filtering_evaluation.md
+    - Annotation: day2/annotation.md
 
 theme:
   name: material
   logo: assets/images/SIB_logo.svg
-  favicon: assets/images/SIB_logo.svg
   custom_dir: overrides
   icon:
     repo: fontawesome/brands/github
+  favicon: assets/images/SIB_logo.svg
+  features:
+    - announce.dismiss
 
 # Repository
 repo_name: sib-swiss/NGS-variants-training

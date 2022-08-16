@@ -26,6 +26,3 @@ After this course, you will be able to:
 
 This course will consist of lectures, exercises and polls. During exercises, you are free to discuss with other participants. During lectures, focus on the lecture only.
 
-## Issues
-
-If you have any issues, questions or feedback regarding the exercises use the "Comments" section below 👇. It requires a [github account](https://github.com/).
