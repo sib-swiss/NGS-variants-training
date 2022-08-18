@@ -43,13 +43,13 @@
     Type in the password that was provided to you by the teacher. Now let's open the terminal. You can do that with ++ctrl+grave++. Or by clicking **Application menu** > **Terminal** > **New Terminal**:
 
     <figure>
-      <img src="../../assets/images/open_terminal.gif" width="500"/>
+      <img src="../../assets/images/open_terminal.gif" width="800"/>
     </figure>
 
     For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. With use of the 'new file' button:
 
     <figure>
-      <img src="../../assets/images/new_file.gif" width="500"/>
+      <img src="../../assets/images/new_file.gif" width="800"/>
     </figure>
 
 === "Docker"

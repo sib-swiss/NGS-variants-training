@@ -26,7 +26,7 @@ Download the following files to your local computer:
     You can download files by right-click the file and after that select **Download**:
 
     <figure>
-      <img src="../../assets/images/download_file.gif" width="500"/>
+      <img src="../../assets/images/download_file.gif" width="800"/>
     </figure>
 
 Launch IGV and select the human genome version hg38 as a reference.
