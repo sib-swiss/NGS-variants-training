@@ -5,6 +5,11 @@ As is stated in the course prerequisites at the [announcement web page](https://
 
 ## Software
 
-We will be mainly working on an Amazon Web Services ([AWS](https://aws.amazon.com/]))  Elastic Cloud (EC2) server. Our Ubuntu server behaves like a 'normal' remote server, and can be approached through a [VS code](https://code.visualstudio.com/). All participants will be granted access to a personal workspace to be used during the course.
+We will be mainly working on an Amazon Web Services ([AWS](https://aws.amazon.com/]))  Elastic Cloud (EC2) server. Our Ubuntu server behaves like a 'normal' remote server, and can be approached through a [VS code](https://code.visualstudio.com/) web interface. All participants will be granted access to a personal workspace to be used during the course.
 
 The only software you need to install before the course is [Integrative Genomics Viewer (IGV)](http://software.broadinstitute.org/software/igv/).
+
+!!! info "For self-learners"
+    Self learners can install the required software via conda, or run the VS code web interface inside a container. More instructions at [Setup](day1/server_login.md)
+    
+    
