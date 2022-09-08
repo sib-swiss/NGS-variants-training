@@ -3,7 +3,61 @@
 <html lang="en" class="no-js">
   <head>
     
-  <link rel="schemas" type="application/csvm+json" href="schemas.json"/>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "LearningResource",
+    "@id": "https://sib-swiss.github.io/NGS-variants-training",
+    "http://purl.org/dc/terms/conformsTo": {
+        "@type": "CreativeWork",
+        "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE"
+    },
+    "description": "Course on detecting variants from next generation sequencing data",
+    "keywords": "NGS, variant, SNP, INDEL, sequencing, SNV, gatk",
+    "name": "NGS - variant analysis",
+    "about": [
+        {
+            "@type": "DefinedTerm",
+            "@id": "http://edamontology.org/topic_3168",
+            "inDefinedTermSet": "http://edamontology.org",
+            "termCode": "topic_3168",
+            "name": "Sequencing"
+        },
+        {
+            "@type": "DefinedTerm",
+            "@id": "http://edamontology.org/topic_3227",
+            "inDefinedTermSet": "http://edamontology.org",
+            "termCode": "topic_3227",
+            "name": "Variant calling"
+        }
+    ],
+    "abstract": "The detection of genetic variation is of major interest in various disciplines spanning from ecology and evolution research to inherited disease discovery and precision oncology. Next generation sequencing (NGS) methods are very powerful for the detection of genomic variants. Thanks to its throughput and cost-efficiency it enables the detection of a large number of variants in a large number of samples. In this two-day course we will cover the steps from read alignment to variant calling and annotation. We will mainly focus on the detection of germline mutations by following the GATK best practices. ",
+    "audience": "Biologists working with NGS data",
+    "author": [
+        {
+            "@type": "Person",
+            "name": "Geert van Geest",
+            "email": "geert.vangeest@sib.swiss"
+        },
+        {
+            "@type": "Person",
+            "name": "Patricia Palagi"
+        },
+        {
+            "@type": "Organization",
+            "name": "SIB Swiss Institute of Bioinformatics"
+        }
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.6457818",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "teaches": [
+        "Understand important aspects of NGS and read alignment for variant analysis",
+        "Perform a read alignment ready for variant analysis",
+        "Perform variant calling according to GATK best practices",
+        "Perform a variant annotation"
+    ]
+}
+</script>
 
     
       
