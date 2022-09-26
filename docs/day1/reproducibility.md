@@ -11,7 +11,7 @@
 
 ### Some good practices for reproducibility
 
-During today and tomorrow we will work with a small *E. coli* dataset to practice quality control, alignment and alignment filtering. You can consider this as a small project. During the exercise you will be guided to adhere to the following basic principles for reproducibility:
+During the exercise you will be guided to adhere to the following basic principles for reproducibility:
 
 1. **Execute the commands from a script** in order to be able to trace back your steps
 2. **Number scripts** based on their order of execution (e.g. `01_download_reads.sh`)
