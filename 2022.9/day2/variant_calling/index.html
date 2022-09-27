@@ -893,11 +893,15 @@ gatk GenomicsDBImport <span class="se">\</span>
 </code></pre></div>
 <p><strong>Exercise:</strong> Create a script called <code>C07_create_genomicsdb.sh</code> to run this command to generate the database.</p>
 <p>You can retrieve the combined vcf from the database with <code>gatk GenotypeGVCFs</code>.</p>
-<div class="highlight"><span class="filename">C08_genotype_gvcfs.sh</span><pre><span></span><code>gatk GenotypeGVCFs <span class="se">\</span>
+<div class="highlight"><span class="filename">C08_genotype_gvcfs.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir
+
+gatk GenotypeGVCFs <span class="se">\</span>
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
---variant gendb://genomicsdb <span class="se">\</span>
+--variant gendb://results/genomicsdb <span class="se">\</span>
 --intervals chr20:10018000-10220000 <span class="se">\</span>
---output variants/trio.vcf
+--output results/variants/trio.vcf
 </code></pre></div>
 <p><strong>Exercise:</strong> Create a script called <code>C08_genotype_gvcfs.sh</code> to run this command to generate the combined vcf.</p>
 
