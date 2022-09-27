@@ -213,11 +213,15 @@ gatk GenomicsDBImport \
 You can retrieve the combined vcf from the database with `gatk GenotypeGVCFs`.
 
 ```sh title="C08_genotype_gvcfs.sh"
+#!/usr/bin/env bash
+
+cd ~/workdir
+
 gatk GenotypeGVCFs \
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
---variant gendb://genomicsdb \
+--variant gendb://results/genomicsdb \
 --intervals chr20:10018000-10220000 \
---output variants/trio.vcf
+--output results/variants/trio.vcf
 ```
 
 **Exercise:** Create a script called `C08_genotype_gvcfs.sh` to run this command to generate the combined vcf.
