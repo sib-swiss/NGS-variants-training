@@ -782,7 +782,7 @@
 <p>Our dataset is too small to apply VQSR. We will therefore do hard filtering instead.</p>
 <h4 id="splitting-snps-and-indels">Splitting SNPs and INDELs</h4>
 <p>First, filtering thresholds are usually different for SNPs and INDELs. Therefore, we will split <code>trio.vcf</code> into two vcfs, one containg only SNPs, and one containing only INDELs. You can extract all the SNP records in our trio vcf like this:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/results
 
 gatk SelectVariants <span class="se">\</span>
 --variant variants/trio.vcf <span class="se">\</span>
