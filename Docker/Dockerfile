@@ -33,4 +33,4 @@ RUN mkdir -p /config/workdir
 
 # copy a different snpeff config file in order to download to /data (in stead of conda directory)
 # comment the line below if running this container locally.
-COPY snpEff.config /opt/conda/share/snpeff-5.0-1
+COPY snpEff.config /opt/conda/envs/ngs-tools/share/snpeff-5.0-1/snpEff.config
