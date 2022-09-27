@@ -767,7 +767,7 @@ gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chro
 </ul>
 <p>Before you start the alignment, it&rsquo;s wise to check out what chromosome naming your input files are using, because changing chromosome names in a <code>.fasta</code> file is easier than in a <code>.bam</code> file.</p>
 <p>If your fasta titles are e.g. starting with a number you can add <code>chr</code> to it with <code>sed</code>:</p>
-<div class="highlight"><pre><span></span><code>sed s/^&gt;/&gt;chr/g &lt;reference.fasta&gt;
+<div class="highlight"><pre><span></span><code>sed &#39;s/^&gt;/&gt;chr/g&#39; &lt;reference.fasta&gt;
 </code></pre></div>
 <p>You can change chromsome names in a vcf with <a href="http://samtools.github.io/bcftools/bcftools.html#annotate"><code>bcftools annotate</code></a>:</p>
 <div class="highlight"><pre><span></span><code>bcftools annotate --rename-chrs &lt;tab-delimited-renaming&gt; &lt;input.vcf&gt;
