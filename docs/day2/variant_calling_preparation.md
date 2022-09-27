@@ -84,7 +84,7 @@ gatk IndexFeatureFile --input <variants.vcf>
     If your fasta titles are e.g. starting with a number you can add `chr` to it with `sed`:
 
     ```
-    sed s/^>/>chr/g <reference.fasta>
+    sed 's/^>/>chr/g' <reference.fasta>
     ```
 
     You can change chromsome names in a vcf with [`bcftools annotate`](http://samtools.github.io/bcftools/bcftools.html#annotate):
