@@ -24,7 +24,7 @@ Our dataset is too small to apply VQSR. We will therefore do hard filtering inst
 First, filtering thresholds are usually different for SNPs and INDELs. Therefore, we will split `trio.vcf` into two vcfs, one containg only SNPs, and one containing only INDELs. You can extract all the SNP records in our trio vcf like this:
 
 ```sh
-cd ~/workdir
+cd ~/workdir/results
 
 gatk SelectVariants \
 --variant variants/trio.vcf \
