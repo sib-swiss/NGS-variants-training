@@ -1,3 +1,4 @@
+
 ## Learning outcomes
 
 !!! note
@@ -24,36 +25,32 @@
     * conda
     * Docker
 
-=== "Cloud notebook"
+=== "Cloud server"
+
+    ## Exercises 
+
+    ### First login
 
     If you are participating in this course with a teacher, you have received a link and a password. Copy-paste the link (including the port, e.g.: `http://12.345.678.91:10002`) in your browser. This should result in the following page:
 
     <figure>
-      <img src="../../assets/images/jupyter_login_page.png" width="300"/>
+      <img src="../../assets/images/vscode_login_page.png" width="300"/>
     </figure>
 
-    Type your password, and proceed to the notebook home page. This page contains all the files in your working directory (if there are any). Most of the exercises will be executed through the command line. Here's a video that explains how to use JupyterLab to use a terminal and work with scripts:
+    !!! info
+        The link gives you access to a web version of [Visual Studio Code](https://code.visualstudio.com). This is a powerful code editor that you can also use a local application on your computer. 
 
-    <iframe src="https://player.vimeo.com/video/524970007" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-
-    If you rather read, here's written explanation how to work with JupyterLab. First, let's open the terminal. Find it at **New > Terminal**:
+    Type in the password that was provided to you by the teacher. Now let's open the terminal. You can do that with ++ctrl+grave++. Or by clicking **Application menu** > **Terminal** > **New Terminal**:
 
     <figure>
-      <img src="../../assets/images/jupyter_choose_terminal.png" width="500"/>
+      <img src="../../assets/images/open_terminal.gif" width="800"/>
     </figure>
 
-    For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. You can generate and edit scripts with **New > Text File**:
+    For a.o. efficiency and reproducibility it makes sense to execute your commands from a script. With use of the 'new file' button:
 
     <figure>
-      <img src="../../assets/images/jupyter_choose_text.png" width="500"/>
+      <img src="../../assets/images/new_file.gif" width="800"/>
     </figure>
-
-    Once you have opened a script you can change the code highlighting. This is convenient for writing the code. The text editor will automatically change the highlighting based on the file extension (e.g. `.py` extension will result in python syntax highlighting). You can change or set the syntax highlighting by clicking the button on the bottom of the page. We will be using mainly shell scripting in this course, so here's an example for adjusting it to shell syntax highlighting:
-
-    <figure>
-      <img src="../../assets/images/jupyter_change_highlighting.png" width="300"/>
-    </figure>
-
 
 === "Docker"
 
@@ -77,93 +74,87 @@
     !!! warning "Modify the script"
         Modify the path after `-v` to the working directory on your computer before running it.
 
-      ```sh
-      docker run \
-      --rm \
-      -e JUPYTER_ENABLE_LAB=yes \
-      -v /path/to/workingdir/:/home/jovyan \
-      -p 8888:8888 \
-      geertvangeest/ngs-variants-jupyter:latest \
-      start-notebook.sh
-      ```
-
-
-    If this command has run successfully, you will find a link and token in the console, e.g.:
-
     ```sh
-    http://127.0.0.1:8888/?token=4be8d916e89afad166923de5ce5th1s1san3xamp13
+    docker run \
+    --rm \
+    -p 8443:8443 \
+    -e PUID=1000 \
+    -e PGID=1000 \
+    -e DEFAULT_WORKSPACE=/config/workdir \
+    -v $PWD:/config/workdir \
+    geertvangeest/ngs-variants-vscode
     ```
 
-    Copy this URL into your browser, and you will be able to use the jupyter notebook.
 
-    The option `-v` mounts a local directory in your computer to the directory `/home/jovyan` in the docker container ('jovyan' is the default user for jupyter containers). In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
+    If this command has run successfully, use your browser to navigate to port 8443 on your local machine:
+
+    ```sh
+    http://127.0.0.1:8443
+    ```
+
+    The option `-v` mounts a local directory in your computer to the directory `/config/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
 
 
-    The part `geertvangeest/ngs-variants-jupyter:latest` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
+    The part `geertvangeest/ngs-variants-vscode` is the image we are going to load into the container. The image contains all the information about software and dependencies needed for this course. When you run this command for the first time it will download the image. Once it's on your computer, it will start immediately.
 
 
 === "conda"
 
     If you have a conda installation on your local computer, you can install the required software using conda.
 
-    You can build the environment from [ngs-variants.yml](../assets/yaml/ngs-variants.yml)
+    You can build the environment from [environment.yml](../assets/yaml/environment.yml)
 
     Generate the conda environment like this:
 
     ```sh
-    conda env create --name ngs-variants -f ngs-variants.yml
+    conda env create --name ngs-tools -f environment.yml
     ```
 
     !!! note "The `yaml` file probably only works for Linux systems"
         If you want to use the conda environment on a different OS, use:
 
         ```sh
-        conda create -n ngs-variants python=3.8
+        conda create -n ngs-tools python=3.8
 
-        conda activate ngs-variants
+        conda activate ngs-tools
 
         conda install -y -c bioconda \
         samtools \
         bwa \
         snpeff \
-        gatk4
+        gatk4 \
+        r-base
         ```
 
-    This will create the conda environment `ngs-variants`
+    This will create the conda environment `ngs-tools`
 
     Activate it like so:
 
     ```sh
-    conda activate ngs-variants
+    conda activate ngs-tools
     ```
 
     After successful installation and activating the environment all the software required to do the exercises should be available.
 
 ### A UNIX command line interface (CLI) refresher
 
-Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory.
+Most bioinformatics software are UNIX based and are executed through the CLI. When working with NGS data, it is therefore convenient to improve your knowledge on UNIX. For this course, we need basic understanding of UNIX CLI, so here are some exercises to refresh your memory. 
+
+If you need some reminders of the commands, here's a link to a UNIX command line cheat sheet:
+
+[:fontawesome-solid-file-pdf: UNIX cheat sheet](https://www.alexji.com/UNIXCheatSheet.pdf){: .md-button }
+
 
 #### Make a new directory
-
-Login to the server and use the command line to make a directory called `workdir`.
-
-!!! note "If working with Docker"
-    If your are working with docker you are a root user. This means that your "home" directory is the root directory, i.e. `/root`, and not `/home/username`. If you have mounted your local directory to `/root/workdir`, this directory should already exist.
-
-??? done "Answer"
-    ```sh
-    cd
-    mkdir workdir
-    ```
 
 Make a directory `scripts` within `~/workdir` and make it your current directory.
 
 ??? done "Answer"
     ```sh
-    cd workdir
+    cd ~/workdir
     mkdir scripts
     cd scripts
     ```
@@ -179,7 +170,7 @@ touch new_script.sh
 Add a command to this script that writes "SIB courses are great!" (or something you can better relate to.. :wink:) to stdout, and try to run it.
 
 ??? done "Answer"
-    The script should look like this:
+    Generate a script as described above. The script should look like this:
 
     ```sh
     #!/usr/bin/env bash
@@ -244,11 +235,11 @@ More on `chmod` and file permissions [here](https://www.howtogeek.com/437958/how
 
 #### Redirection: `>` and `|`
 
-In the root directory (go there like this: `cd /`) there are a range of system directories and files. Write the names of all directories and files to a file called `system_dirs.txt` in your home directory (use `ls` and `>`).
+In the root directory (go there like this: `cd /`) there are a range of system directories and files. Write the names of all directories and files to a file called `system_dirs.txt` in your working directory.
 
 ??? done "Answer"
     ```sh
-    ls / > ~/system_dirs.txt
+    ls / > ~/workdir/system_dirs.txt
     ```
 
 The command `wc -l` counts the number of lines, and can read from stdin. Make a one-liner with a pipe `|` symbol to find out how many system directories and files there are.
@@ -264,7 +255,7 @@ Store `system_dirs.txt` as variable (like this: `VAR=variable`), and use `wc -l`
 
 ??? done "Answer"
     ```sh
-    FILE=system_dirs.txt
+    FILE=~/workdir/system_dirs.txt
     wc -l $FILE
     ```
 
@@ -279,6 +270,7 @@ Make a shell script that automatically counts the number of system directories a
     cd /
     ls | wc -l
     ```
+
 
 ### Loops
 

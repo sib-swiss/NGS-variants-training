@@ -1,2 +1,5 @@
 .DS_Store
 site
+*.zip
+data/
+results/

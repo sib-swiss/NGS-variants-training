@@ -1,24 +1,31 @@
 site_name: NGS - variant analysis
+
 nav:
-    - Home: index.md
-    - Precourse preparations: precourse.md
-    - Course schedule: course_schedule.md
-    - Day 1:
-        - Introduction: day1/introduction.md
-        - Server login: day1/server_login.md
-        - Read alignment - basics: day1/alignment.md
-        - Read alignment - advanced: day1/alignment_advanced.md
-    - Day 2:
-        - Variant calling: day2/variant_calling.md
-        - Visualisation: day2/visualisation.md
-        - Filtering & evaluation: day2/filtering_evaluation.md
-        - Annotation: day2/annotation.md
+  - Home: index.md
+  - Precourse preparations: precourse.md
+  - Course schedule: course_schedule.md
+  - Day 1:
+    - Introduction: day1/introduction.md
+    - Setup: day1/server_login.md
+    - Reproducibility: day1/reproducibility.md
+    - Read alignment - basics: day1/alignment.md
+    - Read alignment - advanced: day1/alignment_advanced.md
+  - Day 2:
+    - Variant calling - preparation: day2/variant_calling_preparation.md
+    - Variant calling: day2/variant_calling.md
+    - Visualisation: day2/visualisation.md
+    - Filtering & evaluation: day2/filtering_evaluation.md
+    - Annotation: day2/annotation.md
 
 theme:
   name: material
   logo: assets/images/SIB_logo.svg
   favicon: assets/images/SIB_logo.svg
   custom_dir: overrides
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - announce.dismiss
 
 # Repository
 repo_name: sib-swiss/NGS-variants-training
@@ -43,8 +50,8 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true 
   - attr_list
-  - pymdownx.tabbed
   - pymdownx.details
+  - pymdownx.keys
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
@@ -58,9 +65,18 @@ extra_css:
 extra:
   version:
     provider: mike
+    default: latest
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  analytics:
+    provider: google
+    property: G-9DHDFTPFZD
 
-copyright: Copyright &copy; 2021 SIB Swiss institute of Bioinformatics
-
-# google_analytics:
-#   - G-SK9D4D2P4M
-#   - auto
+copyright: >
+  Copyright &copy; 2021-2022 SIB Swiss institute of Bioinformatics –
+  <a href="#__consent">Change cookie settings</a>
