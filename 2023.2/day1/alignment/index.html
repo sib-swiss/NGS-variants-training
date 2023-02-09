@@ -1,0 +1,1167 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "LearningResource",
+    "@id": "https://sib-swiss.github.io/NGS-variants-training",
+    "http://purl.org/dc/terms/conformsTo": {
+        "@type": "CreativeWork",
+        "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE"
+    },
+    "description": "Course on detecting variants from next generation sequencing data",
+    "keywords": "NGS, variant, SNP, INDEL, sequencing, SNV, gatk",
+    "name": "NGS - variant analysis",
+    "about": [
+        {
+            "@type": "DefinedTerm",
+            "@id": "http://edamontology.org/topic_3168",
+            "inDefinedTermSet": "http://edamontology.org",
+            "termCode": "topic_3168",
+            "name": "Sequencing"
+        },
+        {
+            "@type": "DefinedTerm",
+            "@id": "http://edamontology.org/topic_3227",
+            "inDefinedTermSet": "http://edamontology.org",
+            "termCode": "topic_3227",
+            "name": "Variant calling"
+        }
+    ],
+    "abstract": "The detection of genetic variation is of major interest in various disciplines spanning from ecology and evolution research to inherited disease discovery and precision oncology. Next generation sequencing (NGS) methods are very powerful for the detection of genomic variants. Thanks to its throughput and cost-efficiency it enables the detection of a large number of variants in a large number of samples. In this two-day course we will cover the steps from read alignment to variant calling and annotation. We will mainly focus on the detection of germline mutations by following the GATK best practices. ",
+    "audience": "Biologists working with NGS data",
+    "author": [
+        {
+            "@type": "Person",
+            "name": "Geert van Geest",
+            "email": "geert.vangeest@sib.swiss"
+        },
+        {
+            "@type": "Person",
+            "name": "Patricia Palagi"
+        },
+        {
+            "@type": "Organization",
+            "name": "SIB Swiss Institute of Bioinformatics"
+        }
+    ],
+    "identifier": "https://doi.org/10.5281/zenodo.6457818",
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "teaches": [
+        "Understand important aspects of NGS and read alignment for variant analysis",
+        "Perform a read alignment ready for variant analysis",
+        "Perform variant calling according to GATK best practices",
+        "Perform a variant annotation"
+    ]
+}
+</script>
+
+    
+      
+        <title>Read alignment - basics - NGS - variant analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.20d9efc8.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+
+  <script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-9DHDFTPFZD"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-9DHDFTPFZD",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-9DHDFTPFZD",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
+
+  
+    <script>var consent;"undefined"==typeof __md_analytics||(consent=__md_get("__consent"))&&consent.analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#learning-outcomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+              <button class="md-banner__button md-icon" aria-label="Don't show this again">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+              </button>
+            
+            
+  <b>Issues, questions or feedback? &#128591; &#128640; </b> Use the "Questions and Answers" section at the bottom &#128071; of every page
+
+          </div>
+          
+            <script>var content,el=document.querySelector("[data-md-component=announce]");el&&(content=el.querySelector(".md-typeset"),__md_hash(content.innerHTML)===__md_get("__announce")&&(el.hidden=!0))</script>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+          <aside class="md-banner md-banner--warning">
+            <div class="md-banner__inner md-grid md-typeset">
+              
+  You're not viewing the latest version.
+  <a href="../../.."> 
+    <strong>Click here to go to latest.</strong>
+  </a>
+
+            </div>
+            <script>var el=document.querySelector("[data-md-component=outdated]"),outdated=__md_get("__outdated",sessionStorage);!0===outdated&&el&&(el.hidden=!1)</script>
+          </aside>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NGS - variant analysis" class="md-header__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NGS - variant analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Read alignment - basics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NGS - variant analysis" class="md-nav__button md-logo" aria-label="NGS - variant analysis" data-md-component="logo">
+      
+  <img src="../../assets/images/SIB_logo.svg" alt="logo">
+
+    </a>
+    NGS - variant analysis
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/sib-swiss/NGS-variants-training" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    sib-swiss/NGS-variants-training
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../precourse/" class="md-nav__link">
+        Precourse preparations
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../course_schedule/" class="md-nav__link">
+        Course schedule
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Day 1
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 1" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Day 1
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server_login/" class="md-nav__link">
+        Setup
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reproducibility/" class="md-nav__link">
+        Reproducibility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Read alignment - basics
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Read alignment - basics
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-download-data-and-prepare-the-reference-genome" class="md-nav__link">
+    1. Download data and prepare the reference genome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-read-alignment" class="md-nav__link">
+    2. Read alignment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-alignment-statistics" class="md-nav__link">
+    3. Alignment statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-sorting-and-compression" class="md-nav__link">
+    4. Sorting and compression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-recap" class="md-nav__link">
+    5. Recap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alignment_advanced/" class="md-nav__link">
+        Read alignment - advanced
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Day 2
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Day 2" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Day 2
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling_preparation/" class="md-nav__link">
+        Variant calling - preparation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/variant_calling/" class="md-nav__link">
+        Variant calling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/visualisation/" class="md-nav__link">
+        Visualisation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/filtering_evaluation/" class="md-nav__link">
+        Filtering & evaluation
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../day2/annotation/" class="md-nav__link">
+        Annotation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    Learning outcomes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#material" class="md-nav__link">
+    Material
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercises" class="md-nav__link">
+    Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-download-data-and-prepare-the-reference-genome" class="md-nav__link">
+    1. Download data and prepare the reference genome
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-read-alignment" class="md-nav__link">
+    2. Read alignment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-alignment-statistics" class="md-nav__link">
+    3. Alignment statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-sorting-and-compression" class="md-nav__link">
+    4. Sorting and compression
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-recap" class="md-nav__link">
+    5. Recap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+  <a href="https://github.com/sib-swiss/NGS-variants-training/edit/main/docs/day1/alignment.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+  <h1>Read alignment - basics</h1>
+
+<h2 id="learning-outcomes">Learning outcomes</h2>
+<p><strong>After having completed this chapter you will be able to:</strong></p>
+<ul>
+<li>Describe the general workflow of library preparation and sequencing with an Illumina sequencer</li>
+<li>Explain how the fastq format stores sequence and base quality information</li>
+<li>Calculate probability from phred quality and the other way around</li>
+<li>Explain why base quality and mapping quality are important for detecting variants</li>
+<li>Illustrate the difference between short-read and long-read sequencing</li>
+<li>Explain which type of invention led to development of long-read sequencing</li>
+<li>Explain what impact long read sequencing can have on variant analysis</li>
+<li>Describe how alignment information is stored in a sequence alignment (<code>.sam</code>) file</li>
+<li>Define a duplicate alignment and explain how alignment duplicates can affect variant analysis</li>
+<li>Perform an alignment of genomic reads with <code>bwa mem</code></li>
+<li>Generate and interpret the alignment statistics from <code>samtools flagstat</code></li>
+</ul>
+<h2 id="material">Material</h2>
+<p><a class="md-button" href="../../assets/pdf/sequencing_alignment.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> Download the presentation</a></p>
+<h2 id="exercises">Exercises</h2>
+<div class="admonition tip">
+<p class="admonition-title">Running into problems during the exercises?</p>
+<p>Use the &ldquo;Comments&rdquo; box at the bottom of each page 👇 for asking questions or giving feedback. It requires a <a href="https://github.com/">github account</a>.</p>
+</div>
+<h3 id="1-download-data-and-prepare-the-reference-genome">1. Download data and prepare the reference genome</h3>
+<p>Let&rsquo;s start with the first script of our &lsquo;pipeline&rsquo;. We will use it to download and unpack the course data. Use the code snippet below to create a script called <code>A01_download_course_data.sh</code>. Store it in <code>~/workdir/scripts/A-prepare_references/</code>, and run it.</p>
+<div class="highlight"><span class="filename">A01_download_course_data.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nb">cd</span> ~/workdir
+
+wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
+tar -xvf ngs-variants-training.tar.gz
+rm ngs-variants-training.tar.gz
+</code></pre></div>
+<p><strong>Exercise:</strong> This will create the directory <code>data</code>. Check out what&rsquo;s in there.</p>
+<details class="done">
+<summary>Answer</summary>
+<p>The directory data contains the following:
+<div class="highlight"><pre><span></span><code>data
+├── fastq
+│   ├── father_R1.fastq.gz
+│   ├── father_R2.fastq.gz
+│   ├── mother_R1.fastq.gz
+│   ├── mother_R2.fastq.gz
+│   ├── son_R1.fastq.gz
+│   └── son_R2.fastq.gz
+├── reference
+│   └── Homo_sapiens.GRCh38.dna.chromosome.20.fa
+└── variants
+    ├── 1000g_gold_standard.indels.filtered.vcf
+    ├── GCF.38.filtered.renamed.vcf
+    ├── NA12878.vcf.gz
+    └── NA12878.vcf.gz.tbi
+
+3 directories, 11 files
+</code></pre></div></p>
+<p>These are:</p>
+<ul>
+<li>input reads (at <code>fastq</code>)</li>
+<li>a part of the human reference genome (at <code>reference</code>)</li>
+<li>some vcfs with variants for calibration and evaluation (at <code>variants</code>)</li>
+</ul>
+</details>
+<div class="admonition note">
+<p class="admonition-title">Use <code>data</code> only for input</p>
+<p>The directory <code>data</code> that you have just downloaded, contains only input files for the exercises. So, don&rsquo;t write output (except for indexes) to this directory.</p>
+</div>
+<p>In order to index the reference sequence we are going to need some bioinformatics tools. All required tools are pre-installed in a conda environment called <code>ngs-tools</code>. In order to use them, every time you open a new terminal, you will have to load the environment:</p>
+<div class="highlight"><pre><span></span><code>conda activate ngs-tools
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">activate ngs-tools</p>
+<p>Every time you open a new terminal you will have to activate the environment again.</p>
+</div>
+<p>The software <code>bwa</code> is in this environment. We will use it for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:</p>
+<div class="highlight"><pre><span></span><code>bwa index &lt;reference.fa&gt;
+</code></pre></div>
+<p>Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in <code>~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>. Do it with a script called <code>A02_create_bwa_index.sh</code>. Also store this in the directory <code>A-prepare_references</code>.</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><span class="filename">A02_create_bwa_index.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/data/reference/
+bwa index Homo_sapiens.GRCh38.dna.chromosome.20.fa
+</code></pre></div>
+</details>
+<h3 id="2-read-alignment">2. Read alignment</h3>
+<p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/workdir/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
+<details class="done">
+<summary>Answer</summary>
+<p>The manual says:
+<div class="highlight"><pre><span></span><code>bwa mem [-aCHMpP] [-t nThreads] [-k minSeedLen] ... db.prefix reads.fq [mates.fq]
+</code></pre></div>
+So, we&rsquo;ll need:</p>
+<ul>
+<li>a database prefix (<code>db.prefix</code>)</li>
+<li>forward reads (<code>reads.fq</code>)</li>
+<li>reverse reads (<code>mates.fq</code>)</li>
+</ul>
+<p>For our reference sequence a command would look like:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span> ~/workdir/
+
+bwa mem <span class="se">\</span>
+data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+&lt;forward_reads.fq&gt; <span class="se">\</span>
+&lt;reverse_reads.fq&gt; <span class="se">\</span>
+&gt; &lt;alignment.sam&gt;
+</code></pre></div>
+</details>
+<p>We will now go through all the steps concerning alignment for the sample <code>mother</code>. To store the results of these steps, we will create a directory within <code>~/workdir</code> called <code>results</code>. For the alignment, make a script called <code>B01_alignment.sh</code>. Since we will perform a similar analysis later on for all samples, we store this script in<code>~/workdir/scripts/B-mother_only</code>. </p>
+<p>Your directory <code>~/workdir/scripts</code> should now like this:</p>
+<div class="highlight"><pre><span></span><code>scripts
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   ├── A02_create_bwa_index.sh
+├── B-mother_only
+│   └── B01_alignment.sh
+└── C-all_samples
+</code></pre></div>
+<p>In <code>B01_alignment.sh</code> write the commands to perform an alignment with <code>bwa mem</code> of the reads from the mother (<code>mother_R1.fastq</code> and <code>mother_R2.fastq</code>) against chromosome 20. Write the resulting <code>.sam</code> file to a directory in <code>~/workdir/results</code> called <code>alignments</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Index prefix is the same a reference filename</p>
+<p>With default values, the name of the index of a reference for <code>bwa mem</code> is the same as the name of the reference itself. In this case, this would be <code>Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
+</div>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><span class="filename">B01_read_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/
+mkdir -p results/alignments
+
+bwa mem <span class="se">\</span>
+data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa <span class="se">\</span>
+data/fastq/mother_R1.fastq.gz <span class="se">\</span>
+data/fastq/mother_R2.fastq.gz <span class="se">\</span>
+&gt; results/alignments/mother.sam
+</code></pre></div>
+</details>
+<h3 id="3-alignment-statistics">3. Alignment statistics</h3>
+<p><strong>Exercise:</strong> Check out the statistics of the alignment by using <code>samtools flagstat</code>. Write the output of samtools flagstat to a file called <code>mother.sam.flagstat</code>. Do this by creating a script called <code>B02_get_alignment_statistics.sh</code>, and add this script to <code>~/workdir/scripts/B-mother_only</code>. Find the documentation of <code>samtools flagstat</code> <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Any duplicates in there?</p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><span class="filename">B02_get_alignment_statistics.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results/alignments
+samtools flagstat mother.sam &gt; mother.sam.flagstat
+</code></pre></div>
+<p>This should result in:</p>
+<div class="highlight"><pre><span></span><code>133477 + 0 in total (QC-passed reads + QC-failed reads)
+0 + 0 secondary
+317 + 0 supplementary
+0 + 0 duplicates
+132892 + 0 mapped (99.56% : N/A)
+133160 + 0 paired in sequencing
+66580 + 0 read1
+66580 + 0 read2
+131470 + 0 properly paired (98.73% : N/A)
+131990 + 0 with itself and mate mapped
+
+585 + 0 singletons (0.44% : N/A)
+0 + 0 with mate mapped to a different chr
+0 + 0 with mate mapped to a different chr (mapQ&gt;=5)
+</code></pre></div>
+<p>No duplicates were found (<code>0 + 0 duplicates</code>). The aligner doesn&rsquo;t automatically flag duplicates. This needs to be done after the alignment.</p>
+</details>
+<h3 id="4-sorting-and-compression">4. Sorting and compression</h3>
+<p>Many downstream analyses require a coordinate sorted alignment file. Now, your alignment file is in the same order as the fastq file. You can coordinate sort an alignment file with <code>samtools sort</code>. You can find the documentation <a href="http://www.htslib.org/doc/samtools-sort.html">here</a>. </p>
+<p><strong>Exercise</strong>: Sort the alignment file according to coordinate. In order to do this, create a script called <code>B03_sort_alignment.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>). </p>
+<details class="done">
+<summary>Answer</summary>
+<div class="highlight"><span class="filename">B03_sort_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results
+
+samtools sort -o alignments/mother.sorted.sam alignments/mother.sam 
+</code></pre></div>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">Tip: <code>samtools sort</code> and <code>samtools view</code> can write to stdout</p>
+<p>Like <code>bwa mem</code>, <code>samtools sort</code> and <code>samtools view</code> can write its output to stdout. This means that you need to redirect your output to a file with <code>&gt;</code> or use the the output option <code>-o</code>.</p>
+</div>
+<p>The command <code>samtools view</code> is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let&rsquo;s start with that.</p>
+<p><strong>Exercise</strong>: compress our SAM file into a BAM file and include the header in the output. For this, use the <code>-b</code> and <code>-h</code> options. Perform the calculation from a script called <code>B04_compress_alignment.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>).  Find the required documentation <a href="http://www.htslib.org/doc/samtools-view.html">here</a>. How much was the disk space reduced by compressing the file?</p>
+<details class="done">
+<summary>Answer</summary>
+<p><div class="highlight"><span class="filename">B04_compress_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+
+<span class="nb">cd</span> ~/workdir/results
+
+samtools view -bh alignments/mother.sorted.sam &gt; alignments/mother.bam
+</code></pre></div>
+By using <code>ls -lh</code>, you can find out that <code>mother.sorted.sam</code> has a size of 55 Mb, while <code>mother.bam</code> is only 16 Mb.  </p>
+</details>
+<h3 id="5-recap">5. Recap</h3>
+<p>You have now performed:</p>
+<ul>
+<li>alignment</li>
+<li>sorting </li>
+<li>compression</li>
+<li>flag statistics </li>
+</ul>
+<p>On the sample <code>mother</code>. Your scripts directory should look like this:</p>
+<div class="highlight"><pre><span></span><code>scripts
+├── A-prepare_references
+│   ├── A01_download_course_data.sh
+│   └── A02_create_bwa_index.sh
+├── B-mother_only
+│   ├── B01_alignment.sh
+│   ├── B02_get_alignment_statistics.sh
+│   ├── B03_sort_alignment.sh
+│   └── B04_compress_alignment.sh
+└── C-all_samples
+</code></pre></div>
+
+
+  
+
+
+
+
+                
+
+  <!-- Giscus -->
+  <h2>Questions & Answers</h2>
+
+    <script src="https://giscus.app/client.js"
+            data-repo="sib-swiss/NGS-variants-training"
+            data-repo-id="MDEwOlJlcG9zaXRvcnkzMTEzMTc0MDI="
+            data-category="Q&A"
+            data-category-id="DIC_kwDOEo5Tms4CQ1hn"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="en"
+            crossorigin="anonymous"
+            async>
+    </script>
+  <!-- Synchronize Giscus theme with palette -->
+  <script>
+    var giscus = document.querySelector("script[src*=giscus]")
+
+    /* Set palette on initial load */
+    var palette = __md_get("__palette")
+    if (palette && typeof palette.color === "object") {
+      var theme = palette.color.scheme === "slate" ? "dark" : "light"
+      giscus.setAttribute("data-theme", theme) 
+
+
+    }
+
+    /* Register event handlers after documented loaded */
+    document.addEventListener("DOMContentLoaded", function() {
+      var ref = document.querySelector("[data-md-component=palette]")
+      ref.addEventListener("change", function() {
+        var palette = __md_get("__palette")
+        if (palette && typeof palette.color === "object") {
+          var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+          /* Instruct Giscus to change theme */
+          var frame = document.querySelector(".giscus-frame")
+          frame.contentWindow.postMessage(
+            { giscus: { setConfig: { theme } } },
+            "https://giscus.app"
+          )
+        }
+      })
+    })
+  </script>
+
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../reproducibility/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Reproducibility" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Reproducibility
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../alignment_advanced/" class="md-footer__link md-footer__link--next" aria-label="Next: Read alignment - advanced" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Read alignment - advanced
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2021-2022 SIB Swiss institute of Bioinformatics – <a href="#__consent">Change cookie settings</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+  
+    
+  
+
+
+  
+    
+  
+
+
+
+  
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input type="checkbox" class="md-toggle" id="__settings">
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="analytics" checked>
+          <span class="task-list-indicator"></span>
+          Google Analytics
+        <label>
+      </li>
+    
+      
+        
+        
+      
+      <li class="task-list-item">
+        <label class="task-list-control">
+          <input type="checkbox" name="github" checked>
+          <span class="task-list-indicator"></span>
+          GitHub
+        <label>
+      </li>
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout(function(){document.querySelector("[data-md-component=consent]").hidden=!1},250);var action,form=document.forms.consent;for(action of["submit","reset"])form.addEventListener(action,function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);console.log(new FormData(form)),__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map(function(e){return[e,!0]}))),location.hash="",location.reload()})</script>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.8492ddcf.min.js"></script>
+      
+    
+  </body>
+</html>
