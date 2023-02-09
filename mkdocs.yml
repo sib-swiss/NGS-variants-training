@@ -20,10 +20,10 @@ nav:
 theme:
   name: material
   logo: assets/images/SIB_logo.svg
+  favicon: assets/images/SIB_logo.svg
   custom_dir: overrides
   icon:
     repo: fontawesome/brands/github
-  favicon: assets/images/SIB_logo.svg
   features:
     - announce.dismiss
 
@@ -35,6 +35,7 @@ edit_uri: edit/main/docs/
 site_url: https://sib-swiss.github.io/NGS-variants-training/
 
 markdown_extensions:
+  - meta
   - abbr
   - def_list
   - footnotes
