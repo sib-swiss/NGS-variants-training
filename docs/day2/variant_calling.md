@@ -54,7 +54,7 @@ Where:
 
 ??? done "Answer"
     ```R
-    # For g = 0 (i.e. 0 reference alleles)
+    # For g = 0 (i.e. 0 alternative alleles)
     -10*log10(genotype_likelihood(m = 2, g= 0, e = 0.01, ref = 22, alt = 4))
     # [1] 80.96026 
     -10*log10(genotype_likelihood(m = 2, g= 1, e = 0.01, ref = 22, alt = 4))
@@ -66,7 +66,7 @@ Where:
 **Exercise:** What is the most likely genotype? What is the genotype quality (GQ)? Do you think we should be confident about this genotype call?
 
 ??? done "Answer" 
-    The most likely genotype has the lowest PL, so where g=1 (heterozygous). GL is calculated by subtracting the lowest PL from the second lowest PL, so 80.96 - 78.27 = 2.69. 
+    The most likely genotype has the lowest PL, so where g=1 (heterozygous). GQ is calculated by subtracting the lowest PL from the second lowest PL, so 80.96 - 78.27 = 2.69. 
     
     This is a low genotype quality (note that we're in the phred scale), i.e. an error probability of 0.54. This makes sense, if the genotype is heterozygous we would roughly expect to count as many reference as alternative alleles, and our example quite strongly deviates from this expectation. 
 
