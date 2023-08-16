@@ -17,7 +17,7 @@
 
 ## Material
 
-[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/sequencing_alignment.pdf){: .md-button }
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/04_sequencing_alignment.pdf){: .md-button }
 
 ## Exercises
 

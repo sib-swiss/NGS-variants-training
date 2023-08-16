@@ -7,7 +7,7 @@
 
 ## Material
 
-[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/reproducible_research.pdf){: .md-button }
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/03_reproducible_research.pdf){: .md-button }
 
 ### Some good practices for reproducibility
 

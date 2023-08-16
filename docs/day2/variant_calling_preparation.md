@@ -9,7 +9,7 @@
 
 ## Material
 
-[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/variant_calling.pdf){: .md-button }
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/05_variant_calling.pdf){: .md-button }
 
 [VCF format description](https://samtools.github.io/hts-specs/VCFv4.1.pdf)
 

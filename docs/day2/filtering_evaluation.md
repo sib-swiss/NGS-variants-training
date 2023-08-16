@@ -9,7 +9,7 @@
 
 ## Material
 
-[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/filtering_evaluation.pdf){: .md-button }
+[:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/06_filtering_evaluation.pdf){: .md-button }
 
 ## Exercises
 
