@@ -6,38 +6,39 @@
         "alias": "",
         "text": "How comfortable are you with bioinformatic analyses?",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525398",
                 "alias": null,
                 "text": "I had some introduction in unix and/or R/python and ready to get started!",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525399",
                 "alias": null,
                 "text": "I analyzed some datasets for which I used the command line",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525400",
                 "alias": null,
                 "text": "I regularly analyze datasets with the command line",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525401",
                 "alias": null,
                 "text": "I’m a bioinformatician",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -46,56 +47,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
-    },
-    {
-        "@type": "MultipleChoiceQuestion",
-        "lowerCaseAlias": "",
-        "id": "1946792",
-        "alias": null,
-        "text": "How comfortable are you with bioinformatic analyses?",
-        "image": null,
-        "choices": [
-            {
-                "id": "7525402",
-                "alias": null,
-                "text": "I had some introduction in unix and/or R/python and ready to get started!",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            },
-            {
-                "id": "7525403",
-                "alias": null,
-                "text": "I analyzed some datasets for which I used the command line",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            },
-            {
-                "id": "7525404",
-                "alias": null,
-                "text": "I regularly analyze datasets with the command line",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            },
-            {
-                "id": "7525405",
-                "alias": null,
-                "text": "I’m a bioinformatician",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            }
-        ],
-        "minNumberSelections": 1,
-        "maxNumberSelections": 1,
-        "resultFormat": "%",
-        "distributableWeight": null,
-        "weightingSetting": null,
-        "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -104,38 +57,39 @@
         "alias": "",
         "text": "In which stage of working with variant analysis are you?",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525406",
                 "alias": null,
                 "text": "I might be performing a variant analysis in the future",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525407",
                 "alias": null,
                 "text": "I will probably perform a variant analysis in one of my current research projects",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525408",
                 "alias": null,
                 "text": "There is a dataset waiting to be analyzed",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525409",
                 "alias": null,
                 "text": "I already performed one or more variant analyses",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -144,7 +98,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -153,62 +108,63 @@
         "alias": "",
         "text": "What kind of organism are you primarily working with?",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525410",
                 "alias": null,
                 "text": "Human",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525411",
                 "alias": null,
                 "text": "Mammals (other than human)",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525412",
                 "alias": null,
                 "text": "Bacteria",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525413",
                 "alias": null,
                 "text": "Plants",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525414",
                 "alias": null,
                 "text": "Other eukaryotes",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525415",
                 "alias": null,
                 "text": "Viruses",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525416",
                 "alias": null,
                 "text": "Other",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -217,7 +173,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -226,30 +183,31 @@
         "alias": "",
         "text": "What kind of mutation has caused the flower to turn yellow?",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525417",
                 "alias": null,
                 "text": "Somatic mutation",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525418",
                 "alias": null,
                 "text": "Germline mutation",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525419",
                 "alias": null,
                 "text": "Both",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -258,7 +216,59 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "lowerCaseAlias": "",
+        "id": "3044585",
+        "alias": "",
+        "text": "If two alleles are in repulsion in one individual, can both alleles be inherited by the same individual?",
+        "image": null,
+        "imageAltText": "",
+        "choices": [
+            {
+                "id": "11575876",
+                "alias": null,
+                "text": "Yes, they are in repulsion so on the same haplotype",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "11575877",
+                "alias": null,
+                "text": "Yes, but only if there's a crossing-over event between the alleles",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "11575878",
+                "alias": null,
+                "text": "No, because they're on different homologs and only one homolog will be inherited",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "11575879",
+                "alias": null,
+                "text": "No, both variant would need to be homozygous and that's not possible if alleles are in repulsion",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -267,30 +277,31 @@
         "alias": "",
         "text": "How many haplotype alleles can theoretically be present in a population based on 3 proximate bi-allelic SNPs?",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525420",
                 "alias": null,
                 "text": "3",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525421",
                 "alias": null,
                 "text": "3x3 = 9",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525422",
                 "alias": null,
                 "text": "2^3 = 8",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": true
             }
         ],
         "minNumberSelections": 1,
@@ -299,7 +310,59 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "lowerCaseAlias": "",
+        "id": "3043747",
+        "alias": "",
+        "text": "A high base quality means:",
+        "image": null,
+        "imageAltText": "",
+        "choices": [
+            {
+                "id": "11572662",
+                "alias": null,
+                "text": "A high error but high accuracy",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "11572663",
+                "alias": null,
+                "text": "A low error and high accuracy",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "11572664",
+                "alias": null,
+                "text": "A high error and low accuracy",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "11572665",
+                "alias": null,
+                "text": "A low error and low accuracy",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -308,30 +371,31 @@
         "alias": "",
         "text": "With grep -c \"^>\" it is easy to count the number of sequences in a fasta file. Why doesn’t grep -c \"^@\" work for fastq sequences?\n",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525423",
                 "alias": null,
                 "text": "@ is a special character for regular expressions",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525424",
                 "alias": null,
                 "text": "The @ can also occur elsewhere in a fastq file",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": true
             },
             {
                 "id": "7525425",
                 "alias": null,
                 "text": "There is no specific title start symbol for fastq files",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -340,7 +404,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -349,38 +414,39 @@
         "alias": "",
         "text": "Why are INDELs more difficult to detect from alignments compared to SNPs?\n",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525426",
                 "alias": null,
                 "text": "Because there is no base quality",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525427",
                 "alias": null,
                 "text": "Because it is difficult to know the correct local alignment",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525428",
                 "alias": null,
                 "text": "Because they are often present in repeats/homopolymers",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525429",
                 "alias": null,
                 "text": "All of the above",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": true
             }
         ],
         "minNumberSelections": 1,
@@ -389,56 +455,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
-    },
-    {
-        "@type": "MultipleChoiceQuestion",
-        "lowerCaseAlias": "",
-        "id": "1946799",
-        "alias": null,
-        "text": "Why are INDELs more difficult to detect from alignments compared to SNPs?\n",
-        "image": null,
-        "choices": [
-            {
-                "id": "7525430",
-                "alias": null,
-                "text": "Because there is no base quality",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            },
-            {
-                "id": "7525431",
-                "alias": null,
-                "text": "Because it is difficult to know the correct local alignment",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            },
-            {
-                "id": "7525432",
-                "alias": null,
-                "text": "Because they are often present in repeats/homopolymers",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            },
-            {
-                "id": "7525433",
-                "alias": null,
-                "text": "All of the above",
-                "isCorrectAnswer": false,
-                "excludeFromResults": false,
-                "image": null
-            }
-        ],
-        "minNumberSelections": 1,
-        "maxNumberSelections": 1,
-        "resultFormat": "%",
-        "distributableWeight": null,
-        "weightingSetting": null,
-        "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -447,38 +465,39 @@
         "alias": "",
         "text": "Can you technically regenerate the fastq file out of the SAM file? And can you regenerate the reference sequence (fasta) file from the SAM file?\n",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525434",
                 "alias": null,
                 "text": "Only the fastq file",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": true
             },
             {
                 "id": "7525435",
                 "alias": null,
                 "text": "Only the fasta file",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525436",
                 "alias": null,
                 "text": "Both files",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525437",
                 "alias": null,
                 "text": "None of those",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -487,7 +506,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -496,22 +516,23 @@
         "alias": "",
         "text": "Let’s say we we count 8 bases REF and 1 ALT at a locus, what would you consider the most likely genotype?\n",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525438",
                 "alias": null,
                 "text": "Homozygous REF, because by far most of the bases are REF",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525439",
                 "alias": null,
                 "text": "Heterozygous, because having one base supporting ALT gives evidence that there is an ALT allele",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -520,47 +541,49 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
         "lowerCaseAlias": "",
-        "id": "1946802",
+        "id": "3043754",
         "alias": "",
-        "text": "What would be a command to get the number of variants in a vcf file? (the -v option will invert the match; the -c option will give the count of matches)\n",
+        "text": "For a variant we find three Phred-based likelihoods: 80, 57 and 300 for the genotypes HomRef, Heterozygous and HomAlt respectively. What is the most likely genotype? And what is the genotype quality?",
         "image": null,
+        "imageAltText": "",
         "choices": [
             {
-                "id": "7525440",
+                "id": "11572687",
                 "alias": null,
-                "text": "grep -v \"^#\" my.vcf | wc -l",
-                "isCorrectAnswer": false,
+                "text": "Genotype: HomAlt, GQ: 300",
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
-                "id": "7525441",
+                "id": "11572688",
                 "alias": null,
-                "text": "wc -l my.vcf | grep -c",
-                "isCorrectAnswer": false,
+                "text": "Genotype: HomAlt, GQ: 220",
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
-                "id": "7525442",
+                "id": "11572689",
                 "alias": null,
-                "text": "grep -c \"^#\" my.vcf ",
-                "isCorrectAnswer": false,
+                "text": "Genotype: Heterozygous, GQ: 57",
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
-                "id": "7525443",
+                "id": "11572690",
                 "alias": null,
-                "text": "grep -c CHROM my.vcf",
-                "isCorrectAnswer": false,
+                "text": "Genotype: Heterozygous, GQ: 23",
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": true
             }
         ],
         "minNumberSelections": 1,
@@ -569,39 +592,92 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
+    },
+    {
+        "@type": "MultipleChoiceQuestion",
+        "lowerCaseAlias": "",
+        "id": "3043828",
+        "alias": "",
+        "text": "Which information can NOT be stored in a vcf file?",
+        "image": null,
+        "imageAltText": "",
+        "choices": [
+            {
+                "id": "11572950",
+                "alias": null,
+                "text": "The sequence surrounding the variants",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": true
+            },
+            {
+                "id": "11572951",
+                "alias": null,
+                "text": "The sequence of each of the possible alleles",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "11572952",
+                "alias": null,
+                "text": "Haplotype (phasing) information",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            },
+            {
+                "id": "11572953",
+                "alias": null,
+                "text": "Depth of each individual allele",
+                "excludeFromResults": false,
+                "image": null,
+                "isCorrectAnswer": false
+            }
+        ],
+        "minNumberSelections": 1,
+        "maxNumberSelections": 1,
+        "resultFormat": "%",
+        "distributableWeight": null,
+        "weightingSetting": null,
+        "weightingFactor": null,
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
         "lowerCaseAlias": "",
         "id": "1946803",
         "alias": "",
-        "text": "What would be solution for this ‘missing genotype’ problem? (answer the best solution)\n",
+        "text": "What would be solution for this ‘missing genotype’ problem? (answer what you think is the best solution)\n",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525444",
                 "alias": null,
                 "text": "Do a variant call on all samples in one go",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525445",
                 "alias": null,
                 "text": "Store information on non-variant regions in the vcf",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525446",
                 "alias": null,
                 "text": "Fill out missing values at missing genotypes",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -610,7 +686,8 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     },
     {
         "@type": "MultipleChoiceQuestion",
@@ -619,38 +696,39 @@
         "alias": "",
         "text": "Strong filtering likely results in:\n",
         "image": null,
+        "imageAltText": null,
         "choices": [
             {
                 "id": "7525447",
                 "alias": null,
                 "text": "Higher precision – lower recall",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": true
             },
             {
                 "id": "7525448",
                 "alias": null,
                 "text": "Lower prescion – higher recall",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525449",
                 "alias": null,
                 "text": "Both precision and recall lower",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             },
             {
                 "id": "7525450",
                 "alias": null,
                 "text": "Both recall and precision higher",
-                "isCorrectAnswer": false,
                 "excludeFromResults": false,
-                "image": null
+                "image": null,
+                "isCorrectAnswer": false
             }
         ],
         "minNumberSelections": 1,
@@ -659,6 +737,7 @@
         "distributableWeight": null,
         "weightingSetting": null,
         "weightingFactor": null,
-        "correctAnswerExplanation": null
+        "correctAnswerExplanation": null,
+        "resultSorting": null
     }
 ]
