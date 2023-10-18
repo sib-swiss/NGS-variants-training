@@ -9,6 +9,8 @@
 
 ## Material
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5lwbusTbxHM?si=I_wt8MPKqSoWhGR5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/05_variant_calling.pdf){: .md-button }
 
 [VCF format description](https://samtools.github.io/hts-specs/VCFv4.1.pdf)

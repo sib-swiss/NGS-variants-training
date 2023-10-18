@@ -17,6 +17,8 @@
 
 ## Material
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VhJ2JKE4fBs?si=dZWZ5A0lnMPIORtE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/04_sequencing_alignment.pdf){: .md-button }
 
 ## Exercises

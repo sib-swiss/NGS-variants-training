@@ -9,6 +9,8 @@
 
 ## Material
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8oiQOg40_co?si=bCnSYkIrWB_yCjjN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/06_filtering_evaluation.pdf){: .md-button }
 
 ## Exercises

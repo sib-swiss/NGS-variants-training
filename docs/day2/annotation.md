@@ -12,6 +12,8 @@
 
 ## Material
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DxuQ63jFMtM?si=SvQ5mVKjlIIS6A6h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 [:fontawesome-solid-file-pdf: Download the presentation](../assets/pdf/07_variant_annotation.pdf){: .md-button }
 
 ## Exercises
