@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 
 gatk GenomicsDBImport \
 --variant results/variants/mother.HC.g.vcf \

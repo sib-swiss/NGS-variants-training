@@ -55,7 +55,7 @@ During several steps of variant calling `gatk` uses read group information. For 
     ```sh title="B05_add_readgroups.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results
+    cd ~/project/results
 
     gatk AddOrReplaceReadGroups \
     --INPUT alignments/mother.bam \
@@ -101,7 +101,7 @@ Now that we have specified read groups, we can mark the duplicates with `gatk Ma
     ```sh title="B06_mark_duplicates.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results
+    cd ~/project/results
 
     gatk MarkDuplicates \
     --INPUT alignments/mother.rg.bam \
@@ -115,7 +115,7 @@ Now that we have specified read groups, we can mark the duplicates with `gatk Ma
     ```sh title="B07_get_alignment_stats_after_md.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments
+    cd ~/project/results/alignments
 
     samtools flagstat mother.rg.md.bam > mother.rg.md.bam.flagstat
     ```
@@ -154,7 +154,7 @@ samtools index <bam file>
     ```sh title="B08_index_alignment.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments/
+    cd ~/project/results/alignments/
 
     samtools index mother.rg.md.bam
     ```
@@ -232,7 +232,7 @@ data/fastq/"$SAMPLE"_R2.fastq.gz \
     ```sh title="C01_alignment_sorting_compression.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     for SAMPLE in mother father son
     do
@@ -271,7 +271,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     Try to just print the variables from a loop in order to check to see whether the loop performs according to your expectation. E.g.:
 
     ```sh
-    cd ~/workdir/results
+    cd ~/project/results
 
     cat sample_rg_fields.txt | while read SAMPLE LB PU ID
     do
@@ -284,7 +284,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     ```sh title="C02_add_readgroups.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results
+    cd ~/project/results
 
     cat sample_rg_fields.txt | while read SAMPLE LB PU ID
     do
@@ -307,7 +307,7 @@ As final step, we will mark the duplicates and perform the indexing for the thre
     ```sh title="C03_mark_duplicates.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results
+    cd ~/project/results
     
     for SAMPLE in mother father son
     do
@@ -322,7 +322,7 @@ As final step, we will mark the duplicates and perform the indexing for the thre
     ```sh title="C04_index_alignment.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results
+    cd ~/project/results
 
     for SAMPLE in mother father son
     do

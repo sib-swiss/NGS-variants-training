@@ -56,7 +56,7 @@ GRCh38.99 \
     ```sh title="C18_annotate_snpEff.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/variants
+    cd ~/project/results/variants
 
     snpEff -Xmx4g \
     -v \

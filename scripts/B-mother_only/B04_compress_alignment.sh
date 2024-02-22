@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/project/results
 
 samtools view -bh alignments/mother.sorted.sam > alignments/mother.bam

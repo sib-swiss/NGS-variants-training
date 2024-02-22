@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 
 gatk VariantsToTable \
 --variant results/variants/mother.HC.vcf \

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 
 gatk SelectVariants \
 --variant results/variants/trio.vcf \

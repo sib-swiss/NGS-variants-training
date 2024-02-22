@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 
 gatk Concordance \
 --evaluation results/variants/mother.trio.vcf \

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 mkdir -p results/variants
 
 gatk HaplotypeCaller \

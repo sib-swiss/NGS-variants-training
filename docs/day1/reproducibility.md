@@ -41,7 +41,7 @@ We store the scripts required for these subprojects in different subdirectories 
 You can already create these directories now with:
 
 ```sh
-cd ~/workdir/scripts/
+cd ~/project/scripts/
 
 mkdir -p \
 A-prepare_references \

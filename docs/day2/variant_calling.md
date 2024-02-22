@@ -89,7 +89,7 @@ The command [`gatk HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/ar
     ```sh title="B10_run_haplotype_caller.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
     mkdir -p results/variants
 
     gatk HaplotypeCaller \
@@ -125,7 +125,7 @@ gatk VariantsToTable \
     Your script should look like:
 
     ```sh title="B11_variants_to_table.sh"
-    cd ~/workdir
+    cd ~/project
 
     gatk VariantsToTable \
     --variant results/variants/mother.HC.vcf \
@@ -172,7 +172,7 @@ Now, we will perform the variant calling on all three samples. Later we want to 
     ```sh title="C06_run_haplotypecaller.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     for SAMPLE in mother father son
     do
@@ -197,7 +197,7 @@ You can generate a GenomicsDB on our three samples like this:
 ```sh title="C07_create_genomicsdb.sh"
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 
 gatk GenomicsDBImport \
 --variant results/variants/mother.HC.g.vcf \
@@ -215,7 +215,7 @@ You can retrieve the combined vcf from the database with `gatk GenotypeGVCFs`.
 ```sh title="C08_genotype_gvcfs.sh"
 #!/usr/bin/env bash
 
-cd ~/workdir
+cd ~/project
 
 gatk GenotypeGVCFs \
 --reference data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \

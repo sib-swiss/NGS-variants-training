@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/project/results
 
 for SAMPLE in mother father son
 do

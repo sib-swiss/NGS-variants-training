@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results/alignments
+cd ~/project/results/alignments
 samtools flagstat mother.sam > mother.sam.flagstat

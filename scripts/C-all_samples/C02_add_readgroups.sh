@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/project/results
 
 cat sample_rg_fields.txt | while read SAMPLE LB PU ID
 do

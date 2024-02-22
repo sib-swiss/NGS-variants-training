@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results/variants
+cd ~/project/results/variants
 
 gatk MergeVcfs \
 --INPUT trio.SNP.filtered.vcf \

@@ -28,7 +28,7 @@
 Many algorithms work faster, or only work with an index of their (large) input files. In that sense, `gatk` is no different from other tools. The index for a reference needs to be created in two steps:
 
 ```sh
-cd ~/workdir/data/reference
+cd ~/project/data/reference
 samtools faidx <reference.fa>
 gatk CreateSequenceDictionary --REFERENCE <reference.fa>
 ```
@@ -57,7 +57,7 @@ gatk IndexFeatureFile --input <variants.vcf>
     ```sh title="A03_create_vcf_indices.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/data 
+    cd ~/project/data 
 
     gatk IndexFeatureFile --input variants/1000g_gold_standard.indels.filtered.vcf
     gatk IndexFeatureFile --input variants/GCF.38.filtered.renamed.vcf
@@ -68,7 +68,7 @@ gatk IndexFeatureFile --input <variants.vcf>
     ```sh title="A04_create_fasta_index.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/data 
+    cd ~/project/data 
 
     samtools faidx reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
     gatk CreateSequenceDictionary --REFERENCE reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa
@@ -138,7 +138,7 @@ BQSR is done in two steps:
     ```sh title="B09_perform_bqsr.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     mkdir -p results/bqsr
 
@@ -161,7 +161,7 @@ BQSR is done in two steps:
     ```sh title="C05_perform_bqsr.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     for SAMPLE in mother father son
     do

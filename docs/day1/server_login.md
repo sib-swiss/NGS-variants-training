@@ -80,8 +80,8 @@
     -p 8443:8443 \
     -e PUID=1000 \
     -e PGID=1000 \
-    -e DEFAULT_WORKSPACE=/config/workdir \
-    -v $PWD:/config/workdir \
+    -e DEFAULT_WORKSPACE=/config/project \
+    -v $PWD:/config/project \
     geertvangeest/ngs-variants-vscode
     ```
 
@@ -92,7 +92,7 @@
     http://127.0.0.1:8443
     ```
 
-    The option `-v` mounts a local directory in your computer to the directory `/config/workdir` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
+    The option `-v` mounts a local directory in your computer to the directory `/config/project` in the docker container. In that way, you have files available both in the container and on your computer. Use this directory on your computer to e.g. visualise data with IGV. Change the first path to a path on your computer that you want to use as a working directory.
 
     !!! note "Don't mount directly in the home dir"
         Don't directly mount your local directory to the home directory (`/root`). This will lead to unexpected behaviour.
@@ -154,7 +154,7 @@ Make a directory `scripts` within `~/workdir` and make it your current directory
 
 ??? done "Answer"
     ```sh
-    cd ~/workdir
+    cd ~/project
     mkdir scripts
     cd scripts
     ```

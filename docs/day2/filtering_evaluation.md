@@ -26,7 +26,7 @@ Our dataset is too small to apply VQSR. We will therefore do hard filtering inst
 First, filtering thresholds are usually different for SNPs and INDELs. Therefore, we will split `trio.vcf` into two vcfs, one containg only SNPs, and one containing only INDELs. You can extract all the SNP records in our trio vcf like this:
 
 ```sh
-cd ~/workdir/results
+cd ~/project/results
 
 gatk SelectVariants \
 --variant variants/trio.vcf \
@@ -48,7 +48,7 @@ gatk SelectVariants \
     ```sh title="C09_select_SNPs.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     gatk SelectVariants \
     --variant results/variants/trio.vcf \
@@ -61,7 +61,7 @@ gatk SelectVariants \
     ```sh title="C10_select_INDELs.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     gatk SelectVariants \
     --variant results/variants/trio.vcf \
@@ -102,7 +102,7 @@ gatk VariantFiltration \
     ```sh title="C11_filter_SNPs.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/variants
+    cd ~/project/results/variants
 
     gatk VariantFiltration \
     --variant trio.SNP.vcf \
@@ -176,7 +176,7 @@ gatk VariantFiltration \
     ```sh title="C12_filter_INDELs.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/variants
+    cd ~/project/results/variants
 
     gatk VariantFiltration \
     --variant trio.INDEL.vcf \
@@ -219,7 +219,7 @@ gatk MergeVcfs \
     ```sh title="C13_merged_filtered.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/variants
+    cd ~/project/results/variants
 
     gatk MergeVcfs \
     --INPUT trio.SNP.filtered.vcf \
@@ -247,7 +247,7 @@ In addition to the required arguments.
     ```sh title="C14_extract_mother_only.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/variants
+    cd ~/project/results/variants
 
     gatk SelectVariants \
     --variant trio.filtered.vcf \
@@ -293,7 +293,7 @@ gatk Concordance \
     ```sh title="C15_evaluate_concordance.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     gatk Concordance \
     --evaluation results/variants/mother.trio.filtered.vcf \
@@ -341,7 +341,7 @@ gatk Concordance \
     ```sh title="C16_extract_mother_before_filtering.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/variants
+    cd ~/project/results/variants
 
     gatk SelectVariants \
     --variant trio.vcf \
@@ -359,7 +359,7 @@ gatk Concordance \
     ```sh title="C17_evaluate_concordance_before_filtering.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir
+    cd ~/project
 
     gatk Concordance \
     --evaluation results/variants/mother.trio.vcf \

@@ -32,7 +32,7 @@ Let's start with the first script of our 'pipeline'. We will use it to download 
 
 ```sh title="A01_download_course_data.sh"
 #!/usr/bin/env bash
-cd ~/workdir
+cd ~/project
 
 wget https://ngs-variants-training.s3.eu-central-1.amazonaws.com/ngs-variants-training.tar.gz
 tar -xvf ngs-variants-training.tar.gz
@@ -93,7 +93,7 @@ Make an index of the reference sequence of chromosome 20 of the human genome. Yo
     ```sh title="A02_create_bwa_index.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/data/reference/
+    cd ~/project/data/reference/
     bwa index Homo_sapiens.GRCh38.dna.chromosome.20.fa
     ```
 
@@ -115,7 +115,7 @@ Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/
     For our reference sequence a command would look like:
 
     ```sh
-    cd ~/workdir/
+    cd ~/project/
 
     bwa mem \
     data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa \
@@ -148,7 +148,7 @@ In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` 
     ```sh title="B01_read_alignment.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/
+    cd ~/project/
     mkdir -p results/alignments
 
     bwa mem \
@@ -167,7 +167,7 @@ In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` 
     ```sh title="B02_get_alignment_statistics.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results/alignments
+    cd ~/project/results/alignments
     samtools flagstat mother.sam > mother.sam.flagstat
     ```
 
@@ -202,7 +202,7 @@ Many downstream analyses require a coordinate sorted alignment file. Now, your a
     ```sh title="B03_sort_alignment.sh"
     #!/usr/bin/env bash
 
-    cd ~/workdir/results
+    cd ~/project/results
 
     samtools sort -o alignments/mother.sorted.sam alignments/mother.sam 
     ```
@@ -218,7 +218,7 @@ The command `samtools view` is very versatile. It takes an alignment file and wr
     ```sh title="B04_compress_alignment.sh"
     #!/usr/bin/env bash
     
-    cd ~/workdir/results
+    cd ~/project/results
 
     samtools view -bh alignments/mother.sorted.sam > alignments/mother.bam
     ```

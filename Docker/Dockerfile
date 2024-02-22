@@ -29,7 +29,7 @@ RUN conda init
 
 COPY settings.json /config/data/User/
 COPY keybindings.json /config/data/User/
-RUN mkdir -p /config/workdir
+RUN mkdir -p /config/project
 
 # copy a different snpeff config file in order to download to /data (in stead of conda directory)
 # comment the line below if running this container locally.

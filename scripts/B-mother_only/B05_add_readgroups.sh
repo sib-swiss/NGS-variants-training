@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/project/results
 
 gatk AddOrReplaceReadGroups \
 --INPUT alignments/mother.bam \

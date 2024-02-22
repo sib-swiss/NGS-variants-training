@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/workdir/results
+cd ~/project/results
 
 gatk MarkDuplicates \
 --INPUT alignments/mother.rg.bam \
