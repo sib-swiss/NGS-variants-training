@@ -47,7 +47,7 @@ During several steps of variant calling `gatk` uses read group information. For 
     Here, e.g. the `PU` field would be `FC706VJ.2.ATCACG`
 
 
-**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. Do this from a script called `B05_add_readgroups.sh` (in `~/workdir/scripts/B-mother_only`).
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-) of `AddOrReplaceReadGroups`. Specify the required arguments, and run the command. Do this from a script called `B05_add_readgroups.sh` (in `~/project/scripts/B-mother_only`).
 
 ??? done "Answer"
     We can use the answers of the previous exercise, and use them in the command:
@@ -95,7 +95,7 @@ During several steps of variant calling `gatk` uses read group information. For 
 
 Now that we have specified read groups, we can mark the duplicates with `gatk MarkDuplicates`. 
 
-**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. Do this from a script called `B06_mark_duplicates.sh` (in `~/workdir/scripts/B-mother_only`). 
+**Exercise:** Have a look at the [documentation](https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-), and run `gatk MarkDuplicates` with the three required arguments. Do this from a script called `B06_mark_duplicates.sh` (in `~/project/scripts/B-mother_only`). 
 
 ??? done "Answer"
     ```sh title="B06_mark_duplicates.sh"
@@ -109,7 +109,7 @@ Now that we have specified read groups, we can mark the duplicates with `gatk Ma
     --METRICS_FILE alignments/marked_dup_metrics_mother.txt 
     ```
 
-**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates, and write the output to a file called `mother.rg.md.bam.flagstat`. Create a script called `B07_get_alignment_stats_after_md.sh` (in `~/workdir/scripts/B-mother_only`). How many reads were marked as duplicate?
+**Exercise:** Run `samtools flagstat` on the alignment file with marked duplicates, and write the output to a file called `mother.rg.md.bam.flagstat`. Create a script called `B07_get_alignment_stats_after_md.sh` (in `~/project/scripts/B-mother_only`). How many reads were marked as duplicate?
 
 ??? done "Answer"
     ```sh title="B07_get_alignment_stats_after_md.sh"
@@ -148,7 +148,7 @@ To look up specific alignments, it is convenient to have your alignment file ind
 samtools index <bam file>
 ```
 
-**Exercise**: Create a script called `B08_index_alignment.sh` (in `~/workdir/scripts/B-mother_only`) to perform the alignment.
+**Exercise**: Create a script called `B08_index_alignment.sh` (in `~/project/scripts/B-mother_only`) to perform the alignment.
 
 ??? done "Answer"
     ```sh title="B08_index_alignment.sh"
@@ -202,7 +202,7 @@ data/fastq/"$SAMPLE"_R2.fastq.gz \
 | samtools view -bh > results/alignments/"$SAMPLE".bam
 ```
 
-**Exercise**: Make a directory in the scripts directory `C-all_samples` (so `~/workdir/scripts/C-all_samples`). In here, create a script called `C01_alignment_sorting_compression.sh`. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. `mother`, `father` and `son`).
+**Exercise**: Make a directory in the scripts directory `C-all_samples` (so `~/project/scripts/C-all_samples`). In here, create a script called `C01_alignment_sorting_compression.sh`. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. `mother`, `father` and `son`).
 
 ??? done "Answer"
 
@@ -246,7 +246,7 @@ data/fastq/"$SAMPLE"_R2.fastq.gz \
 
 Now we continue with adding the readgroups. For each sample, we have to add specific information to the different readgroup fields. We can do that by looping over a tab delimited file with sample-specific information in each row. Let's create that tab-delimited file. 
 
-**Exercise** Generate a tab-delimited file called `sample_rg_fields.txt` and store it in `~/workdir/results/`. In this file, each line should represent a sample (mother, father and son), and you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
+**Exercise** Generate a tab-delimited file called `sample_rg_fields.txt` and store it in `~/project/results/`. In this file, each line should represent a sample (mother, father and son), and you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
 
 ```
 mother	lib1	H0164.2.ALXX140820	H0164.2
@@ -264,7 +264,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     son	lib3	H0164.6.ALXX140820	H0164.6
     ```
 
-**Exercise** Generate a script called `C02_add_readgroups.sh` (in `~/workdir/scripts/C-all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](../server_login#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
+**Exercise** Generate a script called `C02_add_readgroups.sh` (in `~/project/scripts/C-all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](../server_login#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
 
 ??? hint
     

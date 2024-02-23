@@ -150,7 +150,7 @@ If you need some reminders of the commands, here's a link to a UNIX command line
 
 #### Make a new directory
 
-Make a directory `scripts` within `~/workdir` and make it your current directory.
+Make a directory `scripts` within `~/project` and make it your current directory.
 
 ??? done "Answer"
     ```sh
@@ -161,7 +161,7 @@ Make a directory `scripts` within `~/workdir` and make it your current directory
 
 #### File permissions
 
-Generate an empty script in your newly made directory `~/workdir/scripts` like this:
+Generate an empty script in your newly made directory `~/project/scripts` like this:
 
 ```sh
 touch new_script.sh
@@ -239,7 +239,7 @@ In the root directory (go there like this: `cd /`) there are a range of system d
 
 ??? done "Answer"
     ```sh
-    ls / > ~/workdir/system_dirs.txt
+    ls / > ~/project/system_dirs.txt
     ```
 
 The command `wc -l` counts the number of lines, and can read from stdin. Make a one-liner with a pipe `|` symbol to find out how many system directories and files there are.
@@ -255,7 +255,7 @@ Store `system_dirs.txt` as variable (like this: `VAR=variable`), and use `wc -l`
 
 ??? done "Answer"
     ```sh
-    FILE=~/workdir/system_dirs.txt
+    FILE=~/project/system_dirs.txt
     wc -l $FILE
     ```
 

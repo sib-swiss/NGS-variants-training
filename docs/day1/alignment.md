@@ -28,7 +28,7 @@
 
 ### 1. Download data and prepare the reference genome
 
-Let's start with the first script of our 'pipeline'. We will use it to download and unpack the course data. Use the code snippet below to create a script called `A01_download_course_data.sh`. Store it in `~/workdir/scripts/A-prepare_references/`, and run it.
+Let's start with the first script of our 'pipeline'. We will use it to download and unpack the course data. Use the code snippet below to create a script called `A01_download_course_data.sh`. Store it in `~/project/scripts/A-prepare_references/`, and run it.
 
 ```sh title="A01_download_course_data.sh"
 #!/usr/bin/env bash
@@ -87,7 +87,7 @@ The software `bwa` is in this environment. We will use it for the alignment. Lik
 bwa index <reference.fa>
 ```
 
-Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in `~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`. Do it with a script called `A02_create_bwa_index.sh`. Also store this in the directory `A-prepare_references`.
+Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in `~/project/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa`. Do it with a script called `A02_create_bwa_index.sh`. Also store this in the directory `A-prepare_references`.
 
 ??? done "Answer"
     ```sh title="A02_create_bwa_index.sh"
@@ -99,7 +99,7 @@ Make an index of the reference sequence of chromosome 20 of the human genome. Yo
 
 ### 2. Read alignment
 
-Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/bwa.shtml). We'll be using paired-end reads of three samples that can be found at `~/workdir/data/fastq`. If we run `bwa mem` with default options, which three arguments do we need?
+Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/bwa.shtml). We'll be using paired-end reads of three samples that can be found at `~/project/data/fastq`. If we run `bwa mem` with default options, which three arguments do we need?
 
 ??? done "Answer"
     The manual says:
@@ -124,9 +124,9 @@ Check out the [synopsis and manual of `bwa mem`](http://bio-bwa.sourceforge.net/
     > <alignment.sam>
     ```
 
-We will now go through all the steps concerning alignment for the sample `mother`. To store the results of these steps, we will create a directory within `~/workdir` called `results`. For the alignment, make a script called `B01_alignment.sh`. Since we will perform a similar analysis later on for all samples, we store this script in`~/workdir/scripts/B-mother_only`. 
+We will now go through all the steps concerning alignment for the sample `mother`. To store the results of these steps, we will create a directory within `~/project` called `results`. For the alignment, make a script called `B01_alignment.sh`. Since we will perform a similar analysis later on for all samples, we store this script in`~/project/scripts/B-mother_only`. 
 
-Your directory `~/workdir/scripts` should now like this:
+Your directory `~/project/scripts` should now like this:
 
 ```
 scripts
@@ -138,7 +138,7 @@ scripts
 └── C-all_samples
 ```
 
-In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the resulting `.sam` file to a directory in `~/workdir/results` called `alignments`.
+In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` of the reads from the mother (`mother_R1.fastq` and `mother_R2.fastq`) against chromosome 20. Write the resulting `.sam` file to a directory in `~/project/results` called `alignments`.
 
 !!! note "Index prefix is the same a reference filename"
     With default values, the name of the index of a reference for `bwa mem` is the same as the name of the reference itself. In this case, this would be `Homo_sapiens.GRCh38.dna.chromosome.20.fa`.
@@ -160,7 +160,7 @@ In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` 
 
 ### 3. Alignment statistics
 
-**Exercise:** Check out the statistics of the alignment by using `samtools flagstat`. Write the output of samtools flagstat to a file called `mother.sam.flagstat`. Do this by creating a script called `B02_get_alignment_statistics.sh`, and add this script to `~/workdir/scripts/B-mother_only`. Find the documentation of `samtools flagstat` [here](http://www.htslib.org/doc/samtools-flagstat.html). Any duplicates in there?
+**Exercise:** Check out the statistics of the alignment by using `samtools flagstat`. Write the output of samtools flagstat to a file called `mother.sam.flagstat`. Do this by creating a script called `B02_get_alignment_statistics.sh`, and add this script to `~/project/scripts/B-mother_only`. Find the documentation of `samtools flagstat` [here](http://www.htslib.org/doc/samtools-flagstat.html). Any duplicates in there?
 
 ??? done "Answer"
 
@@ -196,7 +196,7 @@ In `B01_alignment.sh` write the commands to perform an alignment with `bwa mem` 
 
 Many downstream analyses require a coordinate sorted alignment file. Now, your alignment file is in the same order as the fastq file. You can coordinate sort an alignment file with `samtools sort`. You can find the documentation [here](http://www.htslib.org/doc/samtools-sort.html). 
 
-**Exercise**: Sort the alignment file according to coordinate. In order to do this, create a script called `B03_sort_alignment.sh` (in `~/workdir/scripts/B-mother_only`). 
+**Exercise**: Sort the alignment file according to coordinate. In order to do this, create a script called `B03_sort_alignment.sh` (in `~/project/scripts/B-mother_only`). 
 
 ??? done "Answer"
     ```sh title="B03_sort_alignment.sh"
@@ -212,7 +212,7 @@ Many downstream analyses require a coordinate sorted alignment file. Now, your a
 
 The command `samtools view` is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let's start with that.
 
-**Exercise**: compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Perform the calculation from a script called `B04_compress_alignment.sh` (in `~/workdir/scripts/B-mother_only`).  Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
+**Exercise**: compress our SAM file into a BAM file and include the header in the output. For this, use the `-b` and `-h` options. Perform the calculation from a script called `B04_compress_alignment.sh` (in `~/project/scripts/B-mother_only`).  Find the required documentation [here](http://www.htslib.org/doc/samtools-view.html). How much was the disk space reduced by compressing the file?
 
 ??? done "Answer"
     ```sh title="B04_compress_alignment.sh"

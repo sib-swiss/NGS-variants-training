@@ -32,7 +32,7 @@ Throughout the exercises today and tomorrow we will work on three different 'sub
 - Alignment and variant calling on one sample ('mother')
 - Alignment, variant calling and filtering on all samples
 
-We store the scripts required for these subprojects in different subdirectories of `~/workdir/scripts` named:
+We store the scripts required for these subprojects in different subdirectories of `~/project/scripts` named:
 
 - `A-prepare_references`
 - `B-mother_only`
@@ -49,7 +49,7 @@ B-mother_only \
 C-all_samples
 ```
 
-By the end of day 2 `~/workdir/scripts` should look (something) like this:
+By the end of day 2 `~/project/scripts` should look (something) like this:
 
 ```
 scripts

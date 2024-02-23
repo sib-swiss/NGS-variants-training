@@ -83,7 +83,7 @@ The command [`gatk HaplotypeCaller`](https://gatk.broadinstitute.org/hc/en-us/ar
     * `--ouput`
     * `--reference`
 
-**Exercise:** Generate a script called `B10_run_haplotype_caller.sh` in `B-mother_only`. Use it to make a directory called `~/workdir/results/variants` to write the output vcf. In the same script, run `gatk HaplotypeCaller` with required options on the recalibrated alignment file of the mother (`results/bqsr/mother.recal.bam`). We'll focus on a small region, so add `--intervals chr20:10018000-10220000`.
+**Exercise:** Generate a script called `B10_run_haplotype_caller.sh` in `B-mother_only`. Use it to make a directory called `~/project/results/variants` to write the output vcf. In the same script, run `gatk HaplotypeCaller` with required options on the recalibrated alignment file of the mother (`results/bqsr/mother.recal.bam`). We'll focus on a small region, so add `--intervals chr20:10018000-10220000`.
 
 ??? done "Answer"
     ```sh title="B10_run_haplotype_caller.sh"
