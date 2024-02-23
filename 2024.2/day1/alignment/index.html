@@ -781,7 +781,7 @@
 <p>Use the &ldquo;Comments&rdquo; box at the bottom of each page 👇 for asking questions or giving feedback. It requires a <a href="https://github.com/">github account</a>.</p>
 </div>
 <h3 id="1-download-data-and-prepare-the-reference-genome">1. Download data and prepare the reference genome</h3>
-<p>Let&rsquo;s start with the first script of our &lsquo;pipeline&rsquo;. We will use it to download and unpack the course data. Use the code snippet below to create a script called <code>A01_download_course_data.sh</code>. Store it in <code>~/workdir/scripts/A-prepare_references/</code>, and run it.</p>
+<p>Let&rsquo;s start with the first script of our &lsquo;pipeline&rsquo;. We will use it to download and unpack the course data. Use the code snippet below to create a script called <code>A01_download_course_data.sh</code>. Store it in <code>~/project/scripts/A-prepare_references/</code>, and run it.</p>
 <div class="highlight"><span class="filename">A01_download_course_data.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nb">cd</span><span class="w"> </span>~/project
 
@@ -832,7 +832,7 @@ rm<span class="w"> </span>ngs-variants-training.tar.gz
 <p>The software <code>bwa</code> is in this environment. We will use it for the alignment. Like all alignment software, it requires an index of the reference genome. You can make an index like this:</p>
 <div class="highlight"><pre><span></span><code>bwa<span class="w"> </span>index<span class="w"> </span>&lt;reference.fa&gt;
 </code></pre></div>
-<p>Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in <code>~/workdir/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>. Do it with a script called <code>A02_create_bwa_index.sh</code>. Also store this in the directory <code>A-prepare_references</code>.</p>
+<p>Make an index of the reference sequence of chromosome 20 of the human genome. You can find the fasta file in <code>~/project/data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>. Do it with a script called <code>A02_create_bwa_index.sh</code>. Also store this in the directory <code>A-prepare_references</code>.</p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">A02_create_bwa_index.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
@@ -842,7 +842,7 @@ bwa<span class="w"> </span>index<span class="w"> </span>Homo_sapiens.GRCh38.dna.
 </code></pre></div>
 </details>
 <h3 id="2-read-alignment">2. Read alignment</h3>
-<p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/workdir/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
+<p>Check out the <a href="http://bio-bwa.sourceforge.net/bwa.shtml">synopsis and manual of <code>bwa mem</code></a>. We&rsquo;ll be using paired-end reads of three samples that can be found at <code>~/project/data/fastq</code>. If we run <code>bwa mem</code> with default options, which three arguments do we need?</p>
 <details class="done">
 <summary>Answer</summary>
 <p>The manual says:
@@ -864,8 +864,8 @@ data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa<span class="w"> </span><
 &gt;<span class="w"> </span>&lt;alignment.sam&gt;
 </code></pre></div>
 </details>
-<p>We will now go through all the steps concerning alignment for the sample <code>mother</code>. To store the results of these steps, we will create a directory within <code>~/workdir</code> called <code>results</code>. For the alignment, make a script called <code>B01_alignment.sh</code>. Since we will perform a similar analysis later on for all samples, we store this script in<code>~/workdir/scripts/B-mother_only</code>. </p>
-<p>Your directory <code>~/workdir/scripts</code> should now like this:</p>
+<p>We will now go through all the steps concerning alignment for the sample <code>mother</code>. To store the results of these steps, we will create a directory within <code>~/project</code> called <code>results</code>. For the alignment, make a script called <code>B01_alignment.sh</code>. Since we will perform a similar analysis later on for all samples, we store this script in<code>~/project/scripts/B-mother_only</code>. </p>
+<p>Your directory <code>~/project/scripts</code> should now like this:</p>
 <div class="highlight"><pre><span></span><code>scripts
 ├── A-prepare_references
 │   ├── A01_download_course_data.sh
@@ -874,7 +874,7 @@ data/reference/Homo_sapiens.GRCh38.dna.chromosome.20.fa<span class="w"> </span><
 │   └── B01_alignment.sh
 └── C-all_samples
 </code></pre></div>
-<p>In <code>B01_alignment.sh</code> write the commands to perform an alignment with <code>bwa mem</code> of the reads from the mother (<code>mother_R1.fastq</code> and <code>mother_R2.fastq</code>) against chromosome 20. Write the resulting <code>.sam</code> file to a directory in <code>~/workdir/results</code> called <code>alignments</code>.</p>
+<p>In <code>B01_alignment.sh</code> write the commands to perform an alignment with <code>bwa mem</code> of the reads from the mother (<code>mother_R1.fastq</code> and <code>mother_R2.fastq</code>) against chromosome 20. Write the resulting <code>.sam</code> file to a directory in <code>~/project/results</code> called <code>alignments</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Index prefix is the same a reference filename</p>
 <p>With default values, the name of the index of a reference for <code>bwa mem</code> is the same as the name of the reference itself. In this case, this would be <code>Homo_sapiens.GRCh38.dna.chromosome.20.fa</code>.</p>
@@ -894,7 +894,7 @@ data/fastq/mother_R2.fastq.gz<span class="w"> </span><span class="se">\</span>
 </code></pre></div>
 </details>
 <h3 id="3-alignment-statistics">3. Alignment statistics</h3>
-<p><strong>Exercise:</strong> Check out the statistics of the alignment by using <code>samtools flagstat</code>. Write the output of samtools flagstat to a file called <code>mother.sam.flagstat</code>. Do this by creating a script called <code>B02_get_alignment_statistics.sh</code>, and add this script to <code>~/workdir/scripts/B-mother_only</code>. Find the documentation of <code>samtools flagstat</code> <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Any duplicates in there?</p>
+<p><strong>Exercise:</strong> Check out the statistics of the alignment by using <code>samtools flagstat</code>. Write the output of samtools flagstat to a file called <code>mother.sam.flagstat</code>. Do this by creating a script called <code>B02_get_alignment_statistics.sh</code>, and add this script to <code>~/project/scripts/B-mother_only</code>. Find the documentation of <code>samtools flagstat</code> <a href="http://www.htslib.org/doc/samtools-flagstat.html">here</a>. Any duplicates in there?</p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">B02_get_alignment_statistics.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
@@ -922,7 +922,7 @@ samtools<span class="w"> </span>flagstat<span class="w"> </span>mother.sam<span 
 </details>
 <h3 id="4-sorting-and-compression">4. Sorting and compression</h3>
 <p>Many downstream analyses require a coordinate sorted alignment file. Now, your alignment file is in the same order as the fastq file. You can coordinate sort an alignment file with <code>samtools sort</code>. You can find the documentation <a href="http://www.htslib.org/doc/samtools-sort.html">here</a>. </p>
-<p><strong>Exercise</strong>: Sort the alignment file according to coordinate. In order to do this, create a script called <code>B03_sort_alignment.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>). </p>
+<p><strong>Exercise</strong>: Sort the alignment file according to coordinate. In order to do this, create a script called <code>B03_sort_alignment.sh</code> (in <code>~/project/scripts/B-mother_only</code>). </p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">B03_sort_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
@@ -937,7 +937,7 @@ samtools<span class="w"> </span>sort<span class="w"> </span>-o<span class="w"> <
 <p>Like <code>bwa mem</code>, <code>samtools sort</code> and <code>samtools view</code> can write its output to stdout. This means that you need to redirect your output to a file with <code>&gt;</code> or use the the output option <code>-o</code>.</p>
 </div>
 <p>The command <code>samtools view</code> is very versatile. It takes an alignment file and writes a filtered or processed alignment to the output. You can for example use it to compress your SAM file into a BAM file. Let&rsquo;s start with that.</p>
-<p><strong>Exercise</strong>: compress our SAM file into a BAM file and include the header in the output. For this, use the <code>-b</code> and <code>-h</code> options. Perform the calculation from a script called <code>B04_compress_alignment.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>).  Find the required documentation <a href="http://www.htslib.org/doc/samtools-view.html">here</a>. How much was the disk space reduced by compressing the file?</p>
+<p><strong>Exercise</strong>: compress our SAM file into a BAM file and include the header in the output. For this, use the <code>-b</code> and <code>-h</code> options. Perform the calculation from a script called <code>B04_compress_alignment.sh</code> (in <code>~/project/scripts/B-mother_only</code>).  Find the required documentation <a href="http://www.htslib.org/doc/samtools-view.html">here</a>. How much was the disk space reduced by compressing the file?</p>
 <details class="done">
 <summary>Answer</summary>
 <p><div class="highlight"><span class="filename">B04_compress_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>

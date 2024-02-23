@@ -970,7 +970,7 @@ r-base
 <p>If you need some reminders of the commands, here&rsquo;s a link to a UNIX command line cheat sheet:</p>
 <p><a class="md-button" href="https://www.alexji.com/UNIXCheatSheet.pdf"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M64 0C28.7 0 0 28.7 0 64v384c0 35.3 28.7 64 64 64h256c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224h24c30.9 0 56 25.1 56 56s-25.1 56-56 56h-8v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm24 80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-8v48h8zm72-64c0-8.8 7.2-16 16-16h24c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48h-24c-8.8 0-16-7.2-16-16V240zm32 112h8c8.8 0 16-7.2 16-16v-64c0-8.8-7.2-16-16-16h-8v96zm96-128h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16h-32v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16z"/></svg></span> UNIX cheat sheet</a></p>
 <h4 id="make-a-new-directory">Make a new directory</h4>
-<p>Make a directory <code>scripts</code> within <code>~/workdir</code> and make it your current directory.</p>
+<p>Make a directory <code>scripts</code> within <code>~/project</code> and make it your current directory.</p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>~/project
@@ -979,7 +979,7 @@ mkdir<span class="w"> </span>scripts
 </code></pre></div>
 </details>
 <h4 id="file-permissions">File permissions</h4>
-<p>Generate an empty script in your newly made directory <code>~/workdir/scripts</code> like this:</p>
+<p>Generate an empty script in your newly made directory <code>~/project/scripts</code> like this:</p>
 <div class="highlight"><pre><span></span><code>touch<span class="w"> </span>new_script.sh
 </code></pre></div>
 <p>Add a command to this script that writes &ldquo;SIB courses are great!&rdquo; (or something you can better relate to.. <img alt="😉" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f609.svg" title=":wink:" />) to stdout, and try to run it.</p>
@@ -1029,7 +1029,7 @@ mkdir<span class="w"> </span>scripts
 <p>In the root directory (go there like this: <code>cd /</code>) there are a range of system directories and files. Write the names of all directories and files to a file called <code>system_dirs.txt</code> in your working directory.</p>
 <details class="done">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/<span class="w"> </span>&gt;<span class="w"> </span>~/workdir/system_dirs.txt
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>/<span class="w"> </span>&gt;<span class="w"> </span>~/project/system_dirs.txt
 </code></pre></div>
 </details>
 <p>The command <code>wc -l</code> counts the number of lines, and can read from stdin. Make a one-liner with a pipe <code>|</code> symbol to find out how many system directories and files there are.</p>
@@ -1042,7 +1042,7 @@ mkdir<span class="w"> </span>scripts
 <p>Store <code>system_dirs.txt</code> as variable (like this: <code>VAR=variable</code>), and use <code>wc -l</code> on that variable to count the number of lines in the file.</p>
 <details class="done">
 <summary>Answer</summary>
-<div class="highlight"><pre><span></span><code><span class="nv">FILE</span><span class="o">=</span>~/workdir/system_dirs.txt
+<div class="highlight"><pre><span></span><code><span class="nv">FILE</span><span class="o">=</span>~/project/system_dirs.txt
 wc<span class="w"> </span>-l<span class="w"> </span><span class="nv">$FILE</span>
 </code></pre></div>
 </details>

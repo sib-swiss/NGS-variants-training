@@ -810,7 +810,7 @@
 </code></pre></div>
 <p>Here, e.g. the <code>PU</code> field would be <code>FC706VJ.2.ATCACG</code></p>
 </div>
-<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">documentation</a> of <code>AddOrReplaceReadGroups</code>. Specify the required arguments, and run the command. Do this from a script called <code>B05_add_readgroups.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>).</p>
+<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-">documentation</a> of <code>AddOrReplaceReadGroups</code>. Specify the required arguments, and run the command. Do this from a script called <code>B05_add_readgroups.sh</code> (in <code>~/project/scripts/B-mother_only</code>).</p>
 <details class="done">
 <summary>Answer</summary>
 <p>We can use the answers of the previous exercise, and use them in the command:</p>
@@ -847,7 +847,7 @@ gatk<span class="w"> </span>AddOrReplaceReadGroups<span class="w"> </span><span 
 </details>
 <h3 id="2-mark-duplicates">2. Mark duplicates</h3>
 <p>Now that we have specified read groups, we can mark the duplicates with <code>gatk MarkDuplicates</code>. </p>
-<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">documentation</a>, and run <code>gatk MarkDuplicates</code> with the three required arguments. Do this from a script called <code>B06_mark_duplicates.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>). </p>
+<p><strong>Exercise:</strong> Have a look at the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360037052812-MarkDuplicates-Picard-">documentation</a>, and run <code>gatk MarkDuplicates</code> with the three required arguments. Do this from a script called <code>B06_mark_duplicates.sh</code> (in <code>~/project/scripts/B-mother_only</code>). </p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">B06_mark_duplicates.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
@@ -860,7 +860,7 @@ gatk<span class="w"> </span>MarkDuplicates<span class="w"> </span><span class="s
 --METRICS_FILE<span class="w"> </span>alignments/marked_dup_metrics_mother.txt<span class="w"> </span>
 </code></pre></div>
 </details>
-<p><strong>Exercise:</strong> Run <code>samtools flagstat</code> on the alignment file with marked duplicates, and write the output to a file called <code>mother.rg.md.bam.flagstat</code>. Create a script called <code>B07_get_alignment_stats_after_md.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>). How many reads were marked as duplicate?</p>
+<p><strong>Exercise:</strong> Run <code>samtools flagstat</code> on the alignment file with marked duplicates, and write the output to a file called <code>mother.rg.md.bam.flagstat</code>. Create a script called <code>B07_get_alignment_stats_after_md.sh</code> (in <code>~/project/scripts/B-mother_only</code>). How many reads were marked as duplicate?</p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">B07_get_alignment_stats_after_md.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
@@ -891,7 +891,7 @@ Which tells us that 17329 reads were marked as duplicate.</p>
 <p>To look up specific alignments, it is convenient to have your alignment file indexed. An indexing can be compared to a kind of &lsquo;phonebook&rsquo; of your sequence alignment file. Indexing can be done with <code>samtools</code> as well, but it first needs to be sorted on coordinate (i.e. the alignment location). You can do it like this:</p>
 <div class="highlight"><pre><span></span><code>samtools<span class="w"> </span>index<span class="w"> </span>&lt;bam<span class="w"> </span>file&gt;
 </code></pre></div>
-<p><strong>Exercise</strong>: Create a script called <code>B08_index_alignment.sh</code> (in <code>~/workdir/scripts/B-mother_only</code>) to perform the alignment.</p>
+<p><strong>Exercise</strong>: Create a script called <code>B08_index_alignment.sh</code> (in <code>~/project/scripts/B-mother_only</code>) to perform the alignment.</p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">B08_index_alignment.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
@@ -934,7 +934,7 @@ data/fastq/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span cl
 <span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>sort<span class="w"> </span><span class="se">\</span>
 <span class="p">|</span><span class="w"> </span>samtools<span class="w"> </span>view<span class="w"> </span>-bh<span class="w"> </span>&gt;<span class="w"> </span>results/alignments/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span class="s2">&quot;</span>.bam
 </code></pre></div>
-<p><strong>Exercise</strong>: Make a directory in the scripts directory <code>C-all_samples</code> (so <code>~/workdir/scripts/C-all_samples</code>). In here, create a script called <code>C01_alignment_sorting_compression.sh</code>. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. <code>mother</code>, <code>father</code> and <code>son</code>).</p>
+<p><strong>Exercise</strong>: Make a directory in the scripts directory <code>C-all_samples</code> (so <code>~/project/scripts/C-all_samples</code>). In here, create a script called <code>C01_alignment_sorting_compression.sh</code>. Within that script use the above snippet to make a loop that performs the alignment, sorting and compression for all three samples (i.e. <code>mother</code>, <code>father</code> and <code>son</code>).</p>
 <details class="done">
 <summary>Answer</summary>
 <p>Your <code>scripts</code> directory should look like:</p>
@@ -970,7 +970,7 @@ data/fastq/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span cl
 </code></pre></div>
 </details>
 <p>Now we continue with adding the readgroups. For each sample, we have to add specific information to the different readgroup fields. We can do that by looping over a tab delimited file with sample-specific information in each row. Let&rsquo;s create that tab-delimited file. </p>
-<p><strong>Exercise</strong> Generate a tab-delimited file called <code>sample_rg_fields.txt</code> and store it in <code>~/workdir/results/</code>. In this file, each line should represent a sample (mother, father and son), and you specify the <code>SM</code>, <code>LB</code>, <code>PU</code> and <code>ID</code> fields. E.g., the first line (for &lsquo;mother&rsquo;) would look like:</p>
+<p><strong>Exercise</strong> Generate a tab-delimited file called <code>sample_rg_fields.txt</code> and store it in <code>~/project/results/</code>. In this file, each line should represent a sample (mother, father and son), and you specify the <code>SM</code>, <code>LB</code>, <code>PU</code> and <code>ID</code> fields. E.g., the first line (for &lsquo;mother&rsquo;) would look like:</p>
 <div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2
 </code></pre></div>
 <div class="admonition warning">
@@ -985,7 +985,7 @@ father  lib2    H0164.3.ALXX140820  H0164.3
 son lib3    H0164.6.ALXX140820  H0164.6
 </code></pre></div>
 </details>
-<p><strong>Exercise</strong> Generate a script called <code>C02_add_readgroups.sh</code> (in <code>~/workdir/scripts/C-all_samples</code>) to loop over the tab-delimited file (have a look at the last exercise in <a href="../server_login#loops">Setup</a>), and add the correct readgroups to the bam file of each sample with <code>gatk AddOrReplaceReadGroups</code>. </p>
+<p><strong>Exercise</strong> Generate a script called <code>C02_add_readgroups.sh</code> (in <code>~/project/scripts/C-all_samples</code>) to loop over the tab-delimited file (have a look at the last exercise in <a href="../server_login#loops">Setup</a>), and add the correct readgroups to the bam file of each sample with <code>gatk AddOrReplaceReadGroups</code>. </p>
 <details class="hint">
 <summary>Hint</summary>
 <p>Try to just print the variables from a loop in order to check to see whether the loop performs according to your expectation. E.g.:</p>

@@ -829,7 +829,7 @@
 <li><code>--reference</code></li>
 </ul>
 </details>
-<p><strong>Exercise:</strong> Generate a script called <code>B10_run_haplotype_caller.sh</code> in <code>B-mother_only</code>. Use it to make a directory called <code>~/workdir/results/variants</code> to write the output vcf. In the same script, run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>results/bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
+<p><strong>Exercise:</strong> Generate a script called <code>B10_run_haplotype_caller.sh</code> in <code>B-mother_only</code>. Use it to make a directory called <code>~/project/results/variants</code> to write the output vcf. In the same script, run <code>gatk HaplotypeCaller</code> with required options on the recalibrated alignment file of the mother (<code>results/bqsr/mother.recal.bam</code>). We&rsquo;ll focus on a small region, so add <code>--intervals chr20:10018000-10220000</code>.</p>
 <details class="done">
 <summary>Answer</summary>
 <div class="highlight"><span class="filename">B10_run_haplotype_caller.sh</span><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
