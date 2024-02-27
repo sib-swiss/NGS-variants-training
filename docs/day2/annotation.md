@@ -34,6 +34,7 @@ mkdir annotation
 
 snpEff -Xmx4g \
 -v \
+-dataDir /data/ \
 GRCh38.99 \
 <filtered_variants.vcf> \
 > <annotated_variants.vcf>
