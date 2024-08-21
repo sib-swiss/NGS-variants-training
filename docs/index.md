@@ -33,7 +33,7 @@ bioschemas:
 
 ## License & copyright
 
-**License:** [CC BY-SA 4.0](https://raw.githubusercontent.com/sib-swiss/NGS-variants-training/main/LICENCE)
+**License:** [CC BY 4.0](https://raw.githubusercontent.com/sib-swiss/NGS-variants-training/main/LICENCE)
 
 **Copyright:** [SIB Swiss Institute of Bioinformatics](https://www.sib.swiss/)
 
