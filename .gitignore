@@ -3,3 +3,4 @@ site
 *.zip
 data/
 results/
+env/
