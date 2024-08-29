@@ -264,7 +264,7 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     son	lib3	H0164.6.ALXX140820	H0164.6
     ```
 
-**Exercise** Generate a script called `C02_add_readgroups.sh` (in `~/project/scripts/C-all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](../server_login#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
+**Exercise** Generate a script called `C02_add_readgroups.sh` (in `~/project/scripts/C-all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](server_login.md#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 
 
 ??? hint
     
