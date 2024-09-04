@@ -963,7 +963,7 @@
 <li><code>SM</code>: the sample. All alignments that have reads coming from the same individual should have the same identifier in this field. For us, this would be <code>mother</code>. </li>
 <li><code>LB</code>: library identifier. Molecular duplicates only exist within a library. If a single library was sequenced on multiple lanes, it is important to track this information. In our case, we have sequenced only one library, so you can specify it with e.g. <code>lib1</code>. </li>
 <li><code>PU</code>: platform unit. This field is used to identify the sequencing lane. The documentation tells us we should specify it as <code>[FLOWCELL].[LANE].[SAMPLE BARCODE]</code>. The header of the first entry in our fastq file looks like this: <code>@H0164ALXX140820:2:1101:2136:40460/1</code>. Where the flowcell ID is <code>H0164</code> and the lane <code>2</code>. This formatting is specific to Broad Genomic Services pipelines, and not very common nowadays. Here the sample barcode is added to the flowcell ID, and is therefore specified as ALXX140820. We can therefore specify it with <code>H0164.2.ALXX140820</code>. </li>
-<li><code>ID</code>: read group id. If you don&rsquo;t have specific information on the flowcell and lane (specified with <code>PU</code>), you can use this field to specify a unique unit that is used for e.g. base quality score recalibration. This often a combination of a flow cell identifier and a lane. In our case this could be <code>H0164.2</code></li>
+<li><code>ID</code>: read group id. This is a unique identifier for the read groups. It can be a combination of the flow cell, lane and library (sample). So, for example <code>H0164.2.mother</code>. Of course in stead of <code>mother</code> you can also use the sample barcode. </li>
 </ul>
 </details>
 <div class="admonition note">
@@ -988,7 +988,7 @@ gatk<span class="w"> </span>AddOrReplaceReadGroups<span class="w"> </span><span 
 --RGPU<span class="w"> </span>H0164.2.ALXX140820<span class="w"> </span><span class="se">\</span>
 --RGPL<span class="w"> </span>ILLUMINA<span class="w"> </span><span class="se">\</span>
 --RGSM<span class="w"> </span>mother<span class="w"> </span><span class="se">\</span>
---RGID<span class="w"> </span>H0164.2
+--RGID<span class="w"> </span>H0164.2.mother
 </code></pre></div>
 </details>
 <p><strong>Exercise:</strong> Compare the header and first alignments of <code>mother.bam</code> and <code>mother.rg.bam</code>. Notice any differences?</p>
@@ -1003,10 +1003,10 @@ gatk<span class="w"> </span>AddOrReplaceReadGroups<span class="w"> </span><span 
 </div>
 <details class="done">
 <summary>Answer</summary>
-<p>Compared to the header of <code>mother.markdup.bam</code>, the header of <code>mother.markdup.rg.bam</code> contains an extra line starting with <code>@RG</code>:</p>
-<div class="highlight"><pre><span></span><code>@RG     ID:H0164.2      LB:lib1 PL:ILLUMINA     SM:mother       PU:H0164.2.ALXX140820
+<p>Compared to the header of <code>mother.bam</code>, the header of <code>mother.rg.bam</code> contains an extra line starting with <code>@RG</code>:</p>
+<div class="highlight"><pre><span></span><code>@RG     ID:H0164.2.mother      LB:lib1 PL:ILLUMINA     SM:mother       PU:H0164.2.ALXX140820
 </code></pre></div>
-<p>In the alignment records, a tag was added at the very end of each line: <code>RG:Z:H0164.2</code>. Note that all fields (<code>LB</code>, <code>PU</code>, etc.) are related to <code>ID</code>. So for each read only <code>ID</code> is specified and all other fields can be deducted from that. </p>
+<p>In the alignment records, a tag was added at the very end of each line: <code>RG:Z:H0164.2.mother</code>. Note that all fields (<code>LB</code>, <code>PU</code>, etc.) are related to <code>ID</code>. So for each read only <code>ID</code> is specified and all other fields can be deducted from that. </p>
 </details>
 <h3 id="2-mark-duplicates">2. Mark duplicates</h3>
 <p>Now that we have specified read groups, we can mark the duplicates with <code>gatk MarkDuplicates</code>. </p>
@@ -1134,7 +1134,7 @@ data/fastq/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span cl
 </details>
 <p>Now we continue with adding the readgroups. For each sample, we have to add specific information to the different readgroup fields. We can do that by looping over a tab delimited file with sample-specific information in each row. Let&rsquo;s create that tab-delimited file. </p>
 <p><strong>Exercise</strong> Generate a tab-delimited file called <code>sample_rg_fields.txt</code> and store it in <code>~/project/results/</code>. In this file, each line should represent a sample (mother, father and son), and you specify the <code>SM</code>, <code>LB</code>, <code>PU</code> and <code>ID</code> fields. E.g., the first line (for &lsquo;mother&rsquo;) would look like:</p>
-<div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2
+<div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2.mother
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1143,9 +1143,9 @@ data/fastq/<span class="s2">&quot;</span><span class="nv">$SAMPLE</span><span cl
 <details class="done">
 <summary>Answer</summary>
 <p>Your file should look like this:</p>
-<div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2
-father  lib2    H0164.3.ALXX140820  H0164.3
-son lib3    H0164.6.ALXX140820  H0164.6
+<div class="highlight"><pre><span></span><code>mother  lib1    H0164.2.ALXX140820  H0164.2.mother
+father  lib2    H0164.3.ALXX140820  H0164.3.father
+son lib3    H0164.6.ALXX140820  H0164.6.son
 </code></pre></div>
 </details>
 <p><strong>Exercise</strong> Generate a script called <code>C02_add_readgroups.sh</code> (in <code>~/project/scripts/C-all_samples</code>) to loop over the tab-delimited file (have a look at the last exercise in <a href="../server_login/#loops">Setup</a>), and add the correct readgroups to the bam file of each sample with <code>gatk AddOrReplaceReadGroups</code>. </p>
