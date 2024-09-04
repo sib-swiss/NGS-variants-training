@@ -35,7 +35,7 @@ During several steps of variant calling `gatk` uses read group information. For 
     - `SM`: the sample. All alignments that have reads coming from the same individual should have the same identifier in this field. For us, this would be `mother`. 
     - `LB`: library identifier. Molecular duplicates only exist within a library. If a single library was sequenced on multiple lanes, it is important to track this information. In our case, we have sequenced only one library, so you can specify it with e.g. `lib1`. 
     - `PU`: platform unit. This field is used to identify the sequencing lane. The documentation tells us we should specify it as `[FLOWCELL].[LANE].[SAMPLE BARCODE]`. The header of the first entry in our fastq file looks like this: `@H0164ALXX140820:2:1101:2136:40460/1`. Where the flowcell ID is `H0164` and the lane `2`. This formatting is specific to Broad Genomic Services pipelines, and not very common nowadays. Here the sample barcode is added to the flowcell ID, and is therefore specified as ALXX140820. We can therefore specify it with `H0164.2.ALXX140820`. 
-    - `ID`: read group id. If you don't have specific information on the flowcell and lane (specified with `PU`), you can use this field to specify a unique unit that is used for e.g. base quality score recalibration. This often a combination of a flow cell identifier and a lane. In our case this could be `H0164.2`
+    - `ID`: read group id. This is a unique identifier for the read groups. It can be a combination of the flow cell, lane and library (sample). So, for example `H0164.2.mother`. Of course in stead of `mother` you can also use the sample barcode. 
 
 !!! Note
     More modern output of an Illumina sequencer looks e.g. like this (example on [Wikipedia](https://en.wikipedia.org/wiki/FASTQ_format)):
@@ -64,7 +64,7 @@ During several steps of variant calling `gatk` uses read group information. For 
     --RGPU H0164.2.ALXX140820 \
     --RGPL ILLUMINA \
     --RGSM mother \
-    --RGID H0164.2
+    --RGID H0164.2.mother
     ```
 
 **Exercise:** Compare the header and first alignments of `mother.bam` and `mother.rg.bam`. Notice any differences?
@@ -83,13 +83,13 @@ During several steps of variant calling `gatk` uses read group information. For 
     ```
 
 ??? done "Answer"
-    Compared to the header of `mother.markdup.bam`, the header of `mother.markdup.rg.bam` contains an extra line starting with `@RG`:
+    Compared to the header of `mother.bam`, the header of `mother.rg.bam` contains an extra line starting with `@RG`:
 
     ```
-    @RG     ID:H0164.2      LB:lib1 PL:ILLUMINA     SM:mother       PU:H0164.2.ALXX140820
+    @RG     ID:H0164.2.mother      LB:lib1 PL:ILLUMINA     SM:mother       PU:H0164.2.ALXX140820
     ```
 
-    In the alignment records, a tag was added at the very end of each line: `RG:Z:H0164.2`. Note that all fields (`LB`, `PU`, etc.) are related to `ID`. So for each read only `ID` is specified and all other fields can be deducted from that. 
+    In the alignment records, a tag was added at the very end of each line: `RG:Z:H0164.2.mother`. Note that all fields (`LB`, `PU`, etc.) are related to `ID`. So for each read only `ID` is specified and all other fields can be deducted from that. 
 
 ### 2. Mark duplicates
 
@@ -249,7 +249,7 @@ Now we continue with adding the readgroups. For each sample, we have to add spec
 **Exercise** Generate a tab-delimited file called `sample_rg_fields.txt` and store it in `~/project/results/`. In this file, each line should represent a sample (mother, father and son), and you specify the `SM`, `LB`, `PU` and `ID` fields. E.g., the first line (for 'mother') would look like:
 
 ```
-mother	lib1	H0164.2.ALXX140820	H0164.2
+mother	lib1	H0164.2.ALXX140820	H0164.2.mother
 ```
 
 !!! warning
@@ -259,9 +259,9 @@ mother	lib1	H0164.2.ALXX140820	H0164.2
     Your file should look like this:
 
     ```
-    mother	lib1	H0164.2.ALXX140820	H0164.2
-    father	lib2	H0164.3.ALXX140820	H0164.3
-    son	lib3	H0164.6.ALXX140820	H0164.6
+    mother  lib1    H0164.2.ALXX140820  H0164.2.mother
+    father  lib2    H0164.3.ALXX140820  H0164.3.father
+    son lib3    H0164.6.ALXX140820  H0164.6.son
     ```
 
 **Exercise** Generate a script called `C02_add_readgroups.sh` (in `~/project/scripts/C-all_samples`) to loop over the tab-delimited file (have a look at the last exercise in [Setup](server_login.md#loops)), and add the correct readgroups to the bam file of each sample with `gatk AddOrReplaceReadGroups`. 

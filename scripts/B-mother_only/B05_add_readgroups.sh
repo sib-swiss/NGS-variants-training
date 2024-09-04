@@ -9,4 +9,4 @@ gatk AddOrReplaceReadGroups \
 --RGPU H0164.2.ALXX140820 \
 --RGPL ILLUMINA \
 --RGSM mother \
---RGID H0164.2
+--RGID H0164.2.mother
