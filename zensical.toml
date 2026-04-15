@@ -1,0 +1,104 @@
+[project]
+site_name = "NGS - variant analysis"
+copyright = """Copyright &copy; 2021-2026 SIB Swiss institute of Bioinformatics –
+<a href="#__consent">Change cookie settings</a>
+"""
+docs_dir = "docs"
+extra_css = ["stylesheets/extra.css"]
+extra_javascript = ["javascripts/consent.js"]
+
+nav = [
+  { "Home" = "index.md" },
+  { "Precourse preparations" = "precourse.md" },
+  { "Course schedule" = "course_schedule.md" },
+  { "Day 1" = [
+      { "Introduction" = "day1/introduction.md"},
+      { "Setup" = "day1/server_login.md"},
+      { "Reproducibility" = "day1/reproducibility.md"},
+      { "Read alignment - basics" = "day1/alignment.md"},
+      { "Read alignment - advanced" = "day1/alignment_advanced.md"}
+  ]},
+  { "Day 2" =[
+    { "Variant calling - preparation" = "day2/variant_calling_preparation.md"},
+    { "Variant calling" = "day2/variant_calling.md"},
+    { "Visualisation" = "day2/visualisation.md"},
+    { "Filtering & evaluation" = "day2/filtering_evaluation.md"},
+    { "Annotation" = "day2/annotation.md"}
+  ]}
+]
+
+"repo_name" = "sib-swiss/NGS-variants-training"
+"repo_url" = "https://github.com/sib-swiss/NGS-variants-training"
+"edit_uri" = "edit/main/docs/"
+"site_url" = "https://sib-swiss.github.io/NGS-variants-training/"
+
+
+[project.theme]
+name = "material"
+logo = "assets/images/SIB_logo.svg"
+favicon = "assets/images/SIB_logo.svg"
+custom_dir = "overrides"
+features = [
+    "announce.dismiss"
+]
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"
+
+
+[project.extra.version]
+provider = "mike"
+default = "latest"
+
+[project.extra.consent]
+title = "Cookie consent"
+description = """
+	We use cookies to recognize your repeated visits and preferences, as well
+    as to measure the effectiveness of our trainig material and whether users
+    find what they're searching for. With your consent, you're helping us to
+    make our training material better.
+"""
+actions = [
+    "accept",
+    "manage",
+    "reject"
+]
+
+
+[project.extra.consent.cookies]
+matomo = "Matomo Analytics"
+
+[project.markdown_extensions.abbr]
+[project.markdown_extensions.admonition]
+[project.markdown_extensions.attr_list]
+[project.markdown_extensions.def_list]
+[project.markdown_extensions.footnotes]
+[project.markdown_extensions.md_in_html]
+[project.markdown_extensions.toc]
+permalink = true
+[project.markdown_extensions.pymdownx.arithmatex]
+generic = true
+[project.markdown_extensions.pymdownx.betterem]
+[project.markdown_extensions.pymdownx.caret]
+[project.markdown_extensions.pymdownx.details]
+[project.markdown_extensions.pymdownx.emoji]
+emoji_generator = "zensical.extensions.emoji.to_svg"
+emoji_index = "zensical.extensions.emoji.twemoji"
+options.custom_icons = ["overrides/.icons"]
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+line_spans = "__span"
+pygments_lang_class = true
+[project.markdown_extensions.pymdownx.inlinehilite]
+[project.markdown_extensions.pymdownx.keys]
+[project.markdown_extensions.pymdownx.magiclink]
+[project.markdown_extensions.pymdownx.mark]
+[project.markdown_extensions.pymdownx.smartsymbols]
+[project.markdown_extensions.pymdownx.superfences]
+custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" }
+]
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+combine_header_slug = true
+[project.markdown_extensions.pymdownx.tilde]
