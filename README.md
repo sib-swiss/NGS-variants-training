@@ -7,21 +7,38 @@ Hosted at: [https://sib-swiss.github.io/NGS-variants-training/](https://sib-swis
 
 # Course website
 
-This website is generated with [MkDocs](https://www.mkdocs.org/), with the theme [Material](https://squidfunk.github.io/mkdocs-material/).
+This website is generated with [Zensical](https://zensical.org), and versioned with [mike (for Zensical)](https://github.com/squidfunk/mike).
 
-To host it locally, install MkDocs:
-```bash
-pip install mkdocs
+## tool installation
+
+To [install Zensical](https://zensical.org/docs/get-started/) you can run:
+
+```
+pip install zensical
 ```
 
-and Material:
-```bash
-pip install mkdocs-material
+Alternatively you can use `uv` or `pixi`.
+
+
+To install [mike for Zensical](https://github.com/squidfunk/mike?tab=readme-ov-file#installation), you can use:
+
+```
+pip install git+https://github.com/squidfunk/mike.git
 ```
 
-Host it with:
+## host locally
+
 ```bash
-mkdocs serve
+mike serve
 ```
 
 Check it out with your browser at [http://localhost:8000/](http://localhost:8000/)
+
+## deploy to gh-page
+
+You can deploy the generated website to gh-pages using:
+
+```
+mike deploy -p -u <version tag> latest
+```
+
