@@ -1,0 +1,3 @@
+mother  lib1    H0164.2.ALXX140820  H0164.2
+father  lib2    H0164.3.ALXX140820  H0164.3
+son lib3    H0164.6.ALXX140820  H0164.6
