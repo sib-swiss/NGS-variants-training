@@ -2,14 +2,14 @@
   {
     "version": "2026.06.01",
     "title": "2026.06.01",
-    "aliases": []
+    "aliases": [
+      "latest"
+    ]
   },
   {
     "version": "2026.06",
     "title": "2026.06",
-    "aliases": [
-      "latest"
-    ]
+    "aliases": []
   },
   {
     "version": "2024.9",
