@@ -35,6 +35,11 @@
         },
         {
             "@type": "Person",
+            "name": "Wandrille Duchemin",
+            "email": "wandrille.duchemin@sib.swiss"
+        },
+        {
+            "@type": "Person",
             "name": "Patricia Palagi"
         },
         {

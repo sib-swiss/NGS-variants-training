@@ -1,11 +1,12 @@
 
 ## Teachers
 
-- Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+- Wandrille Duchemin [:custom-orcid:](https://orcid.org/0000-0001-8854-7235)
 
 ## Authors
 
 - Geert van Geest [:custom-orcid:](https://orcid.org/0000-0002-1561-078X)
+- Wandrille Duchemin [:custom-orcid:](https://orcid.org/0000-0001-8854-7235)
 - Patricia Palagi [:custom-orcid:](https://orcid.org/0000-0001-9062-6303)
 
 ## License & copyright
