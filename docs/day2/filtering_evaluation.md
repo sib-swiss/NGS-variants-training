@@ -21,6 +21,13 @@ The developers of `gatk` strongly advise to do [Variant Quality Score Recalibrat
 
 Our dataset is too small to apply VQSR. We will therefore do hard filtering instead.
 
+A few helpful links:
+
+ * [VSQR and hard filter step-by-step](https://gatk.broadinstitute.org/hc/en-us/articles/360035531112--How-to-Filter-variants-either-with-VQSR-or-by-hard-filtering)
+ * [hard-filter recommendation explained](https://sites.google.com/a/broadinstitute.org/legacy-gatk-documentation/methods-and-algorithms/6925-Understanding-and-adapting-the-generic-hardfiltering-recommendations)
+ * [Further important notes on hard-filtering](https://gatk.broadinstitute.org/hc/en-us/articles/360037499012-I-am-unable-to-use-VQSR-recalibration-to-filter-variants)
+
+
 #### Splitting SNPs and INDELs
 
 First, filtering thresholds are usually different for SNPs and INDELs. Therefore, we will split `trio.vcf` into two vcfs, one containg only SNPs, and one containing only INDELs. You can extract all the SNP records in our trio vcf like this:
@@ -70,9 +77,28 @@ gatk SelectVariants \
 
     ```
 
+#### looking at SNPs QC metrics
+
+To help you understand your data and decide on thresholds, it is a good idea to take a look at the many QC metrics reported by the haplotype caller.
+
+The vcf format is not the most useful, which is why we use the command [VariantsToTable](https://gatk.broadinstitute.org/hc/en-us/articles/360036896892-VariantsToTable) to transform it into a much more manageable `tsv`:
+
+```
+    gatk VariantsToTable \
+     -V ~/project/results/variants/trio.SNP.vcf \
+     -O ~/project/results/variants/trio.SNP.tsv
+```
+
+**Exercise:** Run the export command above, then visualize the distributions of some of the columns in there:
+ * *remember*: you can download the tsv file to your own computer at any time to explore its content in a familiar environment
+ * use whichever visualization tool you are the most familiar with (python, R, excel, ...)
+ * focus on the QC metrics described in the [hard-filtering guide](https://sites.google.com/a/broadinstitute.org/legacy-gatk-documentation/methods-and-algorithms/6925-Understanding-and-adapting-the-generic-hardfiltering-recommendations)
+
+
+
 #### Filtering SNPs
 
-The command `gatk VariantFiltration` enables you to filter for both the INFO field (per variant) and FORMAT field (per genotype). For now we're only interested in filtering variants. Below you can find the command to hard-filter the SNP variants on some sensible thresholds (that are explained [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890471-Hard-filtering-germline-short-variants)).
+The command `gatk VariantFiltration` enables you to filter for both the INFO field (per variant) and FORMAT field (per genotype). For now we're only interested in filtering variants. Below you can find the command to hard-filter the SNP variants on some sensible thresholds (that are explained [here](https://sites.google.com/a/broadinstitute.org/legacy-gatk-documentation/methods-and-algorithms/6925-Understanding-and-adapting-the-generic-hardfiltering-recommendations)).
 
 ```sh
 gatk VariantFiltration \

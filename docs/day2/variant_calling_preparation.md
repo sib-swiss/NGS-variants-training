@@ -101,7 +101,7 @@ BQSR evaluates the base qualities on systematic error. It can ignore sites with 
 
 BQSR is done in two steps:
 
-1. Recalibration with [`gatk BaseRecalibrator`](https://gatk.broadinstitute.org/hc/en-us/articles/360037593511-BaseRecalibrator)
+1. Recalibration with [`gatk BaseRecalibrator`](https://gatk.broadinstitute.org/hc/en-us/articles/360037593511-BaseRecalibrator) ([concept explanation](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR))
 2. By using the output of `gatk BaseRecalibrator`, the application to the bam file with [`gatk ApplyBQSR`](https://gatk.broadinstitute.org/hc/en-us/articles/360037055712-ApplyBQSR)
 
 **Exercise:** Check out the documentation of the tools. Which options are required?
