@@ -2,9 +2,7 @@
   {
     "version": "2026.06.01",
     "title": "2026.06.01",
-    "aliases": [
-      "latest"
-    ]
+    "aliases": []
   },
   {
     "version": "2026.06",
@@ -50,5 +48,12 @@
     "version": "2021.3",
     "title": "2021.3",
     "aliases": []
+  },
+  {
+    "version": "v2026.06.2",
+    "title": "v2026.06.2",
+    "aliases": [
+      "latest"
+    ]
   }
 ]
